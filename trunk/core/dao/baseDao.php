@@ -10,12 +10,8 @@ class BaseDao {
 	var $connection;
 	
 	public function connect(){
-		try {
-			$this->connection = new PDO('mysql:host='.$this->hote.';dbname='.$this->base', $this->user, $this->mdp);
-		} catch (PDOException $e) {
-			print "Erreur !: " . $e->getMessage() . "<br/>";
-			die();
-		}
+			$this->connection = mysql_connect($this->hote,$this->user, $this->mdp);
+			mysql_select_db($this->base,$this->connection);
 	}
 	
 	public function close(){
@@ -25,8 +21,9 @@ class BaseDao {
 	public function sendRequest($request){
 		$ressource = mysql_query($request,$this->connection) ;
 		return $ressource;
-	
 	}
 }
  
 ?>
+
+
