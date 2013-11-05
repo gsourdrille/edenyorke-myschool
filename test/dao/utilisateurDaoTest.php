@@ -1,23 +1,29 @@
 <?php
 
 include("../../core/include.php");
+include("../../core/constant/constants.php");
+
+
 //TEST de la classe UtilisateurDao
-error_reporting(E_ALL);
+
+echo "Test Class UtilisateurDao.<br>";
 $dao= new UtilisateurDao();
-echo "OK";
 $utilisateur = new Utilisateur();
-echo "OK";
 $utilisateur->idUser = "0";
 $utilisateur->nom = "nomTest";
 $utilisateur->prenom="prenomTest";
 $utilisateur->login="loginTest";
 $utilisateur->mdp = "mdpTest";
-echo "before save";
+
+$typesUtilisateur = array(Type_Utilisateur::DIRECTION,Type_Utilisateur::ENSEIGNANT);
+
+$utilisateur->typesUtilisateur = $typesUtilisateur[];
+$utilisateur->afficher();
 $dao->saveUtilisateur($utilisateur);
-echo "after Save";
-$utilisateur2 = $dao->findUtilisateur("loginTest", "mdpTest");
-$utilisateur2->toString();
-
-$dao->deleteUtilisateur($utilisateur2);
-
+//$utilisateur = $dao->findUtilisateur("loginTest", "mdpTest");
+//$dao->deleteUtilisateur($utilisateur);
+//$utilisateur = $dao->findUtilisateur("loginTest", "mdpTest");
+if($utilisateur == null){
+	echo "TEST OK.<br>";
+}
 ?>
