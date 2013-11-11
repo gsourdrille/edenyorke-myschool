@@ -1,7 +1,7 @@
 <?php
 
 
-include ("baseDao.php");
+
  class UtilisateurDao{
  	
  	public function saveUtilisateur($utilisateur){
@@ -11,25 +11,27 @@ include ("baseDao.php");
  			$requete = "INSERT INTO UTILISATEUR (ID_USER,NOM,PRENOM,LOGIN,MOT_DE_PASSE) 
  						VALUES ('$utilisateur->idUser', '$utilisateur->nom', '$utilisateur->prenom', '$utilisateur->login', '$utilisateur->mdp') ";
  			$result = $baseDao->sendRequest($requete);
- 			echo "test1";
- 			echo "USER : ".$utilisateur->typesUtilisateurs[0];
- 			if(sizeof($utilisateur->typesUtilisateurs)>0){
- 				echo "test2";
- 				$requete = "DELETE FROM UTILISATEUR_TYPE_UTILISATEUR WHERE ID_USER=$utilisateur->idUser";
- 				$baseDao->sendRequest($requete);
- 				foreach ($utilisateur->typesUtilisateurs as $typeUtilisateur) {
- 					$requete = "INSERT INTO UTILISATEUR_TYPE_UTILISATEUR (ID_USER,ID_TYPE_UTILISATEUR)
- 					VALUES ('$utilisateur->idUser', $typeUtilisateur) ";
- 					$result = $baseDao->sendRequest($requete);
- 				}
- 			}
  			$baseDao->close();
  		}
  		
  	}
  	
- 
- 	
+ 	public function saveUtilisateurTypeUtilisateur($utilisateur,$typesUtlisateurs){
+  		if($utilisateur != null && $typesUtlisateurs != null){
+ 			$baseDao = new BaseDao();
+ 			$baseDao->connect();
+ 			//Supression des anciennes relations
+ 			$requete = "DELETE FROM UTILISATEUR_TYPE_UTILISATEUR WHERE ID_USER=$utilisateur->idUser";
+ 			$result = $baseDao->sendRequest($requete);
+ 			foreach ($typesUtlisateurs as $typeUtilisateur) {
+ 				$requete = "INSERT INTO UTILISATEUR_TYPE_UTILISATEUR (ID_USER,ID_TYPE_UTILISATEUR)
+ 				VALUES ('$utilisateur->idUser', $typeUtilisateur) ";
+ 				$result = $baseDao->sendRequest($requete);
+ 			}
+ 			$baseDao->close();
+ 		}
+ 	}
+
  	public function updateUtilisateur($utilisateur){
  		if($utilisateur != null){
  			$baseDao = new BaseDao();
@@ -38,6 +40,16 @@ include ("baseDao.php");
  						WHERE ID_USER=$utilisateur->idUser";
  			$baseDao->sendRequest($requete);
  			$baseDao->close();
+ 		}
+ 	}
+ 	
+ 	public function deleteTypeUtilisateur($utilisateur, $typeUtilisateur){
+ 		if($utilisateur != null){
+ 			$baseDao = new BaseDao();
+ 			$baseDao->connect();
+	 		$requete = "DELETE FROM UTILISATEUR_TYPE_UTILISATEUR WHERE ID_USER = $utilisateur->idUser AND ID_TYPE_UTILISATEUR = $typeUtilisateur";
+	 		$result = $baseDao->sendRequest($requete);
+	 		$baseDao->close();
  		}
  	}
  	
@@ -63,6 +75,19 @@ include ("baseDao.php");
  			$utilisateur = $this->buildUtilisateur($row);
  			$baseDao->close();
  			return $utilisateur;
+ 	}
+ 	
+ 	public function findTypeUtilisateur($utilisateur){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "SELECT * FROM UTILISATEUR_TYPE_UTILISATEUR WHERE ID_USER='$utilisateur->idUser'";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$listeTypesUtilisateurs = new ArrayObject();
+ 		while($row = mysql_fetch_array($resulat, MYSQL_ASSOC)){
+ 			$listeTypesUtilisateurs->append($row["ID_TYPE_UTILISATEUR"]);
+ 		}
+ 		$baseDao->close();
+ 		return $listeTypesUtilisateurs;
  	}
  	
  	public function buildUtilisateur($row){
