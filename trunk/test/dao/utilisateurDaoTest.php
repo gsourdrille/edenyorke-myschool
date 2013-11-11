@@ -15,15 +15,27 @@ $utilisateur->prenom="prenomTest";
 $utilisateur->login="loginTest";
 $utilisateur->mdp = "mdpTest";
 
-$typesUtilisateur = array(Type_Utilisateur::DIRECTION,Type_Utilisateur::ENSEIGNANT);
+$listeTypesUtilisateurs = new ArrayObject();
+$listeTypesUtilisateurs->append(Type_Utilisateur::DIRECTION);
+$listeTypesUtilisateurs->append(Type_Utilisateur::ENSEIGNANT);
 
-$utilisateur->typesUtilisateur = $typesUtilisateur[];
-$utilisateur->afficher();
+
 $dao->saveUtilisateur($utilisateur);
-//$utilisateur = $dao->findUtilisateur("loginTest", "mdpTest");
-//$dao->deleteUtilisateur($utilisateur);
-//$utilisateur = $dao->findUtilisateur("loginTest", "mdpTest");
+$dao->saveUtilisateurTypeUtilisateur($utilisateur, $listeTypesUtilisateurs);
+echo "save ok<br>";
+$utilisateur = $dao->findUtilisateur("loginTest", "mdpTest");
+$utilisateur->afficher();
+$listeTypesUtilisateurs = $dao->findTypeUtilisateur($utilisateur);
+echo "Taile Liste : ".$listeTypesUtilisateurs->count()."<br>";
+echo "find ok<br>";
+$dao->deleteUtilisateur($utilisateur);
+echo "delete ok<br>";
+$utilisateur = $dao->findUtilisateur("loginTest", "mdpTest");
+echo "find ok<br>";
 if($utilisateur == null){
 	echo "TEST OK.<br>";
+}else{
+	echo "TEST KO.<br>";
+	$utilisateur->afficher();
 }
 ?>
