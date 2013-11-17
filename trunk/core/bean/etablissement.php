@@ -13,10 +13,6 @@ class Etablissement {
 	var $fax;
 
 	
-	function __construct() {
-		$this->listeNiveau = new ArrayObject();
-		$this->listeUtilisateurs = new ArrayObject();
-	}
 	
 	
 	

@@ -8,10 +8,14 @@
  		if($utilisateur != null){
   			$baseDao = new BaseDao();
  			$baseDao->connect();
- 			$requete = "INSERT INTO UTILISATEUR (ID_USER,NOM,PRENOM,LOGIN,MOT_DE_PASSE) 
- 						VALUES ('$utilisateur->idUser', '$utilisateur->nom', '$utilisateur->prenom', '$utilisateur->login', '$utilisateur->mdp') ";
+ 			$requete = "INSERT INTO UTILISATEUR (NOM,PRENOM,LOGIN,MOT_DE_PASSE) 
+ 						VALUES ('$utilisateur->nom', '$utilisateur->prenom', '$utilisateur->login', '$utilisateur->mdp') ";
  			$result = $baseDao->sendRequest($requete);
+ 			$requete = "SELECT LAST_INSERT_ID() FROM UTILISATEUR";
+ 			$result = mysql_insert_id(); 
+ 			$utilisateur->idUser = $result;
  			$baseDao->close();
+ 			return $utilisateur;
  		}
  		
  	}
