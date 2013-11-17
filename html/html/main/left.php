@@ -4,8 +4,10 @@
 			<img alt="" src="/myschool/html/images/logostmartin.jpg"  />
 		</div>
 		<div id="infos_ecole">
-			<p>31 rue d'Antrain<br>35000 Rennes<br>
-			Tel: 02.02.01.03.45<br>Fax: 02.02.01.03.46</p>
+			<p><?php echo $etablissement->adresse;?><br><?php  echo $etablissement->codePostal;?> <?php echo $etablissement ->ville;?><br>
+			<?php if(isset($etablissement->telephone1)){ ?>Tel: <?php echo $etablissement->telephone1;}?>
+			<?php if(isset($etablissement->telephone2)){ ?><br>Tel: <?php echo $etablissement->telephone2;}?>
+			<?php if(isset($etablissement->fax)){ ?><br>Fax: <?php echo $etablissement->fax;}?></p>
 		</div>
 	</div>
 	<div class="left_post" style="height:300px;">

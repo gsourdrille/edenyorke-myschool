@@ -81,6 +81,20 @@
  			return $utilisateur;
  	}
  	
+ 	public function findUtilisateurByUsername($login){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE LOGIN='$login'";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$row = mysql_fetch_array($resulat, MYSQL_ASSOC);
+ 		if($row["ID_USER"] == null){
+ 			return null;
+ 		}
+ 		$utilisateur = $this->buildUtilisateur($row);
+ 		$baseDao->close();
+ 		return $utilisateur;
+ 	}
+ 	
  	public function findTypeUtilisateur($utilisateur){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
