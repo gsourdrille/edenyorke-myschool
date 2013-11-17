@@ -1,222 +1,285 @@
-drop table if exists CLASSE;
+-- phpMyAdmin SQL Dump
+-- version 3.5.7
+-- http://www.phpmyadmin.net
+--
+-- Client: localhost
+-- Généré le: Dim 17 Novembre 2013 à 16:55
+-- Version du serveur: 5.5.29
+-- Version de PHP: 5.4.10
 
-drop table if exists ETABLISSEMENT;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
-drop table if exists NIVEAU;
+--
+-- Base de données: `myschool`
+--
 
-drop table if exists POST;
+-- --------------------------------------------------------
 
-drop table if exists POST_CLASSE;
+--
+-- Structure de la table `CLASSE`
+--
 
-drop table if exists POST_ETABLISSEMENT;
+CREATE TABLE `CLASSE` (
+  `ID_CLASSE` int(11) NOT NULL,
+  `ID_NIVEAU` int(11) DEFAULT NULL,
+  `NOM` text,
+  PRIMARY KEY (`ID_CLASSE`),
+  KEY `FK_RELATION_2` (`ID_NIVEAU`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-drop table if exists POST_NIVEAU;
+-- --------------------------------------------------------
 
-drop table if exists TYPE_UTILISATEUR;
+--
+-- Structure de la table `ETABLISSEMENT`
+--
 
-drop table if exists UTILISATEUR;
+CREATE TABLE `ETABLISSEMENT` (
+  `ID_ETABLISSEMENT` int(11) NOT NULL AUTO_INCREMENT,
+  `NOM` text NOT NULL,
+  `ADRESSE` text NOT NULL,
+  `CODE_POSTAL` text NOT NULL,
+  `VILLE` text NOT NULL,
+  `TELEPHONE_1` text,
+  `TELEPHONE_2` text,
+  `FAX` text,
+  PRIMARY KEY (`ID_ETABLISSEMENT`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
-drop table if exists UTILISATEUR_CLASSE;
 
-drop table if exists UTILISATEUR_NIVEAU;
 
-drop table if exists UTILISATEUR_TYPE_UTILISATEUR;
+-- --------------------------------------------------------
 
-drop table if exists UTILSATEUR_ETABLISSEMENT;
+--
+-- Structure de la table `NIVEAU`
+--
 
-/*==============================================================*/
-/* Table : CLASSE                                               */
-/*==============================================================*/
-create table CLASSE
-(
-   ID_CLASSE            int not null,
-   ID_NIVEAU            int,
-   NOM                  text,
-   primary key (ID_CLASSE)
-);
+CREATE TABLE `NIVEAU` (
+  `ID_NIVEAU` int(11) NOT NULL,
+  `ID_ETABLISSEMENT` int(11) DEFAULT NULL,
+  `NOM` text NOT NULL,
+  PRIMARY KEY (`ID_NIVEAU`),
+  KEY `FK_RELATION_1` (`ID_ETABLISSEMENT`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*==============================================================*/
-/* Table : ETABLISSEMENT                                        */
-/*==============================================================*/
-create table ETABLISSEMENT
-(
-   ID_ETABLISSEMENT     int not null,
-   NOM                  text not null,
-   ADRESSE              text not null,
-   CODE_POSTAL          text not null,
-   VILLE                text not null,
-   TELEPHONE_1          text,
-   TELEPHONE_2          text,
-   FAX                  text,
-   primary key (ID_ETABLISSEMENT)
-);
+-- --------------------------------------------------------
 
-/*==============================================================*/
-/* Table : NIVEAU                                               */
-/*==============================================================*/
-create table NIVEAU
-(
-   ID_NIVEAU            int not null,
-   ID_ETABLISSEMENT     int,
-   NOM                  text not null,
-   primary key (ID_NIVEAU)
-);
+--
+-- Structure de la table `POST`
+--
 
-/*==============================================================*/
-/* Table : POST                                                 */
-/*==============================================================*/
-create table POST
-(
-   ID_POST              int not null,
-   ID_USER              int,
-   TITRE                text not null,
-   DATE_CREATION        datetime not null,
-   DATE_DERNIERE_MODIFICATION datetime,
-   CONTENU              text not null,
-   primary key (ID_POST)
-);
+CREATE TABLE `POST` (
+  `ID_POST` int(11) NOT NULL,
+  `ID_USER` int(11) DEFAULT NULL,
+  `TITRE` text NOT NULL,
+  `DATE_CREATION` datetime NOT NULL,
+  `DATE_DERNIERE_MODIFICATION` datetime DEFAULT NULL,
+  `CONTENU` text NOT NULL,
+  PRIMARY KEY (`ID_POST`),
+  KEY `FK_CREATEUR` (`ID_USER`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*==============================================================*/
-/* Table : POST_CLASSE                                          */
-/*==============================================================*/
-create table POST_CLASSE
-(
-   ID_POST              int not null,
-   ID_CLASSE            int not null,
-   primary key (ID_POST, ID_CLASSE)
-);
+-- --------------------------------------------------------
 
-/*==============================================================*/
-/* Table : POST_ETABLISSEMENT                                   */
-/*==============================================================*/
-create table POST_ETABLISSEMENT
-(
-   ID_POST              int not null,
-   ID_ETABLISSEMENT     int not null,
-   primary key (ID_POST, ID_ETABLISSEMENT)
-);
+--
+-- Structure de la table `POST_CLASSE`
+--
 
-/*==============================================================*/
-/* Table : POST_NIVEAU                                          */
-/*==============================================================*/
-create table POST_NIVEAU
-(
-   ID_POST              int not null,
-   ID_NIVEAU            int not null,
-   primary key (ID_POST, ID_NIVEAU)
-);
+CREATE TABLE `POST_CLASSE` (
+  `ID_POST` int(11) NOT NULL,
+  `ID_CLASSE` int(11) NOT NULL,
+  PRIMARY KEY (`ID_POST`,`ID_CLASSE`),
+  KEY `FK_POST_CLASSE2` (`ID_CLASSE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*==============================================================*/
-/* Table : TYPE_UTILISATEUR                                     */
-/*==============================================================*/
-create table TYPE_UTILISATEUR
-(
-   ID_TYPE_UTILISATEUR  int not null,
-   VALEUR               text not null,
-   LIBELLE              text not null,
-   primary key (ID_TYPE_UTILISATEUR)
-);
+-- --------------------------------------------------------
 
-/*==============================================================*/
-/* Table : UTILISATEUR                                          */
-/*==============================================================*/
-create table UTILISATEUR
-(
-   ID_USER              int not null,
-   NOM                  text not null,
-   PRENOM               text not null,
-   LOGIN                text not null,
-   MOT_DE_PASSE         text,
-   primary key (ID_USER)
-);
+--
+-- Structure de la table `POST_ETABLISSEMENT`
+--
 
-/*==============================================================*/
-/* Table : UTILISATEUR_CLASSE                                   */
-/*==============================================================*/
-create table UTILISATEUR_CLASSE
-(
-   ID_CLASSE            int not null,
-   ID_USER              int not null,
-   primary key (ID_CLASSE, ID_USER)
-);
+CREATE TABLE `POST_ETABLISSEMENT` (
+  `ID_POST` int(11) NOT NULL,
+  `ID_ETABLISSEMENT` int(11) NOT NULL,
+  PRIMARY KEY (`ID_POST`,`ID_ETABLISSEMENT`),
+  KEY `FK_POST_ETABLISSEMENT2` (`ID_ETABLISSEMENT`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*==============================================================*/
-/* Table : UTILISATEUR_NIVEAU                                   */
-/*==============================================================*/
-create table UTILISATEUR_NIVEAU
-(
-   ID_NIVEAU            int not null,
-   ID_USER              int not null,
-   primary key (ID_NIVEAU, ID_USER)
-);
+-- --------------------------------------------------------
 
-/*==============================================================*/
-/* Table : UTILISATEUR_TYPE_UTILISATEUR                         */
-/*==============================================================*/
-create table UTILISATEUR_TYPE_UTILISATEUR
-(
-   ID_USER              int not null,
-   ID_TYPE_UTILISATEUR  int not null,
-   primary key (ID_USER, ID_TYPE_UTILISATEUR)
-);
+--
+-- Structure de la table `POST_NIVEAU`
+--
 
-/*==============================================================*/
-/* Table : UTILSATEUR_ETABLISSEMENT                             */
-/*==============================================================*/
-create table UTILSATEUR_ETABLISSEMENT
-(
-   ID_ETABLISSEMENT     int not null,
-   ID_USER              int not null,
-   primary key (ID_ETABLISSEMENT, ID_USER)
-);
+CREATE TABLE `POST_NIVEAU` (
+  `ID_POST` int(11) NOT NULL,
+  `ID_NIVEAU` int(11) NOT NULL,
+  PRIMARY KEY (`ID_POST`,`ID_NIVEAU`),
+  KEY `FK_POST_NIVEAU2` (`ID_NIVEAU`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-alter table CLASSE add constraint FK_RELATION_2 foreign key (ID_NIVEAU)
-      references NIVEAU (ID_NIVEAU) on delete restrict on update restrict;
+-- --------------------------------------------------------
 
-alter table NIVEAU add constraint FK_RELATION_1 foreign key (ID_ETABLISSEMENT)
-      references ETABLISSEMENT (ID_ETABLISSEMENT) on delete restrict on update restrict;
+--
+-- Structure de la table `TYPE_UTILISATEUR`
+--
 
-alter table POST add constraint FK_CREATEUR foreign key (ID_USER)
-      references UTILISATEUR (ID_USER) on delete restrict on update restrict;
+CREATE TABLE `TYPE_UTILISATEUR` (
+  `ID_TYPE_UTILISATEUR` int(11) NOT NULL,
+  `VALEUR` text NOT NULL,
+  `LIBELLE` text NOT NULL,
+  PRIMARY KEY (`ID_TYPE_UTILISATEUR`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-alter table POST_CLASSE add constraint FK_POST_CLASSE foreign key (ID_POST)
-      references POST (ID_POST) on delete restrict on update restrict;
+--
+-- Contenu de la table `TYPE_UTILISATEUR`
+--
 
-alter table POST_CLASSE add constraint FK_POST_CLASSE2 foreign key (ID_CLASSE)
-      references CLASSE (ID_CLASSE) on delete restrict on update restrict;
+INSERT INTO `TYPE_UTILISATEUR` (`ID_TYPE_UTILISATEUR`, `VALEUR`, `LIBELLE`) VALUES
+(1, 'DIRECTION', 'Direction'),
+(2, 'ENSEIGNANT', 'Enseignant'),
+(3, 'ELEVE', 'Elève'),
+(4, 'PARENT_ELEVE', 'Parent');
 
-alter table POST_ETABLISSEMENT add constraint FK_POST_ETABLISSEMENT foreign key (ID_POST)
-      references POST (ID_POST) on delete restrict on update restrict;
+-- --------------------------------------------------------
 
-alter table POST_ETABLISSEMENT add constraint FK_POST_ETABLISSEMENT2 foreign key (ID_ETABLISSEMENT)
-      references ETABLISSEMENT (ID_ETABLISSEMENT) on delete restrict on update restrict;
+--
+-- Structure de la table `UTILISATEUR`
+--
 
-alter table POST_NIVEAU add constraint FK_POST_NIVEAU foreign key (ID_POST)
-      references POST (ID_POST) on delete restrict on update restrict;
+CREATE TABLE `UTILISATEUR` (
+  `ID_USER` int(11) NOT NULL AUTO_INCREMENT,
+  `NOM` text NOT NULL,
+  `PRENOM` text NOT NULL,
+  `LOGIN` text NOT NULL,
+  `MOT_DE_PASSE` text,
+  PRIMARY KEY (`ID_USER`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
-alter table POST_NIVEAU add constraint FK_POST_NIVEAU2 foreign key (ID_NIVEAU)
-      references NIVEAU (ID_NIVEAU) on delete restrict on update restrict;
 
-alter table UTILISATEUR_CLASSE add constraint FK_UTILISATEUR_CLASSE foreign key (ID_CLASSE)
-      references CLASSE (ID_CLASSE) on delete restrict on update restrict;
+-- --------------------------------------------------------
 
-alter table UTILISATEUR_CLASSE add constraint FK_UTILISATEUR_CLASSE2 foreign key (ID_USER)
-      references UTILISATEUR (ID_USER) on delete restrict on update restrict;
+--
+-- Structure de la table `UTILISATEUR_CLASSE`
+--
 
-alter table UTILISATEUR_NIVEAU add constraint FK_UTILISATEUR_NIVEAU foreign key (ID_NIVEAU)
-      references NIVEAU (ID_NIVEAU) on delete restrict on update restrict;
+CREATE TABLE `UTILISATEUR_CLASSE` (
+  `ID_CLASSE` int(11) NOT NULL,
+  `ID_USER` int(11) NOT NULL,
+  PRIMARY KEY (`ID_CLASSE`,`ID_USER`),
+  KEY `FK_UTILISATEUR_CLASSE2` (`ID_USER`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-alter table UTILISATEUR_NIVEAU add constraint FK_UTILISATEUR_NIVEAU2 foreign key (ID_USER)
-      references UTILISATEUR (ID_USER) on delete restrict on update restrict;
+-- --------------------------------------------------------
 
-alter table UTILISATEUR_TYPE_UTILISATEUR add constraint FK_UTILISATEUR_TYPE_UTILISATEU foreign key (ID_USER)
-      references UTILISATEUR (ID_USER) on delete restrict on update restrict;
+--
+-- Structure de la table `UTILISATEUR_ETABLISSEMENT`
+--
 
-alter table UTILISATEUR_TYPE_UTILISATEUR add constraint FK_UTILISATEUR_TYPE_UTILISATE2 foreign key (ID_TYPE_UTILISATEUR)
-      references TYPE_UTILISATEUR (ID_TYPE_UTILISATEUR) on delete restrict on update restrict;
+CREATE TABLE `UTILISATEUR_ETABLISSEMENT` (
+  `ID_ETABLISSEMENT` int(11) NOT NULL,
+  `ID_USER` int(11) NOT NULL,
+  PRIMARY KEY (`ID_ETABLISSEMENT`,`ID_USER`),
+  KEY `FK_UTILSATEUR_ETABLISSEMENT2` (`ID_USER`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-alter table UTILSATEUR_ETABLISSEMENT add constraint FK_UTILSATEUR_ETABLISSEMENT foreign key (ID_ETABLISSEMENT)
-      references ETABLISSEMENT (ID_ETABLISSEMENT) on delete restrict on update restrict;
 
-alter table UTILSATEUR_ETABLISSEMENT add constraint FK_UTILSATEUR_ETABLISSEMENT2 foreign key (ID_USER)
-      references UTILISATEUR (ID_USER) on delete restrict on update restrict;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `UTILISATEUR_NIVEAU`
+--
+
+CREATE TABLE `UTILISATEUR_NIVEAU` (
+  `ID_NIVEAU` int(11) NOT NULL,
+  `ID_USER` int(11) NOT NULL,
+  PRIMARY KEY (`ID_NIVEAU`,`ID_USER`),
+  KEY `FK_UTILISATEUR_NIVEAU2` (`ID_USER`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `UTILISATEUR_TYPE_UTILISATEUR`
+--
+
+CREATE TABLE `UTILISATEUR_TYPE_UTILISATEUR` (
+  `ID_USER` int(11) NOT NULL,
+  `ID_TYPE_UTILISATEUR` int(11) NOT NULL,
+  PRIMARY KEY (`ID_USER`,`ID_TYPE_UTILISATEUR`),
+  KEY `FK_UTILISATEUR_TYPE_UTILISATE2` (`ID_TYPE_UTILISATEUR`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `CLASSE`
+--
+ALTER TABLE `CLASSE`
+  ADD CONSTRAINT `FK_RELATION_2` FOREIGN KEY (`ID_NIVEAU`) REFERENCES `NIVEAU` (`ID_NIVEAU`);
+
+--
+-- Contraintes pour la table `NIVEAU`
+--
+ALTER TABLE `NIVEAU`
+  ADD CONSTRAINT `FK_RELATION_1` FOREIGN KEY (`ID_ETABLISSEMENT`) REFERENCES `ETABLISSEMENT` (`ID_ETABLISSEMENT`);
+
+--
+-- Contraintes pour la table `POST`
+--
+ALTER TABLE `POST`
+  ADD CONSTRAINT `FK_CREATEUR` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`);
+
+--
+-- Contraintes pour la table `POST_CLASSE`
+--
+ALTER TABLE `POST_CLASSE`
+  ADD CONSTRAINT `FK_POST_CLASSE` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`),
+  ADD CONSTRAINT `FK_POST_CLASSE2` FOREIGN KEY (`ID_CLASSE`) REFERENCES `CLASSE` (`ID_CLASSE`);
+
+--
+-- Contraintes pour la table `POST_ETABLISSEMENT`
+--
+ALTER TABLE `POST_ETABLISSEMENT`
+  ADD CONSTRAINT `FK_POST_ETABLISSEMENT` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`),
+  ADD CONSTRAINT `FK_POST_ETABLISSEMENT2` FOREIGN KEY (`ID_ETABLISSEMENT`) REFERENCES `ETABLISSEMENT` (`ID_ETABLISSEMENT`);
+
+--
+-- Contraintes pour la table `POST_NIVEAU`
+--
+ALTER TABLE `POST_NIVEAU`
+  ADD CONSTRAINT `FK_POST_NIVEAU` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`),
+  ADD CONSTRAINT `FK_POST_NIVEAU2` FOREIGN KEY (`ID_NIVEAU`) REFERENCES `NIVEAU` (`ID_NIVEAU`);
+
+--
+-- Contraintes pour la table `UTILISATEUR_CLASSE`
+--
+ALTER TABLE `UTILISATEUR_CLASSE`
+  ADD CONSTRAINT `FK_UTILISATEUR_CLASSE` FOREIGN KEY (`ID_CLASSE`) REFERENCES `CLASSE` (`ID_CLASSE`),
+  ADD CONSTRAINT `FK_UTILISATEUR_CLASSE2` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`);
+
+--
+-- Contraintes pour la table `UTILISATEUR_ETABLISSEMENT`
+--
+ALTER TABLE `UTILISATEUR_ETABLISSEMENT`
+  ADD CONSTRAINT `FK_UTILSATEUR_ETABLISSEMENT` FOREIGN KEY (`ID_ETABLISSEMENT`) REFERENCES `ETABLISSEMENT` (`ID_ETABLISSEMENT`),
+  ADD CONSTRAINT `FK_UTILSATEUR_ETABLISSEMENT2` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`);
+
+--
+-- Contraintes pour la table `UTILISATEUR_NIVEAU`
+--
+ALTER TABLE `UTILISATEUR_NIVEAU`
+  ADD CONSTRAINT `FK_UTILISATEUR_NIVEAU` FOREIGN KEY (`ID_NIVEAU`) REFERENCES `NIVEAU` (`ID_NIVEAU`),
+  ADD CONSTRAINT `FK_UTILISATEUR_NIVEAU2` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`);
+
+--
+-- Contraintes pour la table `UTILISATEUR_TYPE_UTILISATEUR`
+--
+ALTER TABLE `UTILISATEUR_TYPE_UTILISATEUR`
+  ADD CONSTRAINT `FK_UTILISATEUR_TYPE_UTILISATE2` FOREIGN KEY (`ID_TYPE_UTILISATEUR`) REFERENCES `TYPE_UTILISATEUR` (`ID_TYPE_UTILISATEUR`),
+  ADD CONSTRAINT `UTILISATEUR_TYPE_UTILISATEUR_ibfk_1` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`) ON DELETE CASCADE;
