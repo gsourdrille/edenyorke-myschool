@@ -224,7 +224,7 @@ a {
   border-width: 0 1px 2px;
   margin: 20px 40px; 
   width: 300px;
-  height: 100px;
+  min-height: 100px;
   float : left;
 }
 
@@ -336,4 +336,40 @@ a {
 #tools_login{
 	float: left;
 	width: 400px;
+}
+
+#current_admin_page{
+  background-color: #FFFFFF;
+  border-color: #D8D8D8;
+  border-image: none;
+  border-left: 1px solid #D8D8D8;
+  border-radius: 3px 3px 3px 3px;
+  border-right: 1px solid #D8D8D8;
+  border-style: solid;
+  border-width: 0 1px 2px;
+  margin: 20px 0px; 
+  width: 700px;
+  height: 500px;
+  float : left;
+
+}
+
+#left_admin{
+  background-color: #FFFFFF;
+  border-color: #D8D8D8;
+  border-image: none;
+  border-left: 1px solid #D8D8D8;
+  border-radius: 3px 3px 3px 3px;
+  border-right: 1px solid #D8D8D8;
+  border-style: solid;
+  border-width: 0 1px 2px;
+  margin: 20px 40px; 
+  width: 200px;
+  height: 500px;
+  float : left;
+}
+
+#left_admin_conteneur{
+	float: left;
+	width: 210px;
 }

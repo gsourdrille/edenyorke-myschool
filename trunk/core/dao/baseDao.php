@@ -19,6 +19,7 @@ class BaseDao {
 	}
 	
 	public function sendRequest($request){
+		$charset = mysql_query("SET NAMES UTF8",$this->connection);
 		$ressource = mysql_query($request,$this->connection) ;
 		return $ressource;
 	}
