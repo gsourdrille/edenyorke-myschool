@@ -326,11 +326,10 @@ a {
 }
 
 #error_login{
-	font-size: 15px;
+	font-size: 13px;
 	color:red;
-	float: left;
-	margin-top:10px;
-	width: 200px;
+	float: right;
+	width: 300px;
 }
 
 #tools_login{

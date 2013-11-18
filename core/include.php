@@ -1,9 +1,9 @@
 <?php
-include("constant/constants.php");
-include("dao/baseDao.php");
-include("dao/utilisateurDao.php");
-include("bean/utilisateur.php");
-include("dao/etablissementDao.php");
-include("bean/etablissement.php");
-include("bean/type_utilisateur.php");
-include("dao/utilisateurEtablissementDao.php");
+include_once("constant/constants.php");
+include_once("dao/baseDao.php");
+include_once("dao/utilisateurDao.php");
+include_once("bean/utilisateur.php");
+include_once("dao/etablissementDao.php");
+include_once("bean/etablissement.php");
+include_once("bean/type_utilisateur.php");
+include_once("dao/utilisateurEtablissementDao.php");

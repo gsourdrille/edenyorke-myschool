@@ -11,7 +11,7 @@
 		<img alt="" src="/myschool/html/images/icon_mail.png"  class="icon_mail"/>
 	</div>
 	<div id="user">
-		<a href="#">
+		<a href="/myschool/core/controller/admin_infos_controller.php">
 			<img alt="" src="/myschool/html/images/icon_user.png"  class="icon_user"/>
 			<?php echo $utilisateur->prenom; ?> <?php echo $utilisateur->nom?>
 		</a>

@@ -3,7 +3,7 @@
 	
 	
 		<ul>
-			<li onclick="$('#current_admin_page').load('/myschool/core/controller/admin_controller.php?action=infos');"> Infos personnelles</li>
+			<li><a href="/myschool/core/controller/admin_infos_controller.php"> Infos personnelles</a></li>
 			<li>Etablissements</li>
 			<li>Niveaux</li>
 			<li>Classes</li>
