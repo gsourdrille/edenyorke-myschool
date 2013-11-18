@@ -40,7 +40,7 @@
  		if($utilisateur != null){
  			$baseDao = new BaseDao();
  			$baseDao->connect();
- 			$requete = "UPDATE UTILISATEUR SET NOM=$utilisateur->nom, PRENOM=$utilisateur->prenom, LOGIN=$utilisateur->login,MOT_DE_PASSE=$utilisateur->mdp
+ 			$requete = "UPDATE UTILISATEUR SET NOM='$utilisateur->nom', PRENOM='$utilisateur->prenom', LOGIN='$utilisateur->login',MOT_DE_PASSE='$utilisateur->mdp'
  						WHERE ID_USER=$utilisateur->idUser";
  			$baseDao->sendRequest($requete);
  			$baseDao->close();

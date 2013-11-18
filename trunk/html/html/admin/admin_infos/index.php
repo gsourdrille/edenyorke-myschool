@@ -3,13 +3,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK rel="stylesheet" type="text/css" href="/myschool/html/css/style.css">
+ <script type="text/javascript" src="/myschool/html/js/jquery.js"></script>
 <title>MySchool</title>
 </head>
 <body>
 <div id="header">
 <?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/header.php"); ?>
 </div>
-<?php include("body.php"); ?>
+<div id="main_conteneur" class="with_bg">
+	<div id="post_conteneur">
+		<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/left.php"); ?>
+		<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_infos/admin_infos.php"); ?>
+	
+	</div>
+</div> 
 <?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/footer.php"); ?>
 </body>
 </html>
