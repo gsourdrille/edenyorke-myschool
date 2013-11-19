@@ -15,5 +15,10 @@ function validateLogin($username, $userId){
 
 function updateUtilisateur($utilisateur){
 	$utilisaterDao = new UtilisateurDao();
-	$utilisaterDao->updateUtilisateur($utilisateur);
+	return $utilisaterDao->updateUtilisateur($utilisateur);
+}
+
+function updateEtablissement($etablissement){
+	$etablissementDao = new EtablissementDao();
+	return $etablissementDao->updateEtablissement($etablissement);
 }

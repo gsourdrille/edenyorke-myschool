@@ -1,7 +1,6 @@
 <div id="current_admin_page">
 	<div id="center_conteneur">
 		<form action="/myschool/core/controller/admin_infos_controller.php" method="post">
-			<input type="hidden" name="action" value="updateInfos"/>
 			<div id="nom_info">
 				<label for="name">Nom : </label>
 				<input type="text" name="nom" value="<?php if(isset($nom)){echo $nom;}else{echo $utilisateur->nom;}?>"/>
