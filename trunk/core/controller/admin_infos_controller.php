@@ -80,9 +80,13 @@ if (isset($_POST['submit'])){
 			}
 		}
 		if($error==false){
-			updateUtilisateur($utilisateur);
-			$_SESSION['USER'] = serialize($utilisateur);
-			$succes = "Vos informations ont été mises à jour";
+			if(updateUtilisateur($utilisateur)){
+				$_SESSION['USER'] = serialize($utilisateur);
+				$succes = "Vos informations ont été mises à jour";
+			}else{
+				$succes = "Une erreur est survnue lors de la mise à jour";
+			}
+			
 		}
 	}
 

@@ -4,7 +4,7 @@
 	
 		<ul>
 			<li><a href="/myschool/core/controller/admin_infos_controller.php"> Infos personnelles</a></li>
-			<li>Etablissements</li>
+			<li><a href="/myschool/core/controller/admin_etablissement_controller.php">Etablissement</a></li>
 			<li>Niveaux</li>
 			<li>Classes</li>
 			<li>Utilisateurs</li>

@@ -42,8 +42,13 @@
  			$baseDao->connect();
  			$requete = "UPDATE UTILISATEUR SET NOM='$utilisateur->nom', PRENOM='$utilisateur->prenom', LOGIN='$utilisateur->login',MOT_DE_PASSE='$utilisateur->mdp'
  						WHERE ID_USER=$utilisateur->idUser";
- 			$baseDao->sendRequest($requete);
+ 			$result  = $baseDao->sendRequest($requete);
  			$baseDao->close();
+ 			if(!$result){
+ 				return false;
+ 			}else{
+ 				return true;
+ 			}
  		}
  	}
  	
