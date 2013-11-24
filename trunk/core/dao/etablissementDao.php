@@ -7,10 +7,19 @@ class EtablissementDao{
 		if($etablissement != null){
 			$baseDao = new BaseDao();
 			$baseDao->connect();
-			$requete = "INSERT INTO ETABLISSEMENT (ID_ETABLISSEMENT,NOM,ADRESSE,CODE_POSTAL,VILLE,TELEPHONE_1,TELEPHONE_2,FAX)
-			VALUES ('$etablissement->idEtablissement',  '$etablissement->nom', '$etablissement->adresse', '$etablissement->codePostal', '$etablissement->ville', '$etablissement->telephone1', '$etablissement->telephone2','$etablissement->fax') ";
+			
+			$nom = mysql_real_escape_string($etablissement->nom);
+			$adresse = mysql_real_escape_string($etablissement->adresse);
+			$ville = mysql_real_escape_string($etablissement->ville);
+			
+			$requete = "INSERT INTO ETABLISSEMENT (NOM,ADRESSE,CODE_POSTAL,VILLE,TELEPHONE_1,TELEPHONE_2,FAX)
+			VALUES ('$nom', '$etablissement->adresse', '$adresse', '$etablissement->ville', '$ville', '$etablissement->telephone2','$etablissement->fax') ";
 			$result = $baseDao->sendRequest($requete);
+			$requete = "SELECT LAST_INSERT_ID() FROM ETABLISSEMENT";
+			$result = mysql_insert_id();
+			$etablissement->idEtablissement = $result;
 			$baseDao->close();
+			return $etablissement;
 		}
 	}
 	
@@ -27,7 +36,6 @@ class EtablissementDao{
 			WHERE ID_ETABLISSEMENT=$etablissement->idEtablissement";
 			
 			$result = $baseDao->sendRequest($requete);
-			echo $requete;
 			$baseDao->close();
 			if(!$result){
 				return false;

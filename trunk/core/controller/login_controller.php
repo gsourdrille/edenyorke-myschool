@@ -5,7 +5,7 @@ session_start();
 require ('../service/login_service.php');
 require('../logs/Logger.class.php');
 
-	// CrŽation d'un objet Logger
+	// Crï¿½ation d'un objet Logger
 	$logger = new Logger(Constants::LOGGER_LOCATION);
 
 	$username=$_POST['username'];
@@ -19,5 +19,5 @@ require('../logs/Logger.class.php');
 	}else{
 		$logger->log('error', 'myschool', "Fonction connect() : l'authentification a echouee", Logger::GRAN_VOID);
 		$error = "Utilisateur inconnu";
-		require ("../../html/html/login/index.php");
+		require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/login/index.php");
 	}

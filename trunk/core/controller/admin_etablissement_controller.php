@@ -1,30 +1,13 @@
 <?php
 session_start();
 require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/tableau_service.php");
 
 require('../logs/Logger.class.php');
 
 // Creation d'un objet Logger
 $logger = new Logger(Constants::LOGGER_LOCATION);
 
-if(!isset($_SESSION['USER'])){
-	header("location:/myschool/html/html/login/index.php");
-}else{
-	
-	$utilisateur = unserialize($_SESSION['USER']);
-	$listeTypeUtilisateur = getTypeUtilisateur($utilisateur);
-	if($listeTypeUtilisateur!= null && $listeTypeUtilisateur->count()>0){
-		$_SESSION['TYPE_UTILISATEUR'] = $listeTypeUtilisateur[0];
-	}
-	$listeEtablissement = getListeEtabliseement($utilisateur);
-	if($listeEtablissement!= null && $listeEtablissement->count()>0){
-		$etablissement = getEtablissement($listeEtablissement[0]);
-		if($etablissement != null){
-			$_SESSION['ETABLISSEMENT_ID'] = $etablissement->idEtablissement;
-		}
-	}
-}
+include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.php");
 
 if (isset($_POST['submit'])){
 	
@@ -80,4 +63,4 @@ if (isset($_POST['submit'])){
 		}
 	}
 
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/etablissement_infos/index.php");
+require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_etablissement/index.php");

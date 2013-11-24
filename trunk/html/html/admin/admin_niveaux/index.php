@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK rel="stylesheet" type="text/css" href="/myschool/html/css/style.css">
  <script type="text/javascript" src="/myschool/html/js/jquery.js"></script>
+ <script type="text/javascript" src="/myschool/html/js/myschool.js"></script>
 <title>MySchool</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
 <div id="main_conteneur" class="with_bg">
 	<div id="post_conteneur">
 		<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/left.php"); ?>
-		<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/etablissement_infos/etablissement_infos.php"); ?>
+		<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_niveaux/admin_niveaux.php"); ?>
 	
 	</div>
 </div> 
