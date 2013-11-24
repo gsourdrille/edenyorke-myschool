@@ -1,30 +1,13 @@
 <?php
 session_start();
 require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/tableau_service.php");
 
 require('../logs/Logger.class.php');
 
 // Creation d'un objet Logger
 $logger = new Logger(Constants::LOGGER_LOCATION);
 
-if(!isset($_SESSION['USER'])){
-	header("location:/myschool/html/html/login/index.php");
-}else{
-	
-	$utilisateur = unserialize($_SESSION['USER']);
-	$listeTypeUtilisateur = getTypeUtilisateur($utilisateur);
-	if($listeTypeUtilisateur!= null && $listeTypeUtilisateur->count()>0){
-		$_SESSION['TYPE_UTILISATEUR'] = $listeTypeUtilisateur[0];
-	}
-	$listeEtablissement = getListeEtabliseement($utilisateur);
-	if($listeEtablissement!= null && $listeEtablissement->count()>0){
-		$etablissement = getEtablissement($listeEtablissement[0]);
-		if($etablissement != null){
-			$_SESSION['ETABLISSEMENT_ID'] = $etablissement->idEtablissement;
-		}
-	}
-}
+include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.php");
 
 if (isset($_POST['submit'])){
 	
@@ -56,10 +39,7 @@ if (isset($_POST['submit'])){
 			}
 		}
 		$ancienMdp = $_POST['ancien_mdp'];
-		$logger->log('succes', 'myschool', "Fonction validate infos user() : test ".$ancienMdp, Logger::GRAN_VOID);
 		if($ancienMdp != null && trim($ancienMdp) == true){
-			$logger->log('succes', 'myschool', "Fonction validate infos user() : ancienMdp ".sha1($ancienMdp), Logger::GRAN_VOID);
-			$logger->log('succes', 'myschool', "Fonction validate infos user() : Mdp ".$utilisateur->mdp, Logger::GRAN_VOID);
 			if(sha1($ancienMdp) != $utilisateur->mdp){
 				$error_password="L'ancien mot de passe n'est pas correct";
 				$error = true;
@@ -94,4 +74,4 @@ if (isset($_POST['submit'])){
 	
 
 
-require ("../../html/html/admin/admin_infos/index.php");
+require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_infos/index.php");

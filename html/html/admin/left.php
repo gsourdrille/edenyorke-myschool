@@ -5,9 +5,10 @@
 		<ul>
 			<li><a href="/myschool/core/controller/admin_infos_controller.php"> Infos personnelles</a></li>
 			<li><a href="/myschool/core/controller/admin_etablissement_controller.php">Etablissement</a></li>
-			<li>Niveaux</li>
+			<li><a href="/myschool/core/controller/admin_niveaux_controller.php">Niveaux</a></li>
 			<li>Classes</li>
-			<li>Utilisateurs</li>
+			<li>Professeurs</li>
+			<li>Elèves</li>
 		</ul>
 	</div>
 </div>

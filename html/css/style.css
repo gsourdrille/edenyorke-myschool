@@ -14,6 +14,20 @@ a {
     transition: all 0.5s ease 0s;
 }
 
+
+select{
+ background: transparent;
+ width: 154px;
+ min-height: 154px;
+ padding: 5px;
+ font-size: 16px;
+ line-height: 1;
+ border: 1;
+ border-radius: 0;
+ -webkit-appearance: none;
+ -moz-appearance: none;
+ appearance: none;
+}
 #header {
   background: url("../images/header_bg.png") repeat-x scroll 0 0 #89AB0C;
   border-bottom: 1px solid #7D9E0C;
@@ -371,4 +385,15 @@ a {
 #left_admin_conteneur{
 	float: left;
 	width: 210px;
+}
+
+.floatleft{
+	float: left;
+}
+.floatright{
+	float: right;
+}
+
+#button_submit_infos{
+	float:left;
 }
