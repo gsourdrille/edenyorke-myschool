@@ -56,7 +56,7 @@
 			<div>
 				<div class="floatleft">
 					<select id="liste_classes" size="6"  onclick="loadClasses()">
-						<?php  foreach ($listeClasse as $selectClasse){
+						<?php  foreach ($listeClasses as $selectClasse){
 							$selected = false;
 							if(isset($classe) && $classe->idClasse == $selectClasse->idClasse){
 								$selected = true;

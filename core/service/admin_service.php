@@ -57,3 +57,37 @@ function deleteNiveau($niveau){
 	$niveauDao = new NiveauDao();
 	return $niveauDao->deleteNiveau($niveau);
 }
+
+function getClasseById($idClasse){
+	$classeDao = new ClasseDao();
+	return $classeDao->findClasse($idClasse);
+}
+
+function validateClasse($nom, $idClasse,$idNiveau){
+	$classeDao = new ClasseDao();
+	$classe = $classeDao->findClasseByNomAndNiveau($nom, $idNiveau);
+	if($classe == null || ($classe != null && $classe->idClasse == $idClasse)){
+		return true;
+	}else{
+		return false;
+	}
+
+}
+
+function saveOrUpdateClasse($classe){
+	$classeDao = new ClasseDao();
+	if($classe->idClasse == null){
+		return $classeDao->saveClasse($classe);
+	}else{
+		return $classeDao->updateClasse($classe);
+	}
+}
+function deleteClasse($classe){
+	$classeDao = new ClasseDao();
+	return $classeDao->deleteClasse($classe);
+}
+
+function getClassesByNiveau($idNiveau){
+	$classeDao = new ClasseDao();
+	return $classeDao->findClasseByNiveau($idNiveau);
+}

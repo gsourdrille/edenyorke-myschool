@@ -19,12 +19,13 @@ if(isset($_GET['action'])){
 		$niveau = getNiveauById($_GET['idNiveau']);
 		$_SESSION['NIVEAU_SELECTED'] = $niveau->idNiveau;
 		$showNiveau = true;
+		$listeClasses = getClassesByNiveau($_GET['idNiveau']);
 	}
 }
 if(isset($_POST['saveNiveau'])){
 	$logger->log('succes', 'myschool', "admin_controller.php : action save" , Logger::GRAN_VOID);
 	$idNiveau = $_POST['idNiveau'];
-	$nom = $_POST['nomNiveau'];
+	$nomNiveau = $_POST['nomNiveau'];
 	if($idNiveau == null || trim($idNiveau) == false){
 		//Nouveau niveau
 		$niveau = new Niveau();
@@ -36,7 +37,6 @@ if(isset($_POST['saveNiveau'])){
 	}
 	
 	$error = false;
-	$nomNiveau = $_POST['nomNiveau'];
 	if($nomNiveau == null || trim($nomNiveau) == false){
 		$error_nom_niveau="Le nom ne peut être vide";
 		$error = true;
@@ -69,10 +69,50 @@ if(isset($_POST['saveNiveau'])){
 	$showNiveau = true;
 	$nomNiveau="";
 }else if(isset($_POST['showAddClasse'])){
+	$niveau = getNiveauById($_SESSION['NIVEAU_SELECTED']);
 	$showClasse = true;
 	$showNiveau = true;
 	$nomClasse="";
+}else if(isset($_POST['saveClasse'])){
+	
+	$niveau = getNiveauById($_SESSION['NIVEAU_SELECTED']);
+	$idClasse = $_POST['idClasse'];
+	$nomClasse = $_POST['nomClasse'];
+	if($idClasse == null || trim($idClasse) == false){
+		//Nouvelle classe
+		$classe = new Classe();
+		$classe->idNiveau = $_SESSION['NIVEAU_SELECTED'];
+		$isnew = true;
+	}else{
+		$classe = getClasseById($idNiveau);
+		$isnew = false;
+	}
+	
+	$error = false;
+	if($nomClasse == null || trim($nomClasse) == false){
+		$error_nom_classe="Le nom ne peut être vide";
+		$error = true;
+	}else{
+		//Verification que le nomn n'existe pas deja
+		if(validateClasse($nomClasse, $classe->idClasse, $_SESSION['NIVEAU_SELECTED'])){
+			$classe->nom = $nomClasse;
+		}else{
+			$error_nom_classe="Ce nom de classe est déjà utilisée, veuillez en choisir un autre";
+			$error = true;
+		}
+	}
+	$showClasse = true;
+	if($error==false){
+		if(saveOrUpdateClasse($classe)){
+			$succesClasse = "Vos informations ont été mises à jour";
+		}else{
+			$succesClasse = "Une erreur est survenue lors de la mise à jour";
+		}
+			
+	}
+	$listeClasses = getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
+	$showClasse = true;
+	$showNiveau = true;
+
 }
-
-
 require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_niveaux/index.php");
