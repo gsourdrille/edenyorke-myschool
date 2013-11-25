@@ -8,3 +8,5 @@ include_once("bean/etablissement.php");
 include_once("bean/type_utilisateur.php");
 include_once("bean/niveau.php");
 include_once("dao/niveauDao.php");
+include_once("bean/classe.php");
+include_once("dao/classeDao.php");

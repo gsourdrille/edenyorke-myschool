@@ -9,7 +9,7 @@
   			$baseDao = new BaseDao();
  			$baseDao->connect();
  			$nom = mysql_real_escape_string($classe->nom);
- 			$requete = "INSERT INTO CLASSE (NOM,ID_NIVEAU) VALUES ('$nom', '$classe->idEtablissement') ";
+ 			$requete = "INSERT INTO CLASSE (NOM,ID_NIVEAU) VALUES ('$nom', '$classe->idNiveau') ";
  			$result = $baseDao->sendRequest($requete);
  			$requete = "SELECT LAST_INSERT_ID() FROM CLASSE";
  			$result = mysql_insert_id(); 
@@ -65,7 +65,7 @@
  	public function findClasseByNiveau($idNiveau){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
- 		$requete = "SELECT * FROM CLASSE WHERE ID_CLASSE='$idClasse'";
+ 		$requete = "SELECT * FROM CLASSE WHERE ID_NIVEAU='$idNiveau'";
  		$resulat = $baseDao->sendRequest($requete);
  		$listeClasses = new ArrayObject();
  		while($row = mysql_fetch_array($resulat, MYSQL_ASSOC)){
