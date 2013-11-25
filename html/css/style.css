@@ -18,15 +18,8 @@ a {
 select{
  background: transparent;
  width: 154px;
- min-height: 154px;
- padding: 5px;
- font-size: 16px;
  line-height: 1;
  border: 1;
- border-radius: 0;
- -webkit-appearance: none;
- -moz-appearance: none;
- appearance: none;
 }
 #header {
   background: url("../images/header_bg.png") repeat-x scroll 0 0 #89AB0C;
