@@ -17,13 +17,14 @@ if(isset($_GET['action'])){
 	if($action == 'show'){
 		$logger->log('succes', 'myschool', "admin_controller.php : action show ", Logger::GRAN_VOID);
 		$niveau = getNiveauById($_GET['idNiveau']);
+		$_SESSION['NIVEAU_SELECTED'] = $niveau->idNiveau;
 		$showNiveau = true;
 	}
 }
-if(isset($_POST['save'])){
+if(isset($_POST['saveNiveau'])){
 	$logger->log('succes', 'myschool', "admin_controller.php : action save" , Logger::GRAN_VOID);
 	$idNiveau = $_POST['idNiveau'];
-	$nom = $_POST['nom'];
+	$nom = $_POST['nomNiveau'];
 	if($idNiveau == null || trim($idNiveau) == false){
 		//Nouveau niveau
 		$niveau = new Niveau();
@@ -35,38 +36,42 @@ if(isset($_POST['save'])){
 	}
 	
 	$error = false;
-	$nom = $_POST['nom'];
-	if($nom == null || trim($nom) == false){
-		$error_nom="Le nom ne peut être vide";
+	$nomNiveau = $_POST['nomNiveau'];
+	if($nomNiveau == null || trim($nomNiveau) == false){
+		$error_nom_niveau="Le nom ne peut être vide";
 		$error = true;
 	}else{
 		//Verification que le nomn n'existe pas deja
-		if(validateNiveau($nom, $niveau->idNiveau, $_SESSION['ETABLISSEMENT_ID'])){
-			$niveau->nom = $nom;
+		if(validateNiveau($nomNiveau, $niveau->idNiveau, $_SESSION['ETABLISSEMENT_ID'])){
+			$niveau->nom = $nomNiveau;
 		}else{
-			$error_nom="Ce nom de niveau est déjà utilisé, veuillez en choisir un autre";
+			$error_nom_niveau="Ce nom de niveau est déjà utilisé, veuillez en choisir un autre";
 			$error = true;
 		}
 	}
 	$showNiveau = true;
 	if($error==false){
 		if(saveOrUpdateNiveau($niveau)){
-			$succes = "Vos informations ont été mises à jour";
+			$succesNiveau = "Vos informations ont été mises à jour";
 			$listeNiveaux = getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
 		}else{
-			$succes = "Une erreur est survnue lors de la mise à jour";
+			$succesNiveau = "Une erreur est survnue lors de la mise à jour";
 		}
 			
 	}
-}else if(isset($_POST['delete'])){
+}else if(isset($_POST['deleteNiveau'])){
 	$idNiveau = $_POST['idNiveau'];
 	$niveau = getNiveauById($idNiveau);
 	deleteNiveau($niveau);
 	$showNiveau = false;
 	$listeNiveaux = getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
-}else if(isset($_POST['showAdd'])){
+}else if(isset($_POST['showAddNiveau'])){
 	$showNiveau = true;
-	$nom="";
+	$nomNiveau="";
+}else if(isset($_POST['showAddClasse'])){
+	$showClasse = true;
+	$showNiveau = true;
+	$nomClasse="";
 }
 
 

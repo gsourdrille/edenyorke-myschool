@@ -28,9 +28,9 @@ jQuery.fn.filterByText = function(textbox, selectSingleMatch) {
 	    });
 	  });
 	};
-	$(function() {
-		  $('#liste_niveaux').filterByText($('#filter'), true);
-		});  
+//	$(function() {
+//		  $('#liste_niveaux').filterByText($('#filter'), true);
+//		});  
 
 	
  function loadNiveaux() {
