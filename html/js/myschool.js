@@ -36,5 +36,11 @@ jQuery.fn.filterByText = function(textbox, selectSingleMatch) {
  function loadNiveaux() {
     var selectBox = document.getElementById("liste_niveaux");
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    document.location.href='admin_niveaux_controller.php?action=show&idNiveau='+selectedValue;
+    document.location.href='admin_niveaux_controller.php?action=showNiveau&idNiveau='+selectedValue;
 }
+ 
+ function loadClasses() {
+	    var selectBox = document.getElementById("liste_classes");
+	    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+	    document.location.href='admin_niveaux_controller.php?action=showClasse&idClasse='+selectedValue;
+	}

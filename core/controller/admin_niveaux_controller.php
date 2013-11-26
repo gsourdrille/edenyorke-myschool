@@ -1,12 +1,6 @@
 <?php
 session_start();
 require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
-
-require('../logs/Logger.class.php');
-
-// Creation d'un objet Logger
-$logger = new Logger(Constants::LOGGER_LOCATION);
-
 include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.php");
 
 
@@ -14,16 +8,23 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.p
 $listeNiveaux = getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
 if(isset($_GET['action'])){
 	$action = $_GET['action'];
-	if($action == 'show'){
-		$logger->log('succes', 'myschool', "admin_controller.php : action show ", Logger::GRAN_VOID);
+	if($action == 'showNiveau'){
 		$niveau = getNiveauById($_GET['idNiveau']);
+		$listeClasses = getClassesByNiveau($_GET['idNiveau']);
 		$_SESSION['NIVEAU_SELECTED'] = $niveau->idNiveau;
 		$showNiveau = true;
-		$listeClasses = getClassesByNiveau($_GET['idNiveau']);
+		$showListeClasses = true;
+	}else if($action == 'showClasse'){
+		$classe = getCLasseById($_GET['idClasse']);
+		$niveau = getNiveauById($_SESSION['NIVEAU_SELECTED']);
+		$listeClasses = getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
+		$_SESSION['CLASSE_SELECTED'] = $classe->idClasse;
+		$showNiveau = true;
+		$showListeClasses = true;
+		$showClasse = true;
 	}
 }
 if(isset($_POST['saveNiveau'])){
-	$logger->log('succes', 'myschool', "admin_controller.php : action save" , Logger::GRAN_VOID);
 	$idNiveau = $_POST['idNiveau'];
 	$nomNiveau = $_POST['nomNiveau'];
 	if($idNiveau == null || trim($idNiveau) == false){
@@ -50,31 +51,35 @@ if(isset($_POST['saveNiveau'])){
 		}
 	}
 	$showNiveau = true;
+	$showListeClasses = true;
 	if($error==false){
 		if(saveOrUpdateNiveau($niveau)){
 			$succesNiveau = "Vos informations ont été mises à jour";
 			$listeNiveaux = getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
+			$_SESSION['NIVEAU_SELECTED'] = $niveau->idNiveau;
 		}else{
 			$succesNiveau = "Une erreur est survnue lors de la mise à jour";
 		}
 			
 	}
 }else if(isset($_POST['deleteNiveau'])){
-	$idNiveau = $_POST['idNiveau'];
-	$niveau = getNiveauById($idNiveau);
-	deleteNiveau($niveau);
+	$idNiveau = $_POST['idNiveau']; 
+	deleteNiveau($idNiveau);
 	$showNiveau = false;
+	$showListeClasses = false;
 	$listeNiveaux = getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
 }else if(isset($_POST['showAddNiveau'])){
 	$showNiveau = true;
+	$showListeClasses = false;
 	$nomNiveau="";
 }else if(isset($_POST['showAddClasse'])){
 	$niveau = getNiveauById($_SESSION['NIVEAU_SELECTED']);
+	$listeClasses = getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
 	$showClasse = true;
 	$showNiveau = true;
+	$showListeClasses = true;
 	$nomClasse="";
 }else if(isset($_POST['saveClasse'])){
-	
 	$niveau = getNiveauById($_SESSION['NIVEAU_SELECTED']);
 	$idClasse = $_POST['idClasse'];
 	$nomClasse = $_POST['nomClasse'];
@@ -105,6 +110,8 @@ if(isset($_POST['saveNiveau'])){
 	if($error==false){
 		if(saveOrUpdateClasse($classe)){
 			$succesClasse = "Vos informations ont été mises à jour";
+			$_SESSION['CLASSE_SELECTED'] = $classe->idClasse;
+			$listeClasses = getClassesByNiveau($_GET['idNiveau']);
 		}else{
 			$succesClasse = "Une erreur est survenue lors de la mise à jour";
 		}
@@ -113,6 +120,16 @@ if(isset($_POST['saveNiveau'])){
 	$listeClasses = getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
 	$showClasse = true;
 	$showNiveau = true;
+	$showListeClasses = true;
 
+}else if(isset($_POST['deleteClasse'])){
+	$idClasse = $_POST['idClasse'];
+	$niveau = getNiveauById($_SESSION['NIVEAU_SELECTED']);
+	$listeNiveaux = getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
+	deleteClasse($idClasse);
+	$showNiveau = true;
+	$showListeClasses = true;
+	$showClasse = false;
+	$listeClasses = getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
 }
 require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_niveaux/index.php");
