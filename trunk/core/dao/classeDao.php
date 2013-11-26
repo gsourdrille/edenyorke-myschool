@@ -10,6 +10,7 @@
  			$baseDao->connect();
  			$nom = mysql_real_escape_string($classe->nom);
  			$requete = "INSERT INTO CLASSE (NOM,ID_NIVEAU) VALUES ('$nom', '$classe->idNiveau') ";
+ 			echo $requete;
  			$result = $baseDao->sendRequest($requete);
  			$requete = "SELECT LAST_INSERT_ID() FROM CLASSE";
  			$result = mysql_insert_id(); 
@@ -38,11 +39,11 @@
  	}
  	
  	 	
- 	public function deleteClasse($classe){
- 		if($classe != null){
+ 	public function deleteClasse($idClasse){
+ 		if($idClasse != null){
  			$baseDao = new BaseDao();
  			$baseDao->connect();
- 			$requete = "DELETE FROM CLASSE WHERE ID_CLASSE=$classe->idClasse";
+ 			$requete = "DELETE FROM CLASSE WHERE ID_CLASSE=$idClasse";
  			$baseDao->sendRequest($requete);
  			$baseDao->close();
  		}

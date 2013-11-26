@@ -38,11 +38,12 @@
  	}
  	
  	 	
- 	public function deleteNiveau($niveau){
- 		if($niveau != null){
+ 	public function deleteNiveau($idNiveau){
+ 		if($idNiveau != null){
  			$baseDao = new BaseDao();
  			$baseDao->connect();
- 			$requete = "DELETE FROM NIVEAU WHERE ID_NIVEAU=$niveau->idNiveau";
+ 			$requete = "DELETE FROM NIVEAU WHERE ID_NIVEAU=$idNiveau";
+ 			echo $requete;
  			$baseDao->sendRequest($requete);
  			$baseDao->close();
  		}

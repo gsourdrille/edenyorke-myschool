@@ -53,9 +53,9 @@ function saveOrUpdateNiveau($niveau){
 		return $niveauDao->updateNiveau($niveau);
 	}
 }
-function deleteNiveau($niveau){
+function deleteNiveau($idNiveau){
 	$niveauDao = new NiveauDao();
-	return $niveauDao->deleteNiveau($niveau);
+	return $niveauDao->deleteNiveau($idNiveau);
 }
 
 function getClasseById($idClasse){
@@ -82,9 +82,9 @@ function saveOrUpdateClasse($classe){
 		return $classeDao->updateClasse($classe);
 	}
 }
-function deleteClasse($classe){
+function deleteClasse($idClasse){
 	$classeDao = new ClasseDao();
-	return $classeDao->deleteClasse($classe);
+	return $classeDao->deleteClasse($idClasse);
 }
 
 function getClassesByNiveau($idNiveau){

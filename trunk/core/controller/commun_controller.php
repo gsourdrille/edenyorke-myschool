@@ -13,6 +13,5 @@ if(!isset($_SESSION['USER'])){
 	$etablissement = getEtablissement($utilisateur->etablissement);
 	if($etablissement != null){
 		$_SESSION['ETABLISSEMENT_ID'] = $etablissement->idEtablissement;
-		$logger->log('succes', 'myschool', "tableau_controller.php : etablissement trouve : ".$etablissement->nom, Logger::GRAN_VOID);
 	}
 }
