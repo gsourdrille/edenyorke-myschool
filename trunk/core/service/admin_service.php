@@ -91,3 +91,8 @@ function getClassesByNiveau($idNiveau){
 	$classeDao = new ClasseDao();
 	return $classeDao->findClasseByNiveau($idNiveau);
 }
+
+function getUserByEtablissementAndType($idEtablissement, $type){
+	$userDao = new UtilisateurDao();
+	return $userDao->findUtilisateurByEtablissementAndType($idEtablissement, $type);
+}

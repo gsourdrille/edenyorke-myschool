@@ -113,6 +113,20 @@
  		return $listeTypesUtilisateurs;
  	}
  	
+ 	//TODO
+ 	public function findUtilisateurByEtablissementAndType($idEtablissement, $type){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_ETABLISSEMENT='$idEtablissement'";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$listeUtilisateurs = new ArrayObject();
+ 		while($row = mysql_fetch_array($resulat, MYSQL_ASSOC)){
+ 			$listeTypesUtilisateurs->append($row["ID_TYPE_UTILISATEUR"]);
+ 		}
+ 		$baseDao->close();
+ 		return $listeTypesUtilisateurs;
+ 	}
+ 	
  	public function buildUtilisateur($row){
   		$utilisateur = new Utilisateur();
  		$utilisateur->idUser = $row["ID_USER"];
