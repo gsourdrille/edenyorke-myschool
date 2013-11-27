@@ -3,8 +3,8 @@
 include($_SERVER['DOCUMENT_ROOT']."/myschool/core/include.php");
 
 function validateLogin($username, $userId){
-	$utilisaterDao = new UtilisateurDao();
-	$utilisateur = $utilisaterDao->findUtilisateurByUsername($username);
+	$utilisateurDao = new UtilisateurDao();
+	$utilisateur = $utilisateurDao->findUtilisateurByUsername($username);
 	if($utilisateur == null || ($utilisateur != null && $utilisateur->idUser == $userId)){
 		return true;
 	}else{
@@ -14,8 +14,17 @@ function validateLogin($username, $userId){
 }
 
 function updateUtilisateur($utilisateur){
-	$utilisaterDao = new UtilisateurDao();
-	return $utilisaterDao->updateUtilisateur($utilisateur);
+	$utilisateurDao = new UtilisateurDao();
+	return $utilisateurDao->updateUtilisateur($utilisateur);
+}
+
+function saveOrUpdateUtilisateur($utilisateur,$type){
+	$utilisateurDao = new UtilisateurDao();
+	if($utilisateur->idUser == null){
+		return $utilisateurDao->saveUtilisateur($utilisateur,$type);
+	}else{
+		return $utilisateurDao->updateUtilisateur($utilisateur);
+	}
 }
 
 function updateEtablissement($etablissement){
