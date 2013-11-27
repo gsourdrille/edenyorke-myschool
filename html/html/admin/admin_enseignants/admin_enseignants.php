@@ -1,8 +1,8 @@
 <div id="current_admin_page">
 	<div id="center_conteneur">
 		<div class="floatleft">
-			Enseignant : 
-			<select id="liste_enseignants" size="6"  onclick="loadEnseignants()">
+			<div>Enseignants :</div> 
+			<select id="liste_enseignants" size="20"  onclick="loadEnseignants()">
 				<?php  foreach ($listeEnseignants as $selectEnseignant){
 					$selected = false;
 					if(isset($_SESSION['ENSEIGNANT_SELECTED']) && $_SESSION['ENSEIGNANT_SELECTED'] == $selectEnseignant->idUser){
@@ -11,7 +11,7 @@
 					echo "<option value='$selectEnseignant->idUser' ";
 					if($selected){
 						echo "selected=selected";
-					}
+					}  
 					echo ">$selectEnseignant->nom $selectEnseignant->prenom</option>";
 					}?>
 			</select>
@@ -21,8 +21,8 @@
 				</div>
 			</form>
 			</div>
-		</div>
 		<div class="floatright">
+			<?php  if(isset($showEnseignant) && $showEnseignant){?>
 			<form action="/myschool/core/controller/admin_enseignants_controller.php" method="post">
 				<div id="nom_info">
 					<label for="name">Nom : </label>
@@ -53,11 +53,11 @@
 				</div>
 				
 				<div id="nouveau_mdp_info">
-					<label for="nouveau_mdp">Nouveau mot de passe : </label>
+					<label for="nouveau_mdp">Mot de passe : </label>
 					<input type="password" name="nouveau_mdp" value=""/>
-				</div>
+				</div>  
 				<div id="nouveau_mdp_bis_info">
-					<label for="nouveau_mdp_bis">Repeter nouveau mot de passe : </label>
+					<label for="nouveau_mdp_bis">Repeter mot de passe : </label>
 					<input type="password" name="nouveau_mdp_bis" value=""/>
 					<?php if(isset($error_new_password)){?>
 					<div id="error_login">
@@ -70,7 +70,7 @@
 				</div>
 				<?php if(isset($enseignant->idUser)){?>
 					<div id="button_submit_infos">
-						<input type="submit" name="deleteClasse" value="Supprimer">
+						<input type="submit" name="deleteEnseignant" value="Supprimer">
 					</div>
 					<?php }?>
 				<?php if(isset($succes)){
@@ -80,6 +80,7 @@
 				</div>
 				<?php }?>
 			</form>	
+			<?php }?>
 		</div>
 	</div>
 </div>

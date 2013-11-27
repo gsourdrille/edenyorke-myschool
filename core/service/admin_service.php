@@ -96,3 +96,13 @@ function getUserByEtablissementAndType($idEtablissement, $type){
 	$userDao = new UtilisateurDao();
 	return $userDao->findUtilisateurByEtablissementAndType($idEtablissement, $type);
 }
+
+function getUserById($idUser){
+	$userDao = new UtilisateurDao();
+	return $userDao->findUtilisateurById($idUser);
+}
+
+function deleteUser($idUser){
+	$userDao = new UtilisateurDao();
+	return $userDao->deleteUtilisateur($idUser);
+}

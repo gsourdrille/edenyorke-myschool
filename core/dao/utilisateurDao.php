@@ -62,11 +62,11 @@
  		}
  	}
  	
- 	public function deleteUtilisateur($utilisateur){
- 		if($utilisateur != null){
+ 	public function deleteUtilisateur($idUser){
+ 		if($idUser != null){
  			$baseDao = new BaseDao();
  			$baseDao->connect();
- 			$requete = "DELETE FROM UTILISATEUR WHERE ID_USER=$utilisateur->idUser";
+ 			$requete = "DELETE FROM UTILISATEUR WHERE ID_USER=$idUser";
  			$baseDao->sendRequest($requete);
  			$baseDao->close();
  		}
@@ -113,18 +113,31 @@
  		return $listeTypesUtilisateurs;
  	}
  	
- 	//TODO
  	public function findUtilisateurByEtablissementAndType($idEtablissement, $type){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
- 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_ETABLISSEMENT='$idEtablissement'";
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_ETABLISSEMENT='$idEtablissement' AND ID_USER IN (SELECT ID_USER FROM UTILISATEUR_TYPE_UTILISATEUR WHERE ID_TYPE_UTILISATEUR = '$type')";
  		$resulat = $baseDao->sendRequest($requete);
  		$listeUtilisateurs = new ArrayObject();
  		while($row = mysql_fetch_array($resulat, MYSQL_ASSOC)){
- 			$listeTypesUtilisateurs->append($row["ID_TYPE_UTILISATEUR"]);
+ 			$listeUtilisateurs->append($this->buildUtilisateur($row));  
  		}
  		$baseDao->close();
- 		return $listeTypesUtilisateurs;
+ 		return $listeUtilisateurs;
+ 	}
+ 	
+ 	public function findUtilisateurById($idUser){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_USER='$idUser'";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$row = mysql_fetch_array($resulat, MYSQL_ASSOC);
+ 		if($row["ID_USER"] == null){
+ 			return null;
+ 		}
+ 		$utilisateur = $this->buildUtilisateur($row);
+ 		$baseDao->close();
+ 		return $utilisateur;
  	}
  	
  	public function buildUtilisateur($row){
