@@ -14,4 +14,4 @@ if(!isset($_SESSION['USER'])){
 	if($etablissement != null){
 		$_SESSION['ETABLISSEMENT_ID'] = $etablissement->idEtablissement;
 	}
-}
+} 

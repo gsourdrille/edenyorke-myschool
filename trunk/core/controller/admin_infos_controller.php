@@ -1,8 +1,7 @@
 <?php
 session_start();
 require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
-
-require('../logs/Logger.class.php');
+   
 
 // Creation d'un objet Logger
 $logger = new Logger(Constants::LOGGER_LOCATION);

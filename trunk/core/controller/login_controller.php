@@ -3,7 +3,7 @@
 session_start();
 
 require ('../service/login_service.php');
-require('../logs/Logger.class.php');
+
 
 	// Cr�ation d'un objet Logger
 	$logger = new Logger(Constants::LOGGER_LOCATION);
