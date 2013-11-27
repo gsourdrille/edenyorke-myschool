@@ -24,6 +24,7 @@
 		<div class="floatright">
 			<?php  if(isset($showEnseignant) && $showEnseignant){?>
 			<form action="/myschool/core/controller/admin_enseignants_controller.php" method="post">
+				<input type="hidden" name="idEnseignant"  value="<?php if(isset($enseignant->idUser)){echo $enseignant->idUser;}?>"/>
 				<div id="nom_info">
 					<label for="name">Nom : </label>
 					<input type="text" name="nom" value="<?php if(isset($nom)){echo $nom;}else{echo $enseignant->nom;}?>"/>
@@ -52,21 +53,21 @@
 					<?php }?>
 				</div>
 				
-				<div id="nouveau_mdp_info">
-					<label for="nouveau_mdp">Mot de passe : </label>
-					<input type="password" name="nouveau_mdp" value=""/>
-				</div>  
-				<div id="nouveau_mdp_bis_info">
-					<label for="nouveau_mdp_bis">Repeter mot de passe : </label>
-					<input type="password" name="nouveau_mdp_bis" value=""/>
-					<?php if(isset($error_new_password)){?>
+				<div id="mdp_info">
+					<label for="mdp">Mot de passe : </label>
+					<input type="password" name="mdp" value=""/>
+					<?php if(isset($error_password)){?>
 					<div id="error_login">
-						<?php echo $error_new_password;?>
+						<?php echo $error_password;?>
 					</div>
 					<?php }?>
+				</div>  
+				<div id="mdp_bis_info">
+					<label for="mdp_bis">Repeter mot de passe : </label>
+					<input type="password" name="mdpBis" value=""/>
 				</div>
 				<div id="button_submit_infos">
-					<input type="submit" name="saveClasse" value="Sauvegarder">
+					<input type="submit" name="saveEnseignant" value="Sauvegarder">
 				</div>
 				<?php if(isset($enseignant->idUser)){?>
 					<div id="button_submit_infos">

@@ -4,7 +4,7 @@
 
  class UtilisateurDao{
  	
- 	public function saveUtilisateur($utilisateur){
+ 	public function saveUtilisateur($utilisateur,$type){
  		if($utilisateur != null){
   			$baseDao = new BaseDao();
  			$baseDao->connect();
@@ -14,6 +14,8 @@
  			$requete = "SELECT LAST_INSERT_ID() FROM UTILISATEUR";
  			$result = mysql_insert_id(); 
  			$utilisateur->idUser = $result;
+ 			$requete = "INSERT INTO UTILISATEUR_TYPE_UTILISATEUR (ID_USER, ID_TYPE_UTILISATEUR) VALUES ('$utilisateur->idUser',$type)";
+ 			$result = $baseDao->sendRequest($requete);
  			$baseDao->close();
  			return $utilisateur;
  		}
