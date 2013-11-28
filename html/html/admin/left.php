@@ -7,7 +7,7 @@
 			<li><a href="/myschool/core/controller/admin_etablissement_controller.php">Etablissement</a></li>
 			<li><a href="/myschool/core/controller/admin_niveaux_controller.php">Niveaux & Classes</a></li>
 			<li><a href="/myschool/core/controller/admin_enseignants_controller.php">Enseignants</a></li>
-			<li>Elèves</li>
+			<li><a href="/myschool/core/controller/admin_eleves_controller.php">Elèves</a></li>
 		</ul>
 	</div>
-</div>
+</div>    

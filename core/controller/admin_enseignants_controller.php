@@ -18,6 +18,7 @@ if(isset($_GET['action'])){
  if(isset($_POST['showAddEnseignant'])){
  	$showEnseignant = true;
  	$enseignant = new Utilisateur();
+ 	$_SESSION['ENSEIGNANT_SELECTED'] = null;
  }else if(isset($_POST['deleteEnseignant'])){
 	$idEnseignant = $_SESSION['ENSEIGNANT_SELECTED'];
 	deleteUser($idEnseignant);
@@ -29,11 +30,12 @@ if(isset($_GET['action'])){
 	if($idEnseignant == null || trim($idEnseignant) == false){
 		//Nouveau niveau
 		$enseignant = new Utilisateur();
-		$enseignant->idEtablissement = $_SESSION['ETABLISSEMENT_ID'];
+		$enseignant->etablissement = $_SESSION['ETABLISSEMENT_ID'];
 		$isnew = true;
 	}else{
-		$enseignant = getUserById($idNiveau);
+		$enseignant = getUserById($idEnseignant);
 		$isnew = false;
+		echo "UPADATE<br>";
 	}
 	
 	$error = false;
@@ -42,7 +44,7 @@ if(isset($_GET['action'])){
 		$error_nom="Le nom ne peut être vide";
 		$error = true;
 	}else{
-		$enseignant->nom = $nom;
+		$enseignant->nom = $nom;   
 	}
 	$prenom = $_POST['prenom'];
 	if($prenom == null || trim($prenom) == false){
@@ -81,15 +83,14 @@ if(isset($_GET['action'])){
 			$error = true;
 		}
 	}
-
+	$showEnseignant = true;
 	if($error==false){
 		if(saveOrUpdateUtilisateur($enseignant,Type_Utilisateur::ENSEIGNANT)){
 			$succes = "Vos informations ont été mises à jour";
 			$_SESSION['ENSEIGNANT_SELECTED'] = $enseignant->idUser;
 		}else{
-			$succes = "Une erreur est survnue lors de la mise à jour";
+			$succes = "Une erreur est survenue lors de la mise à jour";
 		}
-		$showEnseignant = true;
 		$listeEnseignants = getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
 	}
 	

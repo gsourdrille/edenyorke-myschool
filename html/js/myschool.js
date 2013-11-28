@@ -50,3 +50,9 @@ jQuery.fn.filterByText = function(textbox, selectSingleMatch) {
 	    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 	    document.location.href='admin_enseignants_controller.php?action=showEnseignant&idUser='+selectedValue;
 	}
+ 
+ function loadEleves() {
+	    var selectBox = document.getElementById("liste_eleves");
+	    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+	    document.location.href='admin_eleves_controller.php?action=showEleve&idUser='+selectedValue;
+	}
