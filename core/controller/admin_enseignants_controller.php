@@ -6,11 +6,13 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.p
 
 //Recuperation des enseignants lies a l'etablissement
 $listeEnseignants = getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
+$listeClasseAndNiveau = getAllClassesForEtablissement($_SESSION['ETABLISSEMENT_ID']);
 if(isset($_GET['action'])){
 	$action = $_GET['action'];
 	if($action == 'showEnseignant'){
 		$enseignant = getUserById($_GET['idUser']);
 		$_SESSION['ENSEIGNANT_SELECTED'] = $enseignant->idUser;
+		$listeClasseSelected = getClassesByUser($enseignant->idUser);
 		$showEnseignant = true;
 	}
 }
