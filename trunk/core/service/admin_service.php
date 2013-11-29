@@ -115,3 +115,26 @@ function deleteUser($idUser){
 	$userDao = new UtilisateurDao();
 	return $userDao->deleteUtilisateur($idUser);
 }
+
+function getAllClassesForEtablissement($idEtablissement){
+	$listeClassesAndNiveaux = null;
+	
+	$listNiveaux = new ArrayObject();
+	$listeNiveaux = getNiveauxByEtablissement($idEtablissement);
+	if($listeNiveaux->count() > 0){
+		foreach ($listeNiveaux as $niveau){
+			$listeClasse = new ArrayObject();
+			$listeClasse = getClassesByNiveau($niveau->idNiveau);
+			if($listeClasse->count() > 0){
+				$listeClassesAndNiveaux[$niveau->nom] = $listeClasse;
+			}
+		}
+	}
+	return $listeClassesAndNiveaux;
+}
+
+function getClassesByUser($idUser){
+	$classeDao = new ClasseDao();
+	return $classeDao ->getClassesByUtlisateur($idUser);
+	
+}

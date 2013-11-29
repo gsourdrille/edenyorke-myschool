@@ -1,5 +1,5 @@
 <div id="current_admin_page">
-	<div id="center_conteneur">
+	<div id="center_admin_conteneur">
 		<div class="floatleft">
 			<div>Enseignants :</div> 
 			<select id="liste_enseignants" size="20"  onclick="loadEnseignants()">
@@ -21,7 +21,7 @@
 				</div>
 			</form>
 			</div>
-		<div class="floatright">
+		<div class="floatleft">
 			<?php  if(isset($showEnseignant) && $showEnseignant){?>
 			<form action="/myschool/core/controller/admin_enseignants_controller.php" method="post">
 				<input type="hidden" name="idEnseignant"  value="<?php if(isset($_SESSION['ENSEIGNANT_SELECTED'])){echo $_SESSION['ENSEIGNANT_SELECTED'];}?>"/>
@@ -80,6 +80,36 @@
 						<?php echo $succes;?>
 				</div>
 				<?php }?>
+				 <br/>    
+				  <div class="floatleft">    
+					  <fieldset>
+					 
+					    <select name="selectClassefrom" id="select-classe-from" multiple size="15">
+					      <?php foreach ($listeClasseAndNiveau as $niveau => $listeClasses){
+					      	echo "<optgroup label='$niveau'>";
+					      	
+					      	foreach ($listeClasses as $classe){
+								echo "<option value='$classe->idClasse'>$classe->nom</option>";
+							}
+					      	echo "</optgroup>";
+						}?>
+					      
+					      
+					    </select>
+					 
+					    <a href="JavaScript:void(0);" id="btn-add-classe">Add &raquo;</a>
+					    <a href="JavaScript:void(0);" id="btn-remove-classe">&laquo; Remove</a>
+					 
+					    <select name="selectClasseto" id="select-classe-to" multiple size="15">
+					      <?php foreach ($listeClasseSelected as $classeSelected){
+					      		echo "<option value='$classeSelected->idClasse'>$classeSelected->nom</option>";
+								}	?>
+					    </select>
+					 
+					  </fieldset>
+				  </div>
+
+				
 			</form>	
 			<?php }?>
 		</div>

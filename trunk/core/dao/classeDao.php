@@ -90,6 +90,23 @@
  		return $classe;
  	}
  	
+ 	public function getClassesByUtlisateur($idUser){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "SELECT * FROM UTILISATEUR_CLASSE WHERE ID_USER='$idUser'";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$listeClassesByUtilisateur = new ArrayObject();
+ 		while($row = mysql_fetch_array($resulat, MYSQL_ASSOC)){
+ 			$idClasse = $row['ID_CLASSE'];
+ 			$requete = "SELECT * FROM CLASSE WHERE ID_CLASSE =$idClasse";
+ 			$resulatClasse = $baseDao->sendRequest($requete);
+ 			$rowClasse = mysql_fetch_array($resulatClasse, MYSQL_ASSOC);
+ 			$listeClassesByUtilisateur->append($this->buildClasse($rowClasse));
+ 		}
+ 		$baseDao->close();
+ 		return $listeClassesByUtilisateur;
+ 	}
+ 	
  	
  	
  	public function buildClasse($row){
