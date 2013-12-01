@@ -43,13 +43,13 @@ $(document).ready(function() {
  }
  
  function showUploadButton(){
-	 $("#image_etablissement").hide();
-     $("#upload_image_etablissement").show();
+	 $("#admin_image").hide();
+     $("#upload_image").show();
 
  }
  
  function hideUploadButton(){
-	 $("#image_etablissement").show();
-     $("#upload_image_etablissement").hide();
+	 $("#admin_image").show();
+     $("#upload_image").hide();
 
  }

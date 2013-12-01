@@ -1,6 +1,9 @@
 <div id="current_admin_page">
 	<div id="center_conteneur">
-		<form action="/myschool/core/controller/admin_infos_controller.php" method="post">
+		<form action="/myschool/core/controller/admin_infos_controller.php" method="post" enctype="multipart/form-data">
+			 
+			<input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+			
 			<div id="nom_info">
 				<label for="name">Nom : </label>
 				<input type="text" name="nom" value="<?php if(isset($nom)){echo $nom;}else{echo $utilisateur->nom;}?>"/>
@@ -51,6 +54,25 @@
 				</div>
 				<?php }?>
 			</div>
+			
+			<div id="admin_image" style="display: block">
+				<?php if ($utilisateur->avatar!=null){?>
+					<img src="<?php echo Constants::PATH_IMAGE_UTILISATEUR."/".$utilisateur->idUser."/".$utilisateur->avatar;?>" width="100px" height="100px">
+				<?php }else{?>
+					<img src="/myschool/html/images/icon_user.png" width="100px" height="100px">
+				<?php }?>
+					<input type="button" value="Changer" onclick="showUploadButton()">
+			</div>
+			<div id="upload_image" style="display: none">
+				<label for="userfile">Photo de profil : </label>
+				<input name="userfile" type="file" />
+				<input type="button" value="Annuler" onclick="hideUploadButton()">
+			</div>
+			<?php if(isset($error_image)){?>
+			<div id="error_login">
+				<?php echo $error_image;?>
+			</div>
+			<?php }?>
 			<div id="button_submit_infos">
 				<input type="submit" name="submit" value="Sauvegarder">
 			</div>

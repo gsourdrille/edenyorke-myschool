@@ -55,31 +55,30 @@ if (isset($_POST['submit'])){
 		if($error==false){
 			if(updateEtablissement($etablissement)){
 				$succes = "Vos informations ont été mises à jour";
-			}
-
-			//upload fichier
-			if ($_FILES['userfile']['error']) {
-				switch ($_FILES['userfile']['error']){
-					case 1: // UPLOAD_ERR_INI_SIZE
-						echo"Le fichier dépasse la limite autorisée par le serveur (fichier php.ini) !";
-						break;
-					case 2: // UPLOAD_ERR_FORM_SIZE
-						echo "Le fichier dépasse la limite autorisée dans le formulaire HTML !";
-						break;
-					case 3: // UPLOAD_ERR_PARTIAL
-						echo "L'envoi du fichier a été interrompu pendant le transfert !";
-						break;
-					case 4: // UPLOAD_ERR_NO_FILE
-						echo "Le fichier que vous avez envoyé a une taille nulle !";
-						break;
+				//upload fichier
+				if ($_FILES['userfile']['error']) {
+					switch ($_FILES['userfile']['error']){
+						case 1: // UPLOAD_ERR_INI_SIZE
+							$error_image = "Le fichier dépasse la limite autorisée par le serveur !";
+							break;
+						case 2: // UPLOAD_ERR_FORM_SIZE
+							$error_image =  "Le fichier dépasse la limite autorisée dans le formulaire HTML !";
+							break;
+						case 3: // UPLOAD_ERR_PARTIAL
+							$error_image =  "L'envoi du fichier a été interrompu pendant le transfert !";
+							break;
+						case 4: // UPLOAD_ERR_NO_FILE
+							$error_image =  "Le fichier que vous avez envoyé a une taille nulle !";
+							break;
+					}
 				}
-			}
-			else {
-				if ((isset($_FILES['userfile']['tmp_name'])&&($_FILES['userfile']['error'] == UPLOAD_ERR_OK))) {
-					$path = FileUtils::createEtablissementDir($etablissement->idEtablissement);
-					move_uploaded_file($_FILES['userfile']['tmp_name'], $path."/".$_FILES['userfile']['name']);
-					setImageToEtablissement($etablissement, $_FILES['userfile']['name']);
-					$etablissement->imagePrincipale = $_FILES['userfile']['name'];
+				else {
+					if ((isset($_FILES['userfile']['tmp_name'])&&($_FILES['userfile']['error'] == UPLOAD_ERR_OK))) {
+						$path = FileUtils::createEtablissementDir($etablissement->idEtablissement);
+						move_uploaded_file($_FILES['userfile']['tmp_name'], $path."/".$_FILES['userfile']['name']);
+						setImageToEtablissement($etablissement, $_FILES['userfile']['name']);
+						$etablissement->imagePrincipale = $_FILES['userfile']['name'];
+					}
 				}
 			}
 			

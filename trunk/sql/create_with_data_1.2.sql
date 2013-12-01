@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Dim 01 Décembre 2013 à 19:59
+-- Généré le: Dim 01 Décembre 2013 à 23:44
 -- Version du serveur: 5.5.29
 -- Version de PHP: 5.4.10
 
@@ -62,7 +62,7 @@ CREATE TABLE `ETABLISSEMENT` (
 --
 
 INSERT INTO `ETABLISSEMENT` (`ID_ETABLISSEMENT`, `NOM`, `ADRESSE`, `CODE_POSTAL`, `VILLE`, `TELEPHONE_1`, `TELEPHONE_2`, `FAX`, `IMAGE_PRINCIPALE`) VALUES
-(2, 'Lycée saint Martin 2', '29 rue d''entrain 2', '35000', 'Rennes', '02.99.01.02.03', '', '02.99.01.02.05', 'ouestu_114.png');
+(2, 'Lycée saint Martin 2', '29 rue d''entrain 2', '35000', 'Rennes', '02.99.01.02.03', '', '02.99.01.02.05', 'xkeyInterfaceLarge.png');
 
 -- --------------------------------------------------------
 
@@ -182,6 +182,7 @@ CREATE TABLE `UTILISATEUR` (
   `PRENOM` text NOT NULL,
   `LOGIN` text NOT NULL,
   `MOT_DE_PASSE` text,
+  `AVATAR` text,
   PRIMARY KEY (`ID_USER`),
   KEY `ID_ETABLISSEMENT` (`ID_ETABLISSEMENT`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
@@ -190,10 +191,10 @@ CREATE TABLE `UTILISATEUR` (
 -- Contenu de la table `UTILISATEUR`
 --
 
-INSERT INTO `UTILISATEUR` (`ID_USER`, `ID_ETABLISSEMENT`, `NOM`, `PRENOM`, `LOGIN`, `MOT_DE_PASSE`) VALUES
-(5, 2, 'SOURDRILLE', 'Guillaume', 'edenyorke', 'fc2789a2f2f3303f7322efa51bb5882fe034a321'),
-(9, 2, 'Enseignant', '1', 'enseignant1', '7e240de74fb1ed08fa08d38063f6a6a91462a815'),
-(10, 2, 'Eleve', 'rené', 'eleve1', '7e240de74fb1ed08fa08d38063f6a6a91462a815');
+INSERT INTO `UTILISATEUR` (`ID_USER`, `ID_ETABLISSEMENT`, `NOM`, `PRENOM`, `LOGIN`, `MOT_DE_PASSE`, `AVATAR`) VALUES
+(5, 2, 'SOURDRILLE', 'Guillaume', 'edenyorke', 'fc2789a2f2f3303f7322efa51bb5882fe034a321', 'xkeyInterfaceLarge.png'),
+(9, 2, 'Enseignant', '1', 'enseignant1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL),
+(10, 2, 'Eleve', 'rené', 'eleve1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL);
 
 -- --------------------------------------------------------
 
@@ -322,4 +323,3 @@ ALTER TABLE `UTILISATEUR_NIVEAU`
 ALTER TABLE `UTILISATEUR_TYPE_UTILISATEUR`
   ADD CONSTRAINT `FK_UTILISATEUR_TYPE_UTILISATE2` FOREIGN KEY (`ID_TYPE_UTILISATEUR`) REFERENCES `TYPE_UTILISATEUR` (`ID_TYPE_UTILISATEUR`),
   ADD CONSTRAINT `UTILISATEUR_TYPE_UTILISATEUR_ibfk_1` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`) ON DELETE CASCADE;
-

@@ -151,6 +151,23 @@
  		return $utilisateur;
  	}
  	
+ 	public function setImageToUtilisateur($iduser, $imageName){
+ 		if($iduser != null && $imageName != null){
+ 			$baseDao = new BaseDao();
+ 			$baseDao->connect();
+ 			$requete = "UPDATE UTILISATEUR SET AVATAR='$imageName'
+ 			WHERE ID_USER=$iduser";
+ 			$result = $baseDao->sendRequest($requete);
+ 			$baseDao->close();
+ 			if(!$result){
+ 				return false;
+ 			}else{
+ 				return true;
+ 			}
+ 		}
+ 	
+ 	}
+ 	
  	public function buildUtilisateur($row){
   		$utilisateur = new Utilisateur();
  		$utilisateur->idUser = $row["ID_USER"];
@@ -159,6 +176,7 @@
  		$utilisateur->login = $row["LOGIN"];
  		$utilisateur->mdp = $row["MOT_DE_PASSE"];
  		$utilisateur->etablissement = $row["ID_ETABLISSEMENT"];
+ 		$utilisateur->avatar = $row["AVATAR"];
  		return $utilisateur;
  	}
  	
