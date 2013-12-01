@@ -1,6 +1,9 @@
 <div id="current_admin_page">
 	<div id="center_conteneur">
-		<form action="/myschool/core/controller/admin_etablissement_controller.php" method="post">
+		<form action="/myschool/core/controller/admin_etablissement_controller.php" method="post" enctype="multipart/form-data">
+			
+			<input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+			
 			<div id="nom_info">
 				<label for="name">Nom : </label>
 				<input type="text" name="nom" value="<?php if(isset($nom)){echo $nom;}else{echo $etablissement->nom;}?>"/>
@@ -53,6 +56,21 @@
 			<div id="fax_info">
 				<label for="fax">Fax : </label>
 				<input type="text" name="fax" value="<?php if(isset($fax)){echo $fax;}else{echo $etablissement->fax;}?>"/>
+			</div>
+			
+			
+			<div id="image_etablissement" style="display: block">
+				<?php if ($etablissement->imagePrincipale!=null){?>
+					<img src="<?php echo Constants::PATH_IMAGE_ETABLISSEMENT."/".$etablissement->idEtablissement."/".$etablissement->imagePrincipale;?>" width="100px" height="100px">
+				<?php }else{?>
+					<img src="/myschool/html/images/defaut_image_etablissement.jpeg" width="100px" height="100px">
+				<?php }?>
+					<input type="button" value="Changer" onclick="showUploadButton()">
+			</div>
+			<div id="upload_image_etablissement" style="display: none">
+				<label for="userfile">Image de l'établissement : </label>
+				<input name="userfile" type="file" />
+				<input type="button" value="Annuler" onclick="hideUploadButton()">
 			</div>
 			<div id="button_submit_infos">
 				<input type="submit" name="submit" value="Sauvegarder">

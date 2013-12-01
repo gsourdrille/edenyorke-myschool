@@ -67,7 +67,7 @@
 					<input type="password" name="mdpBis" value=""/>
 				</div>
 				<div id="button_submit_infos">
-					<input type="submit" name="saveEnseignant" value="Sauvegarder">
+					<input type="submit" name="saveEnseignant" value="Sauvegarder" onclick='selectAllClasses()'>
 				</div>
 				<?php if(isset($enseignant->idUser)){?>
 					<div id="button_submit_infos">
@@ -84,7 +84,7 @@
 				  <div class="floatleft">    
 					  <fieldset>
 					 
-					    <select name="selectClassefrom" id="select-classe-from" multiple size="15">
+					    <select name="selectClassefrom[]" id="select-classe-from" multiple size="15">
 					      <?php foreach ($listeClasseAndNiveau as $niveau => $listeClasses){
 					      	echo "<optgroup label='$niveau'>";
 					      	
@@ -93,14 +93,12 @@
 							}
 					      	echo "</optgroup>";
 						}?>
-					      
-					      
 					    </select>
 					 
 					    <a href="JavaScript:void(0);" id="btn-add-classe">Add &raquo;</a>
 					    <a href="JavaScript:void(0);" id="btn-remove-classe">&laquo; Remove</a>
 					 
-					    <select name="selectClasseto" id="select-classe-to" multiple size="15">
+					    <select name="selectClasseto[]" id="select-classe-to" multiple size="15">
 					      <?php foreach ($listeClasseSelected as $classeSelected){
 					      		echo "<option value='$classeSelected->idClasse'>$classeSelected->nom</option>";
 								}	?>
@@ -108,8 +106,6 @@
 					 
 					  </fieldset>
 				  </div>
-
-				
 			</form>	
 			<?php }?>
 		</div>

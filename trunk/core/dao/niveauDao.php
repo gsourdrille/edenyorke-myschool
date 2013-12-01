@@ -8,12 +8,11 @@
  		if($niveau != null){
   			$baseDao = new BaseDao();
  			$baseDao->connect();
- 			$nom = mysql_real_escape_string($niveau->nom);
+ 			$nom = $baseDao->escapeString($niveau->nom);
  			$requete = "INSERT INTO NIVEAU (NOM,ID_ETABLISSEMENT) VALUES ('$nom', '$niveau->idEtablissement') ";
  			$result = $baseDao->sendRequest($requete);
- 			$requete = "SELECT LAST_INSERT_ID() FROM NIVEAU";
- 			$result = mysql_insert_id(); 
- 			$niveau->idNiveau = $result;
+ 			$result = $baseDao->lastInsertId();
+ 			$niveau->idNiveau = $idNiveau;
  			$baseDao->close();
  			return $niveau;
  		}
@@ -25,7 +24,7 @@
  		if($niveau != null){
  			$baseDao = new BaseDao();
  			$baseDao->connect();
- 			$nom = mysql_real_escape_string($niveau->nom);
+ 			$nom = $baseDao->escapeString($niveau->nom);
  			$requete = "UPDATE NIVEAU SET NOM='$nom' WHERE ID_NIVEAU=$niveau->idNiveau";
  			$result  = $baseDao->sendRequest($requete);
  			$baseDao->close();
@@ -54,7 +53,7 @@
  			$baseDao->connect();
  			$requete = "SELECT * FROM NIVEAU WHERE ID_NIVEAU='$idNiveau'";
  			$resulat = $baseDao->sendRequest($requete);
- 			$row = mysql_fetch_array($resulat, MYSQL_ASSOC);
+ 			$row = mysqli_fetch_array($resulat);
  			if($row["ID_NIVEAU"] == null){
  				return null;
  			}
@@ -69,7 +68,7 @@
  		$requete = "SELECT * FROM NIVEAU WHERE ID_ETABLISSEMENT='$idEtablissement'";
  		$resulat = $baseDao->sendRequest($requete);
  		$listeNiveaux = new ArrayObject();
- 		while($row = mysql_fetch_array($resulat, MYSQL_ASSOC)){
+ 		while($row = mysqli_fetch_array($resulat)){
  			$listeNiveaux->append($this->buildNiveau($row));
  		}
  		$baseDao->close();
@@ -81,7 +80,7 @@
  		$baseDao->connect();
  		$requete = "SELECT * FROM NIVEAU WHERE NOM='$nom' AND ID_ETABLISSEMENT='$idEtablissement'";
  		$resulat = $baseDao->sendRequest($requete);
- 		$row = mysql_fetch_array($resulat, MYSQL_ASSOC);
+ 		$row = mysqli_fetch_array($resulat);
  		if($row["ID_NIVEAU"] == null){
  			return null;
  		}

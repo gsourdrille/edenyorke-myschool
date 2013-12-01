@@ -8,16 +8,15 @@ class EtablissementDao{
 			$baseDao = new BaseDao();
 			$baseDao->connect();
 			
-			$nom = mysql_real_escape_string($etablissement->nom);
-			$adresse = mysql_real_escape_string($etablissement->adresse);
-			$ville = mysql_real_escape_string($etablissement->ville);
+			$nom = $baseDao->escapeString($etablissement->nom);
+			$adresse = $baseDao->escapeString($etablissement->adresse);
+			$ville = $baseDao->escapeString($etablissement->ville);
 			
 			$requete = "INSERT INTO ETABLISSEMENT (NOM,ADRESSE,CODE_POSTAL,VILLE,TELEPHONE_1,TELEPHONE_2,FAX)
 			VALUES ('$nom', '$etablissement->adresse', '$adresse', '$etablissement->ville', '$ville', '$etablissement->telephone2','$etablissement->fax') ";
 			$result = $baseDao->sendRequest($requete);
-			$requete = "SELECT LAST_INSERT_ID() FROM ETABLISSEMENT";
-			$result = mysql_insert_id();
-			$etablissement->idEtablissement = $result;
+			$idEtablissement= $baseDao->lastInsertId();
+			$etablissement->idEtablissement = $idEtablissement;
 			$baseDao->close();
 			return $etablissement;
 		}
@@ -28,11 +27,12 @@ class EtablissementDao{
 			$baseDao = new BaseDao();
 			$baseDao->connect();
 			
-			$nom = mysql_real_escape_string($etablissement->nom);
-			$adresse = mysql_real_escape_string($etablissement->adresse);
-			$ville = mysql_real_escape_string($etablissement->ville);
+			$nom = $baseDao->escapeString($etablissement->nom);
+			$adresse = $baseDao->escapeString($etablissement->adresse);
+			$ville = $baseDao->escapeString($etablissement->ville);
 			
-			$requete = "UPDATE ETABLISSEMENT SET NOM='$nom', ADRESSE='$adresse', CODE_POSTAL='$etablissement->codePostal',VILLE='$ville',TELEPHONE_1='$etablissement->telephone1', TELEPHONE_2='$etablissement->telephone2',FAX='$etablissement->fax'
+			$requete = "UPDATE ETABLISSEMENT SET NOM='$nom', ADRESSE='$adresse', CODE_POSTAL='$etablissement->codePostal',
+			VILLE='$ville',TELEPHONE_1='$etablissement->telephone1', TELEPHONE_2='$etablissement->telephone2',FAX='$etablissement->fax' 
 			WHERE ID_ETABLISSEMENT=$etablissement->idEtablissement";
 			
 			$result = $baseDao->sendRequest($requete);
@@ -44,6 +44,23 @@ class EtablissementDao{
 			}
 		}
 		
+	}
+	
+	public function setImageToEtablissement($idEtablissement, $imageName){
+		if($idEtablissement != null && $imageName != null){
+			$baseDao = new BaseDao();
+			$baseDao->connect();
+			$requete = "UPDATE ETABLISSEMENT SET IMAGE_PRINCIPALE='$imageName'
+			WHERE ID_ETABLISSEMENT=$idEtablissement";
+			$result = $baseDao->sendRequest($requete);
+			$baseDao->close();
+			if(!$result){
+				return false;
+			}else{
+				return true;
+			}
+		}
+	
 	}
 	
 	public function deleteEtablissemenr($etablissement){
@@ -61,7 +78,7 @@ class EtablissementDao{
 		$baseDao->connect();
 		$requete = "SELECT * FROM ETABLISSEMENT WHERE ID_ETABLISSEMENT='$idEtablissement'";
 		$resulat = $baseDao->sendRequest($requete);
-		$row = mysql_fetch_array($resulat, MYSQL_ASSOC);
+		$row = mysqli_fetch_array($resulat, MYSQL_ASSOC);
 		if($row["ID_ETABLISSEMENT"] == null){
 			return null;
 		}
@@ -80,6 +97,7 @@ class EtablissementDao{
 		$etablissement->telephone1 = $row["TELEPHONE_1"];
 		$etablissement->telephone2 = $row["TELEPHONE_2"];
 		$etablissement->fax = $row["FAX"];
+		$etablissement->imagePrincipale = $row["IMAGE_PRINCIPALE"];
 		return $etablissement;
 	}
 	

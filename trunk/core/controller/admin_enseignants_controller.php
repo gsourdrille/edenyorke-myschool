@@ -37,7 +37,6 @@ if(isset($_GET['action'])){
 	}else{
 		$enseignant = getUserById($idEnseignant);
 		$isnew = false;
-		echo "UPADATE<br>";
 	}
 	
 	$error = false;
@@ -88,12 +87,19 @@ if(isset($_GET['action'])){
 	$showEnseignant = true;
 	if($error==false){
 		if(saveOrUpdateUtilisateur($enseignant,Type_Utilisateur::ENSEIGNANT)){
+			if(isset($_POST['selectClasseto'])){
+				$listeClasse = $_POST['selectClasseto'];
+			}else{
+				$listeClasse = null;
+			}
+			addClassesToUser($enseignant->idUser, $listeClasse);
 			$succes = "Vos informations ont été mises à jour";
 			$_SESSION['ENSEIGNANT_SELECTED'] = $enseignant->idUser;
 		}else{
 			$succes = "Une erreur est survenue lors de la mise à jour";
 		}
 		$listeEnseignants = getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
+		$listeClasseSelected = getClassesByUser($_SESSION['ENSEIGNANT_SELECTED']);
 	}
 	
 }

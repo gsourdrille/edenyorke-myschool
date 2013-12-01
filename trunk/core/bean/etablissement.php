@@ -11,6 +11,7 @@ class Etablissement {
 	var $telephone1;
 	var $telephone2;
 	var $fax;
+	var $imagePrincipale;
 
 	
 	
@@ -26,6 +27,7 @@ class Etablissement {
 		echo "telephone1 : ". $this->telephone1 .'<br>';
 		echo "telephone2 : ". $this->telephone2 .'<br>';
 		echo "fax : ". $this->fax .'<br>';
+		echo "imagePrincipale : ". $this->imagePrincipale .'<br>';
 			
 	}
 	

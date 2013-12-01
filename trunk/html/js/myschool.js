@@ -37,3 +37,19 @@ $(document).ready(function() {
 	    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 	    document.location.href='admin_eleves_controller.php?action=showEleve&idUser='+selectedValue;
 	}
+ 
+ function selectAllClasses(){
+	 $("#select-classe-to option").prop('selected', 'selected');
+ }
+ 
+ function showUploadButton(){
+	 $("#image_etablissement").hide();
+     $("#upload_image_etablissement").show();
+
+ }
+ 
+ function hideUploadButton(){
+	 $("#image_etablissement").show();
+     $("#upload_image_etablissement").hide();
+
+ }

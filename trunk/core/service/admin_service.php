@@ -32,6 +32,12 @@ function updateEtablissement($etablissement){
 	return $etablissementDao->updateEtablissement($etablissement);
 }
 
+function setImageToEtablissement($etablissement, $imageName){
+	FileUtils::deleteEtablissementFile($etablissement);
+	$etablissementDao = new EtablissementDao();
+	return $etablissementDao->setImageToEtablissement($etablissement->idEtablissement, $imageName);
+}
+
 function getNiveauxByEtablissement($idEtablissement){
 	$niveauDao = new NiveauDao();
 	return $niveauDao->findNiveauxByEtablissement($idEtablissement);
@@ -137,4 +143,10 @@ function getClassesByUser($idUser){
 	$classeDao = new ClasseDao();
 	return $classeDao ->getClassesByUtlisateur($idUser);
 	
+}
+
+function addClassesToUser($idUser, $listeIdClasses){
+	$classeDao = new ClasseDao();
+	$classeDao ->addClassesToUser($idUser, $listeIdClasses);
+
 }
