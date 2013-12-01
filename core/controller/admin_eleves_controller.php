@@ -6,11 +6,13 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.p
 
 //Recuperation des enseignants lies a l'etablissement
 $listeEleves = getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ELEVE);
+$listeClasseAndNiveau = getAllClassesForEtablissement($_SESSION['ETABLISSEMENT_ID']);
 if(isset($_GET['action'])){
 	$action = $_GET['action'];
 	if($action == 'showEleve'){
 		$eleve = getUserById($_GET['idUser']);
 		$_SESSION['ELEVE_SELECTED'] = $eleve->idUser;
+		$listeClasseSelected = getClassesByUser($eleve->idUser);
 		$showEleve = true;
 	}
 }
@@ -85,12 +87,19 @@ if(isset($_GET['action'])){
 	$showEleve = true;
 	if($error==false){
 		if(saveOrUpdateUtilisateur($eleve,Type_Utilisateur::ELEVE)){
+			if(isset($_POST['selectClasseto'])){
+				$listeClasse = $_POST['selectClasseto'];
+			}else{
+				$listeClasse = null;
+			}
+			addClassesToUser($eleve->idUser, $listeClasse);
 			$succes = "Vos informations ont été mises à jour";
 			$_SESSION['ELEVE_SELECTED'] = $eleve->idUser;
 		}else{
 			$succes = "Une erreur est survenue lors de la mise à jour";
 		}
 		$listeEleves = getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ELEVE);
+		$listeClasseSelected = getClassesByUser($_SESSION['ELEVE_SELECTED']);
 	}
 	
 }

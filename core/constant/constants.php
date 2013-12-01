@@ -8,6 +8,8 @@
  	const BASE = 'myschool';
  	
  	const LOGGER_LOCATION  ='/Applications/MAMP/htdocs/myschool/logs/';
+ 	
+ 	const PATH_IMAGE_ETABLISSEMENT ='/myschool/html/images/etablissements/';
  }
 
 ?>

@@ -11,3 +11,4 @@ include_once("dao/niveauDao.php");
 include_once("bean/classe.php");
 include_once("dao/classeDao.php");
 include_once ("logs/Logger.class.php");
+include_once ("utils/file_utils.php");

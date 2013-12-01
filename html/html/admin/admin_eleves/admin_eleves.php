@@ -1,5 +1,5 @@
 <div id="current_admin_page">
-	<div id="center_conteneur">
+	<div id="center_admin_conteneur">
 		<div class="floatleft">
 			<div>Elèves :</div> 
 			<select id="liste_eleves" size="20"  onclick="loadEleves()">
@@ -21,7 +21,7 @@
 				</div>
 			</form>
 			</div>
-		<div class="floatright">
+		<div class="floatleft">
 			<?php  if(isset($showEleve) && $showEleve){?>
 			<form action="/myschool/core/controller/admin_eleves_controller.php" method="post">
 				<input type="hidden" name="idEleve"  value="<?php if(isset($_SESSION['ELEVE_SELECTED'])){echo $_SESSION['ELEVE_SELECTED'];}?>"/>
@@ -67,7 +67,7 @@
 					<input type="password" name="mdpBis" value=""/>
 				</div>
 				<div id="button_submit_infos">
-					<input type="submit" name="saveEleve" value="Sauvegarder">
+					<input type="submit" name="saveEleve" value="Sauvegarder"  onclick='selectAllClasses()'>
 				</div>
 				<?php if(isset($eleve->idUser)){?>
 					<div id="button_submit_infos">
@@ -80,6 +80,32 @@
 						<?php echo $succes;?>
 				</div>
 				<?php }?>
+				<br/>    
+				  <div class="floatleft">    
+					  <fieldset>
+					 
+					    <select name="selectClassefrom[]" id="select-classe-from" multiple size="15">
+					      <?php foreach ($listeClasseAndNiveau as $niveau => $listeClasses){
+					      	echo "<optgroup label='$niveau'>";
+					      	
+					      	foreach ($listeClasses as $classe){
+								echo "<option value='$classe->idClasse'>$classe->nom</option>";
+							}
+					      	echo "</optgroup>";
+						}?>
+					    </select>
+					 
+					    <a href="JavaScript:void(0);" id="btn-add-classe">Add &raquo;</a>
+					    <a href="JavaScript:void(0);" id="btn-remove-classe">&laquo; Remove</a>
+					 
+					    <select name="selectClasseto[]" id="select-classe-to" multiple size="15">
+					      <?php foreach ($listeClasseSelected as $classeSelected){
+					      		echo "<option value='$classeSelected->idClasse'>$classeSelected->nom</option>";
+								}	?>
+					    </select>
+					 
+					  </fieldset>
+				  </div>
 			</form>	
 			<?php }?>
 		</div>

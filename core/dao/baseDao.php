@@ -12,8 +12,7 @@ class BaseDao {
 	var $connection;
 	
 	public function connect(){
-			$this->connection = mysql_connect($this->hote,$this->user, $this->mdp);
-			mysql_select_db($this->base,$this->connection);
+			$this->connection = mysqli_connect($this->hote,$this->user, $this->mdp,$this->base);
 	}
 	
 	public function close(){
@@ -24,9 +23,17 @@ class BaseDao {
 		// Creation d'un objet Logger
 		$logger = new Logger(Constants::LOGGER_LOCATION);
 		$logger->log('access', 'myschool', $request , Logger::GRAN_VOID);
-		$charset = mysql_query("SET NAMES UTF8",$this->connection);
-		$ressource = mysql_query($request,$this->connection) ;
+		$charset = mysqli_query($this->connection,"SET NAMES UTF8");
+		$ressource = mysqli_query($this->connection,$request) ;
 		return $ressource;
+	}
+	
+	public function escapeString($value){
+		return mysqli_real_escape_string($this->connection, $value);
+	}
+	
+	public function lastInsertId(){
+		return mysqli_insert_id($this->connection);
 	}
 }
  
