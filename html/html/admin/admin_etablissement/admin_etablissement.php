@@ -59,7 +59,7 @@
 			</div>
 			
 			
-			<div id="image_etablissement" style="display: block">
+			<div id="admin_image" style="display: block">
 				<?php if ($etablissement->imagePrincipale!=null){?>
 					<img src="<?php echo Constants::PATH_IMAGE_ETABLISSEMENT."/".$etablissement->idEtablissement."/".$etablissement->imagePrincipale;?>" width="100px" height="100px">
 				<?php }else{?>
@@ -67,7 +67,7 @@
 				<?php }?>
 					<input type="button" value="Changer" onclick="showUploadButton()">
 			</div>
-			<div id="upload_image_etablissement" style="display: none">
+			<div id="upload_image" style="display: none">
 				<label for="userfile">Image de l'établissement : </label>
 				<input name="userfile" type="file" />
 				<input type="button" value="Annuler" onclick="hideUploadButton()">
@@ -75,6 +75,11 @@
 			<div id="button_submit_infos">
 				<input type="submit" name="submit" value="Sauvegarder">
 			</div>
+			<?php if(isset($error_image)){?>
+			<div id="error_login">
+				<?php echo $error_image;?>
+			</div>
+			<?php }?>
 			<?php if(isset($succes)){
 			?>
 			<div id="error_login">

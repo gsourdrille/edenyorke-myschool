@@ -38,6 +38,13 @@ function setImageToEtablissement($etablissement, $imageName){
 	return $etablissementDao->setImageToEtablissement($etablissement->idEtablissement, $imageName);
 }
 
+function setImageToUtilisateur($utilisateur, $imageName){
+	FileUtils::deleteUtilisateurFile($utilisateur);
+	$utilisateurDao = new UtilisateurDao();
+	return $utilisateurDao->setImageToUtilisateur($utilisateur->idUser, $imageName);
+}
+
+
 function getNiveauxByEtablissement($idEtablissement){
 	$niveauDao = new NiveauDao();
 	return $niveauDao->findNiveauxByEtablissement($idEtablissement);

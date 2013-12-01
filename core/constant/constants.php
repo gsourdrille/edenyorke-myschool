@@ -10,6 +10,8 @@
  	const LOGGER_LOCATION  ='/Applications/MAMP/htdocs/myschool/logs/';
  	
  	const PATH_IMAGE_ETABLISSEMENT ='/myschool/html/images/etablissements/';
+ 	
+ 	const PATH_IMAGE_UTILISATEUR='/myschool/html/images/utilisateurs/';
  }
 
 ?>
