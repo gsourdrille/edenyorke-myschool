@@ -1,7 +1,11 @@
 <div id="left_conteneur">
 	<div class="left_post">
 		<div id="logo_ecole">
-			<img alt="" src="/myschool/html/images/logostmartin.jpg"  />
+			<?php if ($etablissement->imagePrincipale!=null){?>
+				<img src="<?php echo Constants::PATH_IMAGE_ETABLISSEMENT."/".$etablissement->idEtablissement."/".$etablissement->imagePrincipale;?>" class="icon_school" >
+			<?php }else{?>
+				<img src="/myschool/html/images/defaut_image_etablissement.jpeg" class="icon_school" >
+			<?php }?>
 		</div>
 		<div id="infos_ecole">
 			<p><?php echo $etablissement->adresse;?><br><?php  echo $etablissement->codePostal;?> <?php echo $etablissement ->ville;?><br>

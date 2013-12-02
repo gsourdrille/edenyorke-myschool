@@ -12,8 +12,13 @@
 	</div>
 	<div id="user">
 		<a href="/myschool/core/controller/admin_infos_controller.php">
-			<img alt="" src="/myschool/html/images/icon_user.png"  class="icon_user"/>
-			<?php echo $utilisateur->prenom; ?> <?php echo $utilisateur->nom?>
+			
+			<?php if ($utilisateur->avatar!=null){?>
+					<img src="<?php echo Constants::PATH_IMAGE_UTILISATEUR."/".$utilisateur->idUser."/".$utilisateur->avatar;?>" class="icon_user">
+				<?php }else{?>
+					<img src="/myschool/html/images/icon_user.png" class="icon_user">  
+				<?php }?>
+			<?php echo $utilisateur->prenom; ?> <?php echo $utilisateur->nom?>		
 		</a>
 	</div>
 </div>

@@ -51,6 +51,12 @@ select{
 	vertical-align: middle;
 }
 
+.icon_school{
+	width:100px;
+	height:100px;
+	vertical-align: middle;
+}
+
 #school_name{
 	color: #FFFFFF;
 	font-size: 20px;
@@ -237,6 +243,7 @@ select{
 
 #logo_ecole{
 	float:left;
+
 }
 
 #infos_ecole{
