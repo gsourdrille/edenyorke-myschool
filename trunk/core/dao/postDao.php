@@ -19,6 +19,42 @@
  		
  	}
  	
+ 	public function saveAssociations($post){
+ 		if($post != null && $post->associations != null){
+ 			$baseDao->connect();
+ 			foreach ($post->associations as $association){
+ 				switch ($associatio->typePose){
+ 					case TypePost::ETABLISSEMENT:
+ 						$requete = "INSERT INTO POST_ETABLISSEMENT (ID_POST,ID_ETABLISSEMENT) VALUES ('$post->idPost', $association->$id') ";
+ 					break;
+ 						
+ 					case TypePost::NIVEAU:
+ 						$requete = "INSERT INTO POST_NIVEAU (ID_POST,ID_NIVEAU) VALUES ('$post->idPost', $association->$id') ";
+ 					break;
+ 					
+ 					case TypePost::CLASSE:
+ 						$requete = "INSERT INTO POST_CLASSE (ID_POST,ID_CLASSE) VALUES ('$post->idPost', $association->$id') ";
+ 					break;
+ 				}
+ 				$result = $baseDao->sendRequest($requete);
+ 			}
+ 			$baseDao->close();
+ 		}
+ 	}
+ 	
+ 	
+ 	public function deleteAssociations($idPost){
+ 		if($idPost != null){
+ 			$baseDao->connect();
+ 			$requete = "DELETE FROM POST_ETABLISSEMENT WHERE ID_POST = $idPost ";
+ 			$result = $baseDao->sendRequest($requete);
+ 			$requete = "DELETE FROM POST_NIVEAU WHERE ID_POST = $idPost ";
+ 			$result = $baseDao->sendRequest($requete);
+ 			$requete = "DELETE FROM POST_CLASSE WHERE ID_POST = $idPost ";
+ 			$result = $baseDao->sendRequest($requete);
+ 			$baseDao->close();
+ 		}
+ 	}
  	
  	public function updatePost($post){
  		if($post != null){
@@ -61,6 +97,23 @@
  			return $post;
  	}
  	
+ 	public function getAllPosts($idEtablissement, $idClasses, $idsNiveaux, $nbResultat, $offset){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$idClassesSQL = join(',',$idClasses); 
+ 		$idNiveauxSQL = join(',',$idsNiveaux);
+ 		$requete = "SELECT * FROM POST WHERE ID_POST IN (SELECT ID_POST FROM POST_ETABLISSEMENT WHERE ID_ETABLISSEMENT = '$idEtablissement' 
+ 		UNION SELECT ID_POST FROM POST_CLASSE WHERE ID_CLASSE IN ($idClassesSQL) 
+ 		UNION SELECT ID_POST FROM POST_NIVEAU WHERE ID_NIVEAU IN ($idNiveauxSQL)) ORDER BY DATE_CREATION LIMIT $nbResultat OFFSET $offset";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$listePosts = new ArrayObject();
+ 		while($row = mysqli_fetch_assoc($resulat)){
+ 			$listePosts->append($this->buildPost($row));
+ 		}
+ 		$baseDao->close();
+ 		return $listePosts;
+ 	}
+ 	
  	
  	
  	public function buildPost($row){
@@ -74,5 +127,6 @@
  		return $post;
  	}
  	
+ 	 	
  	
  }
