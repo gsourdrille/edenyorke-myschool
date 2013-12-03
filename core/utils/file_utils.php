@@ -29,6 +29,14 @@
 		}
 	}
 	
+	public static function getEtablissementImagePrinipale($etablissement){
+		return Constants::PATH_IMAGE_ETABLISSEMENT.$etablissement->idEtablissement."/".$etablissement->imagePrincipale;
+	}
+	
+	public static function getUtilisateurAvatar($utilisateur){
+		return Constants::PATH_IMAGE_UTILISATEUR.$utilisateur->idUser."/".$utilisateur->avatar;
+	}
+	
 	public static function createUtilisateurDir($idUer){
 	
 		$basepath = $_SERVER['DOCUMENT_ROOT'].Constants::PATH_IMAGE_UTILISATEUR;

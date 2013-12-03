@@ -70,6 +70,7 @@
  		$post->contenu = $row["CONTENU"];
  		$post->dateCreation = $row["DATE_CREATION"];
  		$post->dateModification = $row["DATE_DERNIERE_MODIFICATION"];
+ 		$post->commentairesActives = $row['COMMENTAIRES_ACTIVES'];
  		return $post;
  	}
  	

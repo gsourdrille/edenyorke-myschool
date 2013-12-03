@@ -57,7 +57,7 @@
 			
 			<div id="admin_image" style="display: block">
 				<?php if ($utilisateur->avatar!=null){?>
-					<img src="<?php echo Constants::PATH_IMAGE_UTILISATEUR."/".$utilisateur->idUser."/".$utilisateur->avatar;?>" width="100px" height="100px">
+					<img src="<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>" width="100px" height="100px">
 				<?php }else{?>
 					<img src="/myschool/html/images/icon_user.png" width="100px" height="100px">
 				<?php }?>
