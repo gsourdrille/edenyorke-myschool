@@ -9,6 +9,8 @@ class Post{
 	var $contenu;
 	var $commentairesActives;
 	var $piecesJointes;
+	var $commentaires;
+	var $associations;
 	
 	public function afficher(){
 			
