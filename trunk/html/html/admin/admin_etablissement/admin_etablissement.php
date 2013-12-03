@@ -61,7 +61,7 @@
 			
 			<div id="admin_image" style="display: block">
 				<?php if ($etablissement->imagePrincipale!=null){?>
-					<img src="<?php echo Constants::PATH_IMAGE_ETABLISSEMENT.$etablissement->idEtablissement."/".$etablissement->imagePrincipale;?>" width="100px" height="100px">
+					<img src="<?php echo FileUtils::getEtablissementImagePrinipale($etablissement);?>" width="100px" height="100px">
 				<?php }else{?>
 					<img src="/myschool/html/images/defaut_image_etablissement.jpeg" width="100px" height="100px">
 				<?php }?>

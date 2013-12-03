@@ -7,6 +7,7 @@ class Post{
 	var $dateCreation;
 	var $dateModification;
 	var $contenu;
+	var $commentairesActives;
 	var $piecesJointes;
 	
 	public function afficher(){
@@ -16,6 +17,7 @@ class Post{
 		echo "dateCreation : ". $this->dateCreation .'<br>';
 		echo "dateModification : ". $this->dateModification .'<br>';
 		echo "contenu : ". $this->contenu .'<br>';
+		echo "commentairesActives : ". $this->commentairesActives .'<br>';
 	}
 	
 }

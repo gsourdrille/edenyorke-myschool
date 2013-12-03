@@ -14,7 +14,7 @@
 		<a href="/myschool/core/controller/admin_infos_controller.php">
 			
 			<?php if ($utilisateur->avatar!=null){?>
-					<img src="<?php echo Constants::PATH_IMAGE_UTILISATEUR."/".$utilisateur->idUser."/".$utilisateur->avatar;?>" class="icon_user">
+					<img src="<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>" class="icon_user">
 				<?php }else{?>
 					<img src="/myschool/html/images/icon_user.png" class="icon_user">  
 				<?php }?>
