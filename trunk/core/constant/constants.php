@@ -12,6 +12,9 @@
  	const PATH_IMAGE_ETABLISSEMENT ='/myschool/html/images/etablissements/';
  	
  	const PATH_IMAGE_UTILISATEUR='/myschool/html/images/utilisateurs/';
+ 	
+ 	const DEFAUT_OFFSET = 0;
+ 	const DEFAUT_MAX_RESULT = 15;
  }
 
 ?>

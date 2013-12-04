@@ -13,3 +13,8 @@ include_once("dao/classeDao.php");
 include_once ("logs/Logger.class.php");
 include_once ("utils/file_utils.php");
 include_once("bean/post.php");
+include_once("dao/postDao.php");
+include_once("bean/commentaire.php");
+include_once("dao/commentaireDao.php");
+include_once("bean/piece_jointe.php");
+include_once("dao/pieceJointeDao.php");
