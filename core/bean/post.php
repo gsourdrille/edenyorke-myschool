@@ -11,6 +11,7 @@ class Post{
 	var $piecesJointes;
 	var $commentaires;
 	var $associations;
+	var $fullCreateur;
 	
 	public function afficher(){
 			

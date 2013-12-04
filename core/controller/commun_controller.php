@@ -1,5 +1,5 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/commun_service.php");
+require_once  ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/commun_service.php");
 
 if(!isset($_SESSION['USER'])){
 	header("location:/myschool/html/html/login/index.php");

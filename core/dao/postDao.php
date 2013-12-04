@@ -100,8 +100,8 @@
  	public function getAllPosts($idEtablissement, $idClasses, $idsNiveaux, $nbResultat, $offset){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
- 		$idClassesSQL = join(',',$idClasses); 
- 		$idNiveauxSQL = join(',',$idsNiveaux);
+ 		$idClassesSQL = join(',',(array)$idClasses); 
+ 		$idNiveauxSQL = join(',',(array)$idsNiveaux);
  		$requete = "SELECT * FROM POST WHERE ID_POST IN (SELECT ID_POST FROM POST_ETABLISSEMENT WHERE ID_ETABLISSEMENT = '$idEtablissement' 
  		UNION SELECT ID_POST FROM POST_CLASSE WHERE ID_CLASSE IN ($idClassesSQL) 
  		UNION SELECT ID_POST FROM POST_NIVEAU WHERE ID_NIVEAU IN ($idNiveauxSQL)) ORDER BY DATE_CREATION LIMIT $nbResultat OFFSET $offset";
