@@ -4,12 +4,12 @@
 	<div class="post">
 		<div id="createur">
 			<div id="nom_createur">
-					<?php if ($post->createur->avatar!=null){?>
-					<img src="<?php echo FileUtils::getUtilisateurAvatar($post->createur);?>" class="icon_user">
+					<?php if ($post->fullCreateur->avatar!=null){?>
+					<img src="<?php echo FileUtils::getUtilisateurAvatar($post->fullCreateur);?>" class="icon_user">
 					<?php }else{?>
 					<img src="/myschool/html/images/icon_user.png" class="icon_user">  
 					<?php }?>
-			<?php echo $post->createur->prenom; ?> <?php echo $post->createur->nom?>	
+			<?php echo $post->fullCreateur->prenom; ?> <?php echo $post->fullCreateur->nom?>	
 			</div>
 			<div id="poste">
 				Math&eacute;matiques

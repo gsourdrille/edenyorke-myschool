@@ -100,11 +100,19 @@
  	public function getAllPosts($idEtablissement, $idClasses, $idsNiveaux, $nbResultat, $offset){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
- 		$idClassesSQL = join(',',(array)$idClasses); 
- 		$idNiveauxSQL = join(',',(array)$idsNiveaux);
+ 		$requeteClasse = "";
+ 		if(count($idClassesSQL)>0){
+ 			$idClassesSQL = join(',',(array)$idClasses);
+ 			$requeteClasse = "UNION SELECT ID_POST FROM POST_CLASSE WHERE ID_CLASSE IN ($idClassesSQL)";
+ 		}
+ 		$requeteNiveau = "";
+ 		if(count($idsNiveaux)){
+ 			$idNiveauxSQL = join(',',(array)$idsNiveaux);
+ 			$requeteNiveau  = "UNION SELECT ID_POST FROM POST_NIVEAU WHERE ID_NIVEAU IN ($idNiveauxSQL)";
+ 		}
  		$requete = "SELECT * FROM POST WHERE ID_POST IN (SELECT ID_POST FROM POST_ETABLISSEMENT WHERE ID_ETABLISSEMENT = '$idEtablissement' 
- 		UNION SELECT ID_POST FROM POST_CLASSE WHERE ID_CLASSE IN ($idClassesSQL) 
- 		UNION SELECT ID_POST FROM POST_NIVEAU WHERE ID_NIVEAU IN ($idNiveauxSQL)) ORDER BY DATE_CREATION LIMIT $nbResultat OFFSET $offset";
+ 		$requeteClasse
+ 		$requeteNiveau) ORDER BY DATE_CREATION LIMIT $nbResultat OFFSET $offset";
  		$resulat = $baseDao->sendRequest($requete);
  		$listePosts = new ArrayObject();
  		while($row = mysqli_fetch_assoc($resulat)){
