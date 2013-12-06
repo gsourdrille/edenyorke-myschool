@@ -101,7 +101,7 @@
  		$baseDao = new BaseDao();
  		$baseDao->connect();
  		$requeteClasse = "";
- 		if(count($idClassesSQL)>0){
+ 		if(count($idClasses)>0){
  			$idClassesSQL = join(',',(array)$idClasses);
  			$requeteClasse = "UNION SELECT ID_POST FROM POST_CLASSE WHERE ID_CLASSE IN ($idClassesSQL)";
  		}
