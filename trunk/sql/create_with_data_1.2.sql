@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.6
+-- version 3.5.7
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Jeu 05 Décembre 2013 à 13:48
--- Version du serveur: 5.5.33
--- Version de PHP: 5.5.3
+-- Généré le: Ven 06 Décembre 2013 à 08:55
+-- Version du serveur: 5.5.29
+-- Version de PHP: 5.4.10
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
@@ -48,10 +48,18 @@ CREATE TABLE `COMMENTAIRE` (
   `ID_POST` int(11) NOT NULL,
   `ID_USER` int(11) NOT NULL,
   `CONTENU` text NOT NULL,
+  `DATE_CREATION` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID_COMMENTAIRE`),
   KEY `INDEX_COMMENTAIRE_POST` (`ID_POST`),
   KEY `INDEX_COMMENTAIRE_USER` (`ID_USER`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `COMMENTAIRE`
+--
+
+INSERT INTO `COMMENTAIRE` (`ID_COMMENTAIRE`, `ID_POST`, `ID_USER`, `CONTENU`, `DATE_CREATION`) VALUES
+(1, 3, 10, 'test commentaire', '2013-12-06 07:52:31');
 
 -- --------------------------------------------------------
 
@@ -109,6 +117,21 @@ INSERT INTO `NIVEAU` (`ID_NIVEAU`, `ID_ETABLISSEMENT`, `NOM`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `PIECE_JOINTE`
+--
+
+CREATE TABLE `PIECE_JOINTE` (
+  `ID_PJ` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_POST` int(11) NOT NULL,
+  `CONTENT_TYPE` varchar(52) NOT NULL,
+  `PATH` text NOT NULL,
+  PRIMARY KEY (`ID_PJ`),
+  KEY `ID_POST` (`ID_POST`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `POST`
 --
 
@@ -121,14 +144,16 @@ CREATE TABLE `POST` (
   `COMMENTAIRES_ACTIVES` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ID_POST`),
   KEY `FK_CREATEUR` (`ID_USER`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `POST`
 --
 
 INSERT INTO `POST` (`ID_POST`, `ID_USER`, `DATE_CREATION`, `DATE_DERNIERE_MODIFICATION`, `CONTENU`, `COMMENTAIRES_ACTIVES`) VALUES
-(1, 5, '2013-12-05 12:15:08', NULL, 'Test contenu', 1);
+(1, 5, '2013-12-05 12:15:08', NULL, 'Test contenu', 1),
+(2, 9, '2013-12-06 07:47:02', NULL, 'Autre test sur classe et sans commentaire', 0),
+(3, 9, '2013-12-06 07:49:28', NULL, 'Test sur niveau avec commentaire', 1);
 
 --
 -- Déclencheurs `POST`
@@ -152,6 +177,13 @@ CREATE TABLE `POST_CLASSE` (
   PRIMARY KEY (`ID_POST`,`ID_CLASSE`),
   KEY `FK_POST_CLASSE2` (`ID_CLASSE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `POST_CLASSE`
+--
+
+INSERT INTO `POST_CLASSE` (`ID_POST`, `ID_CLASSE`) VALUES
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -185,6 +217,13 @@ CREATE TABLE `POST_NIVEAU` (
   PRIMARY KEY (`ID_POST`,`ID_NIVEAU`),
   KEY `FK_POST_NIVEAU2` (`ID_NIVEAU`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `POST_NIVEAU`
+--
+
+INSERT INTO `POST_NIVEAU` (`ID_POST`, `ID_NIVEAU`) VALUES
+(3, 10);
 
 -- --------------------------------------------------------
 
@@ -316,6 +355,12 @@ ALTER TABLE `COMMENTAIRE`
 --
 ALTER TABLE `NIVEAU`
   ADD CONSTRAINT `niveau_ibfk_1` FOREIGN KEY (`ID_ETABLISSEMENT`) REFERENCES `ETABLISSEMENT` (`ID_ETABLISSEMENT`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `PIECE_JOINTE`
+--
+ALTER TABLE `PIECE_JOINTE`
+  ADD CONSTRAINT `PIECE_JOINTE_ibfk_1` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `POST`

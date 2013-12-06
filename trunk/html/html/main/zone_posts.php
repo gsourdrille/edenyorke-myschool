@@ -2,6 +2,9 @@
 
 <?php foreach ($listePosts as $post){?>
 	<div class="post">
+		<div id="valid">
+			<img alt="J'ai vu" title="J'ai vu" src="/myschool/html/images/valider.png" class="image_valid"/>
+		</div>
 		<div id="createur">
 			<div id="nom_createur">
 					<?php if ($post->fullCreateur->avatar!=null){?>
@@ -30,8 +33,5 @@
 				</div>
 			</div>
 		<?php }?>
-		<div id="valid">
-			<img alt="J'ai vu" title="J'ai vu" src="/myschool/html/images/valider.png" class="image_valid"/>
-		</div>
 	</div>
 <?php }?>
