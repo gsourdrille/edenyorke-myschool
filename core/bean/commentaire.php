@@ -7,5 +7,6 @@ class Commentaire{
 	var $idUser;
 	var $dateCreation;
 	var $contenu;
+	var $fullCreateur;
 	
 }

@@ -180,8 +180,14 @@ select{
 	margin-left : 5px;
 	float: left;
 	width : 320px;
+	min-height :80px
 
 	}
+	
+.zone_pj{
+	margin:5px;
+}
+
 #valid
 {
 	position:absolute;
@@ -191,7 +197,7 @@ select{
 }
 
 #post_comment{
-	height: 30px;
+	min-height: 30px;
 }
 
 #post_comment_nb{
@@ -209,6 +215,17 @@ select{
 .post_comment_write_icon{
 	width: 30px;
 	height: 30px;
+}
+
+.post_comment_content{
+border-top: 1px solid;
+    height: auto;
+    min-height: 40px;
+    display: none;
+}
+
+#post_comment_entete{
+	min-height:40px;
 }
 .image_valid{
 		width: 25px;
@@ -405,4 +422,12 @@ select{
 
 #center_admin_conteneur{
 	width : 700px;
+}
+
+#comment_createur{
+	margin:5px;
+}
+
+#comment_content{
+	margin : 10px;
 }

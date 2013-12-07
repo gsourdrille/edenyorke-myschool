@@ -13,6 +13,8 @@
  	
  	const PATH_IMAGE_UTILISATEUR='/myschool/html/images/utilisateurs/';
  	
+ 	const PATH_POST_FILE='/myschool/html/data/posts/';
+ 	
  	const DEFAUT_OFFSET = 0;
  	const DEFAUT_MAX_RESULT = 15;
  }

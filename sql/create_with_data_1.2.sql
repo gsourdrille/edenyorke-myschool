@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 06 Décembre 2013 à 08:55
+-- Généré le: Sam 07 Décembre 2013 à 15:50
 -- Version du serveur: 5.5.29
 -- Version de PHP: 5.4.10
 
@@ -52,14 +52,15 @@ CREATE TABLE `COMMENTAIRE` (
   PRIMARY KEY (`ID_COMMENTAIRE`),
   KEY `INDEX_COMMENTAIRE_POST` (`ID_POST`),
   KEY `INDEX_COMMENTAIRE_USER` (`ID_USER`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `COMMENTAIRE`
 --
 
 INSERT INTO `COMMENTAIRE` (`ID_COMMENTAIRE`, `ID_POST`, `ID_USER`, `CONTENU`, `DATE_CREATION`) VALUES
-(1, 3, 10, 'test commentaire', '2013-12-06 07:52:31');
+(1, 3, 10, 'test commentaire', '2013-12-06 07:52:31'),
+(2, 3, 5, 'Ceci est un réponse', '2013-12-07 14:18:51');
 
 -- --------------------------------------------------------
 
@@ -127,7 +128,14 @@ CREATE TABLE `PIECE_JOINTE` (
   `PATH` text NOT NULL,
   PRIMARY KEY (`ID_PJ`),
   KEY `ID_POST` (`ID_POST`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `PIECE_JOINTE`
+--
+
+INSERT INTO `PIECE_JOINTE` (`ID_PJ`, `ID_POST`, `CONTENT_TYPE`, `PATH`) VALUES
+(1, 1, 'pdf', 'CV_SOURDRILLE_Guillaume_100212.doc');
 
 -- --------------------------------------------------------
 
@@ -153,7 +161,7 @@ CREATE TABLE `POST` (
 INSERT INTO `POST` (`ID_POST`, `ID_USER`, `DATE_CREATION`, `DATE_DERNIERE_MODIFICATION`, `CONTENU`, `COMMENTAIRES_ACTIVES`) VALUES
 (1, 5, '2013-12-05 12:15:08', NULL, 'Test contenu', 1),
 (2, 9, '2013-12-06 07:47:02', NULL, 'Autre test sur classe et sans commentaire', 0),
-(3, 9, '2013-12-06 07:49:28', NULL, 'Test sur niveau avec commentaire', 1);
+(3, 9, '2013-12-06 07:49:28', '2013-12-06 07:57:20', '<ul><li>Test sur niveau avec commentaire</li>\r\n<li>Autre ligne</li></ul>', 1);
 
 --
 -- Déclencheurs `POST`
