@@ -41,7 +41,11 @@ function getAllPost($etablissementId, $listeClassesId, $listeNiveauxId, $nbResul
 		$post->fullCreateur = $utilisateurDao->findUtilisateurById($post->createur);
 		//Enrichissement des commentaires
 		if($post->commentairesActives){
-			$post->commentaires = $commentaireDao->findCommentairesFromPost($post->idPost, 0, 5);
+			$listCommentaires = $commentaireDao->findCommentairesFromPost($post->idPost, 0, 5);
+			foreach ($listCommentaires as $commentaire){
+				$commentaire->fullCreateur = $utilisateurDao->findUtilisateurById($commentaire->idUser);
+			}
+			$post->commentaires =$listCommentaires;
 		}
 		//Enrichissement des pieces jointes
 		$post->piecesJointes = $pieceJointeDao ->findPiecesJointesFromPost($post->idPost);

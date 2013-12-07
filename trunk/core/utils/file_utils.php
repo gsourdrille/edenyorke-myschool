@@ -64,4 +64,8 @@
 		}
 	}
 	
+	public static function getPostFile($idPost,$pj){
+		return Constants::PATH_POST_FILE.$idPost."/".$pj->path;
+	}
+	
 }

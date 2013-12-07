@@ -25,6 +25,10 @@
 		
 		}
 		
+		public function fullName(){
+			return $this->prenom." ".$this->nom;
+		}
+		
 	}
 
 ?>

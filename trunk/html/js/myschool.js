@@ -53,3 +53,11 @@ $(document).ready(function() {
      $("#upload_image").hide();
 
  }
+ 
+ function showComment(id){
+	 $(id).show();
+ }
+ 
+ function hideComment(id){
+	 $(id).hide();
+ }
