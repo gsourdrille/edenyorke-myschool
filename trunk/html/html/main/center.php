@@ -12,6 +12,9 @@
 
 		</div>
 	</div>
+	<div id="newPost">
+		<?php include("new_post.php"); ?>
+	</div>
 	<div id="zonePosts">
 		<?php include("zone_posts.php"); ?>
 	</div>

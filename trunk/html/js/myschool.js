@@ -10,6 +10,17 @@ $(document).ready(function() {
             $(this).remove();
         });
     });
+    
+    tinyMCE.init({  
+        mode : "exact",  
+        theme : "modern", 
+        menubar:false,
+        statusbar:false,
+        toolbar:'undo redo | bold italic underline | bullist numlist | removeformat',
+        elements : "newPostArea"  ,
+        height:"140px",  
+        width:"500px"  
+        });
  
 });
 
@@ -60,4 +71,23 @@ $(document).ready(function() {
  
  function hideComment(id){
 	 $(id).hide();
+ }
+ 
+ function openNewPost(){
+	 $("#link_new_post").hide();
+     $("#zone_new_post").show();
+ }
+ 
+ function closeNewPost(){
+	 $("#link_new_post").show();
+     $("#zone_new_post").hide();
+ }
+ function showAssoPost(){
+	 $("#step2").show();
+     $("#step1").hide();
+ }
+ 
+ function hideAssoPost(){
+	 $("#step2").hide();
+     $("#step1").show();
  }
