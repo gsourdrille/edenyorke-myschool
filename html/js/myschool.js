@@ -21,6 +21,12 @@ $(document).ready(function() {
         height:"140px",  
         width:"500px"  
         });
+    
+    $("#selectRight").multiselect({
+    	   selectedText: "# of # selected",
+    		   position:"above",
+    		   autoOpen:true
+    	});
  
 });
 

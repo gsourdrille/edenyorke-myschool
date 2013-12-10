@@ -448,6 +448,11 @@ border-top: 1px solid;
      display: none;
 	}
 	
+	
+#step1{
+	position:relative;
+}
+	
 #step2 {
 	 display: none;
 }
