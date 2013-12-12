@@ -18,15 +18,11 @@ $(document).ready(function() {
         statusbar:false,
         toolbar:'undo redo | bold italic underline | bullist numlist | removeformat',
         elements : "newPostArea"  ,
-        height:"140px",  
-        width:"500px"  
+        height:"167px",  
+        width:"310px"  
         });
     
-    $("#selectRight").multiselect({
-    	   selectedText: "# of # selected",
-    		   position:"above",
-    		   autoOpen:true
-    	});
+   
  
 });
 
@@ -82,6 +78,19 @@ $(document).ready(function() {
  function openNewPost(){
 	 $("#link_new_post").hide();
      $("#zone_new_post").show();
+     $("#selectRight").multiselect({
+  	   selectedText: "# of # selected",
+  	   minWidth:"200px",
+  	   autoOpen:true,
+  	   header: false,
+  	   selectedList: 4,
+  	   height:"135px",
+  	   noneSelectedText: 'Pour qui ?',
+  	   position: {
+  		      my: 'left top',
+  		      at: 'left bottom'
+  	   }
+  	});
  }
  
  function closeNewPost(){
