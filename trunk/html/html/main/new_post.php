@@ -1,5 +1,5 @@
 
-
+<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/new_posts_controller.php")?>
 <div id="link_new_post">
 	<a href="#dev" onClick="openNewPost()">Nouveau post</a>
 </div>
@@ -11,16 +11,23 @@
 			</div>
 			<div style="width:180px; float:left; margin-left:10px;height:175px">
 				<select multiple id="selectRight">
-					<option value="1">Option 1</option>
-					<option value="2">Option 2</option>
-					<option value="3">Option 3</option>
-					<option value="4">Option 4</option>
-					<option value="5">Option 5</option>
-					<option value="6">Option 6</option>
-					<option value="7">Option 7</option>
-					<option value="8">Option 8</option>
-					<option value="9">Option 9</option>
-					<option value="10">Option 10</option>
+					<option value="ALL">Etablissement</option>
+					<?php 
+						foreach ($listeDroitsPost as $idNiveau => $listeClasses){
+							$niveau = null;
+							foreach ($listeNiveaux as $tmpNiveau){
+								if($tmpNiveau->idNiveau == $idNiveau){
+									$niveau = $tmpNiveau;
+								}
+							}
+						
+					      	echo "<optgroup label='$niveau->nom'>";
+					      	echo "<option value='NIVEAU_$niveau->idNiveau'>Tous</option>";
+					      	foreach ($listeClasses as $classe){
+								echo "<option value='CLASSE_$classe->idClasse'>$classe->nom</option>";
+							}
+					      	echo "</optgroup>";
+						}?>
 				</select>
 			</div>
 		</div>
@@ -28,6 +35,11 @@
 			<input type="button" onClick="closeNewPost()" value="Annuler">
 			<input type="button" onClick="submit()" value="Envoyer">
 		</div>
+	</div>
+	<div id="postAddPj">
+		<label for="addfile">Ajouter un fichier : </label>
+		<input name="postfile[]" type="file" />
+		<button id="add_more">+</button>
 	</div>
 </div>
 
