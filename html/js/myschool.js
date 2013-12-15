@@ -22,7 +22,10 @@ $(document).ready(function() {
         width:"310px"  
         });
     
-   
+    $('#add_more').click(function(e){
+        e.preventDefault();
+        $(this).before("<input name='postfile[]' type='file'/>");
+    });
  
 });
 
@@ -80,7 +83,7 @@ $(document).ready(function() {
      $("#zone_new_post").show();
      $("#selectRight").multiselect({
   	   selectedText: "# of # selected",
-  	   minWidth:"200px",
+  	   minWidth:"154px",
   	   autoOpen:true,
   	   header: false,
   	   selectedList: 4,

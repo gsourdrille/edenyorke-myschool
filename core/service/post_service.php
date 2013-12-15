@@ -4,35 +4,41 @@
 function getClassesIdByUser($idUser){
 	$classeDao = new ClasseDao();
 	$listeClasses =  $classeDao ->getClassesByUtlisateur($idUser);
-	$listeClassesId = new ArrayObject();
-	foreach ($listeClasses as $classe){
-		$listeClassesId->append($classe->idClasse);
-	}
-	return $listeClassesId;
-
+	return $listeClasses;
 }
 
 
-function getNiveauxIdByUser($idUser){
+function getNiveauxIdByClasses($listeClasses){
 	$classeDao = new ClasseDao();
-	$listeClasses =  $classeDao ->getClassesByUtlisateur($idUser);
+	$niveauDao = new NiveauDao();
 	$listeNiveauxId = new ArrayObject();
+	$listeNiveaux = new ArrayObject();
 	foreach ($listeClasses as $classe){
 		if(!in_array($classe->idNiveau, (array)$listeNiveauxId)){
 			$listeNiveauxId->append($classe->idNiveau);
+			$listeNiveaux->append($niveauDao->findNiveau($classe->idNiveau));
 		}
 	}
-	return $listeNiveauxId;
+	
+	return $listeNiveaux;
 
 }
 
 
-function getAllPost($etablissementId, $listeClassesId, $listeNiveauxId, $nbResultat, $offset){
+function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat, $offset){
 	$postDao = new PostDao();
 	$utilisateurDao = new UtilisateurDao();
 	$commentaireDao = new CommentaireDao();
 	$pieceJointeDao = new PieceJointeDao();
 	
+	$listeClassesId = new ArrayObject();
+	foreach($listeClasses as $classe){
+		$listeClassesId->append($classe->idClasse);
+	}
+	$listeNiveauxId = new ArrayObject();
+	foreach($listeNiveaux as $niveaux){
+		$listeNiveauxId->append($niveaux->idNiveau);
+	}
 	
 	$listePosts = $postDao->getAllPosts($etablissementId, $listeClassesId, $listeNiveauxId, $nbResultat, $offset);
 	//Pour chaque post
