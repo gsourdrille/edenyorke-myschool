@@ -26,6 +26,28 @@ $(document).ready(function() {
         e.preventDefault();
         $(this).before("<input name='postfile[]' type='file'/>");
     });
+    
+    var $form = $('#postForm');
+	
+	$('#envoyer').on('click', function() {
+		$form.trigger('submit');
+		return false;
+	});
+	
+	$form.on('submit', function() {
+           $.ajax({
+                url: "/myschool/core/controller/create_post_controller.php", 
+                type: $(this).attr('method'), 
+                data: $(this).serialize(), 
+                dataType: 'json',
+                success: function(json) {
+                    if(json.reponse == 'ok') {
+                        alert('Tout est bon');
+                    } else {
+                        alert('Erreur : '+ json.reponse);
+                    }
+                }            });
+    });
  
 });
 
