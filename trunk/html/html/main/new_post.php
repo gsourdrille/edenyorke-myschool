@@ -3,7 +3,7 @@
 <div id="link_new_post">
 	<a href="#dev" onClick="openNewPost()">Nouveau post</a>
 </div>
-<form id="postForm" action="" method="post">
+<form id="postForm" action="/myschool/core/controller/create_post_controller.php" method="post">
 	<div id="zone_new_post">
 		<div id="step1">
 			<div>

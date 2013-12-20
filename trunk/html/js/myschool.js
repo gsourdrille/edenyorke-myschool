@@ -35,18 +35,19 @@ $(document).ready(function() {
 	});
 	
 	$form.on('submit', function() {
+		tinyMCE.get("newPostArea").save();
            $.ajax({
                 url: "/myschool/core/controller/create_post_controller.php", 
                 type: $(this).attr('method'), 
                 data: $(this).serialize(), 
                 dataType: 'json',
                 success: function(json) {
-                    if(json.reponse == 'ok') {
-                        alert('Tout est bon');
-                    } else {
-                        alert('Erreur : '+ json.reponse);
-                    }
-                }            });
+                	closeNewPost();
+                	$('#zonePosts').html("");
+                	$('#zonePosts').load("/myschool/html/html/main/zone_posts.php");
+                }            
+           });
+           return false;  
     });
  
 });

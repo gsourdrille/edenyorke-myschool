@@ -18,3 +18,6 @@ include_once("bean/commentaire.php");
 include_once("dao/commentaireDao.php");
 include_once("bean/piece_jointe.php");
 include_once("dao/pieceJointeDao.php");
+include_once("utils/string_utils.php");
+include_once("bean/association.php");
+include_once("enums/typePost.php");

@@ -9,7 +9,7 @@
   			$baseDao = new BaseDao();
  			$baseDao->connect();
  			$contenu = $baseDao->escapeString($post->contenu);
- 			$requete = "INSERT INTO POST (ID_USER,CONTENU) VALUES ('$post->createur', '$post->$contenu') ";
+ 			$requete = "INSERT INTO POST (ID_USER,CONTENU) VALUES ('$post->createur', '$contenu') ";
  			$result = $baseDao->sendRequest($requete);
  			$idPost = $baseDao->lastInsertId();
  			$post->idPost = $idPost;
@@ -21,19 +21,20 @@
  	
  	public function saveAssociations($post){
  		if($post != null && $post->associations != null){
+ 			$baseDao = new BaseDao();
  			$baseDao->connect();
  			foreach ($post->associations as $association){
- 				switch ($associatio->typePose){
+ 				switch ($association->typePost){
  					case TypePost::ETABLISSEMENT:
- 						$requete = "INSERT INTO POST_ETABLISSEMENT (ID_POST,ID_ETABLISSEMENT) VALUES ('$post->idPost', $association->$id') ";
+ 						$requete = "INSERT INTO POST_ETABLISSEMENT (ID_POST,ID_ETABLISSEMENT) VALUES ('$post->idPost', '$association->id') ";
  					break;
  						
  					case TypePost::NIVEAU:
- 						$requete = "INSERT INTO POST_NIVEAU (ID_POST,ID_NIVEAU) VALUES ('$post->idPost', $association->$id') ";
+ 						$requete = "INSERT INTO POST_NIVEAU (ID_POST,ID_NIVEAU) VALUES ('$post->idPost', $association->id') ";
  					break;
  					
  					case TypePost::CLASSE:
- 						$requete = "INSERT INTO POST_CLASSE (ID_POST,ID_CLASSE) VALUES ('$post->idPost', $association->$id') ";
+ 						$requete = "INSERT INTO POST_CLASSE (ID_POST,ID_CLASSE) VALUES ('$post->idPost', $association->id') ";
  					break;
  				}
  				$result = $baseDao->sendRequest($requete);
@@ -45,6 +46,7 @@
  	
  	public function deleteAssociations($idPost){
  		if($idPost != null){
+ 			$baseDao = new BaseDao();
  			$baseDao->connect();
  			$requete = "DELETE FROM POST_ETABLISSEMENT WHERE ID_POST = $idPost ";
  			$result = $baseDao->sendRequest($requete);
@@ -112,7 +114,7 @@
  		}
  		$requete = "SELECT * FROM POST WHERE ID_POST IN (SELECT ID_POST FROM POST_ETABLISSEMENT WHERE ID_ETABLISSEMENT = '$idEtablissement' 
  		$requeteClasse
- 		$requeteNiveau) ORDER BY DATE_CREATION LIMIT $nbResultat OFFSET $offset";
+ 		$requeteNiveau) ORDER BY DATE_CREATION DESC LIMIT $nbResultat OFFSET $offset";
  		$resulat = $baseDao->sendRequest($requete);
  		$listePosts = new ArrayObject();
  		while($row = mysqli_fetch_assoc($resulat)){
