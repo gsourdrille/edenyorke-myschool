@@ -59,3 +59,17 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 	
 	return $listePosts;
 }
+
+function savePost($post){
+	$postDao = new PostDao();
+	$postDao->savePost($post);	
+	if($post->associations != null && $post->associations->count()>0){
+		$postDao->saveAssociations($post);
+	}
+	return $post;
+}
+
+function setPieceJointeToPost($idPost, $listePieceJointe){
+	$pieceJointeDao = new PieceJointeDao();
+	$pieceJointeDao->savePieceJointe($idPost, $listePieceJointe);
+}

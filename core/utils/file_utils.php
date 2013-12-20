@@ -68,4 +68,19 @@
 		return Constants::PATH_POST_FILE.$idPost."/".$pj->path;
 	}
 	
+	public static function createPostDir($idPost){
+	
+		$basepath = $_SERVER['DOCUMENT_ROOT'].Constants::PATH_POST_FILE;
+		echo $basepath;
+		if( !is_dir($basepath) ){
+			mkdir($basepath);
+		}
+		$path = $basepath.$idUer;
+		if( !is_dir($path) ){
+			mkdir($path);
+		}
+	
+		return $path;
+	}
+	
 }
