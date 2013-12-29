@@ -163,7 +163,7 @@ select{
 
 #post_content{
 	height: auto;
-	min-height: 100px;
+	min-height: 110px;
 	border-bottom: 1px solid;
 }
 
@@ -179,13 +179,19 @@ select{
 	margin-top : 5px;
 	margin-left : 5px;
 	float: left;
-	width : 320px;
+	width : 490px;
 	min-height :80px
 
 	}
 	
 .zone_pj{
 	margin:5px;
+	float:left;
+}
+
+.post_content_pj{
+	width:490px;
+	float:left;
 }
 
 #valid
@@ -218,6 +224,13 @@ select{
 }
 
 .post_comment_content{
+border-top: 1px solid;
+    height: auto;
+    min-height: 40px;
+    display: none;
+}
+
+.post_comment_write_comment{
 border-top: 1px solid;
     height: auto;
     min-height: 40px;
@@ -456,4 +469,9 @@ border-top: 1px solid;
 #postAddPj {
 	 margin-top:210px;
 	 margin-left:10px;
+}
+
+.writeCommentArea{
+	width: 500px;
+	height: 50px;
 }
