@@ -69,7 +69,12 @@ function savePost($post){
 	return $post;
 }
 
-function setPieceJointeToPost($idPost, $listePieceJointe){
+function setListePieceJointeToPost($idPost, $listePieceJointe){
 	$pieceJointeDao = new PieceJointeDao();
 	$pieceJointeDao->savePieceJointe($idPost, $listePieceJointe);
+}
+
+function addCommentaireToPost($commentaire){
+	$commentaireDao = new CommentaireDao();
+	$commentaireDao->saveCommentaire($commentaire);
 }

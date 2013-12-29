@@ -10,6 +10,6 @@
 <?php include("header.php"); ?>
 </div>
 <?php include("body.php"); ?>
-<?php include("footer.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/footer.php"); ?>
 </body>
 </html>

@@ -75,7 +75,7 @@
 		if( !is_dir($basepath) ){
 			mkdir($basepath);
 		}
-		$path = $basepath.$idUer;
+		$path = $basepath.$idPost;
 		if( !is_dir($path) ){
 			mkdir($path);
 		}

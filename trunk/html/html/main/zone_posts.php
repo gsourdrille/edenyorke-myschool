@@ -37,6 +37,8 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 		<?php if($post->commentairesActives){?>
 			<div id="post_comment">
 			<?php $idPostComment = "post_comment_content_".$post->idPost;?>
+			<?php $idPostWriteComment = "post_comment_write_comment_".$post->idPost;?>
+			<?php $idFormWriteComment = "writeCommentForm_".$post->idPost;?>
 				<div id="post_comment_entete">
 					<div id="post_comment_nb">
 						<?php if(count($post->commentaires)>0){?>	
@@ -46,8 +48,18 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 						 }?>
 					</div>
 					<div id="post_comment_write_tools">
-						<img alt="" src="/myschool/html/images/write.png"  class="post_comment_write_icon"/>
+						<a href="#dev" onclick="showComment(<?php echo $idPostWriteComment;?>)">
+							<img alt="" src="/myschool/html/images/write.png"  class="post_comment_write_icon"/>
+						</a>
 					</div>
+				</div>
+				<div class="post_comment_write_comment" id="<?php echo $idPostWriteComment ?>">
+					<form id="<?php echo $idFormWriteComment;?>" action="/myschool/core/controller/create_comment_controller.php" method="post">
+						<input type="hidden" name="idPost" value="<?php echo $post->idPost;?>"/>
+						<textarea name="writeCommentArea" class="writeCommentArea"></textarea>
+						<input type="button" onclick="hideComment(<?php echo $idPostWriteComment;?>)" value="Annuler"/>
+						<input type="button" onclick="sendComment(<?php echo $idFormWriteComment;?>,<?php echo $idPostComment;?>)" value="Envoyer"/>
+					</form>
 				</div>
 				<div class="post_comment_content" id="<?php echo $idPostComment ?>">
 					<?php foreach ($post->commentaires as $commentaire){?>

@@ -4,7 +4,7 @@ class CommentaireDao {
 	
 	
 	public function saveCommentaire($commentaire){
-		if($idPost != null && $idUser != null && $commentaire != null){
+		if($commentaire != null){
 			$baseDao = new BaseDao();
 			$baseDao->connect();
 			$contenu = $baseDao->escapeString($commentaire->contenu);

@@ -22,10 +22,13 @@ $(document).ready(function() {
         width:"310px"  
         });
     
+    
     $('#add_more').click(function(e){
         e.preventDefault();
         $(this).before("<input name='postfile[]' type='file'/>");
     });
+    
+    
     
     var $form = $('#postForm');
 	
@@ -36,11 +39,15 @@ $(document).ready(function() {
 	
 	$form.on('submit', function() {
 		tinyMCE.get("newPostArea").save();
+		var formData = new FormData($(this)[0]);
            $.ajax({
                 url: "/myschool/core/controller/create_post_controller.php", 
                 type: $(this).attr('method'), 
-                data: $(this).serialize(), 
-                dataType: 'json',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
                 success: function(json) {
                 	closeNewPost();
                 	$('#zonePosts').html("");
@@ -49,9 +56,30 @@ $(document).ready(function() {
            });
            return false;  
     });
- 
+	
 });
 
+
+function sendComment(idForm,idDiv){
+	var $form = $(idForm);
+         $sendComment = $.ajax({
+            url: "/myschool/core/controller/create_comment_controller.php", 
+            type: $form.attr('method'), 
+            data: $form.serialize(), 
+            dataType: 'json',
+            success: function(json) {
+            	$("#zonePosts").html("");
+            	$("#zonePosts").load( "/myschool/html/html/main/zone_posts.php", function() {
+            		$(idDiv).show();
+            	});
+            	
+            }            
+       });
+         
+        
+       
+	   return false;  
+}
 	
  function loadNiveaux() {
     var selectBox = document.getElementById("liste_niveaux");
@@ -100,6 +128,8 @@ $(document).ready(function() {
  function hideComment(id){
 	 $(id).hide();
  }
+ 
+ 
  
  function openNewPost(){
 	 $("#link_new_post").hide();
