@@ -61,6 +61,7 @@ $(document).ready(function() {
 
 
 function sendComment(idForm,idDiv){
+	var $div = "#"+idDiv.id;
 	var $form = $(idForm);
          $sendComment = $.ajax({
             url: "/myschool/core/controller/create_comment_controller.php", 
@@ -70,7 +71,7 @@ function sendComment(idForm,idDiv){
             success: function(json) {
             	$("#zonePosts").html("");
             	$("#zonePosts").load( "/myschool/html/html/main/zone_posts.php", function() {
-            		$(idDiv).show();
+            		$($div).show();
             	});
             	
             }            
