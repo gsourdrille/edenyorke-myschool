@@ -31,11 +31,14 @@ if(isset($_POST)) {
 					$associationDTO->typePost= TypePost::ETABLISSEMENT;
 					$associationDTO->id = $_SESSION['ETABLISSEMENT_ID'];
 				}else{
-					list($type, $id) = split('_', $association);
+					list($type, $id) = explode('_', $association);
+					$logger->log('succes', 'myschool', "TYPE : ".$type , Logger::GRAN_VOID);
+					$logger->log('succes', 'myschool', "ID : ".$id , Logger::GRAN_VOID);
 					if($type=="NIVEAU"){
 						$associationDTO->typePost= TypePost::NIVEAU;
 					}else if($type=="CLASSE"){
 						$associationDTO->typePost= TypePost::CLASSE;
+						$logger->log('succes', 'myschool', "TYPE_POST : CLASSE " , Logger::GRAN_VOID);
 					}
 					$associationDTO->id = $id;
 				}

@@ -8,5 +8,6 @@ class Commentaire{
 	var $dateCreation;
 	var $contenu;
 	var $fullCreateur;
+	var $isCreateur;
 	
 }

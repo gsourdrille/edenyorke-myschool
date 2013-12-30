@@ -76,9 +76,6 @@ function sendComment(idForm,idDiv){
             	
             }            
        });
-         
-        
-       
 	   return false;  
 }
 	

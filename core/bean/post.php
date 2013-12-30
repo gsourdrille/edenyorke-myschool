@@ -12,6 +12,7 @@ class Post{
 	var $commentaires;
 	var $associations;
 	var $fullCreateur;
+	var $isCreateur;
 	
 	public function afficher(){
 			
