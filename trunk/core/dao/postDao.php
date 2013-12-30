@@ -30,11 +30,11 @@
  					break;
  						
  					case TypePost::NIVEAU:
- 						$requete = "INSERT INTO POST_NIVEAU (ID_POST,ID_NIVEAU) VALUES ('$post->idPost', $association->id') ";
+ 						$requete = "INSERT INTO POST_NIVEAU (ID_POST,ID_NIVEAU) VALUES ('$post->idPost', '$association->id') ";
  					break;
  					
  					case TypePost::CLASSE:
- 						$requete = "INSERT INTO POST_CLASSE (ID_POST,ID_CLASSE) VALUES ('$post->idPost', $association->id') ";
+ 						$requete = "INSERT INTO POST_CLASSE (ID_POST,ID_CLASSE) VALUES ('$post->idPost', '$association->id') ";
  					break;
  				}
  				$result = $baseDao->sendRequest($requete);
@@ -131,7 +131,7 @@
  		$post->idPost = $row["ID_POST"];
  		$post->createur = $row["ID_USER"];
  		$post->contenu = $row["CONTENU"];
- 		$post->dateCreation = $row["DATE_CREATION"];
+ 		$post->dateCreation = new DateTime($row["DATE_CREATION"]);
  		$post->dateModification = $row["DATE_DERNIERE_MODIFICATION"];
  		$post->commentairesActives = $row['COMMENTAIRES_ACTIVES'];
  		return $post;

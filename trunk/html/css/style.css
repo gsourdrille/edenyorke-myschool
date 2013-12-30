@@ -152,13 +152,35 @@ select{
 
 #createur{
 	border-bottom: 1px solid;
-	height: 40px;
+	height: 60px;
 }
 
 #poste{
 	margin-top:10px;
 	margin-right:30px;
 	float: right;
+}
+
+
+#infos_post{
+	width: 100%;
+}
+
+#edit_post_link{
+	float:left;
+	margin-left: 40px;
+	font-size: 12px;
+}
+#post_date{
+	float:right;
+	margin-right:30px;
+	font-style: italic;
+	font-size: 12px;
+}
+
+#entete_createur{
+	float:left;
+	width:100%;
 }
 
 #post_content{
@@ -439,10 +461,23 @@ border-top: 1px solid;
 
 #comment_createur{
 	margin:5px;
+	float: left;
+}
+
+#comment_date{
+	margin:10px;
+	float: right;
+	font-style: italic;
+	font-size: 12px;
 }
 
 #comment_content{
 	margin : 10px;
+}
+
+#entete_comment{
+	width: 100%;
+	float: left;
 }
 
 #zone_new_post{

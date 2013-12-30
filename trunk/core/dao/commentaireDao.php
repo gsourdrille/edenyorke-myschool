@@ -46,7 +46,7 @@ class CommentaireDao {
 	public function findCommentairesFromPost($idPost, $offset, $nbResultat){
 			$baseDao = new BaseDao();
 			$baseDao->connect();
-			$requete = "SELECT * FROM COMMENTAIRE WHERE ID_POST='$idPost' ORDER BY DATE_CREATION LIMIT $nbResultat OFFSET $offset";
+			$requete = "SELECT * FROM COMMENTAIRE WHERE ID_POST='$idPost' ORDER BY DATE_CREATION DESC LIMIT $nbResultat OFFSET $offset";
 			$resulat = $baseDao->sendRequest($requete);
 			$listeCommentaires = new ArrayObject();
 			while($row = mysqli_fetch_assoc($resulat)){
@@ -71,7 +71,7 @@ class CommentaireDao {
 		$commentaire->idPost = $row["ID_POST"];
 		$commentaire->idUser = $row["ID_USER"];
 		$commentaire->contenu = $row["CONTENU"];
-		$commentaire->dateCreation = $row["DATE_CREATION"];
+		$commentaire->dateCreation = new DateTime($row["DATE_CREATION"]);
 		return $commentaire;
 	}
 	

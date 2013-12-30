@@ -17,6 +17,8 @@
  	
  	const DEFAUT_OFFSET = 0;
  	const DEFAUT_MAX_RESULT = 15;
+ 	
+ 	const FORMAT_DATE = "d/m/Y";
  }
 
 ?>

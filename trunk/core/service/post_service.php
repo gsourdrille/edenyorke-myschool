@@ -26,6 +26,8 @@ function getNiveauxIdByClasses($listeClasses){
 
 
 function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat, $offset){
+	$utilisateur = unserialize($_SESSION['USER']);
+	
 	$postDao = new PostDao();
 	$utilisateurDao = new UtilisateurDao();
 	$commentaireDao = new CommentaireDao();
@@ -45,11 +47,17 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 	foreach ($listePosts as $post){
 		//Enrichissement du createur
 		$post->fullCreateur = $utilisateurDao->findUtilisateurById($post->createur);
+		if($post->createur == $utilisateur->idUser){
+			$post->isCreateur = true;
+		}
 		//Enrichissement des commentaires
 		if($post->commentairesActives){
 			$listCommentaires = $commentaireDao->findCommentairesFromPost($post->idPost, 0, 5);
 			foreach ($listCommentaires as $commentaire){
 				$commentaire->fullCreateur = $utilisateurDao->findUtilisateurById($commentaire->idUser);
+				if($commentaire->idUser == $utilisateur->idUser){
+					$commentaire->isCreateur = true;
+				}
 			}
 			$post->commentaires =$listCommentaires;
 		}
