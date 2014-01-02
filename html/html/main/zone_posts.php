@@ -24,7 +24,7 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 			<div id="infos_post">
 				<div id="edit_post_link">
 					<?php if($post->isCreateur){?>
-						<a href="#">modifier</a>
+						<a href="#" onclick="showEditPost(<?php echo $post->idPost;?>)">modifier</a>
 					<?php }?>
 				</div>
 				<div id="post_date">
@@ -32,7 +32,7 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 				</div>
 			</div>
 		</div>
-		<div id="post_content">
+		<div class="post_content" id="post_content_<?php echo $post->idPost;?>">
 			<div class="post_content_texte">
 				<?php echo $post->contenu ?>
 			</div>
@@ -46,6 +46,11 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 				</div>
 			<?php }?>
 		</div>
+		<?php if($post->isCreateur){?>
+			<div class="edit_post" id="edit_post_<?php echo $post->idPost;?>">
+				<?php include("edit_post.php");?>
+			</div>
+		<?php }?>
 		<?php if($post->commentairesActives){
 			include("zone_commentaires.php");
 		}?>

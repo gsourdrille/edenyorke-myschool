@@ -160,3 +160,38 @@ function sendComment(idForm,idDiv){
 	 $("#step2").hide();
      $("#step1").show();
  }
+ 
+ function showEditPost(idPost){
+	 $("#post_content_"+idPost).hide();
+	 $("#edit_post_"+idPost).show();
+	 $("#selectRight"+idPost).multiselect({
+	  	   selectedText: "# of # selected",
+	  	   minWidth:"154px",
+	  	   autoOpen:true,
+	  	   header: false,
+	  	   selectedList: 4,
+	  	   height:"135px",
+	  	   noneSelectedText: 'Pour qui ?',
+	  	   position: {
+	  		      my: 'left top',
+	  		      at: 'left bottom'
+	  	   }
+	  	});
+	 
+	 tinyMCE.init({  
+	        mode : "exact",  
+	        theme : "modern", 
+	        menubar:false,
+	        statusbar:false,
+	        toolbar:'undo redo | bold italic underline | bullist numlist | removeformat',
+	        elements : "editPostArea"+idPost  ,
+	        height:"167px",  
+	        width:"310px"  
+	        });
+	 
+ }
+ 
+ function hideEditPost(idPostContent, idPostEdit){
+	 $(idPostContent).show();
+	 $(idPostEdit).hide();
+ }
