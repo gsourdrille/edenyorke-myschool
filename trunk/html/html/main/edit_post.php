@@ -1,18 +1,16 @@
 
-<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/new_posts_controller.php")?>
-<div id="link_new_post">
-	<a href="#dev" onClick="openNewPost()">Nouveau post</a>
-</div>
+
 <form id="postForm" action="/myschool/core/controller/create_post_controller.php" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="action" value="CREATE"/>
-	<div id="zone_new_post">
+	<input type="hidden" name="idPost" value="<?php echo $post->idPost;?>"/>
+	<input type="hidden" name="action" value="EDIT"/>
+	<div id="zone_edit_post">
 		<div id="step1">
 			<div>
 				<div style="width:310px; height:140px ;float:left">
-					<textarea name="newPostArea" id="newPostArea"></textarea>
+					<textarea name="editPostArea" id="editPostArea<?php echo $post->idPost;?>"><?php echo $post->contenu;?></textarea>
 				</div>
 				<div style="width:180px; float:left; margin-left:10px;height:175px">
-					<select multiple id="selectRight" name=listPostDestinaires[]>
+					<select multiple id="selectRight<?php echo $post->idPost;?>" name=listPostDestinaires[]>
 						<option value="ALL">Etablissement</option>
 						<?php 
 							foreach ($listeDroitsPost as $idNiveau => $listeClasses){
