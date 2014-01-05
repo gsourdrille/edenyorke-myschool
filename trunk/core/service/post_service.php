@@ -63,6 +63,9 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 		}
 		//Enrichissement des pieces jointes
 		$post->piecesJointes = $pieceJointeDao ->findPiecesJointesFromPost($post->idPost);
+		
+		//Enrichissement des associations
+		$post->associations = $postDao->getAssociations($post->idPost);
 	}
 	
 	return $listePosts;

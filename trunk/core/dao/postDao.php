@@ -43,6 +43,43 @@
  		}
  	}
  	
+ 	public function getAssociations($idPost){
+ 		$listeAssociations = new ArrayObject();
+ 		if($idPost != null){
+ 			$baseDao = new BaseDao();
+ 			$baseDao->connect();
+ 			//Recuperation des association etablissement
+ 			$requete = "SELECT * FROM POST_ETABLISSEMENT WHERE ID_POST=$idPost";
+ 			$result = $baseDao->sendRequest($requete);
+ 			while($row = mysqli_fetch_assoc($result)){
+ 				$association =  new AssociationDTO();
+ 				$association->typePost = TypePost::ETABLISSEMENT;
+ 				$association->id = $row['ID_ETABLISSEMENT'];
+ 				$listeAssociations->append($association);
+ 			}
+ 			//Recuperation des associations Niveaux
+ 			$requete = "SELECT * FROM POST_NIVEAU WHERE ID_POST=$idPost";
+ 			$result = $baseDao->sendRequest($requete);
+ 			while($row = mysqli_fetch_assoc($result)){
+ 				$association =  new AssociationDTO();
+ 				$association->typePost = TypePost::NIVEAU;
+ 				$association->id = $row['ID_NIVEAU'];
+ 				$listeAssociations->append($association);
+ 			}
+ 			//Recuperation des associations Classes
+ 			$requete = "SELECT * FROM POST_CLASSE WHERE ID_POST=$idPost";
+ 			$result = $baseDao->sendRequest($requete);
+ 			while($row = mysqli_fetch_assoc($result)){
+ 				$association =  new AssociationDTO();
+ 				$association->typePost = TypePost::CLASSE;
+ 				$association->id = $row['ID_CLASSE'];
+ 				$listeAssociations->append($association);
+ 			}
+ 			$baseDao->close();
+ 		}
+ 		return $listeAssociations;
+ 	}
+ 	
  	
  	public function deleteAssociations($idPost){
  		if($idPost != null){
