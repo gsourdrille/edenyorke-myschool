@@ -189,9 +189,28 @@ function sendComment(idForm,idDiv){
 	        width:"310px"  
 	        });
 	 
+	 
+	    $("#add_more"+idPost).click(function(e){
+	        e.preventDefault();
+	        $(this).before("<input name='postfile[]' type='file'/>");
+	    });
+	 
  }
  
  function hideEditPost(idPostContent, idPostEdit){
 	 $(idPostContent).show();
 	 $(idPostEdit).hide();
+ }
+ 
+ function deletePj(idPj, idPost){
+	 $("#pj_"+idPj).remove();
+	 var currentval = $("#pjToDelete_"+idPost).val();
+	 if(currentval==""){
+		 $("#pjToDelete_"+idPost).val(idPj);
+	 }else{
+		 $("#pjToDelete_"+idPost).val(currentval + "," + idPj);
+	 }
+	 
+	 
+	 
  }

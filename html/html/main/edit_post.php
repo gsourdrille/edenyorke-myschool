@@ -48,10 +48,19 @@
 				<a href="#" id="envoyer">Envoyer</a>
 			</div>
 		</div>
-		<div id="postAddPj">
+		<div id="postListPj">
+			<input id="pjToDelete_<?php echo $post->idPost;?>" type="hidden" name="pjToDelete[]"/>
+			<?php foreach ($post->piecesJointes as $pj){
+				?>
+			<a id="pj_<?php echo $pj->idPj;?>" href="#null" onclick="deletePj(<?php echo $pj->idPj;?>,<?php echo $post->idPost;?>)" title="Supprimer"><?php echo $pj->path." x"?></a>
+				<?php 	
+			}
+			?>
+		</div>
+		<div id="postEditPj">
 			<label for="addfile">Ajouter un fichier : </label>
 			<input name="postfile[]" type="file" />
-			<button id="add_more">+</button>
+			<button id="add_more<?php echo $post->idPost;?>">+</button>
 		</div>
 	</div>
 </form>
