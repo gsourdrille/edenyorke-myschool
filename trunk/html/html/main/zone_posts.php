@@ -24,7 +24,7 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 			<div id="infos_post">
 				<div id="edit_post_link">
 					<?php if($post->isCreateur){?>
-						<a href="#" onclick="showEditPost(<?php echo $post->idPost;?>)">modifier</a>
+						<a href="#dev" onclick="showEditPost(<?php echo $post->idPost;?>)">modifier</a>
 					<?php }?>
 				</div>
 				<div id="post_date">
