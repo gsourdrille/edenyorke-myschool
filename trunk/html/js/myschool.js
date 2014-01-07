@@ -210,7 +210,25 @@ function sendComment(idForm,idDiv){
 	 }else{
 		 $("#pjToDelete_"+idPost).val(currentval + "," + idPj);
 	 }
-	 
-	 
-	 
  }
+ 
+ function editPost(idPost){
+	 	tinyMCE.triggerSave();
+		var $form = $("#postEditForm"+idPost);
+		var formData = new FormData($form[0]);
+	         $.ajax({
+	        	 url: "/myschool/core/controller/create_post_controller.php", 
+	                type: $form.attr('method'), 
+	                data: formData,
+	                async: false,
+	                cache: false,
+	                contentType: false,
+	                processData: false,
+	                success: function(json) {
+	                	closeNewPost();
+	                	$('#zonePosts').html("");
+	                	$('#zonePosts').load("/myschool/html/html/main/zone_posts.php");
+	                }             
+	       });
+		   return false;  
+	}

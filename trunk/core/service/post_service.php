@@ -89,3 +89,25 @@ function addCommentaireToPost($commentaire){
 	$commentaireDao = new CommentaireDao();
 	$commentaireDao->saveCommentaire($commentaire);
 }
+
+function getPost($idPost){
+	$postDao = new PostDao();
+	$post = $postDao->findPost($idPost);
+	return $post;
+}
+
+function editPost($post){
+	$postDao = new PostDao();
+	$postDao->updatePost($post);
+	if($post->associations != null && $post->associations->count()>0){
+		$postDao->deleteAssociations($post->idPost);
+		$postDao->saveAssociations($post);
+	}
+	return $post;
+}
+
+function setListePieceJointeToDeletePost($idPost, $listePieceJointeToDelete, $listePieceJointe){
+	$pieceJointeDao = new PieceJointeDao();
+	$pieceJointeDao->deletePiecesJointes($listePiecesJointesId);
+	$pieceJointeDao->savePieceJointe($idPost, $listePieceJointe);
+}

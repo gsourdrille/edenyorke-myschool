@@ -7,10 +7,20 @@ class PieceJointeDao {
 		if($idPost != null && $piecesJointes != null && count($piecesJointes) > 0){
 			$baseDao = new BaseDao();
 			$baseDao->connect();
-			$requete = "DELETE FROM PIECE_JOINTE WHERE ID_POST = $idPost";
-			$result = $baseDao->sendRequest($requete);
 			foreach ($piecesJointes as $pj){
 				$requete = "INSERT INTO PIECE_JOINTE (ID_POST,CONTENT_TYPE,PATH) VALUES ('$pj->idPost', '$pj->contentType', '$pj->path' ) ";
+				$result = $baseDao->sendRequest($requete);
+			}
+			$baseDao->close();
+		}
+	}
+	
+	public function deletePiecesJointes($listePiecesJointesId){
+		if($listePiecesJointesId != null && count($listePiecesJointesId) > 0){
+			$baseDao = new BaseDao();
+			$baseDao->connect();
+			foreach ($listePiecesJointesId as $pjId){
+				$requete = "DELETE FROM PIECE_JOINTE WHERE ID_PJ = $pjId";
 				$result = $baseDao->sendRequest($requete);
 			}
 			$baseDao->close();

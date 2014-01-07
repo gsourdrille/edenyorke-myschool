@@ -1,4 +1,4 @@
-<form id="postForm" action="/myschool/core/controller/create_post_controller.php" method="post" enctype="multipart/form-data">
+<form id="postEditForm<?php echo $post->idPost;?>" action="/myschool/core/controller/create_post_controller.php" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="idPost" value="<?php echo $post->idPost;?>"/>
 	<input type="hidden" name="action" value="EDIT"/>
 	<div id="zone_edit_post">
@@ -44,8 +44,8 @@
 				</div>
 			</div>
 			<div style="float:right; margin-right:10px">
-				<input type="button" onClick="closeNewPost()" value="Annuler">
-				<a href="#" id="envoyer">Envoyer</a>
+				<input type="button" onClick="hideEditPost()" value="Annuler">
+				<input type="button" onClick="editPost(<?php echo $post->idPost;?>)" value="Envoyer">
 			</div>
 		</div>
 		<div id="postListPj">
