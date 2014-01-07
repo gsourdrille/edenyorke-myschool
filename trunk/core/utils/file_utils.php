@@ -6,7 +6,6 @@
 	public static function createEtablissementDir($idEtablissement){
 		
 		$basepath = $_SERVER['DOCUMENT_ROOT'].Constants::PATH_IMAGE_ETABLISSEMENT;
-		echo $basepath;
 		if( !is_dir($basepath) ){
 			mkdir($basepath);
 		}
@@ -38,7 +37,6 @@
 	}
 	
 	public static function createUtilisateurDir($idUer){
-	
 		$basepath = $_SERVER['DOCUMENT_ROOT'].Constants::PATH_IMAGE_UTILISATEUR;
 		echo $basepath;
 		if( !is_dir($basepath) ){
@@ -54,7 +52,6 @@
 	
 	
 	public static function deleteUtilisateurFile($utilisateur){
-	
 		$path = $_SERVER['DOCUMENT_ROOT'].Constants::PATH_IMAGE_UTILISATEUR.$utilisateur->idUser;
 		if(is_dir($path) ){
 			$filename  = $path."/".$utilisateur->avatar;
@@ -64,8 +61,18 @@
 		}
 	}
 	
-	public static function getPostFile($idPost,$pj){
-		return Constants::PATH_POST_FILE.$idPost."/".$pj->path;
+	public static function getPostFile($idPost,$name){
+		return Constants::PATH_POST_FILE.$idPost."/".$name;
+	}
+	
+	public static function deletePostFile($idPost,$name){
+		$path = $_SERVER['DOCUMENT_ROOT'].Constants::PATH_POST_FILE.$idPost;
+		if(is_dir($path) ){
+			$filename  = $path."/".$name;
+			if(is_file($filename)){
+				unlink($filename);
+			}
+		}
 	}
 	
 	public static function createPostDir($idPost){

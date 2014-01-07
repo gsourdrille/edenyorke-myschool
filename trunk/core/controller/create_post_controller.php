@@ -15,9 +15,6 @@ if(isset($_POST)) {
 				$post->createur = $utilisateur->idUser;
 				$post->commentairesActives = true;
 				
-				$logger->log('succes', 'myschool', "CONTENU : ".$post->contenu , Logger::GRAN_VOID);
-				$logger->log('succes', 'myschool', "CREATEUR : ".$post->createur , Logger::GRAN_VOID);
-				
 				//Creation des associations
 				if(isset($_POST['listPostDestinaires'])){
 					$listeAssociations = $_POST['listPostDestinaires'];
@@ -88,10 +85,10 @@ if(isset($_POST)) {
 				}
 			break;
 			case 'EDIT':
-		//Creation du post
+				//Edition du post
 				$idPost = $_POST['idPost'];
 				$post = getPost($idPost);
-				$post->contenu = $_POST['editPostArea'.$idPost];
+				$post->contenu = $_POST['editPostArea'];
 				$post->commentairesActives = true;
 				
 				//Creation des associations
@@ -107,8 +104,6 @@ if(isset($_POST)) {
 								$associationDTO->id = $_SESSION['ETABLISSEMENT_ID'];
 							}else{
 								list($type, $id) = explode('_', $association);
-								$logger->log('succes', 'myschool', "TYPE : ".$type , Logger::GRAN_VOID);
-								$logger->log('succes', 'myschool', "ID : ".$id , Logger::GRAN_VOID);
 								if($type=="NIVEAU"){
 									$associationDTO->typePost= TypePost::NIVEAU;
 								}else if($type=="CLASSE"){
@@ -125,6 +120,7 @@ if(isset($_POST)) {
 					$logger->log('succes', 'myschool', "ID_POST : ".$post->idPost , Logger::GRAN_VOID);
 						
 					if($post->idPost != null){
+						
 						//Creation des pieces jointes
 						$listePiecesJointes = new ArrayObject();
 						foreach ($_FILES['postfile']['name'] as $file => $name) {
@@ -157,6 +153,12 @@ if(isset($_POST)) {
 								}
 							}
 						}
+						//suppression des pieces jointes supprimees manuellement
+						if(isset($_POST['pjToDelete'])){
+							$listePiecesJointeToDelete = explode(',',$_POST['pjToDelete']);
+							updateListePieceJointe($post->idPost,$listePiecesJointeToDelete);
+						}
+						
 						if($listePiecesJointes->count()>0){
 							setListePieceJointeToPost($post->idPost,$listePiecesJointes);
 						}

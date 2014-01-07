@@ -27,6 +27,16 @@ class PieceJointeDao {
 		}
 	}
 	
+	public function deletePieceJointe($pieceJointeId){
+		if($pieceJointeId != null){
+			$baseDao = new BaseDao();
+			$baseDao->connect();
+			$requete = "DELETE FROM PIECE_JOINTE WHERE ID_PJ = $pieceJointeId";
+			$result = $baseDao->sendRequest($requete);
+			$baseDao->close();
+		}
+	}
+	
 		
 	public function findPiecesJointesFromPost($idPost){
 			$baseDao = new BaseDao();
@@ -39,6 +49,17 @@ class PieceJointeDao {
 			}
 			$baseDao->close();
 			return $listePiecesJointes;
+	}
+	
+	public function findPieceJointe($idPj){
+		$baseDao = new BaseDao();
+		$baseDao->connect();
+		$requete = "SELECT * FROM PIECE_JOINTE WHERE ID_PJ='$idPj'";
+		$resulat = $baseDao->sendRequest($requete);
+		$row = mysqli_fetch_assoc($resulat);
+		$pj = $this->buildPieceJointe($row);
+		$baseDao->close();
+		return $pj;
 	}
 	
 	public function buildPieceJointe($row){
