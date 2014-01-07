@@ -106,8 +106,13 @@ function editPost($post){
 	return $post;
 }
 
-function setListePieceJointeToDeletePost($idPost, $listePieceJointeToDelete, $listePieceJointe){
+function updateListePieceJointe($idPost,$listePieceJointeToDelete){
 	$pieceJointeDao = new PieceJointeDao();
-	$pieceJointeDao->deletePiecesJointes($listePiecesJointesId);
-	$pieceJointeDao->savePieceJointe($idPost, $listePieceJointe);
+	foreach ($listePieceJointeToDelete as $pjId){
+		//suppression physique
+		$pj = $pieceJointeDao ->findPieceJointe($pjId);
+		FileUtils::deletePostFile($idPost, $pj->path);
+		//suppression en base
+		$pieceJointeDao->deletePieceJointe($pjId);
+	}
 }

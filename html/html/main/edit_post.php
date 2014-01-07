@@ -49,7 +49,7 @@
 			</div>
 		</div>
 		<div id="postListPj">
-			<input id="pjToDelete_<?php echo $post->idPost;?>" type="hidden" name="pjToDelete[]"/>
+			<input id="pjToDelete_<?php echo $post->idPost;?>" type="hidden" name="pjToDelete"/>
 			<?php foreach ($post->piecesJointes as $pj){
 				?>
 			<a id="pj_<?php echo $pj->idPj;?>" href="#null" onclick="deletePj(<?php echo $pj->idPj;?>,<?php echo $post->idPost;?>)" title="Supprimer"><?php echo $pj->path." x"?></a>
