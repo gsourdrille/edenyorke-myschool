@@ -19,6 +19,7 @@
 		<div class="post_comment_write_comment" id="<?php echo $idPostWriteComment ?>">
 			<form id="<?php echo $idFormWriteComment;?>" action="/myschool/core/controller/create_comment_controller.php" method="post">
 				<input type="hidden" name="idPost" value="<?php echo $post->idPost;?>"/>
+				<input type="hidden" name="action" value="CREATE"/>
 				<textarea name="writeCommentArea" class="writeCommentArea"></textarea>
 				<input type="button" onclick="hideComment(<?php echo $idPostWriteComment;?>)" value="Annuler"/>
 				<input type="button" onclick="sendComment(<?php echo $idFormWriteComment;?>,<?php echo $idPostComment;?>)" value="Envoyer"/>
@@ -35,14 +36,24 @@
 								<img src="/myschool/html/images/icon_user.png" class="icon_user">  
 							<?php }?>
 							<?php echo $commentaire->fullCreateur->fullName();?>
+							<?php if($commentaire->isCreateur){?>
+								<div id="edit_commentaire_link">
+									<a href="#dev" onclick="showEditCommentaire(<?php echo $commentaire->idCommentaire;?>)">modifier</a>
+								</div>
+							<?php }?>
 						</div>
 						<div id="comment_date">
 							le <?php echo $commentaire->dateCreation->format(Constants::FORMAT_DATE);?>
 						</div>
 					</div>
-					<div id="comment_content">
+					<div class="comment_content" id="comment_content_<?php echo $commentaire->idCommentaire;?>">
 						<?php echo $commentaire->contenu?> 
 					</div>
+					<?php if($commentaire->isCreateur){?>
+						<div class="edit_commentaire" id="edit_commentaire_<?php echo $commentaire->idCommentaire;?>">
+							<?php include("edit_commentaire.php");?>
+						</div>
+					<?php }?>
 				</div>
 			<?php }?>
 			<div id="post_comment_footer" class="">

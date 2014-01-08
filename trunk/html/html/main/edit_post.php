@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<div style="float:right; margin-right:10px">
-				<input type="button" onClick="hideEditPost()" value="Annuler">
+				<input type="button" onClick="hideEditPost(<?php echo $post->idPost;?>)" value="Annuler">
 				<input type="button" onClick="editPost(<?php echo $post->idPost;?>)" value="Envoyer">
 			</div>
 		</div>
