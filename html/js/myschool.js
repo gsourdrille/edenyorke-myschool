@@ -197,9 +197,9 @@ function sendComment(idForm,idDiv){
 	 
  }
  
- function hideEditPost(idPostContent, idPostEdit){
-	 $(idPostContent).show();
-	 $(idPostEdit).hide();
+ function hideEditPost(idPost){
+	 $("#post_content_"+idPost).show();
+	 $("#edit_post_"+idPost).hide();
  }
  
  function deletePj(idPj, idPost){
@@ -232,3 +232,14 @@ function sendComment(idForm,idDiv){
 	       });
 		   return false;  
 	}
+ 
+ 
+ function showEditCommentaire(idComment){
+	 $("#comment_content_"+idComment).hide();
+	 $("#edit_commentaire_"+idComment).show();
+ }
+ 
+ function hideEditCommentaire(idComment){
+	 $("#comment_content_"+idComment).show();
+	 $("#edit_commentaire_"+idComment).hide();
+ }

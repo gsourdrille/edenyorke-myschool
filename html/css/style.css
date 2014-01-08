@@ -478,8 +478,12 @@ border-top: 1px solid;
 	font-size: 12px;
 }
 
-#comment_content{
+.comment_content{
 	margin : 10px;
+}
+
+.edit_commentaire{
+	display:none;
 }
 
 #entete_comment{
