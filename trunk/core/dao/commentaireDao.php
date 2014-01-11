@@ -56,6 +56,17 @@ class CommentaireDao {
 			return $listeCommentaires;
 	}
 	
+	public function findCommentaire($idCommentaire){
+		$baseDao = new BaseDao();
+		$baseDao->connect();
+		$requete = "SELECT * FROM COMMENTAIRE WHERE ID_COMMENTAIRE='$idCommentaire'";
+		$resulat = $baseDao->sendRequest($requete);
+		$row = mysqli_fetch_assoc($resulat);
+		$commentaire = $this->buildCommentaire($row);
+		$baseDao->close();
+		return $commentaire;
+	}
+	
 	public function countCommentairesFromPost($idPost){
 		$baseDao = new BaseDao();
 		$baseDao->connect();
