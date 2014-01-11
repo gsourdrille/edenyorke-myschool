@@ -78,6 +78,45 @@ function sendComment(idForm,idDiv){
        });
 	   return false;  
 }
+
+function editComment(idCommentaire,idDiv){
+	var $div = "#"+idDiv.id;
+	var $form = $("#commentEditForm"+idCommentaire);
+         $sendComment = $.ajax({
+            url: "/myschool/core/controller/create_comment_controller.php", 
+            type: $form.attr('method'), 
+            data: $form.serialize(), 
+            dataType: 'json',
+            success: function(json) {
+            	$("#zonePosts").html("");
+            	$("#zonePosts").load( "/myschool/html/html/main/zone_posts.php", function() {
+            		$($div).show();
+            	});
+            	
+            }            
+       });
+	   return false;  
+}
+
+function deleteCommentaire(idCommentaire,idDiv){
+	var myPostData="action=DELETE&idCommentaire="+idCommentaire;
+	var $div = "#"+idDiv.id;
+         $.ajax({
+            url: "/myschool/core/controller/create_comment_controller.php", 
+            type: "POST", 
+            data: myPostData, 
+            dataType: 'json',
+            success: function(json) {
+            	$("#zonePosts").html("");
+            	$("#zonePosts").load( "/myschool/html/html/main/zone_posts.php", function() {
+            		$($div).show();
+            	});
+            	
+            }            
+       });
+	   return false;  
+}
+
 	
  function loadNiveaux() {
     var selectBox = document.getElementById("liste_niveaux");

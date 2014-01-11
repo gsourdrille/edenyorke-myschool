@@ -116,3 +116,19 @@ function updateListePieceJointe($idPost,$listePieceJointeToDelete){
 		$pieceJointeDao->deletePieceJointe($pjId);
 	}
 }
+
+function getCommentaire($idCommentaire){
+	$commentaireDao = new CommentaireDao();
+	$commentaire = $commentaireDao->findCommentaire($idCommentaire);
+	return $commentaire;
+}
+
+function saveCommentaire($commentaire){
+	$commentaireDao = new CommentaireDao();
+	$commentaire = $commentaireDao->updateCommentaire($commentaire);
+}
+
+function deleteCommentaire($idCommentaire){
+	$commentaireDao = new CommentaireDao();
+	$commentaire = $commentaireDao->deleteCommentaire($idCommentaire);
+}
