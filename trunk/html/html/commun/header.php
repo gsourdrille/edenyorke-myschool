@@ -2,10 +2,14 @@
 ?>
 <div id="header_content">
 	<div id="myschool">
+		<a href="/myschool/core/controller/tableau_controller.php">
 		MySchool
+		</a>
 	</div>
 	<div id="school_name">
-		<div><?php echo $etablissement->nom;?> - <?php  echo $etablissement->codePostal;?> <?php echo $etablissement ->ville;?></div>
+		<a href="/myschool/core/controller/tableau_controller.php">
+			<?php echo $etablissement->nom;?> - <?php  echo $etablissement->codePostal;?> <?php echo $etablissement ->ville;?>
+		</a>
 	</div>
 	<div id="mail">
 		<img alt="" src="/myschool/html/images/icon_mail.png"  class="icon_mail"/>
