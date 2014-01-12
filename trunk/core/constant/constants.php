@@ -19,6 +19,8 @@
  	const DEFAUT_MAX_RESULT = 15;
  	
  	const FORMAT_DATE = "d/m/Y";
+ 	
+ 	const PASS_CHARS_LENGTH = 8 ;
  }
 
 ?>

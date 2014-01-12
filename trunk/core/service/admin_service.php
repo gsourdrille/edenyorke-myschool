@@ -1,6 +1,7 @@
 <?php
 
 include($_SERVER['DOCUMENT_ROOT']."/myschool/core/include.php");
+include($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/encrypt_service.php");
 
 function validateLogin($username, $userId){
 	$utilisateurDao = new UtilisateurDao();
@@ -99,6 +100,7 @@ function validateClasse($nom, $idClasse,$idNiveau){
 function saveOrUpdateClasse($classe){
 	$classeDao = new ClasseDao();
 	if($classe->idClasse == null){
+		$classe->code = generateUniqueCode();
 		return $classeDao->saveClasse($classe);
 	}else{
 		return $classeDao->updateClasse($classe);

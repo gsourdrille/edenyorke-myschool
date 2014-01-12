@@ -83,6 +83,7 @@ if (isset($_POST['submit'])){
 						move_uploaded_file($_FILES['userfile']['tmp_name'], $path."/".$_FILES['userfile']['name']);
 						setImageToUtilisateur($utilisateur, $_FILES['userfile']['name']);
 						$utilisateur->avatar = $_FILES['userfile']['name'];
+						$_SESSION['USER'] = serialize($utilisateur);
 					}
 				}
 			}else{

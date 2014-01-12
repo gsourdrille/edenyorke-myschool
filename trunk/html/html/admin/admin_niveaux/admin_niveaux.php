@@ -89,6 +89,11 @@
 						</div>
 						<?php }?>
 					</div>
+					<?php if(isset($classe->idClasse)){ ?>
+						<div id="code_classe">
+							Code : <?php echo $classe->code;?>
+						</div>
+					<?php } ?>
 					<div id="button_submit_infos">
 						<input type="submit" name="saveClasse" value="Sauvegarder">
 					</div>

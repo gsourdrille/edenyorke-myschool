@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.7
+-- version 4.0.6
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 07 Décembre 2013 à 15:50
--- Version du serveur: 5.5.29
--- Version de PHP: 5.4.10
+-- Généré le: Dim 12 Janvier 2014 à 16:52
+-- Version du serveur: 5.5.33
+-- Version de PHP: 5.5.3
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
@@ -24,18 +24,28 @@ CREATE TABLE `CLASSE` (
   `ID_CLASSE` int(11) NOT NULL AUTO_INCREMENT,
   `ID_NIVEAU` int(11) DEFAULT NULL,
   `NOM` text,
+  `CODE` varchar(8) NOT NULL,
   PRIMARY KEY (`ID_CLASSE`),
   KEY `FK_RELATION_2` (`ID_NIVEAU`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Contenu de la table `CLASSE`
 --
 
-INSERT INTO `CLASSE` (`ID_CLASSE`, `ID_NIVEAU`, `NOM`) VALUES
-(1, 10, 'test'),
-(2, 14, '8emeVerte'),
-(3, 13, 'tezr');
+INSERT INTO `CLASSE` (`ID_CLASSE`, `ID_NIVEAU`, `NOM`, `CODE`) VALUES
+(2, 14, '8emeVerte', ''),
+(3, 13, 'tezr', ''),
+(13, 10, 'test10', 'BMKuCg6M'),
+(15, 10, 'test9', 'pyVhxqFJ'),
+(19, 10, 'test4', 'aCqfqBEp'),
+(20, 10, 'jkljkljkjk', 'rORpNdNO'),
+(21, 10, 'qsdqstezryrtyres', 'pVWfnVhh'),
+(22, 10, 'erezrzertzer', 'gOWWQRYt'),
+(23, 11, 'testtete', 'bzZF9Tzd'),
+(24, 11, 'sdfsdfdfd', '6qjjPjEr'),
+(25, 10, 'zezeaz', '2c33a4x5'),
+(26, 10, 'sqdqsd', 'WMhuJMjx');
 
 -- --------------------------------------------------------
 
@@ -52,15 +62,14 @@ CREATE TABLE `COMMENTAIRE` (
   PRIMARY KEY (`ID_COMMENTAIRE`),
   KEY `INDEX_COMMENTAIRE_POST` (`ID_POST`),
   KEY `INDEX_COMMENTAIRE_USER` (`ID_USER`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
 
 --
 -- Contenu de la table `COMMENTAIRE`
 --
 
 INSERT INTO `COMMENTAIRE` (`ID_COMMENTAIRE`, `ID_POST`, `ID_USER`, `CONTENU`, `DATE_CREATION`) VALUES
-(1, 3, 10, 'test commentaire', '2013-12-06 07:52:31'),
-(2, 3, 5, 'Ceci est un réponse', '2013-12-07 14:18:51');
+(68, 34, 10, 'test', '2014-01-07 22:29:26');
 
 -- --------------------------------------------------------
 
@@ -87,7 +96,7 @@ CREATE TABLE `ETABLISSEMENT` (
 --
 
 INSERT INTO `ETABLISSEMENT` (`ID_ETABLISSEMENT`, `NOM`, `ADRESSE`, `CODE_POSTAL`, `VILLE`, `TELEPHONE_1`, `TELEPHONE_2`, `FAX`, `IMAGE_PRINCIPALE`) VALUES
-(2, 'Lycée saint Martin 2', '29 rue d''entrain 2', '35000', 'Rennes', '02.99.01.02.03', '', '02.99.01.02.05', 'Argentina.gif');
+(2, 'Lycée saint Martin 2', '29 rue d''entrain 2', '35000', 'Rennes', '02.99.01.02.03', '02.99.00.00.00', '02.99.01.02.05', 'Argentina.gif');
 
 -- --------------------------------------------------------
 
@@ -110,7 +119,7 @@ CREATE TABLE `NIVEAU` (
 INSERT INTO `NIVEAU` (`ID_NIVEAU`, `ID_ETABLISSEMENT`, `NOM`) VALUES
 (8, 2, '1ère'),
 (10, 2, '2nd'),
-(11, 2, '3eme'),
+(11, 2, '6eme'),
 (12, 2, '11eme'),
 (13, 2, 'test'),
 (14, 2, '8');
@@ -128,14 +137,14 @@ CREATE TABLE `PIECE_JOINTE` (
   `PATH` text NOT NULL,
   PRIMARY KEY (`ID_PJ`),
   KEY `ID_POST` (`ID_POST`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Contenu de la table `PIECE_JOINTE`
 --
 
 INSERT INTO `PIECE_JOINTE` (`ID_PJ`, `ID_POST`, `CONTENT_TYPE`, `PATH`) VALUES
-(1, 1, 'pdf', 'CV_SOURDRILLE_Guillaume_100212.doc');
+(10, 34, 'image/jpeg', '326ec86c303fa367bfad907b7659c056-500x500.jpg');
 
 -- --------------------------------------------------------
 
@@ -152,16 +161,39 @@ CREATE TABLE `POST` (
   `COMMENTAIRES_ACTIVES` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ID_POST`),
   KEY `FK_CREATEUR` (`ID_USER`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
 
 --
 -- Contenu de la table `POST`
 --
 
 INSERT INTO `POST` (`ID_POST`, `ID_USER`, `DATE_CREATION`, `DATE_DERNIERE_MODIFICATION`, `CONTENU`, `COMMENTAIRES_ACTIVES`) VALUES
-(1, 5, '2013-12-05 12:15:08', NULL, 'Test contenu', 1),
 (2, 9, '2013-12-06 07:47:02', NULL, 'Autre test sur classe et sans commentaire', 0),
-(3, 9, '2013-12-06 07:49:28', '2013-12-06 07:57:20', '<ul><li>Test sur niveau avec commentaire</li>\r\n<li>Autre ligne</li></ul>', 1);
+(3, 9, '2013-12-06 07:49:28', '2013-12-06 07:57:20', '<ul><li>Test sur niveau avec commentaire</li>\r\n<li>Autre ligne</li></ul>', 1),
+(15, 10, '2013-12-30 22:42:35', NULL, '<p>qsqsq</p>', 1),
+(16, 10, '2013-12-30 22:42:57', NULL, '<p>qsqsq</p>', 1),
+(17, 10, '2013-12-30 22:45:50', NULL, '<p>dsqd</p>', 1),
+(18, 10, '2013-12-30 22:48:31', NULL, '<p>sqdqsdqs</p>', 1),
+(19, 10, '2013-12-30 22:50:41', NULL, '<p>sq</p>', 1),
+(20, 10, '2013-12-30 22:51:13', NULL, '<p>sqdqsdsqd</p>', 1),
+(21, 10, '2013-12-30 22:51:25', NULL, '<p>sqdqsdsqd</p>', 1),
+(22, 10, '2013-12-30 22:51:55', NULL, '<p>sqdsqdsq</p>', 1),
+(23, 10, '2013-12-30 22:53:22', NULL, '<p>sdsqd</p>', 1),
+(24, 10, '2013-12-30 22:53:52', NULL, '<p>sqdqsdqsd</p>', 1),
+(25, 10, '2013-12-30 22:54:38', NULL, '<p>qsQsqsQ</p>', 1),
+(26, 10, '2013-12-30 22:55:40', NULL, '<p>azeazezaeaze</p>', 1),
+(27, 10, '2013-12-30 22:57:08', NULL, '<p>azeazezaeaze</p>', 1),
+(28, 10, '2013-12-30 22:58:21', NULL, '<p>qsez</p>', 1),
+(29, 10, '2013-12-30 22:58:42', NULL, '<p>qsezretret</p>', 1),
+(32, 10, '2014-01-05 22:30:36', NULL, '<p>ceci est un super post</p>', 1),
+(33, 10, '2014-01-05 22:38:25', NULL, '<p>zezqdqdqs</p>', 1),
+(34, 10, '2014-01-07 21:40:15', '2014-01-07 22:28:55', '<p><strong>cec est un test</strong></p>', 1),
+(42, 5, '2014-01-12 09:16:46', NULL, '<p>eazeaze</p>', 1),
+(43, 5, '2014-01-12 09:17:38', NULL, '<p>qsqs</p>', 1),
+(44, 5, '2014-01-12 09:17:43', NULL, '<p>qsqsqsqsqsQ</p>', 1),
+(45, 5, '2014-01-12 09:20:07', NULL, '<p>zaezaeazzae</p>', 1),
+(46, 5, '2014-01-12 09:23:09', '2014-01-12 09:29:34', '<p>qSQsq</p>', 1),
+(47, 5, '2014-01-12 09:23:16', '2014-01-12 09:29:29', '<p>qSQsqqsqs</p>', 1);
 
 --
 -- Déclencheurs `POST`
@@ -191,7 +223,8 @@ CREATE TABLE `POST_CLASSE` (
 --
 
 INSERT INTO `POST_CLASSE` (`ID_POST`, `ID_CLASSE`) VALUES
-(2, 1);
+(32, 3),
+(33, 3);
 
 -- --------------------------------------------------------
 
@@ -211,7 +244,13 @@ CREATE TABLE `POST_ETABLISSEMENT` (
 --
 
 INSERT INTO `POST_ETABLISSEMENT` (`ID_POST`, `ID_ETABLISSEMENT`) VALUES
-(1, 2);
+(33, 2),
+(42, 2),
+(43, 2),
+(44, 2),
+(45, 2),
+(46, 2),
+(47, 2);
 
 -- --------------------------------------------------------
 
@@ -231,7 +270,10 @@ CREATE TABLE `POST_NIVEAU` (
 --
 
 INSERT INTO `POST_NIVEAU` (`ID_POST`, `ID_NIVEAU`) VALUES
-(3, 10);
+(3, 10),
+(29, 10),
+(33, 10),
+(34, 10);
 
 -- --------------------------------------------------------
 
@@ -279,9 +321,9 @@ CREATE TABLE `UTILISATEUR` (
 --
 
 INSERT INTO `UTILISATEUR` (`ID_USER`, `ID_ETABLISSEMENT`, `NOM`, `PRENOM`, `LOGIN`, `MOT_DE_PASSE`, `AVATAR`) VALUES
-(5, 2, 'SOURDRILLE', 'Guillaume', 'edenyorke', 'fc2789a2f2f3303f7322efa51bb5882fe034a321', 'xkeyInterfaceLarge.png'),
+(5, 2, 'SOURDRILLE', 'Guillaume', 'edenyorke', 'fc2789a2f2f3303f7322efa51bb5882fe034a321', '44576.jpg'),
 (9, 2, 'Enseignant', '1', 'enseignant1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL),
-(10, 2, 'Eleve', 'rené', 'eleve1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL);
+(10, 2, 'Eleve', 'rené', 'eleve1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', 'ouestu_114.png');
 
 -- --------------------------------------------------------
 
@@ -301,9 +343,8 @@ CREATE TABLE `UTILISATEUR_CLASSE` (
 --
 
 INSERT INTO `UTILISATEUR_CLASSE` (`ID_CLASSE`, `ID_USER`) VALUES
-(1, 9),
 (2, 9),
-(1, 10);
+(3, 10);
 
 -- --------------------------------------------------------
 
@@ -368,7 +409,7 @@ ALTER TABLE `NIVEAU`
 -- Contraintes pour la table `PIECE_JOINTE`
 --
 ALTER TABLE `PIECE_JOINTE`
-  ADD CONSTRAINT `PIECE_JOINTE_ibfk_1` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`) ON DELETE CASCADE;
+  ADD CONSTRAINT `piece_jointe_ibfk_1` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `POST`
