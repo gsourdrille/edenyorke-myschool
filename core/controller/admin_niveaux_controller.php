@@ -89,7 +89,7 @@ if(isset($_POST['saveNiveau'])){
 		$classe->idNiveau = $_SESSION['NIVEAU_SELECTED'];
 		$isnew = true;
 	}else{
-		$classe = getClasseById($idNiveau);
+		$classe = getClasseById($idClasse);
 		$isnew = false;
 	}
 	
