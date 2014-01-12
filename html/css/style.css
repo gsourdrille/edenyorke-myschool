@@ -104,12 +104,13 @@ select{
 }
 
 #login_conteneur{
-	width: 500px;
-	margin:100px 450px;
-	height: 300px;
-	background-color: #F6FEEE;
-	border-radius: 3px 3px 3px 3px;
+	width: 400px;
+	margin:100px 500px;
+	height: 250px;
+	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius:6px;
 	position: absolute;
+	box-shadow:0 0 15px #000000;
 	
 }
 
@@ -127,7 +128,7 @@ select{
 }
 
 .no_bg{
-	background-image: url("../images/back-to-school.jpg");
+	#background-image: url("../images/back-to-school.jpg");
 }
 
 .post {
@@ -373,35 +374,35 @@ border-top: 1px solid;
 }
 
 #user_login{
-	font-size: 20px;
-	float: right;
-	margin-top:50px;
-	margin-right:200px;
+	float: left;
+	margin-top:20px;
+	margin-left:30px;
+	width: 350px;
 	
 }
 
 #pass_login{
-	font-size: 20px;
-	float: right;
-	margin-top:50px;
-	margin-right:200px;
-	
+	float: left;
+	margin-top:20px;
+	margin-left:30px;
+	width: 350px;
 }
 
 #button_login{
 	font-size: 20px;
 	float: left;
-	margin-top:50px;
-	margin-left:100px;
-	width: 100px;
+	margin-left:60px;
+	width: 140px;
+	
 }
 
 #remember_me{
 	font-size: 12px;
 	float: left;
-	margin-top:50px;
-	margin-right:200px;
-	width: 130px;
+	margin-left:10px;
+	width: 150px;
+	color:white;
+	margin-top: 5px;
 	
 }
 
@@ -560,3 +561,62 @@ border-top: 1px solid;
 #dialog-confirm-delete-post{
 	display:none;
 }
+
+.loginForm {
+	width: 270px;
+	height: 30px;
+	font-size:14.4px;
+	border-radius:2px;
+	box-shadow:none;
+	margin-left:30px;
+}
+
+.loginButton{
+  background-color: #ABCE2F;
+  background-image: linear-gradient(to bottom, #ABCE2F, #99BC1D);
+  background-repeat: repeat-x;
+  border: 1px solid #99BC1D;
+  color: #2E2E2E;
+  width: 140px;
+  height: 30px;
+  font-size : 14.4px;
+  cursor: pointer; 
+}
+
+.loginButton:hover {color: white;}
+
+#connexion_text{
+	font-size : 24px;
+	color: white;
+	margin-top: 20px;
+	margin-left: 140px;
+}
+
+.login_footer{
+	float: left;
+	margin-top:20px;
+	width: 100%;
+	height:80px;
+}
+
+.login_tools{
+	float: left;
+	width: 150px;
+}
+
+.inscription_link{
+	font-size: 12px;
+	float: left;
+	margin-left:80px;
+	width: 50px;
+	margin-top: 30px;
+	color:white;
+	
+	
+}
+
+.inscription_link A:link {text-decoration: none}
+.inscription_link A:visited {text-decoration: none}
+.inscription_link A:active {text-decoration: none}
+.inscription_link A:hover {text-decoration: underline}
+	
