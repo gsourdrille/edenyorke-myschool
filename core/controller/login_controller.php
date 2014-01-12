@@ -5,7 +5,7 @@ session_start();
 require ('../service/login_service.php');
 
 
-	// Cr�ation d'un objet Logger
+	// Creation d'un objet Logger
 	$logger = new Logger(Constants::LOGGER_LOCATION);
 
 	$username=$_POST['username'];

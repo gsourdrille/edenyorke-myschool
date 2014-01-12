@@ -13,7 +13,12 @@ if(isset($_POST)) {
 				$post = new Post();
 				$post->contenu = $_POST['newPostArea'];
 				$post->createur = $utilisateur->idUser;
-				$post->commentairesActives = true;
+				if(isset($_POST['allowComment'])){
+					$post->commentairesActives = true;
+				}else{
+					$post->commentairesActives = false;
+				}
+				
 				
 				//Creation des associations
 				if(isset($_POST['listPostDestinaires'])){
@@ -89,7 +94,11 @@ if(isset($_POST)) {
 				$idPost = $_POST['idPost'];
 				$post = getPost($idPost);
 				$post->contenu = $_POST['editPostArea'];
-				$post->commentairesActives = true;
+				if(isset($_POST['allowComment'])){
+					$post->commentairesActives = true;
+				}else{
+					$post->commentairesActives = false;
+				}
 				
 				//Creation des associations
 				if(isset($_POST['listPostDestinaires'])){
@@ -166,12 +175,16 @@ if(isset($_POST)) {
 				}
 				
 			break;
+			case 'DELETE':
+				$idPost = $_POST['idPost'];
+				deletePost($idPost);
+			break;
 		}
 		
 	}
 }
+
 //TODO gestion des erreurs
 $array['reponse'] = "ok";
 echo json_encode($array);
-
 ?>

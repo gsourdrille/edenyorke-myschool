@@ -132,3 +132,10 @@ function deleteCommentaire($idCommentaire){
 	$commentaireDao = new CommentaireDao();
 	$commentaire = $commentaireDao->deleteCommentaire($idCommentaire);
 }
+
+
+function deletePost($idPost){
+	$postDao = new PostDao();
+	$postDao->deletePost($idPost);
+	FileUtils::deletePostDir($idPost);
+}

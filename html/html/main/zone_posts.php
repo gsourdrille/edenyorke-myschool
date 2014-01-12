@@ -1,7 +1,9 @@
 <?php 
 session_start();
 include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controller.php")?>
-
+<div id="dialog-confirm-delete-post" title="Supprimer le post ?">
+  <p>Voulez vous vraiment supprimer ce post ?</p>
+</div>
 <?php foreach ($listePosts as $post){?>
 	<div class="post">
 		<div id="valid">
@@ -25,6 +27,11 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 				<div id="edit_post_link">
 					<?php if($post->isCreateur){?>
 						<a href="#dev" onclick="showEditPost(<?php echo $post->idPost;?>)">modifier</a>
+					<?php }?>
+				</div>
+				<div id="delete_post_link">
+					<?php if($post->isCreateur){?>
+						<a href="#dev" onclick="deletePost(<?php echo $post->idPost;?>)">supprimer</a>
 					<?php }?>
 				</div>
 				<div id="post_date">

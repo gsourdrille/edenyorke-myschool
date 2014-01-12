@@ -38,6 +38,10 @@
 				<a href="#" id="envoyer">Envoyer</a>
 			</div>
 		</div>
+		<div id="enableComment">
+			<label for="allowComment">Ouvert aux commentaires : </label>
+			<input name="allowComment" type="checkbox" checked />
+		</div>
 		<div id="postAddPj">
 			<label for="addfile">Ajouter un fichier : </label>
 			<input name="postfile[]" type="file" />

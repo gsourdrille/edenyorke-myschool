@@ -9,7 +9,7 @@
   			$baseDao = new BaseDao();
  			$baseDao->connect();
  			$contenu = $baseDao->escapeString($post->contenu);
- 			$requete = "INSERT INTO POST (ID_USER,CONTENU) VALUES ('$post->createur', '$contenu') ";
+ 			$requete = "INSERT INTO POST (ID_USER,CONTENU,COMMENTAIRES_ACTIVES) VALUES ('$post->createur', '$contenu', '$post->commentairesActives') ";
  			$result = $baseDao->sendRequest($requete);
  			$idPost = $baseDao->lastInsertId();
  			$post->idPost = $idPost;
@@ -100,7 +100,7 @@
  			$baseDao = new BaseDao();
  			$baseDao->connect();
  			$contenu = $baseDao->escapeString($post->contenu);
- 			$requete = "UPDATE POST SET CONTENU='$contenu' WHERE ID_POST=$post->idPost";
+ 			$requete = "UPDATE POST SET CONTENU='$contenu', COMMENTAIRES_ACTIVES='$post->commentairesActives' WHERE ID_POST=$post->idPost";
  			$result  = $baseDao->sendRequest($requete);
  			$baseDao->close();
  			if(!$result){

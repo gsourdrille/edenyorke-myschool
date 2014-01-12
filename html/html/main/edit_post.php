@@ -57,6 +57,10 @@
 			}
 			?>
 		</div>
+		<div id="enableComment">
+			<label for="allowComment">Ouvert aux commentaires : </label>
+			<input name="allowComment" type="checkbox" <?php echo $post->commentairesActives?  'checked' : ''?>/>
+		</div>
 		<div id="postEditPj">
 			<label for="addfile">Ajouter un fichier : </label>
 			<input name="postfile[]" type="file" />
