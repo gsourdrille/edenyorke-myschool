@@ -273,6 +273,37 @@ function deleteCommentaire(idCommentaire,idDiv){
 	}
  
  
+ function deletePost(idPost){
+	 $('#dialog-confirm-delete-post').dialog({
+	    autoOpen: false,
+	    modal: true,
+	    buttons: {
+	        'Oui': function () {
+	        	var myPostData="action=DELETE&idPost="+idPost;
+		         $.ajax({
+		            url: "/myschool/core/controller/create_post_controller.php", 
+		            type: "POST", 
+		            data: myPostData, 
+		            dataType: 'json',
+		            success: function(json) {
+		            	$('#dialog-confirm-delete-post').dialog('close');
+		            	$('#dialog-confirm-delete-post').dialog('destroy');
+		            	$("#zonePosts").html("");
+		            	$("#zonePosts").load( "/myschool/html/html/main/zone_posts.php");
+		            	
+		            }            
+		       });
+			   return false;  
+	        },
+	        'Non': function () {
+	            $(this).dialog('close');
+	        }
+	    }
+	});
+	 
+	 $( "#dialog-confirm-delete-post" ).dialog( "open" );
+ }
+ 
  function showEditCommentaire(idComment){
 	 $("#comment_content_"+idComment).hide();
 	 $("#edit_commentaire_"+idComment).show();

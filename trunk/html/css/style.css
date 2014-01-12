@@ -171,6 +171,12 @@ select{
 	margin-left: 40px;
 	font-size: 12px;
 }
+
+#delete_post_link{
+	float:left;
+	margin-left: 40px;
+	font-size: 12px;
+}
 #post_date{
 	float:right;
 	margin-right:30px;
@@ -502,7 +508,7 @@ border-top: 1px solid;
   border-width: 0 1px 2px;
   margin: 20px 0px; 
   width: 500px;
-  height: 250px;
+  height: 280px;
   float : left;
      display: none;
 	}
@@ -527,6 +533,11 @@ border-top: 1px solid;
 }
 	
 #postAddPj {
+	 margin-top:10px;
+	 margin-left:10px;
+}
+
+#enableComment {
 	 margin-top:210px;
 	 margin-left:10px;
 }
@@ -544,4 +555,8 @@ border-top: 1px solid;
 .writeCommentArea{
 	width: 500px;
 	height: 50px;
+}
+
+#dialog-confirm-delete-post{
+	display:none;
 }
