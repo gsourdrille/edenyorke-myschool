@@ -313,3 +313,13 @@ function deleteCommentaire(idCommentaire,idDiv){
 	 $("#comment_content_"+idComment).show();
 	 $("#edit_commentaire_"+idComment).hide();
  }
+ 
+ function showInsciptionBox(){
+	 $("#login_conteneur").hide();
+	 $("#register_conteneur").show();
+ }
+ 
+ function hideInsciptionBox(){
+	 $("#login_conteneur").show();
+	 $("#register_conteneur").hide();
+ }

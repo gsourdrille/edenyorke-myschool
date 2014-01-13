@@ -100,7 +100,8 @@ function validateClasse($nom, $idClasse,$idNiveau){
 function saveOrUpdateClasse($classe){
 	$classeDao = new ClasseDao();
 	if($classe->idClasse == null){
-		$classe->code = generateUniqueCode();
+		$classe->codeEleve = generateUniqueCode();
+		$classe->codeEnseignant = generateUniqueCode();
 		return $classeDao->saveClasse($classe);
 	}else{
 		return $classeDao->updateClasse($classe);

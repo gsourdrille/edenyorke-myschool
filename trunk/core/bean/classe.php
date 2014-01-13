@@ -5,7 +5,8 @@ class Classe{
 	var $idClasse;
 	var $nom;
 	var $idNiveau;
-	var $code;
+	var $codeEleve;
+	var $codeEnseignant;
 	
 	public function afficher(){
 			
