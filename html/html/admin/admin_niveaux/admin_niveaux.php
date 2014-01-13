@@ -91,7 +91,10 @@
 					</div>
 					<?php if(isset($classe->idClasse)){ ?>
 						<div id="code_classe">
-							Code : <?php echo $classe->code;?>
+							Code élève: <?php echo $classe->codeEleve;?>
+						</div>
+						<div id="code_classe">
+							Code enseignant: <?php echo $classe->codeEnseignant;?>
 						</div>
 					<?php } ?>
 					<div id="button_submit_infos">

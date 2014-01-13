@@ -9,7 +9,7 @@
   			$baseDao = new BaseDao();
  			$baseDao->connect();
  			$nom = $baseDao->escapeString($classe->nom);
- 			$requete = "INSERT INTO CLASSE (NOM,ID_NIVEAU,CODE) VALUES ('$nom', '$classe->idNiveau', '$classe->code') ";
+ 			$requete = "INSERT INTO CLASSE (NOM,ID_NIVEAU,CODE_ELEVE,CODE_ENSEIGNANT) VALUES ('$nom', '$classe->idNiveau', '$classe->codeEleve', '$classe->codeEnseignant') ";
  			$result = $baseDao->sendRequest($requete);
  			$idClasse = $baseDao->lastInsertId();
  			$classe->idClasse = $idClasse;
@@ -122,7 +122,7 @@
  	public function isUniqueClasseCode($code){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
- 		$requete = "SELECT COUNT(*) FROM CLASSE WHERE CODE='$code'";
+ 		$requete = "SELECT COUNT(*) FROM CLASSE WHERE CODE_ELEVE='$code' OR CODE_ENSEIGNANT = '$code'";
  		$resulat = $baseDao->sendRequest($requete); 
  		$result = $resulat->fetch_row();
  		$baseDao->close();
@@ -139,7 +139,8 @@
  		$classe->idClasse = $row["ID_CLASSE"];
  		$classe->nom = $row["NOM"];
  		$classe->idNiveau = $row["ID_NIVEAU"];
- 		$classe->code = $row["CODE"];
+ 		$classe->codeEleve = $row["CODE_ELEVE"];
+ 		$classe->codeEnseignant = $row["CODE_ENSEIGNANT"];
  		return $classe;
  	}
  	

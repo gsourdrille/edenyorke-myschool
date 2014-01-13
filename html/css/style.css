@@ -373,19 +373,12 @@ border-top: 1px solid;
 	margin-left:40px;
 }
 
-#user_login{
+.loginInput{
 	float: left;
 	margin-top:20px;
 	margin-left:30px;
 	width: 350px;
 	
-}
-
-#pass_login{
-	float: left;
-	margin-top:20px;
-	margin-left:30px;
-	width: 350px;
 }
 
 #button_login{
@@ -410,7 +403,7 @@ border-top: 1px solid;
 	font-size: 13px;
 	color:red;
 	float: right;
-	width: 300px;
+	width: 120px;
 }
 
 #tools_login{
@@ -619,4 +612,16 @@ border-top: 1px solid;
 .inscription_link A:visited {text-decoration: none}
 .inscription_link A:active {text-decoration: none}
 .inscription_link A:hover {text-decoration: underline}
+
+
+#register_conteneur{
+	width: 400px;
+	margin:100px 500px;
+	height: 450px;
+	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius:6px;
+	position: absolute;
+	box-shadow:0 0 15px #000000;
+	display:none;
+}
 	
