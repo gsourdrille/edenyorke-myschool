@@ -132,6 +132,21 @@
  		return false;
  	}
  	
+ 	public function findClasseByCode($code){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "SELECT * FROM CLASSE WHERE CODE_ELEVE='$code' OR CODE_ENSEIGNANT = '$code'";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$row = mysqli_fetch_assoc($resulat);
+ 		if($row["ID_CLASSE"] == null){
+ 			return null;
+ 		}
+ 		$classe = $this->buildClasse($row);
+ 		$baseDao->close();
+ 		return $classe;
+ 	}
+ 	
+ 	
  	
  	
  	public function buildClasse($row){

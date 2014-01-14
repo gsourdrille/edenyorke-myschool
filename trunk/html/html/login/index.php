@@ -5,7 +5,7 @@
 <LINK rel="stylesheet" type="text/css" href="/myschool/html/css/style.css">
  <script type="text/javascript" src="/myschool/html/js/jquery.js"></script>
  <script type="text/javascript" src="/myschool/html/js/jquery-ui.min.js"></script> 
- <script type="text/javascript" src="/myschool/html/js/myschool.js"></script> 
+ <script type="text/javascript" src="/myschool/html/js/myschool_login.js"></script> 
 
  
 <title>MySchool</title>
