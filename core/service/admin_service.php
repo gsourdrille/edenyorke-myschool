@@ -160,3 +160,9 @@ function addClassesToUser($idUser, $listeIdClasses){
 	$classeDao ->addClassesToUser($idUser, $listeIdClasses);
 
 }
+
+function getClasseFromCode($code){
+	$classeDao = new ClasseDao();
+	return $classeDao->findClasseByCode($code);
+	
+}
