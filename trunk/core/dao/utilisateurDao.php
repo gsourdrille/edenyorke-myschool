@@ -168,6 +168,28 @@
  	
  	}
  	
+ 	public function activerUtilisateur($token){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		
+ 		//Est ce que le token est actif?
+ 		$requete = "SELECT * FROM ACTIVATION WHERE TOKEN='$token'";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$row = mysqli_fetch_array($resulat);
+ 		if($row["ID_USER"] == null){
+ 			return null;
+ 		}
+ 		// Activation de l'utilisateur
+ 		$idUser = $row["ID_USER"] ;
+ 		$requete = "UPDATE UTILISATEUR SET ACTIVE=1 WHERE ID_USER='$idUser'";
+ 		$result = $baseDao->sendRequest($requete);
+ 		
+ 		//Suppression du token
+ 		$requete = "DELETE FROM ACTIVATION WHERE TOKEN='$token'";
+ 		$result = $baseDao->sendRequest($requete);
+ 		$baseDao->close();
+ 	}
+ 	
  	public function buildUtilisateur($row){
   		$utilisateur = new Utilisateur();
  		$utilisateur->idUser = $row["ID_USER"];

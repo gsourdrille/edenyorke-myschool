@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Lun 13 Janvier 2014 à 13:42
+-- Généré le: Mer 15 Janvier 2014 à 00:03
 -- Version du serveur: 5.5.33
 -- Version de PHP: 5.5.3
 
@@ -13,6 +13,18 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `myschool`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ACTIVATION`
+--
+
+CREATE TABLE `ACTIVATION` (
+  `ID_USER` int(11) NOT NULL,
+  `TOKEN` text NOT NULL,
+  KEY `ID_USER_ACTIVATION` (`ID_USER`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -314,18 +326,24 @@ CREATE TABLE `UTILISATEUR` (
   `LOGIN` text NOT NULL,
   `MOT_DE_PASSE` text,
   `AVATAR` text,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID_USER`),
   KEY `ID_ETABLISSEMENT` (`ID_ETABLISSEMENT`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Contenu de la table `UTILISATEUR`
 --
 
-INSERT INTO `UTILISATEUR` (`ID_USER`, `ID_ETABLISSEMENT`, `NOM`, `PRENOM`, `LOGIN`, `MOT_DE_PASSE`, `AVATAR`) VALUES
-(5, 2, 'SOURDRILLE', 'Guillaume', 'edenyorke', 'fc2789a2f2f3303f7322efa51bb5882fe034a321', '44576.jpg'),
-(9, 2, 'Enseignant', '1', 'enseignant1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL),
-(10, 2, 'Eleve', 'rené', 'eleve1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', 'ouestu_114.png');
+INSERT INTO `UTILISATEUR` (`ID_USER`, `ID_ETABLISSEMENT`, `NOM`, `PRENOM`, `LOGIN`, `MOT_DE_PASSE`, `AVATAR`, `active`) VALUES
+(5, 2, 'SOURDRILLE', 'Guillaume', 'edenyorke', 'fc2789a2f2f3303f7322efa51bb5882fe034a321', '44576.jpg', 0),
+(9, 2, 'Enseignant', '1', 'enseignant1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0),
+(10, 2, 'Eleve', 'rené', 'eleve1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', 'ouestu_114.png', 0),
+(11, 2, 'Eleve2', 'eleve2', 'eleve2', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0),
+(12, 2, 'Eleve2', 'eleve2', 'eleve@gmail.com', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0),
+(13, 2, 'AAA', 'AAA', 'qsqS@yahhoo.fr', '606ec6e9bd8a8ff2ad14e5fade3f264471e82251', NULL, 0),
+(14, 2, 'Eleve2', 'eleve2', 'gsourdrille@yopmail.com', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0),
+(15, 2, 'el', 'el', 'gsourdrille2@yopmail.com', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -346,7 +364,12 @@ CREATE TABLE `UTILISATEUR_CLASSE` (
 
 INSERT INTO `UTILISATEUR_CLASSE` (`ID_CLASSE`, `ID_USER`) VALUES
 (2, 9),
-(3, 10);
+(3, 10),
+(27, 11),
+(27, 12),
+(27, 13),
+(27, 14),
+(27, 15);
 
 -- --------------------------------------------------------
 
@@ -382,11 +405,22 @@ CREATE TABLE `UTILISATEUR_TYPE_UTILISATEUR` (
 INSERT INTO `UTILISATEUR_TYPE_UTILISATEUR` (`ID_USER`, `ID_TYPE_UTILISATEUR`) VALUES
 (5, 1),
 (9, 2),
-(10, 3);
+(10, 3),
+(11, 3),
+(12, 3),
+(13, 3),
+(14, 3),
+(15, 3);
 
 --
 -- Contraintes pour les tables exportées
 --
+
+--
+-- Contraintes pour la table `ACTIVATION`
+--
+ALTER TABLE `ACTIVATION`
+  ADD CONSTRAINT `activation_ibfk_1` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `CLASSE`

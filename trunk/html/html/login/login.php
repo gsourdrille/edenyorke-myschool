@@ -1,5 +1,5 @@
 	<form action="/myschool/core/controller/login_controller.php" method="post">
-		<div id="connexion_text">
+		<div class="connexion_text">
 			Connexion
 		</div>
 		<div class="loginInput">
