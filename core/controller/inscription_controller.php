@@ -5,36 +5,42 @@ if(isset($_POST)){
 	$utilisateur = new Utilisateur();
 	$error = false;
 	$nom = $_POST['nom'];
-	if($nom == null || trim($nom) == false){
+	if(StringUtils::isEmpty($nom)){
 		$error="Le nom ne peut être vide";
 	}else{
 		$utilisateur->nom = $nom;   
 	}
 	$prenom = $_POST['prenom'];
-	if($prenom == null || trim($prenom) == false){
+	if(StringUtils::isEmpty($prenom)){
 		$error="Le prénom ne peut être vide";
 	}else{
 		$utilisateur->prenom = $prenom;
 	}
-	$login = $_POST['login'];
-	if($login == null || trim($login) == false){
+	$login = $_POST['username'];
+	if(StringUtils::isEmpty($login)){
 		$error="Le login ne peut être vide";
 	}else{
-		if(validateLogin($login, $eleve->idUser)){
-			$utilisateur->login = $login;
+		if(filter_var($login, FILTER_VALIDATE_EMAIL)){
+			if(validateLogin($login, null)){
+				$utilisateur->login = $login;
+			}else{
+				$error="Cet identifiant est déjà utilisé, veuillez en choisir un autre";
+			}
 		}else{
-			$error="Cet identifiant est déjà utilisé, veuillez en choisir un autre";
+			$error="L'adresse email est incorrecte";
 		}
 	}
 	$mdp = $_POST['password'];
-	if($mdp != null && trim($mdp) == true){
+	if(StringUtils::isNotEmpty($mdp)){
 		$mdpBis = $_POST['password_bis'];
-		if($mdpBis != null && trim($mdpBis) == true){
+		if(StringUtils::isNotEmpty($mdpBis)){
 			if($mdp != $mdpBis){
 				$error="Les mots de passe ne correspondent pas";
 			}else{
 				$utilisateur->mdp = sha1($mdp);
 			}
+		}else{
+			$error="Le mot de passe ne peut être vide";
 		}
 	}else{
 			$error="Le mot de passe ne peut être vide";
@@ -52,11 +58,11 @@ if(isset($_POST)){
 	}
 	
 	if(StringUtils::isEmpty($error)){
-		if(saveUtilisateur($utilisateur, $classe)){
+		if(saveUtilisateur($utilisateur, $classe, $code)){
 			$succes = "Vos informations ont été mises à jour";
 			$array['reponse'] = "ok";
 		}else{
-			$succes = "Une erreur est survenue lors de la mise à jour";
+			$array['error'] = "Une erreur est survenue lors de la mise à jour";
 			$array['reponse'] = "ko";
 		}
 	}else{

@@ -2,16 +2,16 @@
 
 include($_SERVER['DOCUMENT_ROOT']."/myschool/core/include.php");
 include($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/encrypt_service.php");
+include($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/mail_service.php");
 
 function validateLogin($username, $userId){
 	$utilisateurDao = new UtilisateurDao();
 	$utilisateur = $utilisateurDao->findUtilisateurByUsername($username);
-	if($utilisateur == null || ($utilisateur != null && $utilisateur->idUser == $userId)){
+	if($utilisateur == null || ( $userId != null && ($utilisateur != null && $utilisateur->idUser == $userId))){
 		return true;
 	}else{
 		return false;
 	}
-
 }
 
 function updateUtilisateur($utilisateur){
@@ -164,5 +164,38 @@ function addClassesToUser($idUser, $listeIdClasses){
 function getClasseFromCode($code){
 	$classeDao = new ClasseDao();
 	return $classeDao->findClasseByCode($code);
+	
+}
+
+function saveUtilisateur($user, $classe, $code){
+	
+	//Gestion de l'etablissement
+	$niveauDao = new NiveauDao();
+	$niveau = $niveauDao->findNiveau($classe->idNiveau);
+	$etablissementId = $niveau->idEtablissement;
+	$user->etablissement = $etablissementId;
+	
+	//Gestion du type
+	$typeUtilisateur = null;
+	if($code == $classe->codeEleve){
+		$typeUtilisateur = Type_Utilisateur::ELEVE;
+	}else if($code == $classe->codeEnseignant){
+		$typeUtilisateur = Type_Utilisateur::ENSEIGNANT;
+	}else{
+		return null;
+	}
+	
+	//Enregistrement de l'utilisateur
+	$utilisateurDao = new UtilisateurDao();
+	$user = $utilisateurDao->saveUtilisateur($user, $typeUtilisateur);
+	
+	//Association de la classe
+	$classeDao = new ClasseDao();
+	$classeDao -> addClasseToUser($user->idUser, $classe->idClasse);
+	
+	//envoi du mail
+	envoiMailInscription($user->login, "");
+	
+	return $user;
 	
 }

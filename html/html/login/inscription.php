@@ -1,5 +1,6 @@
+<div id="inscriptionFormDiv">
 	<form id="inscriptionForm" action="/myschool/core/controller/inscription_controller.php" method="post">
-		<div id="connexion_text">
+		<div class="connexion_text">
 			Inscription
 		</div>
 		<div class="loginInput">
@@ -23,6 +24,7 @@
 		<div class="login_footer">
 			<div id="button_login">
 				<input id="envoyer" class="loginButton" type="submit" value="Envoyer">
+					<div id="error_inscription"></div>
 			</div>
 			<div class="login_tools">
 				<div class="inscription_link">
@@ -31,3 +33,4 @@
 			</div>
 		</div>
 	</form>
+</div>

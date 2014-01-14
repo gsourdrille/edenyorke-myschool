@@ -15,9 +15,12 @@ var $form = $('#inscriptionForm');
             dataType: 'json',
             success: function(json) {
             	if(json['reponse']=='ok'){
-            		alert('ok');
+            		$("#inscription_succes").show();
+            		$("#register_conteneur").hide();
             	}else{
-            		alert(json['error']);
+            		$("#error_inscription").show();
+            		$("#error_inscription").html("");
+            		$("#error_inscription").append(json['error']);
             	}
             	
             }            

@@ -119,6 +119,14 @@
  		$baseDao->close();
  	}
  	
+ 	public function addClasseToUser($idUser, $idClasse){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "INSERT INTO UTILISATEUR_CLASSE (ID_USER,ID_CLASSE) VALUES ('$idUser', '$idClasse') ";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$baseDao->close();
+ 	}
+ 	
  	public function isUniqueClasseCode($code){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
