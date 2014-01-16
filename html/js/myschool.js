@@ -314,3 +314,17 @@ function deleteCommentaire(idCommentaire,idDiv){
 	 $("#edit_commentaire_"+idComment).hide();
  }
  
+ function addClasse(){
+		var $form = $("#ajoutClasseUserForm");
+			$data = $form.serialize() + "&action=add";
+	         $.ajax({
+	            url: "/myschool/core/controller/admin_infos_controller.php", 
+	            type: $form.attr('method'), 
+	            data: $data, 
+	            dataType: 'json',
+	            success: function(json) {
+	            }            
+	       });
+		   return false;  
+ }
+ 

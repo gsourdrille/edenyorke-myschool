@@ -92,8 +92,9 @@ if (isset($_POST['submit'])){
 			
 		}
 	}
-
 	
+	//Maj de la liste des classes
+	$listeClasse = getClassesByUser($utilisateur->idUser);
 	
 
 
