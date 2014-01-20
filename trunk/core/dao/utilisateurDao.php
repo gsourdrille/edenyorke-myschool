@@ -86,7 +86,7 @@
  	public function findUtilisateur($login,$password){
  			$baseDao = new BaseDao();
  			$baseDao->connect();
- 			$requete = "SELECT * FROM UTILISATEUR WHERE LOGIN='$login' AND MOT_DE_PASSE='$password'";
+ 			$requete = "SELECT * FROM UTILISATEUR WHERE LOGIN='$login' AND MOT_DE_PASSE='$password' AND ACTIVE=1";
  			$resulat = $baseDao->sendRequest($requete);
  			$row = mysqli_fetch_array($resulat);
  			if($row["ID_USER"] == null){
@@ -168,6 +168,15 @@
  	
  	}
  	
+ 	
+ 	public function ajouterToken($idUser, $token){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "INSERT INTO ACTIVATION (ID_USER,TOKEN) VALUE ($idUser, '$token' )";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$baseDao->close();
+ 	}
+ 	
  	public function activerUtilisateur($token){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
@@ -177,7 +186,7 @@
  		$resulat = $baseDao->sendRequest($requete);
  		$row = mysqli_fetch_array($resulat);
  		if($row["ID_USER"] == null){
- 			return null;
+ 			return false;
  		}
  		// Activation de l'utilisateur
  		$idUser = $row["ID_USER"] ;
@@ -188,6 +197,22 @@
  		$requete = "DELETE FROM ACTIVATION WHERE TOKEN='$token'";
  		$result = $baseDao->sendRequest($requete);
  		$baseDao->close();
+ 		return true;
+ 	}
+ 	
+ 	public function isUniqueToken($token){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 			
+ 		//Est ce que le token est actif?
+ 		$requete = "SELECT COUNT(*) FROM ACTIVATION WHERE TOKEN='$token'";
+ 		$resulat = $baseDao->sendRequest($requete); 
+ 		$result = $resulat->fetch_row();
+ 		$baseDao->close();
+ 		if($result == 0){
+ 			return true;
+ 		}
+ 		return false;
  	}
  	
  	public function buildUtilisateur($row){

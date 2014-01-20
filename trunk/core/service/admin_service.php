@@ -189,13 +189,22 @@ function saveUtilisateur($user, $classe, $code){
 	$utilisateurDao = new UtilisateurDao();
 	$user = $utilisateurDao->saveUtilisateur($user, $typeUtilisateur);
 	
+	//Ajout d'un jeton pour la validation de l'inscription
+	$token = generateToken();
+	$utilisateurDao->ajouterToken($user->idUser, $token) ;
+	
 	//Association de la classe
 	$classeDao = new ClasseDao();
 	$classeDao -> addClasseToUser($user->idUser, $classe->idClasse);
 	
 	//envoi du mail
-	envoiMailInscription($user->login, "");
+	envoiMailInscription($user->idUser,$token);
 	
 	return $user;
 	
+}
+
+function validToken($token){
+	$utilisateurDao = new UtilisateurDao();
+	return $utilisateurDao->activerUtilisateur($token);
 }
