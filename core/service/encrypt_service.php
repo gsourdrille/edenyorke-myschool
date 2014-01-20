@@ -11,3 +11,13 @@ include_once($_SERVER['DOCUMENT_ROOT']."/myschool/core/include.php");
 	} 
 	return $code;
 }
+
+function generateToken(){
+	$isNotUnique = true;
+	$utilisateurDao = new UtilisateurDao();
+	while ($isNotUnique){
+		$code = EncryptUtils::generateToken();
+		$isNotUnique = $utilisateurDao->isUniqueToken($code);
+	}
+	return $code;
+}
