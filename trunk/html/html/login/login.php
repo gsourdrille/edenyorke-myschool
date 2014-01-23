@@ -28,3 +28,6 @@
 		</div>
 		
 	</form>
+	<div id="demande_inscription" class="demande_inscription_link" >
+		<a href="#dev" onclick="showDemandeInsciptionBox();" >Inscrire votre établissement</a>
+	</div>

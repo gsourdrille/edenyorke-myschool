@@ -18,5 +18,8 @@
 				Félicitation !
 			</div>
 		</div>
+		<div id="register_etablissement_conteneur">
+			<?php include("demande_inscription.php");?>
+		</div>
 	</div> 
 
