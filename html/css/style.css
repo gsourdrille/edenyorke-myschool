@@ -665,3 +665,27 @@ border-top: 1px solid;
 .valid_message{
 	margin-left: 600px;
 }
+
+#demande_inscription{
+	margin-left:240px;
+	margin-top:220px;
+	color:black;
+	font-size: 12px;
+	
+}
+
+.demande_inscription_link A:link {text-decoration: none}
+.demande_inscription_link A:visited {text-decoration: none}
+.demande_inscription_link A:active {text-decoration: none}
+.demande_inscription_link A:hover {text-decoration: underline}
+
+#register_etablissement_conteneur{
+	width: 400px;
+	margin:100px 500px;
+	height: 500px;
+	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius:6px;
+	position: absolute;
+	box-shadow:0 0 15px #000000;
+	display:none;
+}

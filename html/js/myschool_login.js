@@ -43,3 +43,13 @@ var $form = $('#inscriptionForm');
 	 $("#login_conteneur").show();
 	 $("#register_conteneur").hide();
  }
+ 
+ function showDemandeInsciptionBox(){
+	 $("#login_conteneur").hide();
+	 $("#register_etablissement_conteneur").show();
+ }
+ 
+ function hideDemandeInsciptionBox(){
+	 $("#login_conteneur").show();
+	 $("#register_etablissement_conteneur").hide();
+ }
