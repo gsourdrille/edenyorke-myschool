@@ -1,5 +1,5 @@
 <div id="demandeInscriptionFormDiv">
-	<form id="inscriptionForm" action="/myschool/core/controller/inscription_controller.php" method="post">
+	<form id="demandeInscriptionForm" action="/myschool/core/controller/demande_inscription_controller.php" method="post">
 		<div class="connexion_text" style="margin-left:60px">
 			Inscription Etablissement
 		</div>
@@ -26,8 +26,8 @@
 		</div>
 		<div class="login_footer">
 			<div id="button_login">
-				<input id="envoyer" class="loginButton" type="submit" value="Envoyer">
-					<div id="error_inscription"></div>
+				<input id="envoyerDemandeInscription" class="loginButton" type="submit" value="Envoyer">
+					<div id="error_demande_inscription"></div>
 			</div>
 			<div class="login_tools">
 				<div class="inscription_link">

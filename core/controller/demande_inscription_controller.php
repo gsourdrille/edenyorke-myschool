@@ -1,21 +1,26 @@
 <?php
 require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
-
+$logger = new Logger(Constants::LOGGER_LOCATION);
 if(isset($_POST)){
 	$utilisateur = new Utilisateur();
+	$etablissement = new Etablissement();
 	$error = false;
-	$nom = $_POST['nom'];
 	
-	$nomEtablissement = $_POST['nomEtablissement'];
+	$nomEtablissement = $_POST['nom_etablissement'];
 	if(StringUtils::isEmpty($nomEtablissement)){
 		$error="Le nom de l'établissement ne peut être vide";
+	}else {
+		$etablissement->nom = $nomEtablissement;
 	}
 	
 	$numeroTelephone = $_POST['numeroTelephone'];
 	if(StringUtils::isEmpty($numeroTelephone)){
 		$error="Le numéro de téléphone de l'établissement ne peut être vide";
+	}else {
+		$etablissement->telephone1 = $numeroTelephone;
 	}
 	
+	$nom = $_POST['nom'];
 	if(StringUtils::isEmpty($nom)){
 		$error="Le nom ne peut être vide";
 	}else{
@@ -42,6 +47,7 @@ if(isset($_POST)){
 		}
 	}
 	$mdp = $_POST['password'];
+	$logger->log('succes', 'myschool', "MDP : ".$mdp , Logger::GRAN_VOID);
 	if(StringUtils::isNotEmpty($mdp)){
 		$mdpBis = $_POST['password_bis'];
 		if(StringUtils::isNotEmpty($mdpBis)){
@@ -58,8 +64,9 @@ if(isset($_POST)){
 	}
 	
 	if(StringUtils::isEmpty($error)){
-		//Envoyer mail
+		
 		//Faire une table provisoire? user provisoire?
+		
 		
 	}else{
 		$array['reponse'] = "ko";
