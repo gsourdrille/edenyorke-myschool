@@ -189,16 +189,12 @@ function saveUtilisateur($user, $classe, $code){
 	$utilisateurDao = new UtilisateurDao();
 	$user = $utilisateurDao->saveUtilisateur($user, $typeUtilisateur);
 	
-	//Ajout d'un jeton pour la validation de l'inscription
-	$token = generateToken();
-	$utilisateurDao->ajouterToken($user->idUser, $token) ;
-	
 	//Association de la classe
 	$classeDao = new ClasseDao();
 	$classeDao -> addClasseToUser($user->idUser, $classe->idClasse);
 	
-	//envoi du mail
-	envoiMailInscription($user->idUser,$token);
+	
+	envoiMailConfirmationInscription($user);
 	
 	return $user;
 	
@@ -207,4 +203,25 @@ function saveUtilisateur($user, $classe, $code){
 function validToken($token){
 	$utilisateurDao = new UtilisateurDao();
 	return $utilisateurDao->activerUtilisateur($token);
+}
+
+function createEtablissement($etablissement, $utilisteur){
+	$etablissementDao = new EtablissementDao();
+	$etablissement = $etablissementDao->saveEtablissement($etablissement);
+	$utilisateur->etablissement = $etablissement->etablissementId;
+
+	$utilisateurDao = new UtilisateurDao();
+	$typeUtilisateur = Type_Utilisateur::DIRECTION;
+	$utilisateur = $utilisateurDao->saveUtilisateur($utilisateur, $typeUtilisateur);
+	
+	envoiMailConfirmationInscription($user);
+	
+}
+
+function envoiMailConfirmationInscription($user){
+	//Ajout d'un jeton pour la validation de l'inscription
+	$token = generateToken();
+	$utilisateurDao->ajouterToken($user->idUser, $token) ;
+	//envoi du mail
+	envoiMailInscription($user->idUser,$token);
 }

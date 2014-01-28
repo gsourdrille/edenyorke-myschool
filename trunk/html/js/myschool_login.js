@@ -28,6 +28,34 @@ var $form = $('#inscriptionForm');
 	   return false;  
     });
    
+var $demandeInscriptionform = $('#demandeInscriptionForm');
+	
+	$('#envoyerDemandeInscription').on('click', function() {
+		$demandeInscriptionform.trigger('submit');
+		return false;
+	});
+	
+	$demandeInscriptionform.on('submit', function() {
+		$.ajax({
+            url: "/myschool/core/controller/demande_inscription_controller.php", 
+            type: $demandeInscriptionform.attr('method'), 
+            data: $demandeInscriptionform.serialize(), 
+            dataType: 'json',
+            success: function(json) {
+            	if(json['reponse']=='ok'){
+            		$("#demande_inscription_succes").show();
+            		$("#register_etablissement_conteneur").hide();
+            	}else{
+            		$("#error_demande_inscription").show();
+            		$("#error_demande_inscription").html("");
+            		$("#error_demande_inscription").append(json['error']);
+            	}
+            	
+            }            
+       });
+	   return false;  
+    });
+   
 	
 });
 

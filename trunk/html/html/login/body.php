@@ -21,5 +21,10 @@
 		<div id="register_etablissement_conteneur">
 			<?php include("demande_inscription.php");?>
 		</div>
+		<div id="demande_inscription_succes">
+			<div class="connexion_text" style="margin-left:60px">
+				Etatblissement Félicitation !
+			</div>
+		</div>
 	</div> 
 
