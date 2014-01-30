@@ -161,6 +161,12 @@ function addClassesToUser($idUser, $listeIdClasses){
 
 }
 
+function addClasseToUser($idUser, $idClasse){
+	$classeDao = new ClasseDao();
+	$classeDao ->addClasseToUser($idUser, $idClasse);
+
+}
+
 function getClasseFromCode($code){
 	$classeDao = new ClasseDao();
 	return $classeDao->findClasseByCode($code);
@@ -209,7 +215,6 @@ function createEtablissement($etablissement, $utilisteur){
 	$etablissementDao = new EtablissementDao();
 	$etablissement = $etablissementDao->saveEtablissement($etablissement);
 	$utilisateur->etablissement = $etablissement->etablissementId;
-
 	$utilisateurDao = new UtilisateurDao();
 	$typeUtilisateur = Type_Utilisateur::DIRECTION;
 	$utilisateur = $utilisateurDao->saveUtilisateur($utilisateur, $typeUtilisateur);
@@ -220,8 +225,9 @@ function createEtablissement($etablissement, $utilisteur){
 
 function envoiMailConfirmationInscription($user){
 	//Ajout d'un jeton pour la validation de l'inscription
+	$utilisateurDao = new UtilisateurDao();
 	$token = generateToken();
 	$utilisateurDao->ajouterToken($user->idUser, $token) ;
 	//envoi du mail
-	envoiMailInscription($user->idUser,$token);
+	envoiMailInscription($user->login,$token);
 }
