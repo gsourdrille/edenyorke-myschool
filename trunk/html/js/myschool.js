@@ -323,6 +323,8 @@ function deleteCommentaire(idCommentaire,idDiv){
 	            data: $data, 
 	            dataType: 'json',
 	            success: function(json) {
+	            	$("#ajoutClasseUser").html("");
+	            	$("#ajoutClasseUser").load( "/myschool/html/html/admin/admin_infos/admin_liste_classes.php");
 	            }            
 	       });
 		   return false;  
