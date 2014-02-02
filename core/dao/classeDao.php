@@ -119,6 +119,18 @@
  		$baseDao->close();
  	}
  	
+ 	public function deleteClassesToUser($idUser, $listeIdClasses){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		if($listeIdClasses != null){
+ 			foreach ($listeIdClasses as $idClasse){
+ 				$requete = "DELETE FROM UTILISATEUR_CLASSE WHERE ID_USER='$idUser' AND ID_CLASSE='$idClasse'";
+ 				$resulat = $baseDao->sendRequest($requete);
+ 			}
+ 		}
+ 		$baseDao->close();
+ 	}
+ 	
  	public function addClasseToUser($idUser, $idClasse){
  		$baseDao = new BaseDao();
  		$baseDao->connect();

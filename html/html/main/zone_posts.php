@@ -4,7 +4,7 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 <div id="dialog-confirm-delete-post" title="Supprimer le post ?">
   <p>Voulez vous vraiment supprimer ce post ?</p>
 </div>
-<?php foreach ($listePosts as $post){?>
+<?php foreach ($resultListePosts->listePost as $post){?>
 	<div class="post">
 		<div id="valid">
 			<img alt="J'ai vu" title="J'ai vu" src="/myschool/html/images/valider.png" class="image_valid"/>
@@ -62,4 +62,11 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 			include("zone_commentaires.php");
 		}?>
 	</div>
-<?php }?>
+<?php }
+	if($resultListePosts->hasMorePosts){?>
+     	<div id="morePosts"></div>
+     
+     <?php 
+
+}
+?>

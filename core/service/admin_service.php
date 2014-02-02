@@ -167,6 +167,12 @@ function addClasseToUser($idUser, $idClasse){
 
 }
 
+function deleteClassesToUser($idUser, $listeIdClasse){
+	$classeDao = new ClasseDao();
+	$classeDao ->deleteClassesToUser($idUser, $listeIdClasse);
+
+}
+
 function getClasseFromCode($code){
 	$classeDao = new ClasseDao();
 	return $classeDao->findClasseByCode($code);

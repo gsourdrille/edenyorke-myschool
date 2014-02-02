@@ -1,6 +1,8 @@
 <?php
 require_once  ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/commun_service.php");
 
+$logger = new Logger(Constants::LOGGER_LOCATION);
+
 if(!isset($_SESSION['USER'])){
 	header("location:/myschool/html/html/login/index.php");
 }else{
