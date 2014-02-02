@@ -316,7 +316,7 @@ function deleteCommentaire(idCommentaire,idDiv){
  
  function addClasse(){
 		var $form = $("#ajoutClasseUserForm");
-			$data = $form.serialize() + "&action=add";
+			$data = $form.serialize() + "&action=ADD";
 	         $.ajax({
 	            url: "/myschool/core/controller/admin_infos_controller.php", 
 	            type: $form.attr('method'), 
@@ -329,4 +329,20 @@ function deleteCommentaire(idCommentaire,idDiv){
 	       });
 		   return false;  
  }
+ 
+ function deleteClasse(){
+		var $form = $("#ajoutClasseUserForm");
+			$data = $form.serialize() + "&action=DELETE";
+	         $.ajax({
+	            url: "/myschool/core/controller/admin_infos_controller.php", 
+	            type: $form.attr('method'), 
+	            data: $data, 
+	            dataType: 'json',
+	            success: function(json) {
+	            	$("#ajoutClasseUser").html("");
+	            	$("#ajoutClasseUser").load( "/myschool/html/html/admin/admin_infos/admin_liste_classes.php");
+	            }            
+	       });
+		   return false;  
+}
  

@@ -68,7 +68,17 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 		$post->associations = $postDao->getAssociations($post->idPost);
 	}
 	
-	return $listePosts;
+	$nbTotalPosts = $postDao->countAllPosts($etablissementId, $listeClassesId, $listeNiveauxId);
+	
+	$resultListePoste = new ResultListePosts();
+	$resultListePoste->listePost = $listePosts;
+	if($nbTotalPosts > $offset){
+		$resultListePoste->hasMorePosts = true;
+	}else{
+		$resultListePoste->hasMorePosts = false;
+	}
+	
+	return $resultListePoste;
 }
 
 function savePost($post){

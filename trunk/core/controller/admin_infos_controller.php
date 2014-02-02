@@ -3,9 +3,6 @@ session_start();
 require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
    
 
-// Creation d'un objet Logger
-$logger = new Logger(Constants::LOGGER_LOCATION);
-
 include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.php");
 
 if (isset($_POST['submit'])){
@@ -91,23 +88,35 @@ if (isset($_POST['submit'])){
 					
 			}
 			require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_infos/index.php");
-		}else if(isset($_POST['action']) && $_POST['action']=='add'){
+		}else if(isset($_POST['action'])){
 				$error = null;
-				$codeClasse = $_POST['code'];
-				if(StringUtils::isEmpty($codeClasse)){
-					$error = "Le code classe est vide";
-				}else{
-					$classe = getClasseFromCode($codeClasse);
-					if($classe == null){
-						$error = "Le code classe n'existe pas";
+				switch($_POST['action']){
+					case 'ADD':
+					$codeClasse = $_POST['code'];
+					if(StringUtils::isEmpty($codeClasse)){
+						$error = "Le code classe est vide";
 					}else{
-						$niveau = getNiveauById($classe->idNiveau);
-						if($niveau->idEtablissement != $utilisateur->etablissement){
-							$error = "La classe n'est valide pour cet établissement";
+						$classe = getClasseFromCode($codeClasse);
+						if($classe == null){
+							$error = "Le code classe n'existe pas";
 						}else{
-							addClasseToUser($utilisateur->idUser, $classe->idClasse);
+							$niveau = getNiveauById($classe->idNiveau);
+							if($niveau->idEtablissement != $utilisateur->etablissement){
+								$error = "La classe n'est valide pour cet établissement";
+							}else{
+								addClasseToUser($utilisateur->idUser, $classe->idClasse);
+							}
 						}
 					}
+					break;
+					case 'DELETE':
+						if(isset($_POST['selectClasse'])){
+							$listIdClasse = $_POST['selectClasse'];
+							deleteClassesToUser($utilisateur->idUser, $listIdClasse);
+						}else{
+							$error = "Veuillez selectionner une ou plusieurs classes";
+						}
+					break;
 				}
 				if(StringUtils::isEmpty($error)){
 					$array['reponse'] = "ok";
@@ -115,11 +124,10 @@ if (isset($_POST['submit'])){
 					$array['reponse'] = "ko";
 					$array['error'] = $error;
 				}
-				$logger->log('succes', 'myschool', "LOGGER REPONSE : ".$array['reponse'] , Logger::GRAN_VOID);
 				echo json_encode($array);
 			
 			
 		
-}else{
-	require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_infos/index.php");
-}		
+	}else{
+		require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_infos/index.php");
+	}		

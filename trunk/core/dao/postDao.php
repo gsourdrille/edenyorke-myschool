@@ -161,6 +161,27 @@
  		return $listePosts;
  	}
  	
+ 	public function countAllPosts($idEtablissement, $idClasses, $idsNiveaux){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requeteClasse = "";
+ 		if(count($idClasses)>0){
+ 			$idClassesSQL = join(',',(array)$idClasses);
+ 			$requeteClasse = "UNION SELECT ID_POST FROM POST_CLASSE WHERE ID_CLASSE IN ($idClassesSQL)";
+ 		}
+ 		$requeteNiveau = "";
+ 		if(count($idsNiveaux)){
+ 			$idNiveauxSQL = join(',',(array)$idsNiveaux);
+ 			$requeteNiveau  = "UNION SELECT ID_POST FROM POST_NIVEAU WHERE ID_NIVEAU IN ($idNiveauxSQL)";
+ 		}
+ 		$requete = "SELECT count(*) FROM POST WHERE ID_POST IN (SELECT ID_POST FROM POST_ETABLISSEMENT WHERE ID_ETABLISSEMENT = '$idEtablissement'
+ 		$requeteClasse $requeteNiveau)";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$result = $resulat->fetch_row();
+ 		$baseDao->close();
+ 		return $result;
+ 	}
+ 	
  	
  	
  	public function buildPost($row){

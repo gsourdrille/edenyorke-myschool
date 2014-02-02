@@ -19,7 +19,10 @@ if(isset($_POST['offset'])){
 }
 
 //Recuperation des uniques posts de l'etablissement/niveaux/classes max 15 debut 0 order by date
-$listePosts = getAllPost($etablissementId, $listeClasse, $listeNiveaux, Constants::DEFAUT_MAX_RESULT, $offset);
+$resultListePosts = getAllPost($etablissementId, $listeClasse, $listeNiveaux, Constants::DEFAUT_MAX_RESULT, $offset);
+if($resultListePosts->hasMorePosts){
+	$offset = $offset + Constants::DEFAUT_MAX_RESULT;
+}
 
 //Construction de la liste de droits
 $listeDroitsPost = new ArrayObject();
