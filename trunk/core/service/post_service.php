@@ -72,7 +72,15 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 	
 	$resultListePoste = new ResultListePosts();
 	$resultListePoste->listePost = $listePosts;
-	if($nbTotalPosts > $offset){
+	$nextOffset = $offset+Constants::DEFAUT_MAX_RESULT;
+	/*LOGGER*/
+	$logger = new Logger(Constants::LOGGER_LOCATION);
+	$logger->log('succes', 'myschool', "nbTotalPosts : ".$nbTotalPosts , Logger::GRAN_VOID);
+	$logger->log('succes', 'myschool', "offset : ".$nextOffset , Logger::GRAN_VOID);
+	
+	
+	
+	if($nbTotalPosts > $nextOffset){
 		$resultListePoste->hasMorePosts = true;
 	}else{
 		$resultListePoste->hasMorePosts = false;

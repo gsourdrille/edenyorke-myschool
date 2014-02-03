@@ -72,8 +72,9 @@ class CommentaireDao {
 		$baseDao->connect();
 		$requete = "SELECT COUNT(*) FROM COMMENTAIRE WHERE ID_POST='$idPost'";
 		$resulat = $baseDao->sendRequest($requete);
-		$baseDao->close();
-		return $resulat;
+		$result = $resulat->fetch_row();
+ 		$baseDao->close();
+ 		return $result[0];
 	}
 	
 	public function buildCommentaire($row){

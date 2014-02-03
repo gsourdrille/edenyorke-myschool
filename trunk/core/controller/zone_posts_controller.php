@@ -12,8 +12,8 @@ $listeNiveaux = getNiveauxIdByClasses($listeClasse);
 $etablissementId = $utilisateur->etablissement;
 
 //Gestion de la pagination
-if(isset($_POST['offset'])){
-	$offset = $_POST['offset'];
+if(isset($_GET['offset'])){
+	$offset = $_GET['offset'];
 }else {
 	$offset = Constants::DEFAUT_OFFSET;
 }

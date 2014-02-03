@@ -16,7 +16,7 @@
  	const PATH_POST_FILE='/data/posts/';
  	
  	const DEFAUT_OFFSET = 0;
- 	const DEFAUT_MAX_RESULT = 15;
+ 	const DEFAUT_MAX_RESULT = 3;
  	
  	const FORMAT_DATE = "d/m/Y";
  	

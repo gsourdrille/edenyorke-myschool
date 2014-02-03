@@ -209,7 +209,7 @@
  		$resulat = $baseDao->sendRequest($requete); 
  		$result = $resulat->fetch_row();
  		$baseDao->close();
- 		if($result == 0){
+ 		if($result[0] == 0){
  			return true;
  		}
  		return false;

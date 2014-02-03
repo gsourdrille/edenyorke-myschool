@@ -149,7 +149,10 @@
  		$resulat = $baseDao->sendRequest($requete); 
  		$result = $resulat->fetch_row();
  		$baseDao->close();
- 		if($result == 0){
+ 		
+ 		$logger = new Logger(Constants::LOGGER_LOCATION);
+ 		$logger->log('succes', 'myschool', "COUNT : ".$result[0] , Logger::GRAN_VOID);
+ 		if($result[0] == 0){
  			return true;
  		}
  		return false;

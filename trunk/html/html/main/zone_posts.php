@@ -1,9 +1,6 @@
 <?php 
 session_start();
 include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controller.php")?>
-<div id="dialog-confirm-delete-post" title="Supprimer le post ?">
-  <p>Voulez vous vraiment supprimer ce post ?</p>
-</div>
 <?php foreach ($resultListePosts->listePost as $post){?>
 	<div class="post">
 		<div id="valid">
@@ -64,8 +61,9 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 	</div>
 <?php }
 	if($resultListePosts->hasMorePosts){?>
-     	<div id="morePosts"></div>
-     
+		<div id="morePosts">
+			<input type="button" value="Plus de posts" onclick="showMorePost(<?php echo $offset;?>)"/>
+     	</div>
      <?php 
 
 }
