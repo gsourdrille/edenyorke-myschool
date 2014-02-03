@@ -346,3 +346,10 @@ function deleteCommentaire(idCommentaire,idDiv){
 		   return false;  
 }
  
+ function showMorePost(offset){
+	      //$("#morePosts").load("/myschool/html/html/main/zone_posts.php?offset="+offset);
+	      $.get("/myschool/html/html/main/zone_posts.php?offset="+offset+" #morePosts", function(data) {
+	    	     $("#morePosts").replaceWith(data);
+	    	});
+}
+ 

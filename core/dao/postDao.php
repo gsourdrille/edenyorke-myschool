@@ -179,7 +179,7 @@
  		$resulat = $baseDao->sendRequest($requete);
  		$result = $resulat->fetch_row();
  		$baseDao->close();
- 		return $result;
+ 		return $result[0];
  	}
  	
  	

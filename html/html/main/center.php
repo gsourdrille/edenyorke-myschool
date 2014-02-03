@@ -12,6 +12,9 @@
 
 		</div>
 	</div>
+	<div id="dialog-confirm-delete-post" title="Supprimer le post ?">
+  		<p>Voulez vous vraiment supprimer ce post ?</p>
+	</div>
 	<div id="newPost">
 		<?php include("new_post.php"); ?>
 	</div>
