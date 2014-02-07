@@ -6,7 +6,6 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.p
 
 if(isset($_POST)) {
 	if(isset($_POST['action'])){
-		$logger->log('succes', 'myschool', "POST ACTION : ".$_POST['action'] , Logger::GRAN_VOID);
 		switch ($_POST['action']){
 			case 'CREATE':
 				$contenu = $_POST['writeCommentArea'];
@@ -28,8 +27,6 @@ if(isset($_POST)) {
 				saveCommentaire($commentaire);
 				break;
 			case 'DELETE':
-				
-				$logger->log('succes', 'myschool', "DELETE OK !" , Logger::GRAN_VOID);
 				$idCommentaire = $_POST['idCommentaire'];
 				deleteCommentaire($idCommentaire);
 			break;

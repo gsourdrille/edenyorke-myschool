@@ -1,8 +1,6 @@
 <?php
 session_start();
 require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
-   
-
 include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.php");
 
 if (isset($_POST['submit'])){

@@ -10,6 +10,7 @@
 		var $mdp;
 		var $etablissement;
 		var $avatar;
+		var $type;
 
 
 		
