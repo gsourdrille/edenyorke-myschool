@@ -1,5 +1,5 @@
 <?php
-
+require_once  ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/commun_service.php");
 
 function getClassesIdByUser($idUser){
 	$classeDao = new ClasseDao();
@@ -46,7 +46,10 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 	//Pour chaque post
 	foreach ($listePosts as $post){
 		//Enrichissement du createur
-		$post->fullCreateur = $utilisateurDao->findUtilisateurById($post->createur);
+		$createurPost = $utilisateurDao->findUtilisateurById($post->createur);
+		$typeUtilisateur = getTypeUtilisateur($createurPost);
+		$createurPost->type = getTypeUtilisateurLibelle($typeUtilisateur);
+		$post->fullCreateur = $createurPost;
 		if($post->createur == $utilisateur->idUser){
 			$post->isCreateur = true;
 		}
@@ -73,12 +76,6 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 	$resultListePoste = new ResultListePosts();
 	$resultListePoste->listePost = $listePosts;
 	$nextOffset = $offset+Constants::DEFAUT_MAX_RESULT;
-	/*LOGGER*/
-	$logger = new Logger(Constants::LOGGER_LOCATION);
-	$logger->log('succes', 'myschool', "nbTotalPosts : ".$nbTotalPosts , Logger::GRAN_VOID);
-	$logger->log('succes', 'myschool', "offset : ".$nextOffset , Logger::GRAN_VOID);
-	
-	
 	
 	if($nbTotalPosts > $nextOffset){
 		$resultListePoste->hasMorePosts = true;

@@ -1,5 +1,5 @@
 <?php 
-session_start();
+@session_start();
 include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controller.php")?>
 <?php foreach ($resultListePosts->listePost as $post){?>
 	<div class="post">
@@ -17,7 +17,7 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 					<?php echo $post->fullCreateur->prenom; ?> <?php echo $post->fullCreateur->nom?>	
 				</div>
 				<div id="poste">
-					Math&eacute;matiques
+					<?php echo $post->fullCreateur->type;?>
 				</div>
 			</div>
 			<div id="infos_post">

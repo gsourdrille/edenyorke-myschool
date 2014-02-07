@@ -1,6 +1,6 @@
 <?php
 
-include("../include.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/myschool/core/include.php");
 
 	function connect($username,$password){
 		

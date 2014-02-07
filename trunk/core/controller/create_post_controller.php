@@ -4,7 +4,6 @@ require_once($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/post_service.php"
 //Recuperation de l'utilisateur
 include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.php");
  
-$logger = new Logger(Constants::LOGGER_LOCATION);
 if(isset($_POST)) {
 	if(isset($_POST['action'])){
 		switch ($_POST['action']){
@@ -25,7 +24,6 @@ if(isset($_POST)) {
 					$listeAssociations = $_POST['listPostDestinaires'];
 					$listeAssociationDTO = new ArrayObject();
 					foreach ($listeAssociations as $association){
-						$logger->log('succes', 'myschool', "ASSOCIATION : ".$association , Logger::GRAN_VOID);
 						if($association != ""){
 							$associationDTO = new AssociationDTO();
 							if($association== "ALL"){
@@ -33,13 +31,10 @@ if(isset($_POST)) {
 								$associationDTO->id = $_SESSION['ETABLISSEMENT_ID'];
 							}else{
 								list($type, $id) = explode('_', $association);
-								$logger->log('succes', 'myschool', "TYPE : ".$type , Logger::GRAN_VOID);
-								$logger->log('succes', 'myschool', "ID : ".$id , Logger::GRAN_VOID);
 								if($type=="NIVEAU"){
 									$associationDTO->typePost= TypePost::NIVEAU;
 								}else if($type=="CLASSE"){
 									$associationDTO->typePost= TypePost::CLASSE;
-									$logger->log('succes', 'myschool', "TYPE_POST : CLASSE " , Logger::GRAN_VOID);
 								}
 								$associationDTO->id = $id;
 							}
@@ -48,13 +43,11 @@ if(isset($_POST)) {
 					}
 					$post->associations = $listeAssociationDTO;
 					$post= savePost($post);
-					$logger->log('succes', 'myschool', "ID_POST : ".$post->idPost , Logger::GRAN_VOID);
 						
 					if($post->idPost != null){
 						//Creation des pieces jointes
 						$listePiecesJointes = new ArrayObject();
 						foreach ($_FILES['postfile']['name'] as $file => $name) {
-							$logger->log('succes', 'myschool', "FILE_NAME : ".$name , Logger::GRAN_VOID);
 							if ($_FILES['postfile']['error'][$file]) {
 								switch ($_FILES['postfile']['error'][$file]){
 									case 1: // UPLOAD_ERR_INI_SIZE
@@ -105,7 +98,6 @@ if(isset($_POST)) {
 					$listeAssociations = $_POST['listPostDestinaires'];
 					$listeAssociationDTO = new ArrayObject();
 					foreach ($listeAssociations as $association){
-						$logger->log('succes', 'myschool', "ASSOCIATION : ".$association , Logger::GRAN_VOID);
 						if($association != ""){
 							$associationDTO = new AssociationDTO();
 							if($association== "ALL"){
@@ -117,7 +109,6 @@ if(isset($_POST)) {
 									$associationDTO->typePost= TypePost::NIVEAU;
 								}else if($type=="CLASSE"){
 									$associationDTO->typePost= TypePost::CLASSE;
-									$logger->log('succes', 'myschool', "TYPE_POST : CLASSE " , Logger::GRAN_VOID);
 								}
 								$associationDTO->id = $id;
 							}
@@ -126,14 +117,12 @@ if(isset($_POST)) {
 					}
 					$post->associations = $listeAssociationDTO;
 					$post= editPost($post);
-					$logger->log('succes', 'myschool', "ID_POST : ".$post->idPost , Logger::GRAN_VOID);
 						
 					if($post->idPost != null){
 						
 						//Creation des pieces jointes
 						$listePiecesJointes = new ArrayObject();
 						foreach ($_FILES['postfile']['name'] as $file => $name) {
-							$logger->log('succes', 'myschool', "FILE_NAME : ".$name , Logger::GRAN_VOID);
 							if ($_FILES['postfile']['error'][$file]) {
 								switch ($_FILES['postfile']['error'][$file]){
 									case 1: // UPLOAD_ERR_INI_SIZE

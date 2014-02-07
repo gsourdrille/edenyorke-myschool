@@ -1,7 +1,5 @@
 <?php
 
-
-
  class ClasseDao{
  	
  	public function saveClasse($classe){
@@ -150,8 +148,6 @@
  		$result = $resulat->fetch_row();
  		$baseDao->close();
  		
- 		$logger = new Logger(Constants::LOGGER_LOCATION);
- 		$logger->log('succes', 'myschool', "COUNT : ".$result[0] , Logger::GRAN_VOID);
  		if($result[0] == 0){
  			return true;
  		}

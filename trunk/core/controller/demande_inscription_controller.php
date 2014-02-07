@@ -1,6 +1,5 @@
 <?php
 require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
-$logger = new Logger(Constants::LOGGER_LOCATION);
 if(isset($_POST)){
 	$utilisateur = new Utilisateur();
 	$etablissement = new Etablissement();
@@ -47,7 +46,6 @@ if(isset($_POST)){
 		}
 	}
 	$mdp = $_POST['password'];
-	$logger->log('succes', 'myschool', "MDP : ".$mdp , Logger::GRAN_VOID);
 	if(StringUtils::isNotEmpty($mdp)){
 		$mdpBis = $_POST['password_bis'];
 		if(StringUtils::isNotEmpty($mdpBis)){
