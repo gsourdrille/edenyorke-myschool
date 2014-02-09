@@ -56,10 +56,37 @@ var $demandeInscriptionform = $('#demandeInscriptionForm');
 	   return false;  
     });
    
-	
+
+var $demandePasswordform = $('#forgotForm');
+
+$('#envoyerDemandePassword').on('click', function() {
+	$demandePasswordform.trigger('submit');
+	return false;
+});
+
+$demandePasswordform.on('submit', function() {
+	$.ajax({
+        url: "/myschool/core/controller/forgot_password_controller.php", 
+        type: $demandePasswordform.attr('method'), 
+        data: $demandePasswordform.serialize(), 
+        dataType: 'json',
+        success: function(json) {
+        	if(json['reponse']=='ok'){
+        		$("#forgot_conteneur_succes").show();
+        		$("#forgot_conteneur").hide();
+        	}else{
+        		$("#error_forgot").show();
+        		$("#error_forgot").html("");
+        		$("#error_forgot").append(json['error']);
+        	}
+        	
+        }            
+   });
+   return false;  
 });
 
 
+});
 
  
  function showInsciptionBox(){
@@ -80,4 +107,19 @@ var $demandeInscriptionform = $('#demandeInscriptionForm');
  function hideDemandeInsciptionBox(){
 	 $("#login_conteneur").show();
 	 $("#register_etablissement_conteneur").hide();
+ }
+ 
+ function showForgotBox(){
+	 $("#login_conteneur").hide();
+	 $("#forgot_conteneur").show();
+ }
+ 
+ function hideForgotBox(){
+	 $("#login_conteneur").show();
+	 $("#forgot_conteneur").hide();
+ }
+ 
+ function hideForgotSuccesBox(){
+	 $("#login_conteneur").show();
+	 $("#forgot_conteneur_succes").hide();
  }

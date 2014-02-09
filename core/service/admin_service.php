@@ -237,3 +237,17 @@ function envoiMailConfirmationInscription($user){
 	//envoi du mail
 	envoiMailInscription($user->login,$token);
 }
+
+function sendNewPassword($login){
+	$utilisateurDao = new UtilisateurDao();
+	$utilisateur = $utilisateurDao->findUtilisateurByUsername($login);
+	if($utilisateur != null){
+		$newPassowrd = EncryptUtils::generatePassword();
+		$utilisateur->mdp =sha1($newPassowrd);
+		$utilisateurDao->updateUtilisateur($utilisateur);
+		//envoi du mail
+		envoiMailConfirmationEnvoiPassword($utilisateur,$newPassowrd);
+		return true;
+	}
+	return false;
+}
