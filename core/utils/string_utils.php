@@ -3,9 +3,11 @@
 
 class StringUtils {
 
-	public static function startswith($haystack, $needle) {
-		return substr($haystack, 0, strlen($needle)) === $needle;
+	public static function startsWith($haystack, $needle)
+	{
+    	return !strncmp($haystack, $needle, strlen($needle));
 	}
+	
 	
 	public static function isEmpty($value){
 		return $value == null || $value == '';

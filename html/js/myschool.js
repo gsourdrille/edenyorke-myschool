@@ -304,6 +304,7 @@ function deleteCommentaire(idCommentaire,idDiv){
 	 $( "#dialog-confirm-delete-post" ).dialog( "open" );
  }
  
+ 
  function showEditCommentaire(idComment){
 	 $("#comment_content_"+idComment).hide();
 	 $("#edit_commentaire_"+idComment).show();
@@ -352,4 +353,28 @@ function deleteCommentaire(idCommentaire,idDiv){
 	    	     $("#morePosts").replaceWith(data);
 	    	});
 }
+ 
+ function showGaleria(idPost){
+	 $("#dialog-galeria").html("");
+	 $("#dialog-galeria").load("/myschool/html/html/main/visionneuse.php?idPost="+idPost);
+	 $('#dialog-galeria').dialog({
+	   autoOpen: false,
+	    modal: true,
+	    width: 720,
+	    open: function(){
+            jQuery('.ui-widget-overlay').bind('click',function(){
+                jQuery('#dialog-galeria').dialog('close');
+            })
+        }
+	    
+       });
+
+	 $( "#dialog-galeria" ).dialog( "open" );
+	 Galleria.loadTheme('/myschool/html/js/galleria/themes/classic/galleria.classic.min.js');
+	 Galleria.run('.galleria', {
+		 width: 700,
+		 height: 467
+		});
+ }
+ 
  

@@ -51,6 +51,19 @@ class PieceJointeDao {
 			return $listePiecesJointes;
 	}
 	
+	public function findImagesFromPost($idPost){
+		$baseDao = new BaseDao();
+		$baseDao->connect();
+		$requete = "SELECT * FROM PIECE_JOINTE WHERE ID_POST='$idPost' AND CONTENT_TYPE like 'image%'";
+		$resulat = $baseDao->sendRequest($requete);
+		$listePiecesJointes = new ArrayObject();
+		while($row = mysqli_fetch_assoc($resulat)){
+			$listePiecesJointes->append($this->buildPieceJointe($row));
+		}
+		$baseDao->close();
+		return $listePiecesJointes;
+	}
+	
 	public function findPieceJointe($idPj){
 		$baseDao = new BaseDao();
 		$baseDao->connect();
@@ -67,6 +80,11 @@ class PieceJointeDao {
 		$pj->idPj = $row["ID_PJ"];
 		$pj->idPost = $row["ID_POST"];
 		$pj->contentType = $row["CONTENT_TYPE"];
+		if(StringUtils::startsWith($pj->contentType, "image")){
+			$pj->isImage = true;
+		}else{
+			$pj->isImage = false;
+		}
 		$pj->path = $row["PATH"];
 		return $pj;
 	}

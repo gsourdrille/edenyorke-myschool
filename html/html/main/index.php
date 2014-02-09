@@ -10,6 +10,7 @@
  <script type="text/javascript" src="/myschool/html/js/myschool.js"></script>   
   <script type="text/javascript" src="/myschool/html/js/tinymce/tinymce.min.js"></script> 
   <script type="text/javascript" src="/myschool/html/js/jquery.multiselect.js"></script> 
+  <script type="text/javascript" src="/myschool/html/js/galleria/galleria-1.3.5.min.js"></script>
   
 <title>MySchool</title>
 </head>

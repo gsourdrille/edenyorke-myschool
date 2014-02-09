@@ -216,7 +216,7 @@ select{
 	margin-left : 5px;
 	float: left;
 	width : 490px;
-	min-height :80px
+	min-height :60px
 
 	}
 	
@@ -706,4 +706,17 @@ border-top: 1px solid;
 	position: absolute;
 	box-shadow:0 0 15px #000000;
 	display:none;
+}
+
+#galleria{height:467px}
+
+#dialog-galeria{
+	height: 470px;
+	width: 710px;
+	display: none;
+}
+
+.postPjThumbnails{
+	height: 30px;
+	width: 30px;
 }

@@ -66,12 +66,7 @@ if(isset($_POST)) {
 							}
 							else {
 								if ((isset($_FILES['postfile']['tmp_name'][$file])&&($_FILES['postfile']['error'][$file] == UPLOAD_ERR_OK))) {
-									$path = FileUtils::createPostDir($post->idPost);
-									move_uploaded_file($_FILES['postfile']['tmp_name'][$file], $path."/".$name);
-									$pieceJointe = new PieceJointe();
-									$pieceJointe->idPost = $post->idPost;
-									$pieceJointe->contentType = $_FILES['postfile']['type'][$file];
-									$pieceJointe->path = $name;
+									$pieceJointe = processPieceJointe($_FILES['postfile'],$file,$post, $name);
 									$listePiecesJointes->append($pieceJointe);
 								}
 							}
@@ -141,12 +136,7 @@ if(isset($_POST)) {
 							}
 							else {
 								if ((isset($_FILES['postfile']['tmp_name'][$file])&&($_FILES['postfile']['error'][$file] == UPLOAD_ERR_OK))) {
-									$path = FileUtils::createPostDir($post->idPost);
-									move_uploaded_file($_FILES['postfile']['tmp_name'][$file], $path."/".$name);
-									$pieceJointe = new PieceJointe();
-									$pieceJointe->idPost = $post->idPost;
-									$pieceJointe->contentType = $_FILES['postfile']['type'][$file];
-									$pieceJointe->path = $name;
+									$pieceJointe = processPieceJointe($_FILES['postfile'],$file,$post, $name);
 									$listePiecesJointes->append($pieceJointe);
 								}
 							}

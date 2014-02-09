@@ -44,7 +44,11 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 				<div class="post_content_pj">
 					<?php foreach ($post->piecesJointes as $pj){?>
 						<div class="zone_pj">
-							<a href="<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>"><?php echo $pj->path?></a>
+							<?php if($pj->isImage){?>
+								<a href="#dev" onClick="showGaleria(<?php echo $post->idPost;?>)"><img class="postPjThumbnails" src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>&x=30&y=30&f=0 " ></a>
+							<?php }else{?>
+								<a href="<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>"><?php echo $pj->path?></a>
+							<?php }?>
 						</div>
 					<?php }?>
 				</div>
