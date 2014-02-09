@@ -585,6 +585,28 @@ border-top: 1px solid;
 	margin-left: 140px;
 }
 
+
+.forgot_text{
+	font-size : 24px;
+	color: white;
+	margin-top: 20px;
+	margin-left: 80px;
+}
+
+.forgot_succes_text{
+	font-size : 16px;
+	color: white;
+	margin-top: 40px;
+	margin-left: 40px;
+}
+
+.loginText{
+	font-size : 16px;
+	color: white;
+	margin-top: 40px;
+	margin-left: 40px;
+}
+
 .login_footer{
 	float: left;
 	margin-top:20px;
@@ -608,10 +630,24 @@ border-top: 1px solid;
 	
 }
 
+.forgot_link{
+	font-size: 12px;
+	float: left;
+	margin-top: 20px;
+	color:white;
+	
+	
+}
+
 .inscription_link A:link {text-decoration: none}
 .inscription_link A:visited {text-decoration: none}
 .inscription_link A:active {text-decoration: none}
 .inscription_link A:hover {text-decoration: underline}
+
+.forgot_link A:link {text-decoration: none}
+.forgot_link A:visited {text-decoration: none}
+.forgot_link A:active {text-decoration: none}
+.forgot_link A:hover {text-decoration: underline}
 
 
 #register_conteneur{
@@ -626,6 +662,13 @@ border-top: 1px solid;
 }
 
 #error_inscription{
+	display:none;
+	font-size: 13px;
+	color:red;
+	width: 200px;
+}
+
+#error_forgot{
 	display:none;
 	font-size: 13px;
 	color:red;
@@ -701,6 +744,28 @@ border-top: 1px solid;
 	width: 400px;
 	margin:100px 500px;
 	height: 500px;
+	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius:6px;
+	position: absolute;
+	box-shadow:0 0 15px #000000;
+	display:none;
+}
+
+#forgot_conteneur{
+	width: 400px;
+	margin:100px 500px;
+	height: 170px;
+	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius:6px;
+	position: absolute;
+	box-shadow:0 0 15px #000000;
+	display:none;
+}
+
+#forgot_conteneur_succes{
+	width: 400px;
+	margin:100px 500px;
+	height: 170px;
 	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
 	border-radius:6px;
 	position: absolute;

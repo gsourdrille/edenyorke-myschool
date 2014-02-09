@@ -10,6 +10,12 @@
 		<div id="login_conteneur">
 			<?php include("login.php"); ?>
 		</div>
+		<div id="forgot_conteneur">
+			<?php include("forgot_password.php"); ?>
+		</div>
+		<div id="forgot_conteneur_succes">
+				<?php include("forgot_password_succes.php"); ?>
+		</div>
 		<div id="register_conteneur">
 			<?php include("inscription.php"); ?>
 		</div>

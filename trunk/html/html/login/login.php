@@ -16,7 +16,11 @@
 				<?php echo $error;?>
 					</div>
 				<?php }?>
+				<div class="forgot_link">
+					<a href="#dev" onclick="showForgotBox();" >mot de passe oublié</a>
+				</div>
 			</div>
+			
 			<div class="login_tools">
 				<div id="remember_me">
 					Se souvenir de moi <input type="checkbox">
