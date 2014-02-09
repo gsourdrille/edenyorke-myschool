@@ -15,6 +15,9 @@
 	<div id="dialog-confirm-delete-post" title="Supprimer le post ?">
   		<p>Voulez vous vraiment supprimer ce post ?</p>
 	</div>
+	<div id="dialog-galeria">
+  		<div id="visionneuse" class="galeria"></div>
+	</div>
 	<div id="newPost">
 		<?php include("new_post.php"); ?>
 	</div>

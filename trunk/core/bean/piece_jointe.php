@@ -6,5 +6,6 @@ class PieceJointe{
 	var $idPost;
 	var $contentType;
 	var $path;
+	var $isImage;
 	
 }

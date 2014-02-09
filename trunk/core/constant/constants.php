@@ -9,9 +9,9 @@
  	
  	const LOGGER_LOCATION  ='/Applications/MAMP/htdocs/myschool/logs/';
  	
- 	const PATH_IMAGE_ETABLISSEMENT ='/myschool/html/images/etablissements/';
+ 	const PATH_IMAGE_ETABLISSEMENT ='/data/etablissements/';
  	
- 	const PATH_IMAGE_UTILISATEUR='/myschool/html/images/utilisateurs/';
+ 	const PATH_IMAGE_UTILISATEUR='/data/utilisateurs/';
  	
  	const PATH_POST_FILE='/data/posts/';
  	
@@ -23,6 +23,8 @@
  	const PASS_CHARS_LENGTH = 8 ;
  	
  	const TOKEN_LENGTH = 32 ;
+ 	
+ 	const FILE_NAME_LENGTH = 12;
  	
  	const MAIL_REPLY_TO="donotreply@myschool.com";
  	const MAIL_FROM="gsourdrille@gmail.com";

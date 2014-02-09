@@ -154,3 +154,19 @@ function deletePost($idPost){
 	$postDao->deletePost($idPost);
 	FileUtils::deletePostDir($idPost);
 }
+
+function getImagesFromPost($idPost){
+	$pieceJointeDao = new PieceJointeDao();
+	$listeImages = $pieceJointeDao->findImagesFromPost($idPost);
+	return $listeImages;
+}
+
+function processPieceJointe($postfile,$file,$post,$name){
+	$path = FileUtils::createPostDir($post->idPost);
+	move_uploaded_file($postfile['tmp_name'][$file], $path."/".$name);
+	$pieceJointe = new PieceJointe();
+	$pieceJointe->idPost = $post->idPost;
+	$pieceJointe->contentType = $postfile['type'][$file];
+	$pieceJointe->path = $name;
+	return $pieceJointe;
+}
