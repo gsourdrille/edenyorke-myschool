@@ -11,7 +11,7 @@
 <div id="header">
 <?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/header.php"); ?>
 </div>
-<div id="main_conteneur" class="with_bg">
+<div id="main_conteneur" style="background-image: url('<?php echo FileUtils::getEtablissementImageFond($etablissement);?>')">
 	<div id="post_conteneur">
 		<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/left.php"); ?>
 		<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_etablissement/admin_etablissement.php"); ?>
