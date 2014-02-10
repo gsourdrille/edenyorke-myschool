@@ -33,10 +33,16 @@ function updateEtablissement($etablissement){
 	return $etablissementDao->updateEtablissement($etablissement);
 }
 
-function setImageToEtablissement($etablissement, $imageName){
-	FileUtils::deleteEtablissementFile($etablissement);
+function setImagePrincipaleToEtablissement($etablissement, $imageName){
+	FileUtils::deleteEtablissementImagePrincipale($etablissement);
 	$etablissementDao = new EtablissementDao();
-	return $etablissementDao->setImageToEtablissement($etablissement->idEtablissement, $imageName);
+	return $etablissementDao->setImagePrincipaleToEtablissement($etablissement->idEtablissement, $imageName);
+}
+
+function setImageFondToEtablissement($etablissement, $imageName){
+	FileUtils::deleteEtablissementImageFond($etablissement);
+	$etablissementDao = new EtablissementDao();
+	return $etablissementDao->setImageFondToEtablissement($etablissement->idEtablissement, $imageName);
 }
 
 function setImageToUtilisateur($utilisateur, $imageName){

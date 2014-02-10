@@ -46,11 +46,28 @@ class EtablissementDao{
 		
 	}
 	
-	public function setImageToEtablissement($idEtablissement, $imageName){
+	public function setImagePrincipaleToEtablissement($idEtablissement, $imageName){
 		if($idEtablissement != null && $imageName != null){
 			$baseDao = new BaseDao();
 			$baseDao->connect();
 			$requete = "UPDATE ETABLISSEMENT SET IMAGE_PRINCIPALE='$imageName'
+			WHERE ID_ETABLISSEMENT=$idEtablissement";
+			$result = $baseDao->sendRequest($requete);
+			$baseDao->close();
+			if(!$result){
+				return false;
+			}else{
+				return true;
+			}
+		}
+	
+	}
+	
+	public function setImageFondToEtablissement($idEtablissement, $imageName){
+		if($idEtablissement != null && $imageName != null){
+			$baseDao = new BaseDao();
+			$baseDao->connect();
+			$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND='$imageName'
 			WHERE ID_ETABLISSEMENT=$idEtablissement";
 			$result = $baseDao->sendRequest($requete);
 			$baseDao->close();
@@ -98,6 +115,7 @@ class EtablissementDao{
 		$etablissement->telephone2 = $row["TELEPHONE_2"];
 		$etablissement->fax = $row["FAX"];
 		$etablissement->imagePrincipale = $row["IMAGE_PRINCIPALE"];
+		$etablissement->imageFond = $row["IMAGE_FOND"];
 		return $etablissement;
 	}
 	

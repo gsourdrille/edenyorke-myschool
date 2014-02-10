@@ -12,6 +12,7 @@ class Etablissement {
 	var $telephone2;
 	var $fax;
 	var $imagePrincipale;
+	var $imageFond;
 
 	
 	

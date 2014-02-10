@@ -2,7 +2,7 @@
 	<div id="center_conteneur">
 		<form action="/myschool/core/controller/admin_etablissement_controller.php" method="post" enctype="multipart/form-data">
 			
-			<input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+			<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
 			
 			<div id="nom_info">
 				<label for="name">Nom : </label>
@@ -61,16 +61,30 @@
 			
 			<div id="admin_image" style="display: block">
 				<?php if ($etablissement->imagePrincipale!=null){?>
-					<img src="<?php echo FileUtils::getEtablissementImagePrinipale($etablissement);?>" width="100px" height="100px">
+					<img src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImagePrincipale($etablissement);?>&x=100&y=100&f=0" width="100px" height="100px">
 				<?php }else{?>
 					<img src="/myschool/html/images/defaut_image_etablissement.jpeg" width="100px" height="100px">
 				<?php }?>
-					<input type="button" value="Changer" onclick="showUploadButton()">
+					<input type="button" value="Changer" onclick="showUploadImagePrincipaleButton()">
 			</div>
 			<div id="upload_image" style="display: none">
-				<label for="userfile">Image de l'établissement : </label>
-				<input name="userfile" type="file" />
-				<input type="button" value="Annuler" onclick="hideUploadButton()">
+				<label for="imagePrincipale">Image de l'établissement : </label>
+				<input name="imagePrincipale" type="file" />
+				<input type="button" value="Annuler" onclick="hideUploadImagePrincipaleButton()">
+			</div>
+			<div id="admin_image_fond" style="display: block">
+				<?php if ($etablissement->imageFond!=null){?>
+					<img src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImageFond($etablissement);?>&x=200&y=200&f=0" width="100px">
+					 
+				<?php }else{?>
+					<img src="/myschool/html/images/defaut_image_etablissement.jpeg" width="100px" height="100px">
+				<?php }?>
+					<input type="button" value="Changer" onclick="showUploadImageFondButton()">
+			</div>
+			<div id="upload_image_fond" style="display: none">
+				<label for="imageFond">Image de fond de l'établissement : </label>
+				<input name="imageFond" type="file" />
+				<input type="button" value="Annuler" onclick="hideUploadImageFondButton()">
 			</div>
 			<div id="button_submit_infos">
 				<input type="submit" name="submit" value="Sauvegarder">

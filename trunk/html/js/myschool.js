@@ -146,15 +146,29 @@ function deleteCommentaire(idCommentaire,idDiv){
 	 $("#select-classe-to option").prop('selected', 'selected');
  }
  
- function showUploadButton(){
+ function showUploadImagePrincipaleButton(){
 	 $("#admin_image").hide();
      $("#upload_image").show();
 
  }
+
  
  function hideUploadButton(){
 	 $("#admin_image").show();
      $("#upload_image").hide();
+
+ }
+ 
+ 
+ function showUploadImageFondButton(){
+	 $("#admin_image_fond").hide();
+     $("#upload_image_fond").show();
+
+ }
+ 
+  function hideUploadImageFondButton(){
+	 $("#admin_image_fond").show();
+     $("#upload_image_fond").hide();
 
  }
  

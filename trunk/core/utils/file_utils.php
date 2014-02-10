@@ -17,7 +17,7 @@
 		return $path;
 	}
 	
-	public static function deleteEtablissementFile($etablissement){
+	public static function deleteEtablissementImagePrincipale($etablissement){
 	
 		$path = $_SERVER['DOCUMENT_ROOT'].Constants::PATH_IMAGE_ETABLISSEMENT.$etablissement->idEtablissement;
 		if(is_dir($path) ){
@@ -28,8 +28,23 @@
 		}
 	}
 	
-	public static function getEtablissementImagePrinipale($etablissement){
+	public static function deleteEtablissementImageFond($etablissement){
+	
+		$path = $_SERVER['DOCUMENT_ROOT'].Constants::PATH_IMAGE_ETABLISSEMENT.$etablissement->idEtablissement;
+		if(is_dir($path) ){
+			$filename  = $path."/".$etablissement->imageFond;
+			if(is_file($filename)){
+				unlink($filename);
+			}
+		}
+	}
+	
+	public static function getEtablissementImagePrincipale($etablissement){
 		return Constants::PATH_IMAGE_ETABLISSEMENT.$etablissement->idEtablissement."/".$etablissement->imagePrincipale;
+	}
+	
+	public static function getEtablissementImageFond($etablissement){
+		return Constants::PATH_IMAGE_ETABLISSEMENT.$etablissement->idEtablissement."/".$etablissement->imageFond;
 	}
 	
 	public static function getUtilisateurAvatar($utilisateur){

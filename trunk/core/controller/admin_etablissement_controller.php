@@ -52,8 +52,8 @@ if (isset($_POST['submit'])){
 			if(updateEtablissement($etablissement)){
 				$succes = "Vos informations ont été mises à jour";
 				//upload fichier
-				if ($_FILES['userfile']['error']) {
-					switch ($_FILES['userfile']['error']){
+				if ($_FILES['imagePrincipale']['error']) {
+					switch ($_FILES['imagePrincipale']['error']){
 						case 1: // UPLOAD_ERR_INI_SIZE
 							$error_image = "Le fichier dépasse la limite autorisée par le serveur !";
 							break;
@@ -66,13 +66,38 @@ if (isset($_POST['submit'])){
 					}
 				}
 				else {
-					if ((isset($_FILES['userfile']['tmp_name'])&&($_FILES['userfile']['error'] == UPLOAD_ERR_OK))) {
+					if ((isset($_FILES['imagePrincipale']['tmp_name'])&&($_FILES['imagePrincipale']['error'] == UPLOAD_ERR_OK))) {
 						$path = FileUtils::createEtablissementDir($etablissement->idEtablissement);
-						move_uploaded_file($_FILES['userfile']['tmp_name'], $path."/".$_FILES['userfile']['name']);
-						setImageToEtablissement($etablissement, $_FILES['userfile']['name']);
-						$etablissement->imagePrincipale = $_FILES['userfile']['name'];
+						move_uploaded_file($_FILES['imagePrincipale']['tmp_name'], $path."/".$_FILES['imagePrincipale']['name']);
+						setImagePrincipaleToEtablissement($etablissement, $_FILES['imagePrincipale']['name']);
+						$etablissement->imagePrincipale = $_FILES['imagePrincipale']['name'];
 					}
 				}
+				
+				
+				//upload fichier
+				if ($_FILES['imageFond']['error']) {
+					switch ($_FILES['imageFond']['error']){
+						case 1: // UPLOAD_ERR_INI_SIZE
+							$error_image = "Le fichier dépasse la limite autorisée par le serveur !";
+							break;
+						case 2: // UPLOAD_ERR_FORM_SIZE
+							$error_image =  "Le fichier dépasse la limite autorisée dans le formulaire HTML !";
+							break;
+						case 3: // UPLOAD_ERR_PARTIAL
+							$error_image =  "L'envoi du fichier a été interrompu pendant le transfert !";
+							break;
+					}
+				}
+				else {
+					if ((isset($_FILES['imageFond']['tmp_name'])&&($_FILES['imageFond']['error'] == UPLOAD_ERR_OK))) {
+						$path = FileUtils::createEtablissementDir($etablissement->idEtablissement);
+						move_uploaded_file($_FILES['imageFond']['tmp_name'], $path."/".$_FILES['imageFond']['name']);
+						setImageFondToEtablissement($etablissement, $_FILES['imageFond']['name']);
+						$etablissement->imageFond = $_FILES['imageFond']['name'];
+					}
+				}
+				
 			}
 			
 		}else{
