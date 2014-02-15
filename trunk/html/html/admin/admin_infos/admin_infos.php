@@ -61,13 +61,20 @@
 				<?php }else{?>
 					<img src="/myschool/html/images/icon_user.png" width="100px" height="100px">
 				<?php }?>
-					<input type="button" value="Changer" onclick="showUploadButton()">
+					<input type="button" value="Changer" onclick="showUploadImagePrincipaleButton()">
 			</div>
+			
 			<div id="upload_image" style="display: none">
 				<label for="userfile">Photo de profil : </label>
 				<input name="userfile" type="file" />
-				<input type="button" value="Annuler" onclick="hideUploadButton()">
+				<input type="button" value="Annuler" onclick="hideUploadImagePrincipaleButton()">
 			</div>
+			
+			
+			
+			
+			
+			
 			<?php if(isset($error_image)){?>
 			<div id="error_login">
 				<?php echo $error_image;?>
@@ -83,7 +90,28 @@
 			</div>
 			<?php }?>
 		</form>	
-		<br/>
+		
+		<div id="changeImage">
+		<?php if ($utilisateur->avatar!=null){?>
+			<img class="floatLeft" src="<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>" width="100px" height="100px">
+		<?php }else{?>
+			<img  class="floatLeft"  src="/myschool/html/images/icon_user.png" width="100px" height="100px">
+		<?php }?>
+		<form id="upload" method="post" action="/myschool/core/controller/admin_infos_controller.php" enctype="multipart/form-data">
+	            <input type="hidden" value="CHANGE_AVATAR" name="action" />
+	            <div id="drop">
+	                <a>Browse</a>
+	                <input type="file" name="upl"  />
+	            </div>
+	            <ul>
+	                <!-- The file uploads will be shown here -->
+	            </ul>
+	        </form>
+	     </div>
+	       <br/>
+		
+		
+		
 		<div id="ajoutClasseUser">
 			<?php include("admin_liste_classes.php"); ?>
 		</div>	
