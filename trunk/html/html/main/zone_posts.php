@@ -10,7 +10,7 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 			<div id="entete_createur">
 				<div id="nom_createur">
 					<?php if ($post->fullCreateur->avatar!=null){?>
-					<img src="<?php echo FileUtils::getUtilisateurAvatar($post->fullCreateur);?>" class="icon_user">
+					<img src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($post->fullCreateur);?>&x=100&y=100&f=0 " class="icon_user">
 					<?php }else{?>
 					<img src="/myschool/html/images/icon_user.png" class="icon_user">  
 					<?php }?>

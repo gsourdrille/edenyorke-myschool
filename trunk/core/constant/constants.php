@@ -30,6 +30,7 @@
  	const MAIL_FROM="gsourdrille@gmail.com";
  	const MAIL_FROM_NAME="myschool";
  	const MAIL_VALID_URL_REPONSE="http://localhost:8888/myschool/core/controller/valid_controller.php?token=";
+ 	const MAIL_DEMANDE_INCRIPTION="gsourdrille@gmail.com";
  	
  	
  	

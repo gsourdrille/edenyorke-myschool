@@ -5,13 +5,13 @@
 <LINK rel="stylesheet" type="text/css" href="/myschool/html/css/style.css">
 <LINK rel="stylesheet" type="text/css" href="/myschool/html/css/jquery.multiselect.css">
 <LINK rel="stylesheet" type="text/css" href="/myschool/html/css/jquery-ui.css">
+<LINK rel="stylesheet" type="text/css" href="/myschool/html/css/style_upload.css">
  <script type="text/javascript" src="/myschool/html/js/jquery.js"></script>
  <script type="text/javascript" src="/myschool/html/js/jquery-ui.min.js"></script> 
  <script type="text/javascript" src="/myschool/html/js/myschool.js"></script>   
   <script type="text/javascript" src="/myschool/html/js/tinymce/tinymce.min.js"></script> 
   <script type="text/javascript" src="/myschool/html/js/jquery.multiselect.js"></script> 
   <script type="text/javascript" src="/myschool/html/js/galleria/galleria-1.3.5.min.js"></script>
-  
 <title>MySchool</title>
 </head>
 <body>
