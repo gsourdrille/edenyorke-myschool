@@ -3,13 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK rel="stylesheet" type="text/css" href="/myschool/html/css/style.css">
-<LINK rel="stylesheet" type="text/css" href="/myschool/html/css/style_upload.css">
  <script type="text/javascript" src="/myschool/html/js/jquery.js"></script>
  <script type="text/javascript" src="/myschool/html/js/myschool.js"></script> 
- <script type="text/javascript" src="/myschool/html/js/jquery.knob.js"></script>
- <script type="text/javascript" src="/myschool/html/js/jquery.ui.widget.js"></script>
- <script type="text/javascript" src="/myschool/html/js/jquery.iframe-transport.js"></script>
- <script type="text/javascript" src="/myschool/html/js/jquery.fileupload.js"></script>
+
 
 <title>MySchool</title>
 </head>

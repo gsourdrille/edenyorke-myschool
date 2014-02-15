@@ -31,7 +31,7 @@
 					<div id="entete_comment">
 						<div id="comment_createur">
 							<?php if ($commentaire->fullCreateur->avatar!=null){?>
-								<img src="<?php echo FileUtils::getUtilisateurAvatar($commentaire->fullCreateur);?>" class="icon_user">
+								<img src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($commentaire->fullCreateur);?>&x=100&y=100&f=0 " class="icon_user">
 							<?php }else{?>
 								<img src="/myschool/html/images/icon_user.png" class="icon_user">  
 							<?php }?>

@@ -63,8 +63,10 @@ if(isset($_POST)){
 	
 	if(StringUtils::isEmpty($error)){
 		
-		//Faire une table provisoire? user provisoire?
-		
+		envoiMailDemandeInscription($etablissement, $utilisateur);
+		$array['reponse'] = "ok";
+		$logger = new Logger(Constants::LOGGER_LOCATION);
+		$logger->log('succes', 'myschool', "OK" , Logger::GRAN_VOID);
 		
 	}else{
 		$array['reponse'] = "ko";

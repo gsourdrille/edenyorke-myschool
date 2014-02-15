@@ -18,7 +18,7 @@
 		<a href="/myschool/core/controller/admin_infos_controller.php">
 			
 			<?php if ($utilisateur->avatar!=null){?>
-					<img src="<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>" class="icon_user">
+					<img src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>&x=100&y=100&f=0 " class="icon_user">
 				<?php }else{?>
 					<img src="/myschool/html/images/icon_user.png" class="icon_user">  
 				<?php }?>

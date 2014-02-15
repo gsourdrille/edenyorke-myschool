@@ -2,7 +2,7 @@
 	<div class="left_post">
 		<div id="logo_ecole">
 			<?php if ($etablissement->imagePrincipale!=null){?>
-				<img src="<?php echo FileUtils::getEtablissementImagePrincipale($etablissement);?>" class="icon_school" >
+				<img src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImagePrincipale($etablissement);?>&x=100&y=100&f=0 " class="icon_school" >
 			<?php }else{?>
 				<img src="/myschool/html/images/defaut_image_etablissement.jpeg" class="icon_school" >
 			<?php }?>

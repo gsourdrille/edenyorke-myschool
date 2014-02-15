@@ -2,7 +2,7 @@
 	<div id="center_conteneur">
 		<form action="/myschool/core/controller/admin_infos_controller.php" method="post" enctype="multipart/form-data">
 			 
-			<input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+			<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
 			
 			<div id="nom_info">
 				<label for="name">Nom : </label>
@@ -57,7 +57,7 @@
 			
 			<div id="admin_image" style="display: block">
 				<?php if ($utilisateur->avatar!=null){?>
-					<img src="<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>" width="100px" height="100px">
+					<img src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>&x=100&y=100&f=0 " width="100px" height="100px">
 				<?php }else{?>
 					<img src="/myschool/html/images/icon_user.png" width="100px" height="100px">
 				<?php }?>
@@ -91,27 +91,7 @@
 			<?php }?>
 		</form>	
 		
-		<div id="changeImage">
-		<?php if ($utilisateur->avatar!=null){?>
-			<img class="floatLeft" src="<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>" width="100px" height="100px">
-		<?php }else{?>
-			<img  class="floatLeft"  src="/myschool/html/images/icon_user.png" width="100px" height="100px">
-		<?php }?>
-		<form id="upload" method="post" action="/myschool/core/controller/admin_infos_controller.php" enctype="multipart/form-data">
-	            <input type="hidden" value="CHANGE_AVATAR" name="action" />
-	            <div id="drop">
-	                <a>Browse</a>
-	                <input type="file" name="upl"  />
-	            </div>
-	            <ul>
-	                <!-- The file uploads will be shown here -->
-	            </ul>
-	        </form>
-	     </div>
-	       <br/>
-		
-		
-		
+		<br/>		
 		<div id="ajoutClasseUser">
 			<?php include("admin_liste_classes.php"); ?>
 		</div>	

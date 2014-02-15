@@ -115,32 +115,6 @@ if (isset($_POST['submit'])){
 							$error = "Veuillez selectionner une ou plusieurs classes";
 						}
 					break;
-					case 'CHANGE_AVATAR':
-						//upload fichier
-						if ($_FILES['upl']['error']) {
-							switch ($_FILES['upl']['error']){
-								case 1: // UPLOAD_ERR_INI_SIZE
-									$error_image = "Le fichier dépasse la limite autorisée par le serveur !";
-									break;
-								case 2: // UPLOAD_ERR_FORM_SIZE
-									$error_image =  "Le fichier dépasse la limite autorisée dans le formulaire HTML !";
-									break;
-								case 3: // UPLOAD_ERR_PARTIAL
-									$error_image =  "L'envoi du fichier a été interrompu pendant le transfert !";
-									break;
-										
-							}
-						}
-						else {
-							if ((isset($_FILES['upl']['tmp_name'])&&($_FILES['upl']['error'] == UPLOAD_ERR_OK))) {
-								$path = FileUtils::createUtilisateurDir($utilisateur->idUser);
-								move_uploaded_file($_FILES['upl']['tmp_name'], $path."/".$_FILES['upl']['name']);
-								setImageToUtilisateur($utilisateur, $_FILES['upl']['name']);
-								$utilisateur->avatar = $_FILES['upl']['name'];
-								$_SESSION['USER'] = serialize($utilisateur);
-							}
-						}
-					break;
 				}
 				if(StringUtils::isEmpty($error)){
 					$array['reponse'] = "ok";
