@@ -19,7 +19,7 @@
 			
 			<div class="login_tools">
 				<div id="remember_me">
-					Se souvenir de moi <input type="checkbox">
+					Se souvenir de moi <input type="checkbox" name="autologin">
 				</div>
 				<div class="inscription_link">
 					<a href="#dev" onclick="showInscriptionBox();" >inscription</a>

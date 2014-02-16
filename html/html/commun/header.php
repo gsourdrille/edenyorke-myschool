@@ -25,4 +25,7 @@
 			<?php echo $utilisateur->prenom; ?> <?php echo $utilisateur->nom?>		
 		</a>
 	</div>
+	<div id="disconnect">
+		<a href="/myschool/html/html/login/index.php">deconnection</a>
+	</div>
 </div>

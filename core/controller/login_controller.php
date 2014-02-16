@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-
 require ($_SERVER['DOCUMENT_ROOT'].'/myschool/core/service/login_service.php');
 
 	$response['error'] = false;
@@ -12,6 +11,9 @@ require ($_SERVER['DOCUMENT_ROOT'].'/myschool/core/service/login_service.php');
 	$utilisateur = connect($username,$password);
 	if($utilisateur != null){
 		$_SESSION['USER'] = serialize($utilisateur);
+		if(isset($_POST['autologin']) && $_POST['autologin']){
+			saveAutologin($utilisateur);
+		}
 	}else{
 		$response['error'] = true;
 		$response['error_login'] = "Utilisateur inconnu";

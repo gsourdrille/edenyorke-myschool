@@ -215,6 +215,29 @@
  		return false;
  	}
  	
+ 	function saveAutologin($utilisateur,$key){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "UPDATE UTILISATEUR SET LOGIN_TOKEN='$key' WHERE ID_USER='$utilisateur->idUser'";
+ 		$result = $baseDao->sendRequest($requete);
+ 		$baseDao->close();
+ 		return true;
+ 	}
+ 	
+ 	function getUtilisateurByLoginToken($key){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE LOGIN_TOKEN='$key'";
+ 		$result = $baseDao->sendRequest($requete);
+ 		$row = mysqli_fetch_array($result);
+ 			if($row["ID_USER"] == null){
+ 				return null;
+ 			}
+ 			$utilisateur = $this->buildUtilisateur($row);
+ 			$baseDao->close();
+ 			return $utilisateur;
+ 	}
+ 	
  	public function buildUtilisateur($row){
   		$utilisateur = new Utilisateur();
  		$utilisateur->idUser = $row["ID_USER"];
