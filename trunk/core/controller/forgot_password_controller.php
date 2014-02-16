@@ -2,22 +2,19 @@
 require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
 
 if(isset($_POST)){
-	$error = false;
+	$reponse['error']=false;
 	$login = $_POST['username'];
 	if(StringUtils::isEmpty($login)){
-		$error="Le login ne peut être vide";
+		$reponse['error'] = true;
+		$reponse['error_login']="l'adresse email ne peut être vide";
 	}
-	if(StringUtils::isEmpty($error)){
+	if(!$reponse['error']){
 		if(sendNewPassword($login)){
-			$array['reponse'] = "ok";
 		}else{
-			$array['reponse'] = "ko";
-			$array['error'] = "Utilisateur inconnu";
+			$reponse['error'] = true;
+			$reponse['error_login'] = "Utilisateur inconnu";
 		}
-	}else{
-		$array['reponse'] = "ko";
-		$array['error'] = $error;
 	}
 
-echo json_encode($array);
+echo json_encode($reponse);
 }

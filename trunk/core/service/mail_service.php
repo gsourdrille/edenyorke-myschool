@@ -28,5 +28,6 @@ function envoiMailDemandeInscription($etablissement, $utilisateur){
 	$headers .='Content-Transfer-Encoding: 8bit';
 	$message ='<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8" /> <title>Demande d\'inscription MySchool !</title></head><body>Données : <br/>Nom etablissement : ' .$etablissement->nom.'<br/>Telephone '.$etablissement->telephone1.'<br/>Email '.$utilisateur->login.'<br/>Nom '.$utilisateur->nom.'<br/>Prenom '.$utilisateur->prenom.'<br/>Mot de passe '.$utilisateur->mdp.'</body></html>';
 	mail(Constants::MAIL_DEMANDE_INCRIPTION, 'Nouvelle inscription !', utf8_decode($message), $headers);
+	return true;
 }
 

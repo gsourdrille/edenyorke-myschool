@@ -4,12 +4,13 @@
 			Mode de passe oublié
 		</div>
 		<div class="loginInput">
-			<input class="loginForm" type="text" name="username" value="<?php if(isset($username)){echo $username;}?>" placeholder="Adresse email"/>
+			<input class="buttonForm" type="text" name="username" value="" placeholder="Adresse email"/>
 		</div>
+		<div id="error_forgot_general" class="error_formulaire" style="display:none"></div>
 		<div class="login_footer">
 			<div id="button_login">
-				<input id="envoyerDemandePassword" class="loginButton" type="submit" value="Envoyer">
-					<div id="error_forgot"></div>
+				<input id="envoyerDemandePassword" class="loginButton" type="button" onclick="demandeNouveauMotDePasse()"value="Envoyer">
+					<div id="error_forgot_general"></div>
 			</div>
 			<div class="login_tools">
 				<div class="inscription_link">

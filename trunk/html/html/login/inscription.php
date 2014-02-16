@@ -4,28 +4,33 @@
 			Inscription
 		</div>
 		<div class="loginInput">
-			<input class="loginForm" type="text" name="username" value="<?php if(isset($username)){echo $username;}?>" placeholder="Adresse email"/>
+			<input class="buttonForm" type="text" name="username" value="" placeholder="Adresse email"/>
+		</div>
+		<div id="error_inscription_login" class="error_formulaire" style="display:none"></div>
+		<div class="loginInput">
+			<input class="buttonForm" type="password" name="password" value="" placeholder="Mot de passe"/>
+		</div>
+		<div id="error_inscription_mdp" class="error_formulaire" style="display:none"></div>
+		<div class="loginInput">
+			<input class="buttonForm" type="password" name="password_bis" value="" placeholder="Répeter mot de passe"/>
 		</div>
 		<div class="loginInput">
-			<input class="loginForm" type="password" name="password" value="<?php if(isset($password)){echo $password;}?>" placeholder="Mot de passe"/>
+			<input class="buttonForm" type="text" name="nom" value="" placeholder="Nom"/>
 		</div>
+		<div id="error_inscription_nom" class="error_formulaire" style="display:none"></div>
 		<div class="loginInput">
-			<input class="loginForm" type="password" name="password_bis" value="<?php if(isset($password_bis)){echo $password_bis;}?>" placeholder="Répeter mot de passe"/>
+			<input class="buttonForm" type="text" name="prenom" value="" placeholder="Prénom"/>
 		</div>
+		<div id="error_inscription_prenom" class="error_formulaire" style="display:none"></div>
 		<div class="loginInput">
-			<input class="loginForm" type="text" name="nom" value="<?php if(isset($nom)){echo $nom;}?>" placeholder="Nom"/>
+			<input class="buttonForm" type="text" name="code" value="" placeholder="Code classe"/>
 		</div>
-		<div class="loginInput">
-			<input class="loginForm" type="text" name="prenom" value="<?php if(isset($prenom)){echo $prenom;}?>" placeholder="Prénom"/>
-		</div>
-		<div class="loginInput">
-			<input class="loginForm" type="text" name="code" value="<?php if(isset($code)){echo $code;}?>" placeholder="Code classe"/>
-		</div>
+		<div id="error_inscription_code" class="error_formulaire"></div>
 		<div class="login_footer">
 			<div id="button_login">
-				<input id="envoyer" class="loginButton" type="submit" value="Envoyer">
-					<div id="error_inscription"></div>
+				<input id="envoyer" type="button" class="loginButton" onclick="inscription()" value="Envoyer">
 			</div>
+			<div id="error_inscription_general" class="error_formulaire" style="display:none"></div>
 			<div class="login_tools">
 				<div class="inscription_link">
 					<a href="#dev" onclick="hideInsciptionBox();" >connexion</a>
