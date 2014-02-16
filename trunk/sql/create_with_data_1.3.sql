@@ -2,22 +2,22 @@
 -- version 4.0.6
 -- http://www.phpmyadmin.net
 --
--- Client: localhost
--- Généré le: Ven 14 Février 2014 à 14:10
--- Version du serveur: 5.5.33
--- Version de PHP: 5.5.3
+-- Host: localhost
+-- Generation Time: Feb 17, 2014 at 12:03 AM
+-- Server version: 5.5.33
+-- PHP Version: 5.5.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Base de données: `myschool`
+-- Database: `myschool`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ACTIVATION`
+-- Table structure for table `ACTIVATION`
 --
 
 CREATE TABLE `ACTIVATION` (
@@ -26,10 +26,18 @@ CREATE TABLE `ACTIVATION` (
   KEY `ID_USER_ACTIVATION` (`ID_USER`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ACTIVATION`
+--
+
+INSERT INTO `ACTIVATION` (`ID_USER`, `TOKEN`) VALUES
+(16, '2qHZqvSJgdeY6ARGkkUa7RwnJyzUBbwt'),
+(17, 'HKO9swxfeAdaFSTpsnMG8GfBYpVJ7cxF');
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `CLASSE`
+-- Table structure for table `CLASSE`
 --
 
 CREATE TABLE `CLASSE` (
@@ -40,10 +48,10 @@ CREATE TABLE `CLASSE` (
   `CODE_ENSEIGNANT` varchar(8) NOT NULL,
   PRIMARY KEY (`ID_CLASSE`),
   KEY `FK_RELATION_2` (`ID_NIVEAU`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
--- Contenu de la table `CLASSE`
+-- Dumping data for table `CLASSE`
 --
 
 INSERT INTO `CLASSE` (`ID_CLASSE`, `ID_NIVEAU`, `NOM`, `CODE_ELEVE`, `CODE_ENSEIGNANT`) VALUES
@@ -59,12 +67,13 @@ INSERT INTO `CLASSE` (`ID_CLASSE`, `ID_NIVEAU`, `NOM`, `CODE_ELEVE`, `CODE_ENSEI
 (24, 11, 'sdfsdfdfd', '6qjjPjEr', ''),
 (25, 10, 'zezeaz', '2c33a4x5', ''),
 (26, 10, 'sqdqsd', 'WMhuJMjx', ''),
-(27, 11, 'dscdssddsdsdssdd', 'uTrbWO3c', 'SdThcHuz');
+(27, 11, 'dscdssddsdsdssdd', 'uTrbWO3c', 'SdThcHuz'),
+(28, 12, 'classe 1', 'SD2RJmG2', 'vcrfVT4P');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `COMMENTAIRE`
+-- Table structure for table `COMMENTAIRE`
 --
 
 CREATE TABLE `COMMENTAIRE` (
@@ -76,19 +85,21 @@ CREATE TABLE `COMMENTAIRE` (
   PRIMARY KEY (`ID_COMMENTAIRE`),
   KEY `INDEX_COMMENTAIRE_POST` (`ID_POST`),
   KEY `INDEX_COMMENTAIRE_USER` (`ID_USER`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
 
 --
--- Contenu de la table `COMMENTAIRE`
+-- Dumping data for table `COMMENTAIRE`
 --
 
 INSERT INTO `COMMENTAIRE` (`ID_COMMENTAIRE`, `ID_POST`, `ID_USER`, `CONTENU`, `DATE_CREATION`) VALUES
-(68, 34, 10, 'test', '2014-01-07 22:29:26');
+(68, 34, 10, 'test', '2014-01-07 22:29:26'),
+(69, 56, 5, 'test', '2014-02-05 22:20:21'),
+(70, 60, 5, 'test', '2014-02-15 22:46:14');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ETABLISSEMENT`
+-- Table structure for table `ETABLISSEMENT`
 --
 
 CREATE TABLE `ETABLISSEMENT` (
@@ -101,22 +112,22 @@ CREATE TABLE `ETABLISSEMENT` (
   `TELEPHONE_2` text CHARACTER SET latin1,
   `FAX` text CHARACTER SET latin1,
   `IMAGE_PRINCIPALE` text CHARACTER SET utf8,
-  `IMAGE_FOND` text CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `IMAGE_FOND` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`ID_ETABLISSEMENT`),
   KEY `ID_ETABLISSEMENT` (`ID_ETABLISSEMENT`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
 
 --
--- Contenu de la table `ETABLISSEMENT`
+-- Dumping data for table `ETABLISSEMENT`
 --
 
 INSERT INTO `ETABLISSEMENT` (`ID_ETABLISSEMENT`, `NOM`, `ADRESSE`, `CODE_POSTAL`, `VILLE`, `TELEPHONE_1`, `TELEPHONE_2`, `FAX`, `IMAGE_PRINCIPALE`, `IMAGE_FOND`) VALUES
-(2, 'Lycée saint Martin 2', '29 rue d''entrain 2', '35000', 'Rennes', '02.99.01.02.03', '02.99.00.00.00', '02.99.01.02.05', 'Argentina.gif', '');
+(2, 'Lycée saint Martin 2', '29 rue d''entrain 2', '35000', 'Rennes', '02.99.01.02.03', '02.99.00.00.00', '02.99.01.02.05', 'Alesk.JPG', 'P1000603.JPG');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `NIVEAU`
+-- Table structure for table `NIVEAU`
 --
 
 CREATE TABLE `NIVEAU` (
@@ -128,11 +139,11 @@ CREATE TABLE `NIVEAU` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
--- Contenu de la table `NIVEAU`
+-- Dumping data for table `NIVEAU`
 --
 
 INSERT INTO `NIVEAU` (`ID_NIVEAU`, `ID_ETABLISSEMENT`, `NOM`) VALUES
-(8, 2, '1?®re'),
+(8, 2, '1ère'),
 (10, 2, '2nd'),
 (11, 2, '6eme'),
 (12, 2, '11eme'),
@@ -142,7 +153,7 @@ INSERT INTO `NIVEAU` (`ID_NIVEAU`, `ID_ETABLISSEMENT`, `NOM`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `PIECE_JOINTE`
+-- Table structure for table `PIECE_JOINTE`
 --
 
 CREATE TABLE `PIECE_JOINTE` (
@@ -152,19 +163,24 @@ CREATE TABLE `PIECE_JOINTE` (
   `PATH` text NOT NULL,
   PRIMARY KEY (`ID_PJ`),
   KEY `ID_POST` (`ID_POST`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
--- Contenu de la table `PIECE_JOINTE`
+-- Dumping data for table `PIECE_JOINTE`
 --
 
 INSERT INTO `PIECE_JOINTE` (`ID_PJ`, `ID_POST`, `CONTENT_TYPE`, `PATH`) VALUES
-(10, 34, 'image/jpeg', '326ec86c303fa367bfad907b7659c056-500x500.jpg');
+(10, 34, 'image/jpeg', '326ec86c303fa367bfad907b7659c056-500x500.jpg'),
+(11, 58, 'image/png', 'ouestu_114.png'),
+(12, 58, 'image/png', 'tourdegarde_retina.png'),
+(13, 58, 'image/jpeg', 'Carte identite Guillaume.jpeg'),
+(14, 58, 'application/pdf', 'Panier - IKEA.pdf'),
+(24, 60, 'image/jpeg', 'P1050146.JPG');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `POST`
+-- Table structure for table `POST`
 --
 
 CREATE TABLE `POST` (
@@ -176,10 +192,10 @@ CREATE TABLE `POST` (
   `COMMENTAIRES_ACTIVES` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ID_POST`),
   KEY `FK_CREATEUR` (`ID_USER`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=61 ;
 
 --
--- Contenu de la table `POST`
+-- Dumping data for table `POST`
 --
 
 INSERT INTO `POST` (`ID_POST`, `ID_USER`, `DATE_CREATION`, `DATE_DERNIERE_MODIFICATION`, `CONTENU`, `COMMENTAIRES_ACTIVES`) VALUES
@@ -203,15 +219,21 @@ INSERT INTO `POST` (`ID_POST`, `ID_USER`, `DATE_CREATION`, `DATE_DERNIERE_MODIFI
 (32, 10, '2014-01-05 22:30:36', NULL, '<p>ceci est un super post</p>', 1),
 (33, 10, '2014-01-05 22:38:25', NULL, '<p>zezqdqdqs</p>', 1),
 (34, 10, '2014-01-07 21:40:15', '2014-01-07 22:28:55', '<p><strong>cec est un test</strong></p>', 1),
-(42, 5, '2014-01-12 09:16:46', NULL, '<p>eazeaze</p>', 1),
-(43, 5, '2014-01-12 09:17:38', NULL, '<p>qsqs</p>', 1),
-(44, 5, '2014-01-12 09:17:43', NULL, '<p>qsqsqsqsqsQ</p>', 1),
-(45, 5, '2014-01-12 09:20:07', NULL, '<p>zaezaeazzae</p>', 1),
-(46, 5, '2014-01-12 09:23:09', '2014-01-12 09:29:34', '<p>qSQsq</p>', 1),
-(47, 5, '2014-01-12 09:23:16', '2014-01-12 09:29:29', '<p>qSQsqqsqs</p>', 1);
+(48, 5, '2014-02-03 22:42:03', NULL, '<p>1</p>', 1),
+(49, 5, '2014-02-03 22:42:10', NULL, '<p>2</p>', 1),
+(50, 5, '2014-02-03 22:42:16', NULL, '<p>3</p>', 1),
+(51, 5, '2014-02-03 22:42:33', NULL, '<p>4</p>', 1),
+(52, 5, '2014-02-03 22:42:43', NULL, '<p>5</p>', 1),
+(53, 5, '2014-02-03 22:42:53', NULL, '<p>6</p>', 1),
+(54, 5, '2014-02-05 22:15:13', NULL, '<p>test</p>', 1),
+(55, 5, '2014-02-05 22:16:51', NULL, '<p>test</p>', 1),
+(56, 5, '2014-02-05 22:20:08', NULL, '<p>ghfghgfh</p>', 1),
+(57, 9, '2014-02-07 22:36:50', NULL, '<p>super</p>', 1),
+(58, 5, '2014-02-07 23:19:40', '2014-02-09 11:11:17', '<p>test</p>', 1),
+(60, 5, '2014-02-09 15:22:50', '2014-02-16 18:03:59', '<p>test photo</p>', 1);
 
 --
--- Déclencheurs `POST`
+-- Triggers `POST`
 --
 DROP TRIGGER IF EXISTS `UPDATE_POST_TIMESTAMP`;
 DELIMITER //
@@ -223,7 +245,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `POST_CLASSE`
+-- Table structure for table `POST_CLASSE`
 --
 
 CREATE TABLE `POST_CLASSE` (
@@ -234,7 +256,7 @@ CREATE TABLE `POST_CLASSE` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `POST_CLASSE`
+-- Dumping data for table `POST_CLASSE`
 --
 
 INSERT INTO `POST_CLASSE` (`ID_POST`, `ID_CLASSE`) VALUES
@@ -244,7 +266,7 @@ INSERT INTO `POST_CLASSE` (`ID_POST`, `ID_CLASSE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `POST_ETABLISSEMENT`
+-- Table structure for table `POST_ETABLISSEMENT`
 --
 
 CREATE TABLE `POST_ETABLISSEMENT` (
@@ -255,7 +277,7 @@ CREATE TABLE `POST_ETABLISSEMENT` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `POST_ETABLISSEMENT`
+-- Dumping data for table `POST_ETABLISSEMENT`
 --
 
 INSERT INTO `POST_ETABLISSEMENT` (`ID_POST`, `ID_ETABLISSEMENT`) VALUES
@@ -265,12 +287,19 @@ INSERT INTO `POST_ETABLISSEMENT` (`ID_POST`, `ID_ETABLISSEMENT`) VALUES
 (44, 2),
 (45, 2),
 (46, 2),
-(47, 2);
+(47, 2),
+(54, 2),
+(55, 2),
+(56, 2),
+(57, 2),
+(58, 2),
+(59, 2),
+(60, 2);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `POST_NIVEAU`
+-- Table structure for table `POST_NIVEAU`
 --
 
 CREATE TABLE `POST_NIVEAU` (
@@ -281,19 +310,25 @@ CREATE TABLE `POST_NIVEAU` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `POST_NIVEAU`
+-- Dumping data for table `POST_NIVEAU`
 --
 
 INSERT INTO `POST_NIVEAU` (`ID_POST`, `ID_NIVEAU`) VALUES
 (3, 10),
 (29, 10),
 (33, 10),
-(34, 10);
+(34, 10),
+(48, 12),
+(49, 12),
+(50, 12),
+(51, 12),
+(52, 12),
+(53, 12);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `TYPE_UTILISATEUR`
+-- Table structure for table `TYPE_UTILISATEUR`
 --
 
 CREATE TABLE `TYPE_UTILISATEUR` (
@@ -304,7 +339,7 @@ CREATE TABLE `TYPE_UTILISATEUR` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `TYPE_UTILISATEUR`
+-- Dumping data for table `TYPE_UTILISATEUR`
 --
 
 INSERT INTO `TYPE_UTILISATEUR` (`ID_TYPE_UTILISATEUR`, `VALEUR`, `LIBELLE`) VALUES
@@ -316,7 +351,7 @@ INSERT INTO `TYPE_UTILISATEUR` (`ID_TYPE_UTILISATEUR`, `VALEUR`, `LIBELLE`) VALU
 -- --------------------------------------------------------
 
 --
--- Structure de la table `UTILISATEUR`
+-- Table structure for table `UTILISATEUR`
 --
 
 CREATE TABLE `UTILISATEUR` (
@@ -328,28 +363,31 @@ CREATE TABLE `UTILISATEUR` (
   `MOT_DE_PASSE` text,
   `AVATAR` text,
   `active` tinyint(1) NOT NULL DEFAULT '0',
+  `LOGIN_TOKEN` text NOT NULL,
   PRIMARY KEY (`ID_USER`),
   KEY `ID_ETABLISSEMENT` (`ID_ETABLISSEMENT`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
--- Contenu de la table `UTILISATEUR`
+-- Dumping data for table `UTILISATEUR`
 --
 
-INSERT INTO `UTILISATEUR` (`ID_USER`, `ID_ETABLISSEMENT`, `NOM`, `PRENOM`, `LOGIN`, `MOT_DE_PASSE`, `AVATAR`, `active`) VALUES
-(5, 2, 'SOURDRILLE', 'Guillaume', 'edenyorke', 'fc2789a2f2f3303f7322efa51bb5882fe034a321', 'Canada.gif', 1),
-(9, 2, 'Enseignant', '1', 'enseignant1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0),
-(10, 2, 'Eleve', 'ren?©', 'eleve1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', 'ouestu_114.png', 0),
-(11, 2, 'Eleve2', 'eleve2', 'eleve2', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0),
-(12, 2, 'Eleve2', 'eleve2', 'eleve@gmail.com', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0),
-(13, 2, 'AAA', 'AAA', 'qsqS@yahhoo.fr', '606ec6e9bd8a8ff2ad14e5fade3f264471e82251', NULL, 0),
-(14, 2, 'Eleve2', 'eleve2', 'gsourdrille@yopmail.com', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0),
-(15, 2, 'el', 'el', 'gsourdrille2@yopmail.com', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0);
+INSERT INTO `UTILISATEUR` (`ID_USER`, `ID_ETABLISSEMENT`, `NOM`, `PRENOM`, `LOGIN`, `MOT_DE_PASSE`, `AVATAR`, `active`, `LOGIN_TOKEN`) VALUES
+(5, 2, 'SOURDRILLE', 'Guillaume', 'edenyorke', 'fc2789a2f2f3303f7322efa51bb5882fe034a321', 'P1000590.JPG', 1, 'd43ad6656739265566acdee5d843896cbbaf170a'),
+(9, 2, 'Enseignant', '1', 'enseignant1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 1, ''),
+(10, 2, 'Eleve', 'rené', 'eleve1', '7e240de74fb1ed08fa08d38063f6a6a91462a815', 'ouestu_114.png', 0, ''),
+(11, 2, 'Eleve2', 'eleve2', 'eleve2', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0, ''),
+(12, 2, 'Eleve2', 'eleve2', 'eleve@gmail.com', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0, ''),
+(13, 2, 'AAA', 'AAA', 'qsqS@yahhoo.fr', '606ec6e9bd8a8ff2ad14e5fade3f264471e82251', NULL, 0, ''),
+(14, 2, 'aaa', 'aaa', 'gsourdrille2@yopmail.com', '2fdcff54423c2985749282b4ce5fa540b67b9bd1', 'ouestu_114.png', 1, ''),
+(15, 2, 'enseignant2', 'enseignant2', 'e2', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 1, ''),
+(16, 2, 'nom', 'prenom', 'gsourdrille8@yopmail.com', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0, ''),
+(17, 2, 'nom', 'n', 'test8@yahoo.fr', '7e240de74fb1ed08fa08d38063f6a6a91462a815', NULL, 0, '');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `UTILISATEUR_CLASSE`
+-- Table structure for table `UTILISATEUR_CLASSE`
 --
 
 CREATE TABLE `UTILISATEUR_CLASSE` (
@@ -360,22 +398,32 @@ CREATE TABLE `UTILISATEUR_CLASSE` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `UTILISATEUR_CLASSE`
+-- Dumping data for table `UTILISATEUR_CLASSE`
 --
 
 INSERT INTO `UTILISATEUR_CLASSE` (`ID_CLASSE`, `ID_USER`) VALUES
+(28, 5),
 (2, 9),
 (3, 10),
 (27, 11),
 (27, 12),
 (27, 13),
-(27, 14),
-(27, 15);
+(20, 14),
+(13, 15),
+(22, 16),
+(27, 16),
+(22, 17),
+(27, 17),
+(20, 18),
+(22, 19),
+(19, 20),
+(19, 21),
+(27, 22);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `UTILISATEUR_NIVEAU`
+-- Table structure for table `UTILISATEUR_NIVEAU`
 --
 
 CREATE TABLE `UTILISATEUR_NIVEAU` (
@@ -388,7 +436,7 @@ CREATE TABLE `UTILISATEUR_NIVEAU` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `UTILISATEUR_TYPE_UTILISATEUR`
+-- Table structure for table `UTILISATEUR_TYPE_UTILISATEUR`
 --
 
 CREATE TABLE `UTILISATEUR_TYPE_UTILISATEUR` (
@@ -400,62 +448,70 @@ CREATE TABLE `UTILISATEUR_TYPE_UTILISATEUR` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `UTILISATEUR_TYPE_UTILISATEUR`
+-- Dumping data for table `UTILISATEUR_TYPE_UTILISATEUR`
 --
 
 INSERT INTO `UTILISATEUR_TYPE_UTILISATEUR` (`ID_USER`, `ID_TYPE_UTILISATEUR`) VALUES
 (5, 1),
 (9, 2),
+(15, 2),
 (10, 3),
 (11, 3),
 (12, 3),
 (13, 3),
 (14, 3),
-(15, 3);
+(15, 3),
+(16, 3),
+(17, 3),
+(18, 3),
+(19, 3),
+(20, 3),
+(21, 3),
+(22, 3);
 
 --
--- Contraintes pour les tables exportées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `ACTIVATION`
+-- Constraints for table `ACTIVATION`
 --
 ALTER TABLE `ACTIVATION`
   ADD CONSTRAINT `activation_ibfk_1` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `CLASSE`
+-- Constraints for table `CLASSE`
 --
 ALTER TABLE `CLASSE`
   ADD CONSTRAINT `FK_RELATION_2` FOREIGN KEY (`ID_NIVEAU`) REFERENCES `NIVEAU` (`ID_NIVEAU`);
 
 --
--- Contraintes pour la table `COMMENTAIRE`
+-- Constraints for table `COMMENTAIRE`
 --
 ALTER TABLE `COMMENTAIRE`
   ADD CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`) ON DELETE CASCADE,
   ADD CONSTRAINT `commentaire_ibfk_2` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `NIVEAU`
+-- Constraints for table `NIVEAU`
 --
 ALTER TABLE `NIVEAU`
   ADD CONSTRAINT `niveau_ibfk_1` FOREIGN KEY (`ID_ETABLISSEMENT`) REFERENCES `ETABLISSEMENT` (`ID_ETABLISSEMENT`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `PIECE_JOINTE`
+-- Constraints for table `PIECE_JOINTE`
 --
 ALTER TABLE `PIECE_JOINTE`
   ADD CONSTRAINT `piece_jointe_ibfk_1` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `POST`
+-- Constraints for table `POST`
 --
 ALTER TABLE `POST`
   ADD CONSTRAINT `FK_CREATEUR` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`);
 
 --
--- Contraintes pour la table `POST_CLASSE`
+-- Constraints for table `POST_CLASSE`
 --
 ALTER TABLE `POST_CLASSE`
   ADD CONSTRAINT `FK_POST_CLASSE` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`) ON DELETE CASCADE,
