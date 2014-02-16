@@ -61,6 +61,14 @@ select{
   float:left;
 }
 
+#disconnect {
+  color: #FFFFFF;
+  font-size: 12px;
+  margin: 10px 0 0 10px;
+  width:100px;
+  float:left;
+}
+
 .icon_user{
 	width:30px;
 	height:30px;

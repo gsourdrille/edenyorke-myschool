@@ -1,8 +1,9 @@
 
-	<div id="main_conteneur" style="background-image: url('<?php echo FileUtils::getEtablissementImageFond($etablissement);?>')">
+	<div id="main_conteneur" style="background-image: url('/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImageFond($etablissement);?>&x=700&y=700&f=0&q=100')">
 		<div id="post_conteneur">
 			<?php include("left.php"); ?>
 			<?php include("center.php"); ?>
 		</div>
 	</div> 
 
+ 
