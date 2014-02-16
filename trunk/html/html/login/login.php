@@ -2,10 +2,10 @@
 		<div class="connexion_text">
 			Connexion
 		</div>
-		<div class="loginInput">
+		<div class="formulaireInput">
 			<input class="buttonForm" type="text" name="username" value="" placeholder="Adresse email"/>
 		</div>
-		<div class="loginInput">
+		<div class="formulaireInput">
 			<input class="buttonForm" type="password" name="password" value="" placeholder="Mot de passe"/>
 		</div>
 		<div id="error_login_general" class="error_formulaire" style="display:none"></div>
@@ -22,12 +22,12 @@
 					Se souvenir de moi <input type="checkbox">
 				</div>
 				<div class="inscription_link">
-					<a href="#dev" onclick="showInsciptionBox();" >inscription</a>
+					<a href="#dev" onclick="showInscriptionBox();" >inscription</a>
 				</div>
 			</div>
 		</div>
 		
 	</form>
 	<div id="demande_inscription" class="demande_inscription_link" >
-		<a href="#dev" onclick="showDemandeInsciptionBox();" >Inscrire votre établissement</a>
+		<a href="#dev" onclick="showDemandeInscriptionBox();" >Inscrire votre établissement</a>
 	</div>

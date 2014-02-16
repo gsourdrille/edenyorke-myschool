@@ -3,7 +3,7 @@
 		<div class="forgot_text">
 			Mode de passe oublié
 		</div>
-		<div class="loginInput">
+		<div class="formulaireInput">
 			<input class="buttonForm" type="text" name="username" value="" placeholder="Adresse email"/>
 		</div>
 		<div id="error_forgot_general" class="error_formulaire" style="display:none"></div>

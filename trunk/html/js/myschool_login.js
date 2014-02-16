@@ -168,12 +168,12 @@ function inscription(){
 
 
  
- function showInsciptionBox(){
+ function showInscriptionBox(){
 	 $("#login_conteneur").hide();
 	 $("#register_conteneur").show();
  }
  
- function hideInsciptionBox(){
+ function hideInscriptionBox(){
 	 $("#login_conteneur").show();
 	 $("#register_conteneur").hide();
  }
@@ -184,12 +184,12 @@ function inscription(){
 	 $("#inscription_succes").hide();
  }
  
- function showDemandeInsciptionBox(){
+ function showDemandeInscriptionBox(){
 	 $("#login_conteneur").hide();
 	 $("#register_etablissement_conteneur").show();
  }
  
- function hideDemandeInsciptionBox(){
+ function hideDemandeInscriptionBox(){
 	 $("#login_conteneur").show();
 	 $("#register_etablissement_conteneur").hide();
  }
