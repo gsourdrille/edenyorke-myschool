@@ -20,17 +20,13 @@
 			<?php include("inscription.php"); ?>
 		</div>
 		<div id="inscription_succes">
-			<div class="connexion_text">
-				Félicitation !
-			</div>
+			<?php include("inscription_succes.php");?>
 		</div>
 		<div id="register_etablissement_conteneur">
 			<?php include("demande_inscription.php");?>
 		</div>
 		<div id="demande_inscription_succes">
-			<div class="connexion_text" style="margin-left:60px">
-				Etatblissement Félicitation !
-			</div>
+			<?php include("demande_inscription_succes.php")?>
 		</div>
 	</div> 
 
