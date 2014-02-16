@@ -19,6 +19,8 @@
 <?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/header.php"); ?>
 </div>
 <?php include("body.php"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/footer.php"); ?>
+<div id="footer">
+			<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/footer.php"); ?>
+		</div>
 </body>
 </html>

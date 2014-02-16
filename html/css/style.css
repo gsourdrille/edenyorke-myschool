@@ -37,6 +37,22 @@ select{
 	min-height:40px;
 }
 
+#footer {
+  background: url("../images/header_bg.png") repeat-x scroll 0 0 #89AB0C;
+  border-bottom: 1px solid #7D9E0C;
+  position: relative;
+  min-height:80px;
+}
+
+#footer_content{
+	
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	width: 1200px;
+	min-height:80px;
+}
+
 #user {
   color: #FFFFFF;
   font-size: 14px;
@@ -117,7 +133,7 @@ select{
 #main_conteneur{
 	width: 1400px;
 	margin:0 auto;
-	height: 1000px;
+	min-height: 700px;
 	background-repeat:no-repeat;
 	background-size : cover;
 	
