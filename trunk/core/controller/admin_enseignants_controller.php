@@ -86,6 +86,7 @@ if(isset($_GET['action'])){
 	}
 	$showEnseignant = true;
 	if($error==false){
+		$enseignant->active = 1;
 		if(saveOrUpdateUtilisateur($enseignant,Type_Utilisateur::ENSEIGNANT)){
 			if(isset($_POST['selectClasseto'])){
 				$listeClasse = $_POST['selectClasseto'];

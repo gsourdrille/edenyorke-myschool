@@ -86,6 +86,7 @@ if(isset($_GET['action'])){
 	}
 	$showEleve = true;
 	if($error==false){
+		$eleve->active = 1;
 		if(saveOrUpdateUtilisateur($eleve,Type_Utilisateur::ELEVE)){
 			if(isset($_POST['selectClasseto'])){
 				$listeClasse = $_POST['selectClasseto'];

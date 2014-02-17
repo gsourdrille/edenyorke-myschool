@@ -58,16 +58,19 @@
 				<div class="floatleft"> 
 				Classes : 
 					<select id="liste_classes" size="6"  onclick="loadClasses()">
-						<?php  foreach ($listeClasses as $selectClasse){
-							$selected = false;
-							if(isset($_SESSION['CLASSE_SELECTED']) && $_SESSION['CLASSE_SELECTED'] == $selectClasse->idClasse){
-								$selected = true;
-							}
-							echo "<option value='$selectClasse->idClasse' ";
-							if($selected){
-								echo "selected=selected";
-							}
-							echo ">$selectClasse->nom</option>";
+						<?php  
+							if(isset($listeClasses)){
+								foreach ($listeClasses as $selectClasse){
+								$selected = false;
+								if(isset($_SESSION['CLASSE_SELECTED']) && $_SESSION['CLASSE_SELECTED'] == $selectClasse->idClasse){
+									$selected = true;
+								}
+								echo "<option value='$selectClasse->idClasse' ";
+								if($selected){
+									echo "selected=selected";
+								}
+								echo ">$selectClasse->nom</option>";
+								}
 							}?>
 					</select>
 					<form action="/myschool/core/controller/admin_niveaux_controller.php" method="post">
