@@ -111,7 +111,6 @@ if(isset($_POST['saveNiveau'])){
 		if(saveOrUpdateClasse($classe)){
 			$succesClasse = "Vos informations ont été mises à jour";
 			$_SESSION['CLASSE_SELECTED'] = $classe->idClasse;
-			$listeClasses = getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
 		}else{
 			$succesClasse = "Une erreur est survenue lors de la mise à jour";
 		}

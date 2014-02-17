@@ -4,6 +4,7 @@ session_start();
 require ($_SERVER['DOCUMENT_ROOT'].'/myschool/core/service/login_service.php');
 
 	// Récupération de la valeur du cookie
+	if(isset($_COOKIE['mysauto'])){
 	$key = $_COOKIE['mysauto'];
 	$logger = new Logger(Constants::LOGGER_LOCATION);
 	$logger->log('succes', 'myschool', "LECTURE COOKIE", Logger::GRAN_VOID);
@@ -16,5 +17,8 @@ require ($_SERVER['DOCUMENT_ROOT'].'/myschool/core/service/login_service.php');
 		}else{
 			header("location:/myschool/html/html/login/index.php");
 		}
+	}
+	}else {
+		header("location:/myschool/html/html/login/index.php");
 	}
 

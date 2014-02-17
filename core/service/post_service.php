@@ -1,5 +1,6 @@
 <?php
 require_once  ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/commun_service.php");
+require_once  ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/mail_service.php");
 
 function getClassesIdByUser($idUser){
 	$classeDao = new ClasseDao();
@@ -169,4 +170,42 @@ function processPieceJointe($postfile,$file,$post,$name){
 	$pieceJointe->contentType = $postfile['type'][$file];
 	$pieceJointe->path = $name;
 	return $pieceJointe;
+}
+
+function envoiMailNotification($post, $utilisateur){
+	$logger = new Logger(Constants::LOGGER_LOCATION);
+	$logger->log('mail', 'myschool', "ENVOI MAIL : ", Logger::GRAN_VOID);
+	$postDao = new PostDao();
+	$utilisateurDao = new UtilisateurDao();
+	$listeAssociations = $postDao->getAssociations($post->idPost);
+	$listeUtilisateurs = Array();
+	foreach($listeAssociations as $association){
+		switch ($association->typePost){
+			case TypePost::ETABLISSEMENT:
+				$listeUtilisateursEtablissement = $utilisateurDao->getUtilisateurByEtablissement($association->id);
+				$listeUtilisateurs = array_merge($listeUtilisateurs,$listeUtilisateursEtablissement->getArrayCopy());
+			break;
+			case TypePost::NIVEAU:
+				$listeUtilisateursNiveau = $utilisateurDao->getUtilisateurByNiveaux($association->id);
+				$listeUtilisateurs = array_merge($listeUtilisateurs,$listeUtilisateursNiveau->getArrayCopy());
+			break;
+			case TypePost::CLASSE:
+				$listeUtilisateursClasse = $utilisateurDao->getUtilisateurByClasses($association->id);
+				$listeUtilisateurs = array_merge($listeUtilisateurs,$listeUtilisateursClasse->getArrayCopy());
+			break;
+		}
+		$listeUtilisateurs = array_unique($listeUtilisateurs);
+		foreach ($listeUtilisateurs as $user){
+			$logger->log('mail', 'myschool', "USER AVANT: ".$user->fullname(), Logger::GRAN_VOID);
+		}
+		
+	}
+	
+	if(($key = array_search($utilisateur->idUser, $listeUtilisateurs)) !== false) {
+		unset($listeUtilisateurs[$key]);
+	}
+	
+	
+	envoiMailNotificationPost($post, $utilisateur, $listeUtilisateurs);
+	
 }

@@ -13,8 +13,8 @@
  			$prenom = $baseDao->escapeString($utilisateur->prenom);
  			$login = $baseDao->escapeString($utilisateur->login);
  			
- 			$requete = "INSERT INTO UTILISATEUR (NOM,PRENOM,LOGIN,MOT_DE_PASSE,ID_ETABLISSEMENT) 
- 						VALUES ('$nom', '$prenom', '$login', '$utilisateur->mdp', '$utilisateur->etablissement') ";
+ 			$requete = "INSERT INTO UTILISATEUR (NOM,PRENOM,LOGIN,MOT_DE_PASSE,ID_ETABLISSEMENT,ACTIVE) 
+ 						VALUES ('$nom', '$prenom', '$login', '$utilisateur->mdp', '$utilisateur->etablissement',$utilisateur->active) ";
  			$result = $baseDao->sendRequest($requete);
  			$requete = "SELECT LAST_INSERT_ID() FROM UTILISATEUR";
  			$result = $baseDao->lastInsertId();
@@ -236,6 +236,46 @@
  			$utilisateur = $this->buildUtilisateur($row);
  			$baseDao->close();
  			return $utilisateur;
+ 	}
+ 	
+ 	
+ 	function getUtilisateurByEtablissement($idEtablissement){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_ETABLISSEMENT='$idEtablissement' AND ACTIVE=1";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$listeUtilisateurs = new ArrayObject();
+ 		while($row = mysqli_fetch_array($resulat)){
+ 			$listeUtilisateurs->append($this->buildUtilisateur($row));
+ 		}
+ 		$baseDao->close();
+ 		return $listeUtilisateurs;
+ 	}
+ 	
+ 	function getUtilisateurByNiveaux($idNiveau){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_USER IN (SELECT ID_USER FROM UTILISATEUR_CLASSE WHERE ID_CLASSE IN (SELECT ID_CLASSE FROM CLASSE WHERE ID_NIVEAU = $idNiveau))  AND ACTIVE=1";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$listeUtilisateurs = new ArrayObject();
+ 		while($row = mysqli_fetch_array($resulat)){
+ 			$listeUtilisateurs->append($this->buildUtilisateur($row));
+ 		}
+ 		$baseDao->close();
+ 		return $listeUtilisateurs;
+ 	}
+ 	
+ 	function getUtilisateurByClasses($idClasse){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_USER IN (SELECT ID_USER FROM UTILISATEUR_CLASSE WHERE ID_CLASSE = $idClasse)  AND ACTIVE=1";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$listeUtilisateurs = new ArrayObject();
+ 		while($row = mysqli_fetch_array($resulat)){
+ 			$listeUtilisateurs->append($this->buildUtilisateur($row));
+ 		}
+ 		$baseDao->close();
+ 		return $listeUtilisateurs;
  	}
  	
  	public function buildUtilisateur($row){

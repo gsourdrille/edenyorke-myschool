@@ -11,8 +11,11 @@
 		var $etablissement;
 		var $avatar;
 		var $type;
+		var $active;
 
-
+		public function __toString() {
+			return $this->idUser;
+		}
 		
 		public function afficher(){
 			

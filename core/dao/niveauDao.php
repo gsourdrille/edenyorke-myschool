@@ -11,7 +11,7 @@
  			$nom = $baseDao->escapeString($niveau->nom);
  			$requete = "INSERT INTO NIVEAU (NOM,ID_ETABLISSEMENT) VALUES ('$nom', '$niveau->idEtablissement') ";
  			$result = $baseDao->sendRequest($requete);
- 			$result = $baseDao->lastInsertId();
+ 			$idNiveau = $baseDao->lastInsertId();
  			$niveau->idNiveau = $idNiveau;
  			$baseDao->close();
  			return $niveau;
@@ -42,7 +42,6 @@
  			$baseDao = new BaseDao();
  			$baseDao->connect();
  			$requete = "DELETE FROM NIVEAU WHERE ID_NIVEAU=$idNiveau";
- 			echo $requete;
  			$baseDao->sendRequest($requete);
  			$baseDao->close();
  		}

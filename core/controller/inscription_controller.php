@@ -63,6 +63,7 @@ if(isset($_POST)){
 	}
 	
 	if(!$response['error']){
+		$utilisateur->active = 0;
 		if(saveUtilisateur($utilisateur, $classe, $code)){
 			$response['error'] = false;
 		}else{

@@ -74,6 +74,9 @@ if(isset($_POST)) {
 						if($listePiecesJointes->count()>0){
 							setListePieceJointeToPost($post->idPost,$listePiecesJointes);
 						}
+						
+						//envoi de la notification par email
+						envoiMailNotification($post, $utilisateur);
 					}
 				}
 			break;
