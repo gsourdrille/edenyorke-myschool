@@ -1,13 +1,22 @@
 <?php
 
-function envoiMailInscription($to,$token){
+function envoiMailInscription($utilisateur,$token){
 	
 	 $headers ='From: "'.Constants::MAIL_FROM_NAME.'"<'.Constants::MAIL_FROM.'>'."\n"; 
      $headers .='Reply-To: '.Constants::MAIL_REPLY_TO.''."\n"; 
      $headers .='Content-Type: text/html; charset=utf-8"'."\n"; 
-     $headers .='Content-Transfer-Encoding: 8bit'; 
-     $message ='<html><head><title>Inscription Myschool</title></head><body>Pour valider votre inscription merci de cliquer sur <a href="'.Constants::MAIL_VALID_URL_REPONSE.$token.'">ce lien</a></body></html>'; 
-     mail($to, 'Validation inscription MySchool', $message, $headers);
+     $headers .='Content-Transfer-Encoding: 8bit';
+
+     $template=  file_get_contents($_SERVER['DOCUMENT_ROOT']."/myschool/html/mail/template_inscription.html");
+     $parametre = array();
+     $parametre['USER_FULLNAME']= $utilisateur->fullname();
+     $parametre['VALIDATION_LINK']=Constants::MAIL_VALID_URL_REPONSE.$token;
+     
+     foreach ($parametre as $key=> $value){
+     	$template = str_replace('{{ '.$key.' }}', $value, $template);
+     }
+     
+     mail($utilisateur->login, 'Validation inscription MySchool', $template, $headers);
 	
 }
 
