@@ -241,7 +241,7 @@ function envoiMailConfirmationInscription($user){
 	$token = generateToken();
 	$utilisateurDao->ajouterToken($user->idUser, $token) ;
 	//envoi du mail
-	envoiMailInscription($user->login,$token);
+	envoiMailInscription($user,$token);
 }
 
 function sendNewPassword($login){
