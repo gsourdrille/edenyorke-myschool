@@ -100,7 +100,7 @@
  	public function findUtilisateurByUsername($login){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
- 		$requete = "SELECT * FROM UTILISATEUR WHERE LOGIN='$login'";
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE LOGIN='$login' AND ACTIVE=1";
  		$resulat = $baseDao->sendRequest($requete);
  		$row = mysqli_fetch_array($resulat);
  		if($row["ID_USER"] == null){
