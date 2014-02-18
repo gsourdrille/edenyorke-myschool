@@ -2,7 +2,7 @@
 		<div class="connexion_text">
 			Confirmation
 		</div>
-		<div class="forgot_succes_text">
+		<div class="succes_text">
 			Un nouveau mot de passe vous a été envoyé !
 		</div>
 		<div class="login_footer">
