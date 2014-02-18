@@ -99,9 +99,12 @@
 					    <a href="JavaScript:void(0);" id="btn-remove-classe">&laquo; Remove</a>
 					 
 					    <select name="selectClasseto[]" id="select-classe-to" multiple size="15">
-					      <?php foreach ($listeClasseSelected as $classeSelected){
-					      		echo "<option value='$classeSelected->idClasse'>$classeSelected->nom</option>";
-								}	?>
+					      <?php
+								if(isset($listeClasseSelected)){
+					       			foreach ($listeClasseSelected as $classeSelected){
+					      				echo "<option value='$classeSelected->idClasse'>$classeSelected->nom</option>";
+									}	
+								}?>
 					    </select>
 					 
 					  </fieldset>

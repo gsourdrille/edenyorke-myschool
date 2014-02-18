@@ -19,6 +19,7 @@
 	
 	</div>
 </div> 
+<div id="footer">
 <?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/footer.php"); ?>
-</body>
+</div></body>
 </html>
