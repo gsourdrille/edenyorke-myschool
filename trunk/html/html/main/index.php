@@ -2,24 +2,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<LINK rel="stylesheet" type="text/css" href="/myschool/html/css/style.css">
-<LINK rel="stylesheet" type="text/css" href="/myschool/html/css/jquery.multiselect.css">
-<LINK rel="stylesheet" type="text/css" href="/myschool/html/css/jquery-ui.css">
- <script type="text/javascript" src="/myschool/html/js/jquery.js"></script>
- <script type="text/javascript" src="/myschool/html/js/jquery-ui.min.js"></script> 
- <script type="text/javascript" src="/myschool/html/js/myschool.js"></script>   
-  <script type="text/javascript" src="/myschool/html/js/tinymce/tinymce.min.js"></script> 
-  <script type="text/javascript" src="/myschool/html/js/jquery.multiselect.js"></script> 
-  <script type="text/javascript" src="/myschool/html/js/galleria/galleria-1.3.5.min.js"></script>
-<title>MySchool</title>
+<LINK rel="stylesheet" type="text/css" href="/html/css/style.css">
+<LINK rel="stylesheet" type="text/css" href="/html/css/jquery.multiselect.css">
+<LINK rel="stylesheet" type="text/css" href="/html/css/jquery-ui.css">
+ <script type="text/javascript" src="/html/js/jquery.js"></script>
+ <script type="text/javascript" src="/html/js/jquery-ui.min.js"></script> 
+ <script type="text/javascript" src="/html/js/liveschool.js"></script>   
+  <script type="text/javascript" src="/html/js/tinymce/tinymce.min.js"></script> 
+  <script type="text/javascript" src="/html/js/jquery.multiselect.js"></script> 
+  <script type="text/javascript" src="/html/js/galleria/galleria-1.3.5.min.js"></script>
+<title>LiveSchool</title>
 </head>
 <body>
 <div id="header">
-<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/header.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/commun/header.php"); ?>
 </div>
 <?php include("body.php"); ?>
 <div id="footer">
-			<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/footer.php"); ?>
+			<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/commun/footer.php"); ?>
 		</div>
 </body>
 </html>

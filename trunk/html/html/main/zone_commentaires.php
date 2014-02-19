@@ -12,12 +12,12 @@
 			</div>
 			<div id="post_comment_write_tools">
 				<a href="#dev" onclick="showComment(<?php echo $idPostWriteComment;?>)">
-					<img alt="" src="/myschool/html/images/write.png"  class="post_comment_write_icon"/>
+					<img alt="" src="/html/images/write.png"  class="post_comment_write_icon"/>
 				</a>
 			</div>
 		</div>
 		<div class="post_comment_write_comment" id="<?php echo $idPostWriteComment ?>">
-			<form id="<?php echo $idFormWriteComment;?>" action="/myschool/core/controller/create_comment_controller.php" method="post">
+			<form id="<?php echo $idFormWriteComment;?>" action="/core/controller/create_comment_controller.php" method="post">
 				<input type="hidden" name="idPost" value="<?php echo $post->idPost;?>"/>
 				<input type="hidden" name="action" value="CREATE"/>
 				<textarea name="writeCommentArea" class="writeCommentArea"></textarea>
@@ -31,9 +31,9 @@
 					<div id="entete_comment">
 						<div id="comment_createur">
 							<?php if ($commentaire->fullCreateur->avatar!=null){?>
-								<img src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($commentaire->fullCreateur);?>&x=100&y=100&f=0 " class="icon_user">
+								<img src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($commentaire->fullCreateur);?>&x=100&y=100&f=0 " class="icon_user">
 							<?php }else{?>
-								<img src="/myschool/html/images/icon_user.png" class="icon_user">  
+								<img src="/html/images/icon_user.png" class="icon_user">  
 							<?php }?>
 							<?php echo $commentaire->fullCreateur->fullName();?>
 							<?php if($commentaire->isCreateur){?>

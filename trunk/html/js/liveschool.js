@@ -31,7 +31,7 @@ $(document).ready(function() {
 		tinyMCE.get("newPostArea").save();
 		var formData = new FormData($(this)[0]);
            $.ajax({
-                url: "/myschool/core/controller/create_post_controller.php", 
+        	    url: $(this).attr('action'), 
                 type: $(this).attr('method'), 
                 data: formData,
                 async: false,
@@ -41,7 +41,7 @@ $(document).ready(function() {
                 success: function(json) {
                 	closeNewPost();
                 	$('#zonePosts').html("");
-                	$('#zonePosts').load("/myschool/html/html/main/zone_posts.php");
+                	$('#zonePosts').load("/html/html/main/zone_posts.php");
                 }            
            });
            return false;  
@@ -70,13 +70,13 @@ function sendComment(idForm,idDiv){
 	var $div = "#"+idDiv.id;
 	var $form = $(idForm);
          $sendComment = $.ajax({
-            url: "/myschool/core/controller/create_comment_controller.php", 
+        	url: $(this).attr('action'), 
             type: $form.attr('method'), 
             data: $form.serialize(), 
             dataType: 'json',
             success: function(json) {
             	$("#zonePosts").html("");
-            	$("#zonePosts").load( "/myschool/html/html/main/zone_posts.php", function() {
+            	$("#zonePosts").load( "/html/html/main/zone_posts.php", function() {
             		$($div).show();
             	});
             	
@@ -89,13 +89,13 @@ function editComment(idCommentaire,idDiv){
 	var $div = "#"+idDiv.id;
 	var $form = $("#commentEditForm"+idCommentaire);
          $sendComment = $.ajax({
-            url: "/myschool/core/controller/create_comment_controller.php", 
+        	url: $(this).attr('action'), 
             type: $form.attr('method'), 
             data: $form.serialize(), 
             dataType: 'json',
             success: function(json) {
             	$("#zonePosts").html("");
-            	$("#zonePosts").load( "/myschool/html/html/main/zone_posts.php", function() {
+            	$("#zonePosts").load( "/html/html/main/zone_posts.php", function() {
             		$($div).show();
             	});
             	
@@ -108,13 +108,13 @@ function deleteCommentaire(idCommentaire,idDiv){
 	var myPostData="action=DELETE&idCommentaire="+idCommentaire;
 	var $div = "#"+idDiv.id;
          $.ajax({
-            url: "/myschool/core/controller/create_comment_controller.php", 
+            url: "/core/controller/create_comment_controller.php", 
             type: "POST", 
             data: myPostData, 
             dataType: 'json',
             success: function(json) {
             	$("#zonePosts").html("");
-            	$("#zonePosts").load( "/myschool/html/html/main/zone_posts.php", function() {
+            	$("#zonePosts").load( "/html/html/main/zone_posts.php", function() {
             		$($div).show();
             	});
             	
@@ -276,7 +276,7 @@ function deleteCommentaire(idCommentaire,idDiv){
 		var $form = $("#postEditForm"+idPost);
 		var formData = new FormData($form[0]);
 	         $.ajax({
-	        	 url: "/myschool/core/controller/create_post_controller.php", 
+	        	 	url: $form.attr('action'), 
 	                type: $form.attr('method'), 
 	                data: formData,
 	                async: false,
@@ -286,7 +286,7 @@ function deleteCommentaire(idCommentaire,idDiv){
 	                success: function(json) {
 	                	closeNewPost();
 	                	$('#zonePosts').html("");
-	                	$('#zonePosts').load("/myschool/html/html/main/zone_posts.php");
+	                	$('#zonePosts').load("/html/html/main/zone_posts.php");
 	                }             
 	       });
 		   return false;  
@@ -301,7 +301,7 @@ function deleteCommentaire(idCommentaire,idDiv){
 	        'Oui': function () {
 	        	var myPostData="action=DELETE&idPost="+idPost;
 		         $.ajax({
-		            url: "/myschool/core/controller/create_post_controller.php", 
+		            url: "/core/controller/create_post_controller.php", 
 		            type: "POST", 
 		            data: myPostData, 
 		            dataType: 'json',
@@ -309,7 +309,7 @@ function deleteCommentaire(idCommentaire,idDiv){
 		            	$('#dialog-confirm-delete-post').dialog('close');
 		            	$('#dialog-confirm-delete-post').dialog('destroy');
 		            	$("#zonePosts").html("");
-		            	$("#zonePosts").load( "/myschool/html/html/main/zone_posts.php");
+		            	$("#zonePosts").load( "/html/html/main/zone_posts.php");
 		            	
 		            }            
 		       });
@@ -339,13 +339,13 @@ function deleteCommentaire(idCommentaire,idDiv){
 		var $form = $("#ajoutClasseUserForm");
 			$data = $form.serialize() + "&action=ADD";
 	         $.ajax({
-	            url: "/myschool/core/controller/admin_infos_controller.php", 
+	            url: $form.attr('action'), 
 	            type: $form.attr('method'), 
 	            data: $data, 
 	            dataType: 'json',
 	            success: function(json) {
 	            	$("#ajoutClasseUser").html("");
-	            	$("#ajoutClasseUser").load( "/myschool/html/html/admin/admin_infos/admin_liste_classes.php");
+	            	$("#ajoutClasseUser").load( "/html/html/admin/admin_infos/admin_liste_classes.php");
 	            }            
 	       });
 		   return false;  
@@ -355,28 +355,27 @@ function deleteCommentaire(idCommentaire,idDiv){
 		var $form = $("#ajoutClasseUserForm");
 			$data = $form.serialize() + "&action=DELETE";
 	         $.ajax({
-	            url: "/myschool/core/controller/admin_infos_controller.php", 
+	            url: $form.attr('action'), 
 	            type: $form.attr('method'), 
 	            data: $data, 
 	            dataType: 'json',
 	            success: function(json) {
 	            	$("#ajoutClasseUser").html("");
-	            	$("#ajoutClasseUser").load( "/myschool/html/html/admin/admin_infos/admin_liste_classes.php");
+	            	$("#ajoutClasseUser").load( "/html/html/admin/admin_infos/admin_liste_classes.php");
 	            }            
 	       });
 		   return false;  
 }
  
  function showMorePost(offset){
-	      //$("#morePosts").load("/myschool/html/html/main/zone_posts.php?offset="+offset);
-	      $.get("/myschool/html/html/main/zone_posts.php?offset="+offset+" #morePosts", function(data) {
+	      $.get("/html/html/main/zone_posts.php?offset="+offset+" #morePosts", function(data) {
 	    	     $("#morePosts").replaceWith(data);
 	    	});
 }
  
  function showGaleria(idPost){
 	 $("#dialog-galeria").html("");
-	 $("#dialog-galeria").load("/myschool/html/html/main/visionneuse.php?idPost="+idPost);
+	 $("#dialog-galeria").load("/html/html/main/visionneuse.php?idPost="+idPost);
 	 $('#dialog-galeria').dialog({
 	   autoOpen: false,
 	    modal: true,
@@ -390,7 +389,7 @@ function deleteCommentaire(idCommentaire,idDiv){
        });
 
 	 $( "#dialog-galeria" ).dialog( "open" );
-	 Galleria.loadTheme('/myschool/html/js/galleria/themes/classic/galleria.classic.min.js');
+	 Galleria.loadTheme('/html/js/galleria/themes/classic/galleria.classic.min.js');
 	 Galleria.run('.galleria', {
 		 width: 700,
 		 height: 467

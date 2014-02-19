@@ -1,5 +1,5 @@
 <div id="demandeInscriptionFormDiv">
-	<form id="demandeInscriptionForm" action="/myschool/core/controller/demande_inscription_controller.php" method="post">
+	<form id="demandeInscriptionForm" action="/core/controller/demande_inscription_controller.php" method="post">
 		<div class="connexion_text" style="margin-left:60px">
 			Inscription Etablissement
 		</div>

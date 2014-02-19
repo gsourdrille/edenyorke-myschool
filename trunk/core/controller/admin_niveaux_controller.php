@@ -1,7 +1,7 @@
 <?php
 session_start();
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
-include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.php");
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 
 
 //Recuperation des niveaux lies a l'etablissement
@@ -131,4 +131,4 @@ if(isset($_POST['saveNiveau'])){
 	$showClasse = false;
 	$listeClasses = getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
 }
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_niveaux/index.php");
+require ($_SERVER['DOCUMENT_ROOT']."/html/html/admin/admin_niveaux/index.php");

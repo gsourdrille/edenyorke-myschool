@@ -1,7 +1,7 @@
 <?php
 session_start();
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
-include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.php");
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 
 if (isset($_POST['submit'])){
 			$error = false;
@@ -85,7 +85,7 @@ if (isset($_POST['submit'])){
 				}
 					
 			}
-			require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_infos/index.php");
+			require ($_SERVER['DOCUMENT_ROOT']."/html/html/admin/admin_infos/index.php");
 		}else if(isset($_POST['action'])){
 				$error = null;
 				switch($_POST['action']){
@@ -127,5 +127,5 @@ if (isset($_POST['submit'])){
 			
 		
 	}else{
-		require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_infos/index.php");
+		require ($_SERVER['DOCUMENT_ROOT']."/html/html/admin/admin_infos/index.php");
 	}		

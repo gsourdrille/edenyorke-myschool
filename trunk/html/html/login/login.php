@@ -1,4 +1,4 @@
-	<form id="loginForm" action="/myschool/core/controller/login_controller.php" method="post">
+	<form id="loginForm" action="/core/controller/login_controller.php" method="post">
 		<div class="connexion_text">
 			Connexion
 		</div>

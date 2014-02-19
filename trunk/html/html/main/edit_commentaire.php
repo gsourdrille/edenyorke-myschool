@@ -1,4 +1,4 @@
-<form id="commentEditForm<?php echo $commentaire->idCommentaire;?>" action="/myschool/core/controller/create_comment_controller.php" method="post">
+<form id="commentEditForm<?php echo $commentaire->idCommentaire;?>" action="/core/controller/create_comment_controller.php" method="post">
 	<input type="hidden" name="idCommentaire" value="<?php echo $commentaire->idCommentaire;?>"/>
 	<input type="hidden" name="action" value="EDIT"/>
 	<textarea name="writeCommentArea" class="writeCommentArea"><?php echo $commentaire->contenu;?></textarea>

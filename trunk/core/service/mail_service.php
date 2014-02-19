@@ -7,7 +7,7 @@ function envoiMailInscription($utilisateur,$token){
      $headers .='Content-Type: text/html; charset=utf-8"'."\n"; 
      $headers .='Content-Transfer-Encoding: 8bit';
 
-     $template=  file_get_contents($_SERVER['DOCUMENT_ROOT']."/myschool/html/mail/template_inscription.html");
+     $template=  file_get_contents($_SERVER['DOCUMENT_ROOT']."/html/mail/template_inscription.html");
      $parametre = array();
      $parametre['USER_FULLNAME']= $utilisateur->fullname();
      $parametre['VALIDATION_LINK']=Constants::MAIL_VALID_URL_REPONSE.$token;
@@ -16,7 +16,7 @@ function envoiMailInscription($utilisateur,$token){
      	$template = str_replace('{{ '.$key.' }}', $value, $template);
      }
      
-     mail($utilisateur->login, 'Validation inscription MySchool', utf8_decode($template), $headers);
+     mail($utilisateur->login, 'Validation inscription LiveSchool', utf8_decode($template), $headers);
 	
 }
 
@@ -27,7 +27,7 @@ function envoiMailConfirmationEnvoiPassword($utilisateur,$motdepasse){
 	$headers .='Content-Type: text/html; charset=utf-8"'."\n";
 	$headers .='Content-Transfer-Encoding: 8bit';
 	
-	$template=  file_get_contents($_SERVER['DOCUMENT_ROOT']."/myschool/html/mail/template_forgot_password.html");
+	$template=  file_get_contents($_SERVER['DOCUMENT_ROOT']."/html/mail/template_forgot_password.html");
 	$parametre = array();
 	$parametre['USER_FULLNAME']= $utilisateur->fullname();
 	$parametre['NEW_PASSWORD']=$motdepasse;
@@ -36,7 +36,7 @@ function envoiMailConfirmationEnvoiPassword($utilisateur,$motdepasse){
 		$template = str_replace('{{ '.$key.' }}', $value, $template);
 	}
 	
-	mail($utilisateur->login, 'Votre nouveau mot de passe MySchool', utf8_decode($template), $headers);
+	mail($utilisateur->login, 'Votre nouveau mot de passe LiveSchool', utf8_decode($template), $headers);
 }
 
 function envoiMailDemandeInscription($etablissement, $utilisateur){
@@ -45,7 +45,7 @@ function envoiMailDemandeInscription($etablissement, $utilisateur){
 	$headers .='Content-Type: text/html; charset=utf-8"'."\n";
 	$headers .='Content-Transfer-Encoding: 8bit';
 	
-	$template=  file_get_contents($_SERVER['DOCUMENT_ROOT']."/myschool/html/mail/template_demande_inscription.html");
+	$template=  file_get_contents($_SERVER['DOCUMENT_ROOT']."/html/mail/template_demande_inscription.html");
 	$parametre = array();
 	$parametre['NOM_ETABLISSEMENT']= $etablissement->nom;
 	$parametre['TELEPHONE']=$etablissement->telephone1;
@@ -69,7 +69,7 @@ function envoiMailNotificationPost($post, $utilisateur, $listeUtilisateurs){
 		$headers .='Content-Type: text/html; charset=utf-8"'."\n";
 		$headers .='Content-Transfer-Encoding: 8bit';
 		
-		$template=  file_get_contents($_SERVER['DOCUMENT_ROOT']."/myschool/html/mail/template_post_notification.html");
+		$template=  file_get_contents($_SERVER['DOCUMENT_ROOT']."/html/mail/template_post_notification.html");
 		$parametre = array();
 		$parametre['USER_FULLNAME']= $user->fullname();
 		$parametre['CREATEUR']=$utilisateur->fullname();
