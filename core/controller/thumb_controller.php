@@ -109,7 +109,7 @@ if (isset($_REQUEST['y'])) {
 ini_set('memory_limit', '-1');
 
 // include image processing code
-include($_SERVER['DOCUMENT_ROOT']."/myschool/core/utils/thumbnail/image.class.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/utils/thumbnail/image.class.php");
 $img = new Zubrag_image;
 
 // initialize

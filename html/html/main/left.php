@@ -2,9 +2,9 @@
 	<div class="left_post">
 		<div id="logo_ecole">
 			<?php if ($etablissement->imagePrincipale!=null){?>
-				<img src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImagePrincipale($etablissement);?>&x=100&y=100&f=0 " class="icon_school" >
+				<img src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImagePrincipale($etablissement);?>&x=100&y=100&f=0 " class="icon_school" >
 			<?php }else{?>
-				<img src="/myschool/html/images/defaut_image_etablissement.jpeg" class="icon_school" >
+				<img src="/html/images/defaut_image_etablissement.jpeg" class="icon_school" >
 			<?php }?>
 		</div>
 		<div id="infos_ecole">
@@ -17,7 +17,7 @@
 	<div class="left_post" style="height:300px;">
 		<div id="agenda_title">
 			<div id="logo_agenda">
-					<img alt="" src="/myschool/html/images/calendar-icon.png"  class="icon_calendar"/>
+					<img alt="" src="/html/images/calendar-icon.png"  class="icon_calendar"/>
 			</div>
 			<div id="agenda_title_text">Agenda</div>
 		</div>

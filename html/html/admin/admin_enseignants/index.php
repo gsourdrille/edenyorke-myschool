@@ -2,24 +2,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<LINK rel="stylesheet" type="text/css" href="/myschool/html/css/style.css">
- <script type="text/javascript" src="/myschool/html/js/jquery.js"></script>
- <script type="text/javascript" src="/myschool/html/js/myschool.js"></script>   
+<LINK rel="stylesheet" type="text/css" href="/html/css/style.css">
+ <script type="text/javascript" src="/html/js/jquery.js"></script>
+ <script type="text/javascript" src="/html/js/liveschool.js"></script>   
    
-<title>MySchool</title>
+<title>LiveSchool</title>
 </head>
 <body>
 <div id="header">
-<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/header.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/commun/header.php"); ?>
 </div>
 <div id="main_conteneur" style="background-image: url('<?php echo FileUtils::getEtablissementImageFond($etablissement);?>')">
 	<div id="post_conteneur">
-		<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/left.php"); ?>
-		<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_enseignants/admin_enseignants.php"); ?>
+		<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/admin/left.php"); ?>
+		<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/admin/admin_enseignants/admin_enseignants.php"); ?>
 	
 	</div>
 </div> 
 <div id="footer">
-<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/footer.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/commun/footer.php"); ?>
 </div></body>
 </html>

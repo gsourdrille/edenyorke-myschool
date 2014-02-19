@@ -1,8 +1,8 @@
 <?php
 session_start();
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
 
-include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 
 if (isset($_POST['submit'])){
 	
@@ -107,4 +107,4 @@ if (isset($_POST['submit'])){
 		
 	}
 
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_etablissement/index.php");
+require ($_SERVER['DOCUMENT_ROOT']."/html/html/admin/admin_etablissement/index.php");

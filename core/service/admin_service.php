@@ -1,8 +1,8 @@
 <?php
 
-include($_SERVER['DOCUMENT_ROOT']."/myschool/core/include.php");
-include($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/encrypt_service.php");
-include($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/mail_service.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/include.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/service/encrypt_service.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/service/mail_service.php");
 
 function validateLogin($username, $userId){
 	$utilisateurDao = new UtilisateurDao();

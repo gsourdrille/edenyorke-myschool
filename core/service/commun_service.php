@@ -1,6 +1,6 @@
 <?php
 
-include($_SERVER['DOCUMENT_ROOT']."/myschool/core/include.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/include.php");
 function getTypeUtilisateur($utilisateur){
 	$daoUtilisateur = new UtilisateurDao();
 	$listeTypeUtilisateur = $daoUtilisateur->findTypeUtilisateur($utilisateur);

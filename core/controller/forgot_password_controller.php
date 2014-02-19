@@ -1,5 +1,5 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
 
 if(isset($_POST)){
 	$reponse['error']=false;

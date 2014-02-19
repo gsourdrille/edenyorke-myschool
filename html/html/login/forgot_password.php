@@ -1,5 +1,5 @@
 <div id="forgotFormDiv">
-	<form id="forgotForm" action="/myschool/core/controller/forgot_password_controller.php" method="post">
+	<form id="forgotForm" action="/core/controller/forgot_password_controller.php" method="post">
 		<div class="forgot_text">
 			Mode de passe oublié
 		</div>

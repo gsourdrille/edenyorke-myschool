@@ -1,5 +1,5 @@
 <div id="inscriptionFormDiv">
-	<form id="inscriptionForm" action="/myschool/core/controller/inscription_controller.php" method="post">
+	<form id="inscriptionForm" action="/core/controller/inscription_controller.php" method="post">
 		<div class="connexion_text">
 			Inscription
 		</div>

@@ -103,7 +103,7 @@ function login(){
             			$("#error_login_general").html(json['error_login']);
             		}
             	}else{
-            		window.location = '/myschool/core/controller/tableau_controller.php';
+            		window.location = '/core/controller/tableau_controller.php';
             	}
             }  
        });

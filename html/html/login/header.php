@@ -1,7 +1,7 @@
 <?php
 ?>
 <div id="header_content">
-	<div id="myschool_login" >
-		MySchool
+	<div id="liveschool_login" >
+		LiveSchool
 	</div>
 </div>

@@ -1,6 +1,6 @@
 <div id="current_admin_page">
 	<div id="center_conteneur">
-		<form action="/myschool/core/controller/admin_infos_controller.php" method="post" enctype="multipart/form-data">
+		<form action="/core/controller/admin_infos_controller.php" method="post" enctype="multipart/form-data">
 			 
 			<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
 			
@@ -57,9 +57,9 @@
 			
 			<div id="admin_image" style="display: block">
 				<?php if ($utilisateur->avatar!=null){?>
-					<img src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>&x=100&y=100&f=0 " width="100px" height="100px">
+					<img src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>&x=100&y=100&f=0 " width="100px" height="100px">
 				<?php }else{?>
-					<img src="/myschool/html/images/icon_user.png" width="100px" height="100px">
+					<img src="/html/images/icon_user.png" width="100px" height="100px">
 				<?php }?>
 					<input type="button" value="Changer" onclick="showUploadImagePrincipaleButton()">
 			</div>
@@ -69,11 +69,6 @@
 				<input name="userfile" type="file" />
 				<input type="button" value="Annuler" onclick="hideUploadImagePrincipaleButton()">
 			</div>
-			
-			
-			
-			
-			
 			
 			<?php if(isset($error_image)){?>
 			<div id="error_login">

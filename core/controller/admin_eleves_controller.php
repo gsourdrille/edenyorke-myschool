@@ -1,7 +1,7 @@
 <?php
 session_start();
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
-include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.php");
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 
 
 //Recuperation des enseignants lies a l'etablissement
@@ -105,4 +105,4 @@ if(isset($_GET['action'])){
 	
 }
 
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/admin/admin_eleves/index.php");
+require ($_SERVER['DOCUMENT_ROOT']."/html/html/admin/admin_eleves/index.php");

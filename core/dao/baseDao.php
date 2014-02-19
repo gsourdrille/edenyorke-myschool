@@ -22,7 +22,7 @@ class BaseDao {
 	public function sendRequest($request){
 		// Creation d'un objet Logger
 		$logger = new Logger(Constants::LOGGER_LOCATION);
-		$logger->log('access', 'myschool', $request , Logger::GRAN_VOID);
+		$logger->log('access', 'acces', $request , Logger::GRAN_VOID);
 		$charset = mysqli_query($this->connection,"SET NAMES UTF8");
 		$ressource = mysqli_query($this->connection,$request) ;
 		return $ressource;

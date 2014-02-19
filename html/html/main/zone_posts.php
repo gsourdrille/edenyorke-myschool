@@ -1,15 +1,15 @@
 <?php 
 @session_start();
-include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controller.php")?>
+include($_SERVER['DOCUMENT_ROOT']."/core/controller/zone_posts_controller.php")?>
 <?php foreach ($resultListePosts->listePost as $post){?>
 	<div class="post">
 		<div id="createur">
 			<div id="entete_createur">
 				<div id="nom_createur">
 					<?php if ($post->fullCreateur->avatar!=null){?>
-					<img src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($post->fullCreateur);?>&x=100&y=100&f=0 " class="icon_user">
+					<img src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($post->fullCreateur);?>&x=100&y=100&f=0 " class="icon_user">
 					<?php }else{?>
-					<img src="/myschool/html/images/icon_user.png" class="icon_user">  
+					<img src="/html/images/icon_user.png" class="icon_user">  
 					<?php }?>
 					<?php echo $post->fullCreateur->prenom; ?> <?php echo $post->fullCreateur->nom?>	
 				</div>
@@ -42,7 +42,7 @@ include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/zone_posts_controll
 					<?php foreach ($post->piecesJointes as $pj){?>
 						<div class="zone_pj">
 							<?php if($pj->isImage){?>
-								<a href="#dev" onClick="showGaleria(<?php echo $post->idPost;?>)"><img class="postPjThumbnails" src="/myschool/core/controller/thumb_controller.php?src=<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>&x=30&y=30&f=0 " ></a>
+								<a href="#dev" onClick="showGaleria(<?php echo $post->idPost;?>)"><img class="postPjThumbnails" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>&x=30&y=30&f=0 " ></a>
 							<?php }else{?>
 								<a href="<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>"><?php echo $pj->path?></a>
 							<?php }?>

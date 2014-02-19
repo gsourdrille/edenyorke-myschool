@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/post_service.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/core/service/post_service.php");
 //Recuperation de l'utilisateur
-include($_SERVER['DOCUMENT_ROOT']."/myschool/core/controller/commun_controller.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 
 if(isset($_POST)) {
 	if(isset($_POST['action'])){

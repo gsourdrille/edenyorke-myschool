@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require ($_SERVER['DOCUMENT_ROOT'].'/myschool/core/service/login_service.php');
+require ($_SERVER['DOCUMENT_ROOT'].'/core/service/login_service.php');
 
 	$response['error'] = false;
 

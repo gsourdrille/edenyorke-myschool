@@ -1,5 +1,5 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/admin_service.php");
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
 
 if(isset($_GET['token'])){
 	$token = $_GET['token'];
@@ -13,4 +13,4 @@ if(isset($_GET['token'])){
 	$validInscription = false;
 }
 
-require ($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/login/index.php");
+require ($_SERVER['DOCUMENT_ROOT']."/html/html/login/index.php");

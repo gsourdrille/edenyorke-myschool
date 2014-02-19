@@ -1,6 +1,6 @@
 <?php
-require_once  ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/commun_service.php");
-require_once  ($_SERVER['DOCUMENT_ROOT']."/myschool/core/service/mail_service.php");
+require_once  ($_SERVER['DOCUMENT_ROOT']."/core/service/commun_service.php");
+require_once  ($_SERVER['DOCUMENT_ROOT']."/core/service/mail_service.php");
 
 function getClassesIdByUser($idUser){
 	$classeDao = new ClasseDao();
@@ -173,8 +173,6 @@ function processPieceJointe($postfile,$file,$post,$name){
 }
 
 function envoiMailNotification($post, $utilisateur){
-	$logger = new Logger(Constants::LOGGER_LOCATION);
-	$logger->log('mail', 'myschool', "ENVOI MAIL : ", Logger::GRAN_VOID);
 	$postDao = new PostDao();
 	$utilisateurDao = new UtilisateurDao();
 	$listeAssociations = $postDao->getAssociations($post->idPost);
@@ -195,9 +193,6 @@ function envoiMailNotification($post, $utilisateur){
 			break;
 		}
 		$listeUtilisateurs = array_unique($listeUtilisateurs);
-		foreach ($listeUtilisateurs as $user){
-			$logger->log('mail', 'myschool', "USER AVANT: ".$user->fullname(), Logger::GRAN_VOID);
-		}
 		
 	}
 	

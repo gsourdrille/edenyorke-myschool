@@ -5,13 +5,13 @@ $_SESSION = array();?>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<LINK rel="stylesheet" type="text/css" href="/myschool/html/css/style.css">
-		 <script type="text/javascript" src="/myschool/html/js/jquery.js"></script>
-		 <script type="text/javascript" src="/myschool/html/js/jquery-ui.min.js"></script> 
-		 <script type="text/javascript" src="/myschool/html/js/myschool_login.js"></script> 
+		<LINK rel="stylesheet" type="text/css" href="/html/css/style.css">
+		 <script type="text/javascript" src="/html/js/jquery.js"></script>
+		 <script type="text/javascript" src="/html/js/jquery-ui.min.js"></script> 
+		 <script type="text/javascript" src="/html/js/liveschool_login.js"></script> 
 	
 	 
-		<title>MySchool</title>
+		<title>LiveSchool</title>
 	</head>
 	<body>
 		<div id="header">
@@ -19,7 +19,7 @@ $_SESSION = array();?>
 		</div>
 			<?php include("body.php"); ?>
 		<div id="footer">
-			<?php include($_SERVER['DOCUMENT_ROOT']."/myschool/html/html/commun/footer.php"); ?>
+			<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/commun/footer.php"); ?>
 		</div>
 	</body>
 </html>
