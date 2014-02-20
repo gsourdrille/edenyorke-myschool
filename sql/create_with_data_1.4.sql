@@ -208,15 +208,6 @@ INSERT INTO `POST` (`ID_POST`, `ID_USER`, `DATE_CREATION`, `DATE_DERNIERE_MODIFI
 (89, 27, '2014-02-19 21:37:46', NULL, '<p>Ouverture du college !</p>', 1, 0),
 (90, 5, '2014-02-20 21:22:10', '2014-02-20 21:26:45', '<p>Ceci est un test</p>', 1, 0);
 
---
--- Déclencheurs `POST`
---
-DROP TRIGGER IF EXISTS `UPDATE_POST_TIMESTAMP`;
-DELIMITER //
-CREATE TRIGGER `UPDATE_POST_TIMESTAMP` BEFORE UPDATE ON `POST`
- FOR EACH ROW SET NEW.DATE_DERNIERE_MODIFICATION = NOW()
-//
-DELIMITER ;
 
 -- --------------------------------------------------------
 
