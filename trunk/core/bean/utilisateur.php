@@ -8,7 +8,6 @@
 		var $prenom;
 		var $login;
 		var $mdp;
-		var $etablissement;
 		var $avatar;
 		var $type;
 		var $active;
@@ -24,7 +23,6 @@
 			echo "prenom : ". $this->prenom .'<br>';
 			echo "login : ". $this->login .'<br>';
 			echo "mdp : ". $this->mdp .'<br>';
-			echo "etablissement : ". $this->etablissement .'<br>';
 			echo "avatar : ". $this->avatar .'<br>';
 		
 		}

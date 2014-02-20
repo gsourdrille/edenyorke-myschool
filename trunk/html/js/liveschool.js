@@ -70,7 +70,7 @@ function sendComment(idForm,idDiv){
 	var $div = "#"+idDiv.id;
 	var $form = $(idForm);
          $sendComment = $.ajax({
-        	url: $(this).attr('action'), 
+        	url: $form.attr('action'), 
             type: $form.attr('method'), 
             data: $form.serialize(), 
             dataType: 'json',
@@ -89,7 +89,7 @@ function editComment(idCommentaire,idDiv){
 	var $div = "#"+idDiv.id;
 	var $form = $("#commentEditForm"+idCommentaire);
          $sendComment = $.ajax({
-        	url: $(this).attr('action'), 
+        	url: $form.attr('action'), 
             type: $form.attr('method'), 
             data: $form.serialize(), 
             dataType: 'json',
@@ -413,4 +413,9 @@ function deleteCommentaire(idCommentaire,idDiv){
      return (bytes / 1000).toFixed(2) + ' KB';
  }
  
+ 
+ function changeEtablissement(id){
+	document.location.href='change_etablissement_controller.php?etablissement='+id;
+		 
+ }
  

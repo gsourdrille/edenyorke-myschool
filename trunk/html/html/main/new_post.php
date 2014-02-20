@@ -1,8 +1,10 @@
 
 <?php include($_SERVER['DOCUMENT_ROOT']."/core/controller/new_posts_controller.php")?>
-<div id="link_new_post">
-	<a href="#dev" onClick="openNewPost()">Nouveau post</a>
-</div>
+<?php if($_SESSION['TYPE_UTILISATEUR']== Type_Utilisateur::DIRECTION || $_SESSION['TYPE_UTILISATEUR']== Type_Utilisateur::ENSEIGNANT){?>
+	<div id="link_new_post">
+		<a href="#dev" onClick="openNewPost()">Nouveau post</a>
+	</div>
+<?php }?>
 <form id="postForm" action="/core/controller/create_post_controller.php" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="action" value="CREATE"/>
 	<div id="zone_new_post">

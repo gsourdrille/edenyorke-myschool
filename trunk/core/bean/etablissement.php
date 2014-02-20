@@ -15,9 +15,6 @@ class Etablissement {
 	var $imageFond;
 
 	
-	
-	
-	
 	public function afficher(){
 			
 		echo "idEtablissement : ". $this->idEtablissement .'<br>';
@@ -30,6 +27,10 @@ class Etablissement {
 		echo "fax : ". $this->fax .'<br>';
 		echo "imagePrincipale : ". $this->imagePrincipale .'<br>';
 			
+	}
+	
+	public function fullName(){
+		return $this->nom." - ".$this->codePostal." ".$this->ville;
 	}
 	
 	

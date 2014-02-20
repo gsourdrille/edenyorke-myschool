@@ -32,7 +32,6 @@ if(isset($_GET['action'])){
 	if($idEnseignant == null || trim($idEnseignant) == false){
 		//Nouveau niveau
 		$enseignant = new Utilisateur();
-		$enseignant->etablissement = $_SESSION['ETABLISSEMENT_ID'];
 		$isnew = true;
 	}else{
 		$enseignant = getUserById($idEnseignant);
@@ -87,7 +86,7 @@ if(isset($_GET['action'])){
 	$showEnseignant = true;
 	if($error==false){
 		$enseignant->active = 1;
-		if(saveOrUpdateUtilisateur($enseignant,Type_Utilisateur::ENSEIGNANT)){
+		if(saveOrUpdateUtilisateur($enseignant,Type_Utilisateur::ENSEIGNANT, $_SESSION['ETABLISSEMENT_ID'])){
 			if(isset($_POST['selectClasseto'])){
 				$listeClasse = $_POST['selectClasseto'];
 			}else{

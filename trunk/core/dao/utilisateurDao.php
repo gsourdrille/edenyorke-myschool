@@ -13,8 +13,8 @@
  			$prenom = $baseDao->escapeString($utilisateur->prenom);
  			$login = $baseDao->escapeString($utilisateur->login);
  			
- 			$requete = "INSERT INTO UTILISATEUR (NOM,PRENOM,LOGIN,MOT_DE_PASSE,ID_ETABLISSEMENT,ACTIVE) 
- 						VALUES ('$nom', '$prenom', '$login', '$utilisateur->mdp', '$utilisateur->etablissement',$utilisateur->active) ";
+ 			$requete = "INSERT INTO UTILISATEUR (NOM,PRENOM,LOGIN,MOT_DE_PASSE,ACTIVE) 
+ 						VALUES ('$nom', '$prenom', '$login', '$utilisateur->mdp',$utilisateur->active) ";
  			$result = $baseDao->sendRequest($requete);
  			$requete = "SELECT LAST_INSERT_ID() FROM UTILISATEUR";
  			$result = $baseDao->lastInsertId();
@@ -127,7 +127,7 @@
  	public function findUtilisateurByEtablissementAndType($idEtablissement, $type){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
- 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_ETABLISSEMENT='$idEtablissement' AND ID_USER IN (SELECT ID_USER FROM UTILISATEUR_TYPE_UTILISATEUR WHERE ID_TYPE_UTILISATEUR = '$type')";
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_USER IN (SELECT ID_USER FROM UTILISATEUR_TYPE_UTILISATEUR WHERE ID_TYPE_UTILISATEUR = '$type') AND ID_USER IN (SELECT ID_USER FROM UTILISATEUR_ETABLISSEMENT WHERE ID_ETABLISSEMENT = '$idEtablissement')";
  		$resulat = $baseDao->sendRequest($requete);
  		$listeUtilisateurs = new ArrayObject();
  		while($row = mysqli_fetch_array($resulat)){
@@ -242,7 +242,7 @@
  	function getUtilisateurByEtablissement($idEtablissement){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
- 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_ETABLISSEMENT='$idEtablissement' AND ACTIVE=1";
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_USER IN (SELECT ID_USER FROM UTILISATEUR_ETABLISSEMENT WERE ID_ETABLISSEMENT='$idEtablissement') AND ACTIVE=1";
  		$resulat = $baseDao->sendRequest($requete);
  		$listeUtilisateurs = new ArrayObject();
  		while($row = mysqli_fetch_array($resulat)){
@@ -278,6 +278,15 @@
  		return $listeUtilisateurs;
  	}
  	
+ 	public function addEtablissementToUtilisateur($etablissementId, $userId){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "INSERT INTO UTILISATEUR_ETABLISSEMENT (ID_USER, ID_ETABLISSEMENT) VALUES ($userId, $etablissementId)";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$baseDao->close();
+ 	}
+ 	
+ 	
  	public function buildUtilisateur($row){
   		$utilisateur = new Utilisateur();
  		$utilisateur->idUser = $row["ID_USER"];
@@ -285,10 +294,10 @@
  		$utilisateur->prenom = $row["PRENOM"];
  		$utilisateur->login = $row["LOGIN"];
  		$utilisateur->mdp = $row["MOT_DE_PASSE"];
- 		$utilisateur->etablissement = $row["ID_ETABLISSEMENT"];
  		$utilisateur->avatar = $row["AVATAR"];
  		return $utilisateur;
  	}
+ 	
  	
  	
  }

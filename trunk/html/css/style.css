@@ -89,6 +89,15 @@ select{
 	float:left;
 }
 
+
+
+#school_name select{
+	color: #FFFFFF;
+	font-size: 20px;
+	width: 400px;
+	float:left;
+}
+
 #mail{
 	margin: 5px 0 0 50px;
 	float:left;

@@ -2,6 +2,7 @@
 
 session_start();
 require ($_SERVER['DOCUMENT_ROOT'].'/core/service/login_service.php');
+require ($_SERVER['DOCUMENT_ROOT'].'/core/service/commun_service.php');
 
 	$response['error'] = false;
 
@@ -11,6 +12,7 @@ require ($_SERVER['DOCUMENT_ROOT'].'/core/service/login_service.php');
 	$utilisateur = connect($username,$password);
 	if($utilisateur != null){
 		$_SESSION['USER'] = serialize($utilisateur);
+		$_SESSION['ETABLISSEMENT_ID'] = getFirstEtablissement($utilisateur);
 		if(isset($_POST['autologin']) && $_POST['autologin']){
 			saveAutologin($utilisateur);
 		}

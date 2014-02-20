@@ -7,9 +7,30 @@
 		</a>
 	</div>
 	<div id="school_name">
+		<?php if($listeEtablissement->count()>1){
+			?>
+			<select name=etablissementSelected onchange="changeEtablissement(this.options[this.selectedIndex].value)" >
+			<?php foreach ($listeEtablissement as $etablissementToSelect){
+				$selected = false;
+				if(isset($_SESSION['ETABLISSEMENT_ID']) && $_SESSION['ETABLISSEMENT_ID'] == $etablissementToSelect->idEtablissement){
+					$selected = true;
+				}
+				echo "<option value='$etablissementToSelect->idEtablissement' ";
+				if($selected){
+				echo "selected=selected";
+					}
+					echo ">";
+					echo $etablissementToSelect->fullname();
+					echo "</option>";
+			}?>
+			</select>
+			<?php 
+		}else{?>
+	
 		<a href="/core/controller/tableau_controller.php">
-			<?php echo $etablissement->nom;?> - <?php  echo $etablissement->codePostal;?> <?php echo $etablissement ->ville;?>
+			<?php echo $etablissement->fullName();?>
 		</a>
+		<?php }?>
 	</div>
 	<div id="mail">
 		<img alt="" src="/html/images/icon_mail.png"  class="icon_mail"/>

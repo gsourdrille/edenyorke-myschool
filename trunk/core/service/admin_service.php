@@ -1,8 +1,8 @@
 <?php
 
-include($_SERVER['DOCUMENT_ROOT']."/core/include.php");
-include($_SERVER['DOCUMENT_ROOT']."/core/service/encrypt_service.php");
-include($_SERVER['DOCUMENT_ROOT']."/core/service/mail_service.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/include.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/service/encrypt_service.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/service/mail_service.php");
 
 function validateLogin($username, $userId){
 	$utilisateurDao = new UtilisateurDao();
@@ -19,10 +19,12 @@ function updateUtilisateur($utilisateur){
 	return $utilisateurDao->updateUtilisateur($utilisateur);
 }
 
-function saveOrUpdateUtilisateur($utilisateur,$type){
+function saveOrUpdateUtilisateur($utilisateur,$type, $etablissementId){
 	$utilisateurDao = new UtilisateurDao();
 	if($utilisateur->idUser == null){
-		return $utilisateurDao->saveUtilisateur($utilisateur,$type);
+		$utlisateur = $utilisateurDao->saveUtilisateur($utilisateur,$type);
+		$utilisateurDao->addEtablissementToUtilisateur($etablissementId, $utilisateur->idUser);
+		return $utlisateur;
 	}else{
 		return $utilisateurDao->updateUtilisateur($utilisateur);
 	}
@@ -56,6 +58,12 @@ function getNiveauxByEtablissement($idEtablissement){
 	$niveauDao = new NiveauDao();
 	return $niveauDao->findNiveauxByEtablissement($idEtablissement);
 }
+
+function getClassesByEtablissement($idEtablissement){
+	$classeDao = new ClasseDao();
+	return $classeDao->findClasseByEtablissement($idEtablissement);
+}
+
 
 function getNiveauById($idNiveau){
 	$niveauDao = new NiveauDao();
@@ -155,6 +163,10 @@ function getAllClassesForEtablissement($idEtablissement){
 	return $listeClassesAndNiveaux;
 }
 
+function getAllNiveauxForEtablissement($idEtablissement){
+	return getNiveauxByEtablissement($idEtablissement);
+}
+
 function getClassesByUser($idUser){
 	$classeDao = new ClasseDao();
 	return $classeDao ->getClassesByUtlisateur($idUser);
@@ -170,6 +182,23 @@ function addClassesToUser($idUser, $listeIdClasses){
 function addClasseToUser($idUser, $idClasse){
 	$classeDao = new ClasseDao();
 	$classeDao ->addClasseToUser($idUser, $idClasse);
+
+}
+
+function addEtablissementToUser($idUser, $idEtablissement){
+	$etablissementDao = new EtablissementDao();
+	$listeUtilisateur = $etablissementDao->getEtablissementsFromUser($idUser);
+	$etablissementPresent = false;
+	foreach ($listeUtilisateur as $etablissement){
+		if($etablissement->idEtablissement == $idEtablissement){
+			$etablissementPresent = true;
+		}
+	}
+	$utilisateurDao = new UtilisateurDao();
+	if(!$etablissementPresent){
+		$utilisateurDao ->addEtablissementToUtilisateur($idEtablissement, $idUser);
+	}
+	
 
 }
 
@@ -191,7 +220,6 @@ function saveUtilisateur($user, $classe, $code){
 	$niveauDao = new NiveauDao();
 	$niveau = $niveauDao->findNiveau($classe->idNiveau);
 	$etablissementId = $niveau->idEtablissement;
-	$user->etablissement = $etablissementId;
 	
 	//Gestion du type
 	$typeUtilisateur = null;
@@ -206,6 +234,7 @@ function saveUtilisateur($user, $classe, $code){
 	//Enregistrement de l'utilisateur
 	$utilisateurDao = new UtilisateurDao();
 	$user = $utilisateurDao->saveUtilisateur($user, $typeUtilisateur);
+	$utilisateurDao->addEtablissementToUtilisateur($etablissementId, $user->idUser);
 	
 	//Association de la classe
 	$classeDao = new ClasseDao();
@@ -223,17 +252,6 @@ function validToken($token){
 	return $utilisateurDao->activerUtilisateur($token);
 }
 
-function createEtablissement($etablissement, $utilisteur){
-	$etablissementDao = new EtablissementDao();
-	$etablissement = $etablissementDao->saveEtablissement($etablissement);
-	$utilisateur->etablissement = $etablissement->etablissementId;
-	$utilisateurDao = new UtilisateurDao();
-	$typeUtilisateur = Type_Utilisateur::DIRECTION;
-	$utilisateur = $utilisateurDao->saveUtilisateur($utilisateur, $typeUtilisateur);
-	
-	envoiMailConfirmationInscription($user);
-	
-}
 
 function envoiMailConfirmationInscription($user){
 	//Ajout d'un jeton pour la validation de l'inscription

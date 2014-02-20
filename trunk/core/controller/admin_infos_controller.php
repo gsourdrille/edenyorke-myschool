@@ -99,11 +99,8 @@ if (isset($_POST['submit'])){
 							$error = "Le code classe n'existe pas";
 						}else{
 							$niveau = getNiveauById($classe->idNiveau);
-							if($niveau->idEtablissement != $utilisateur->etablissement){
-								$error = "La classe n'est valide pour cet établissement";
-							}else{
-								addClasseToUser($utilisateur->idUser, $classe->idClasse);
-							}
+							addClasseToUser($utilisateur->idUser, $classe->idClasse);
+							addEtablissementToUser($utilisateur->idUser, $niveau->idEtablissement);
 						}
 					}
 					break;
