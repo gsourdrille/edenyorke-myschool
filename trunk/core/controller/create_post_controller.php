@@ -18,6 +18,12 @@ if(isset($_POST)) {
 					$post->commentairesActives = false;
 				}
 				
+				if(isset($_POST['onlyEnseignant'])){
+					$post->seulementEnseignant = true;
+					}else{
+						$post->seulementEnseignant = false;
+				}
+				
 				
 				//Creation des associations
 				if(isset($_POST['listPostDestinaires'])){
@@ -89,6 +95,12 @@ if(isset($_POST)) {
 					$post->commentairesActives = true;
 				}else{
 					$post->commentairesActives = false;
+				}
+				
+				if(isset($_POST['onlyEnseignant'])){
+					$post->seulementEnseignant = true;
+				}else{
+					$post->seulementEnseignant = false;
 				}
 				
 				//Creation des associations

@@ -28,6 +28,7 @@ function getNiveauxIdByClasses($listeClasses){
 
 function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat, $offset){
 	$utilisateur = unserialize($_SESSION['USER']);
+	$typeUtilisateur = $_SESSION['TYPE_UTILISATEUR'];
 	
 	$postDao = new PostDao();
 	$utilisateurDao = new UtilisateurDao();
@@ -43,7 +44,7 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 		$listeNiveauxId->append($niveaux->idNiveau);
 	}
 	
-	$listePosts = $postDao->getAllPosts($etablissementId, $listeClassesId, $listeNiveauxId, $nbResultat, $offset);
+	$listePosts = $postDao->getAllPosts($etablissementId, $listeClassesId, $listeNiveauxId, $nbResultat, $offset,$typeUtilisateur);
 	//Pour chaque post
 	foreach ($listePosts as $post){
 		//Enrichissement du createur
@@ -72,7 +73,7 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 		$post->associations = $postDao->getAssociations($post->idPost);
 	}
 	
-	$nbTotalPosts = $postDao->countAllPosts($etablissementId, $listeClassesId, $listeNiveauxId);
+	$nbTotalPosts = $postDao->countAllPosts($etablissementId, $listeClassesId, $listeNiveauxId, $typeUtilisateur);
 	
 	$resultListePoste = new ResultListePosts();
 	$resultListePoste->listePost = $listePosts;

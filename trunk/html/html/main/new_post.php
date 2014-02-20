@@ -43,7 +43,10 @@
 		<div id="enableComment">
 			<label for="allowComment">Ouvert aux commentaires : </label>
 			<input name="allowComment" type="checkbox" checked />
+			<label for="onlyEnseignant">Seulement aux enseignants : </label>
+			<input name="onlyEnseignant" type="checkbox"  />
 		</div>
+			
 		<div id="postAddPj">
 			<label for="addfile">Ajouter un fichier : </label>
 			<input name="postfile[]" type="file" />

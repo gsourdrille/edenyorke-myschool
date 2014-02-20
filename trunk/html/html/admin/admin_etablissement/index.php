@@ -11,7 +11,7 @@
 <div id="header">
 <?php include($_SERVER['DOCUMENT_ROOT']."/html/html/commun/header.php"); ?>
 </div>
-<div id="main_conteneur" style="background-image: url('<?php echo FileUtils::getEtablissementImageFond($etablissement);?>')">
+	<div id="main_conteneur" style="background-image: url('/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImageFond($etablissement);?>&x=700&y=700&f=0&q=100')">
 	<div id="post_conteneur">
 		<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/admin/left.php"); ?>
 		<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/admin/admin_etablissement/admin_etablissement.php"); ?>

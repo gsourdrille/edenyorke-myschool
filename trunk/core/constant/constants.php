@@ -2,19 +2,14 @@
 
  class Constants{
  	
- 	//const HOTE = 'localhost';
- 	//const USER = 'root';
- 	//const MDP = 'root';
- 	//const BASE = 'liveschool';
+ 	const HOTE = 'localhost';
+ 	const USER = 'root';
+ 	const MDP = 'root';
+ 	const BASE = 'liveschool';
  	
- 	const HOTE = 'db516119988.db.1and1.com';
- 	const USER = 'dbo516119988';
- 	const MDP = 's0JpassR';
- 	const BASE = 'db516119988';
+ 	const LOGGER_LOCATION  ='/Applications/MAMP/htdocs/liveschool/logs/';
  	
- //	const LOGGER_LOCATION  ='/Applications/MAMP/htdocs/liveschool/logs/';
- 	
- 	const LOGGER_LOCATION  ='/homepages/11/d516114061/htdocs/test.liveschool/liveschool/logs/';
+ 	const PATH_DATA = '/Applications/MAMP/htdocs';
  	
  	const PATH_IMAGE_ETABLISSEMENT ='/data/etablissements/';
  	
