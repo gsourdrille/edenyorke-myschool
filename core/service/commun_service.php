@@ -17,6 +17,11 @@ function getEtablissement($etablissementId){
 	return $etablissement;
 }
 
+function getEtablissementFromUser($idUser){
+	$etablissementDao = new EtablissementDao();
+	return $etablissementDao->getEtablissementsFromUser($idUser);
+}
+
 function getTypeUtilisateurLibelle($typeUtilisateur){
 	$libelle = "";
 	switch ($typeUtilisateur){
@@ -31,4 +36,12 @@ function getTypeUtilisateurLibelle($typeUtilisateur){
 			break;
 	}
 	return $libelle; 
+}
+
+function getFirstEtablissement($utilisateur){
+	$etablissementDao = new EtablissementDao();
+	$listeEtablissement = $etablissementDao->getEtablissementsFromUser($utilisateur->idUser);
+	if($listeEtablissement->count()>0){
+		return $listeEtablissement[0]->idEtablissement;
+	}
 }

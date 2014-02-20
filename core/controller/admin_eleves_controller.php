@@ -32,7 +32,6 @@ if(isset($_GET['action'])){
 	if($idEleve == null || trim($idEleve) == false){
 		//Nouveau niveau
 		$eleve = new Utilisateur();
-		$eleve->etablissement = $_SESSION['ETABLISSEMENT_ID'];
 		$isnew = true;
 	}else{
 		$eleve = getUserById($idEleve);
@@ -87,7 +86,7 @@ if(isset($_GET['action'])){
 	$showEleve = true;
 	if($error==false){
 		$eleve->active = 1;
-		if(saveOrUpdateUtilisateur($eleve,Type_Utilisateur::ELEVE)){
+		if(saveOrUpdateUtilisateur($eleve,Type_Utilisateur::ELEVE, $_SESSION['ETABLISSEMENT_ID'])){
 			if(isset($_POST['selectClasseto'])){
 				$listeClasse = $_POST['selectClasseto'];
 			}else{

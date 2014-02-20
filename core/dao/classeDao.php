@@ -169,6 +169,19 @@
  	}
  	
  	
+ 	public function findClasseByEtablissement($idEtablissement){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "SELECT * FROM CLASSE WHERE ID_NIVEAU IN (SELECT ID_NIVEAU FROM NIVEAU WHERE ID_ETABLISSEMENT='$idEtablissement')";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$listeClasses = new ArrayObject();
+ 		while($row = mysqli_fetch_assoc($resulat)){
+ 			$listeClasses->append($this->buildClasse($row));
+ 		}
+ 		$baseDao->close();
+ 		return $listeClasses;
+ 	}
+ 	
  	
  	
  	public function buildClasse($row){

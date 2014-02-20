@@ -104,6 +104,19 @@ class EtablissementDao{
 		return $etablissement;
 	}
 	
+	public function getEtablissementsFromUser($idUser){
+		$baseDao = new BaseDao();
+		$baseDao->connect();
+		$requete = "SELECT * FROM ETABLISSEMENT WHERE ID_ETABLISSEMENT IN (SELECT ID_ETABLISSEMENT FROM UTILISATEUR_ETABLISSEMENT WHERE ID_USER ='$idUser')";
+		$resulat = $baseDao->sendRequest($requete);
+		$listeEtalissement = new ArrayObject();
+ 		while($row = mysqli_fetch_array($resulat)){
+ 			$listeEtalissement->append($this->buildEtablissement($row));  
+ 		}
+ 		$baseDao->close();
+		return $listeEtalissement;
+	}
+	
 	public function buildEtablissement($row){
 		$etablissement = new Etablissement();
 		$etablissement->idEtablissement = $row["ID_ETABLISSEMENT"];

@@ -9,7 +9,7 @@ $listeClasse = getClassesIdByUser($utilisateur->idUser);
 //Recuperation des niveaux lies aux classes
 $listeNiveaux = getNiveauxIdByClasses($listeClasse);
 //Recuperation de l'etablissement
-$etablissementId = $utilisateur->etablissement;
+$etablissementId = $_SESSION['ETABLISSEMENT_ID'];
 
 //Gestion de la pagination
 if(isset($_GET['offset'])){

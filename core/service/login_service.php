@@ -3,12 +3,10 @@
 include_once($_SERVER['DOCUMENT_ROOT']."/core/include.php");
 
 	function connect($username,$password){
-		
 		$passwordSha1 = sha1($password);
 		$utilisateurDao = new UtilisateurDao();
 		$utilisateur = $utilisateurDao->findUtilisateur($username, $passwordSha1);
 		return $utilisateur;
-		
 	}
 	
 	function saveAutologin($utilisateur){
@@ -23,6 +21,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/include.php");
 		$utilisateurDao = new UtilisateurDao();
 		return $utilisateurDao->getUtilisateurByLoginToken($key);
 	}
+	
 
 
 
