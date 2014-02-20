@@ -76,7 +76,7 @@
 	}
 	
 	public static function getPostFile($idPost,$name){
-		return Constants::PATH_DATA.Constants::PATH_POST_FILE.$idPost."/".$name;
+		return Constants::PATH_POST_FILE.$idPost."/".$name;
 	}
 	
 	public static function deletePostFile($idPost,$name){
