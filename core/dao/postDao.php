@@ -9,7 +9,7 @@
   			$baseDao = new BaseDao();
  			$baseDao->connect();
  			$contenu = $baseDao->escapeString($post->contenu);
- 			$requete = "INSERT INTO POST (ID_USER,CONTENU,COMMENTAIRES_ACTIVES) VALUES ('$post->createur', '$contenu', '$post->commentairesActives') ";
+ 			$requete = "INSERT INTO POST (ID_USER,CONTENU,COMMENTAIRES_ACTIVES, POUR_ENSEIGNANT) VALUES ('$post->createur', '$contenu', '$post->commentairesActives', '$post->seulementEnseignant') ";
  			$result = $baseDao->sendRequest($requete);
  			$idPost = $baseDao->lastInsertId();
  			$post->idPost = $idPost;
@@ -100,7 +100,7 @@
  			$baseDao = new BaseDao();
  			$baseDao->connect();
  			$contenu = $baseDao->escapeString($post->contenu);
- 			$requete = "UPDATE POST SET CONTENU='$contenu', COMMENTAIRES_ACTIVES='$post->commentairesActives' WHERE ID_POST=$post->idPost";
+ 			$requete = "UPDATE POST SET CONTENU='$contenu', COMMENTAIRES_ACTIVES='$post->commentairesActives', POUR_ENSEIGNANT='$post->seulementEnseignant' WHERE ID_POST=$post->idPost";
  			$result  = $baseDao->sendRequest($requete);
  			$baseDao->close();
  			if(!$result){
@@ -136,7 +136,7 @@
  			return $post;
  	}
  	
- 	public function getAllPosts($idEtablissement, $idClasses, $idsNiveaux, $nbResultat, $offset){
+ 	public function getAllPosts($idEtablissement, $idClasses, $idsNiveaux, $nbResultat, $offset, $typeUtilisateur){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
  		$requeteClasse = "";
@@ -149,7 +149,11 @@
  			$idNiveauxSQL = join(',',(array)$idsNiveaux);
  			$requeteNiveau  = "UNION SELECT ID_POST FROM POST_NIVEAU WHERE ID_NIVEAU IN ($idNiveauxSQL)";
  		}
- 		$requete = "SELECT * FROM POST WHERE ID_POST IN (SELECT ID_POST FROM POST_ETABLISSEMENT WHERE ID_ETABLISSEMENT = '$idEtablissement' 
+ 		$requeteDroitPost = "";
+ 		if($typeUtilisateur == Type_Utilisateur::ELEVE){
+ 			$requeteDroitPost = "POUR_ENSEIGNANT=0 AND";
+ 		}
+ 		$requete = "SELECT * FROM POST WHERE ".$requeteDroitPost." ID_POST IN (SELECT ID_POST FROM POST_ETABLISSEMENT WHERE ID_ETABLISSEMENT = '$idEtablissement' 
  		$requeteClasse
  		$requeteNiveau) ORDER BY DATE_CREATION DESC LIMIT $nbResultat OFFSET $offset";
  		$resulat = $baseDao->sendRequest($requete);
@@ -161,7 +165,7 @@
  		return $listePosts;
  	}
  	
- 	public function countAllPosts($idEtablissement, $idClasses, $idsNiveaux){
+ 	public function countAllPosts($idEtablissement, $idClasses, $idsNiveaux, $typeUtilisateur){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
  		$requeteClasse = "";
@@ -174,7 +178,11 @@
  			$idNiveauxSQL = join(',',(array)$idsNiveaux);
  			$requeteNiveau  = "UNION SELECT ID_POST FROM POST_NIVEAU WHERE ID_NIVEAU IN ($idNiveauxSQL)";
  		}
- 		$requete = "SELECT count(*) FROM POST WHERE ID_POST IN (SELECT ID_POST FROM POST_ETABLISSEMENT WHERE ID_ETABLISSEMENT = '$idEtablissement'
+ 		$requeteDroitPost = "";
+ 		if($typeUtilisateur == Type_Utilisateur::ELEVE){
+ 			$requeteDroitPost = "POUR_ENSEIGNANT=0 AND";
+ 		}
+ 		$requete = "SELECT count(*) FROM POST WHERE ".$requeteDroitPost." ID_POST IN (SELECT ID_POST FROM POST_ETABLISSEMENT WHERE ID_ETABLISSEMENT = '$idEtablissement'
  		$requeteClasse $requeteNiveau)";
  		$resulat = $baseDao->sendRequest($requete);
  		$result = $resulat->fetch_row();
@@ -192,6 +200,7 @@
  		$post->dateCreation = new DateTime($row["DATE_CREATION"]);
  		$post->dateModification = $row["DATE_DERNIERE_MODIFICATION"];
  		$post->commentairesActives = $row['COMMENTAIRES_ACTIVES'];
+ 		$post->seulementEnseignant = $row['POUR_ENSEIGNANT'];
  		return $post;
  	}
  	

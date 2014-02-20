@@ -17,17 +17,13 @@ if($_SESSION['TYPE_UTILISATEUR']==Type_Utilisateur::DIRECTION){
 	//Recuperation des niveaux lies aux classes
 	$listeNiveaux = getNiveauxIdByClasses($listeClasse);
 }
-$logger = new Logger(Constants::LOGGER_LOCATION);
 
 
 //Construction de la liste de droits
 $listeDroitsPost = new ArrayObject();
 foreach($listeNiveaux as $niveau){
 	$listClassePost = new ArrayObject();
-	$logger->log('succes', 'myschool', "NIVEAU :  ".$niveau->idNiveau, Logger::GRAN_VOID);
 	foreach($listeClasse as $classe){
-		$logger->log('succes', 'myschool', "CLASSE :  ".$classe->idClasse, Logger::GRAN_VOID);
-		$logger->log('succes', 'myschool', "CLASSE NIVEAU:  ".$classe->idNiveau, Logger::GRAN_VOID);
 		if($classe->idNiveau == $niveau->idNiveau){
 			$listClassePost->append($classe);
 		}

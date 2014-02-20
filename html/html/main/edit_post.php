@@ -60,6 +60,8 @@
 		<div id="enableComment">
 			<label for="allowComment">Ouvert aux commentaires : </label>
 			<input name="allowComment" type="checkbox" <?php echo $post->commentairesActives?  'checked' : ''?>/>
+			<label for="onlyEnseignant">Seulement aux enseignants : </label>
+			<input name="onlyEnseignant" type="checkbox"  <?php echo $post->seulementEnseignant?  'checked' : ''?>/>
 		</div>
 		<div id="postEditPj">
 			<label for="addfile">Ajouter un fichier : </label>

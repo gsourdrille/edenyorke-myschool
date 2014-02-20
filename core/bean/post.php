@@ -13,15 +13,7 @@ class Post{
 	var $associations;
 	var $fullCreateur;
 	var $isCreateur;
+	var $seulementEnseignant;
 	
-	public function afficher(){
-			
-		echo "idPost : ". $this->idPost .'<br>';
-		echo "createur : ". $this->createur .'<br>';
-		echo "dateCreation : ". $this->dateCreation .'<br>';
-		echo "dateModification : ". $this->dateModification .'<br>';
-		echo "contenu : ". $this->contenu .'<br>';
-		echo "commentairesActives : ". $this->commentairesActives .'<br>';
-	}
 	
 }

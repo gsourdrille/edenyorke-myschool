@@ -1,5 +1,8 @@
 <?php
 
+// include image processing code
+include($_SERVER['DOCUMENT_ROOT']."/core/utils/thumbnail/image.class.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/constant/constants.php");
 ###############################################################
 # Thumbnail Image Generator 1.3
 ###############################################################
@@ -52,7 +55,7 @@ $cut_y = 0;
 
 // Folder where source images are stored (thumbnails will be generated from these images).
 // MUST end with slash.
-$images_folder = '/Applications/MAMP/htdocs';
+$images_folder = Constants::PATH_DATA;
 
 // Folder to save thumbnails, full path from the root folder, MUST end with slash.
 // Only needed if you save generated thumbnails on the server.
@@ -108,8 +111,6 @@ if (isset($_REQUEST['y'])) {
 // Special thanks to Alecos for providing the code.
 ini_set('memory_limit', '-1');
 
-// include image processing code
-include($_SERVER['DOCUMENT_ROOT']."/core/utils/thumbnail/image.class.php");
 $img = new Zubrag_image;
 
 // initialize
