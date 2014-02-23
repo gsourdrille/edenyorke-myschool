@@ -3,8 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <LINK rel="stylesheet" type="text/css" href="/html/css/style.css">
+<LINK rel="stylesheet" type="text/css" href="/html/css/uploadify.css">
  <script type="text/javascript" src="/html/js/jquery.js"></script>
  <script type="text/javascript" src="/html/js/liveschool.js"></script> 
+ <script type="text/javascript" src="/html/js/uploadify/jquery.uploadify.min.js"></script> 
 
 
 <title>LiveSchool</title>

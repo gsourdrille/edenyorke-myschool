@@ -57,16 +57,17 @@
 			
 			<div id="admin_image" style="display: block">
 				<?php if ($utilisateur->avatar!=null){?>
-					<img src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>&x=100&y=100&f=0 " width="100px" height="100px">
+					<img id="avatar_image" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>&x=100&y=100&f=0 " width="100px" height="100px">
 				<?php }else{?>
 					<img src="/html/images/icon_user.png" width="100px" height="100px">
 				<?php }?>
 					<input type="button" value="Changer" onclick="showUploadImagePrincipaleButton()">
 			</div>
 			
+			<input id="userfileId" type="hidden" name="userfile" />
 			<div id="upload_image" style="display: none">
 				<label for="userfile">Photo de profil : </label>
-				<input name="userfile" type="file" />
+				<input type="file" name="userUploadfile" id="avatar_upload" />
 				<input type="button" value="Annuler" onclick="hideUploadImagePrincipaleButton()">
 			</div>
 			
