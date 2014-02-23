@@ -49,7 +49,22 @@ $(document).ready(function() {
 	
 	
     
-    tinyMCE.init({  
+    
+	 $('#avatar_upload').uploadify({
+	        'swf'      : '/html/js/uploadify/uploadify.swf',
+	        'uploader' : '/core/controller/upload_controller.php',
+	    	'onUploadSuccess' : function(file, data, response) {
+	    		$url="/core/controller/thumb_controller.php?src="+data+"&x=100&y=100&f=0";
+	    		$("#avatar_image").attr("src",$url);
+	    		$("#admin_image").show();
+	    	    $("#upload_image").hide();
+	    	    $("#userfileId").val(data);
+	    	
+	    	}
+	    });
+	    
+	
+	tinyMCE.init({  
         mode : "exact",  
         theme : "modern", 
         menubar:false,
@@ -60,6 +75,8 @@ $(document).ready(function() {
         width:"310px"  
         });
     
+    
+   
     
     
 	
@@ -418,4 +435,7 @@ function deleteCommentaire(idCommentaire,idDiv){
 	document.location.href='change_etablissement_controller.php?etablissement='+id;
 		 
  }
+ 
+ 
+
  

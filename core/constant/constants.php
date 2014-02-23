@@ -15,6 +15,8 @@
  	
  	const PATH_IMAGE_UTILISATEUR='/data/utilisateurs/';
  	
+ 	const PATH_TMP='/data/tmp/';
+ 	
  	const PATH_POST_FILE='/data/posts/';
  	
  	const DEFAUT_OFFSET = 0;
