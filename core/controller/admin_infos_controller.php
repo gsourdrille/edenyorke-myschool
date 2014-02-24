@@ -56,27 +56,17 @@ if (isset($_POST['submit'])){
 				if(updateUtilisateur($utilisateur)){
 					$_SESSION['USER'] = serialize($utilisateur);
 					$succes = "Vos informations ont été mises à jour";
-					//upload fichier
-					if ($_FILES['userfile']['error']) {
-						switch ($_FILES['userfile']['error']){
-							case 1: // UPLOAD_ERR_INI_SIZE
-								$error_image = "Le fichier dépasse la limite autorisée par le serveur !";
-								break;
-							case 2: // UPLOAD_ERR_FORM_SIZE
-								$error_image =  "Le fichier dépasse la limite autorisée dans le formulaire HTML !";
-								break;
-							case 3: // UPLOAD_ERR_PARTIAL
-								$error_image =  "L'envoi du fichier a été interrompu pendant le transfert !";
-								break;
-			
-						}
-					}
-					else {
-						if ((isset($_FILES['userfile']['tmp_name'])&&($_FILES['userfile']['error'] == UPLOAD_ERR_OK))) {
+					if(isset($_POST['userfile']) && StringUtils::isNotEmpty($_POST['userfile'])){
+						if($_POST['etablissementImageFond'] == "delete"){
+							FileUtils::deleteUtilisateurFile($utilisateur);
+							$utilisateur->avatar = null;
+							$_SESSION['USER'] = serialize($utilisateur);
+						}else{
 							$path = FileUtils::createUtilisateurDir($utilisateur->idUser);
-							move_uploaded_file($_FILES['userfile']['tmp_name'], $path."/".$_FILES['userfile']['name']);
-							setImageToUtilisateur($utilisateur, $_FILES['userfile']['name']);
-							$utilisateur->avatar = $_FILES['userfile']['name'];
+							$fileName = substr($_POST['userfile'], strlen(Constants::PATH_TMP)); 
+							rename(Constants::PATH_DATA.$_POST['userfile'], $path."/".$fileName);
+							setImageToUtilisateur($utilisateur, $fileName);
+							$utilisateur->avatar = $fileName;
 							$_SESSION['USER'] = serialize($utilisateur);
 						}
 					}

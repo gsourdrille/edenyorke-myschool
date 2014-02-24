@@ -62,6 +62,7 @@
 					<img src="/html/images/icon_user.png" width="100px" height="100px">
 				<?php }?>
 					<input type="button" value="Changer" onclick="showUploadImagePrincipaleButton()">
+					<input type="button" value="Supprimer" onclick="deleteAvatar()">
 			</div>
 			
 			<input id="userfileId" type="hidden" name="userfile" />

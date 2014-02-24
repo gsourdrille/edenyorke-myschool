@@ -47,9 +47,6 @@ $(document).ready(function() {
            return false;  
     });
 	
-	
-    
-    
 	 $('#avatar_upload').uploadify({
 	        'swf'      : '/html/js/uploadify/uploadify.swf',
 	        'uploader' : '/core/controller/upload_controller.php',
@@ -60,6 +57,30 @@ $(document).ready(function() {
 	    	    $("#upload_image").hide();
 	    	    $("#userfileId").val(data);
 	    	
+	    	}
+	    });
+	 
+	 $('#etablissement_principale_upload').uploadify({
+	        'swf'      : '/html/js/uploadify/uploadify.swf',
+	        'uploader' : '/core/controller/upload_controller.php',
+	    	'onUploadSuccess' : function(file, data, response) {
+	    		$url="/core/controller/thumb_controller.php?src="+data+"&x=100&y=100&f=0";
+	    		$("#etablissement_image_principale").attr("src",$url);
+	    		$("#admin_image").show();
+	    	    $("#upload_image").hide();
+	    	    $("#etablissementImagePrincipaleId").val(data);
+	    	}
+	    });
+	 
+	 $('#etablissement_fond_upload').uploadify({
+	        'swf'      : '/html/js/uploadify/uploadify.swf',
+	        'uploader' : '/core/controller/upload_controller.php',
+	    	'onUploadSuccess' : function(file, data, response) {
+	    		$url="/core/controller/thumb_controller.php?src="+data+"&x=100&y=100&f=0";
+	    		$("#etablissement_image_fond").attr("src",$url);
+	    		$("#admin_image_fond").show();
+	    	    $("#upload_image_fond").hide();
+	    	    $("#etablissementImageFondId").val(data);
 	    	}
 	    });
 	    
@@ -413,27 +434,27 @@ function deleteCommentaire(idCommentaire,idDiv){
 		});
  }
  
- // Helper function that formats the file sizes
- function formatFileSize(bytes) {
-     if (typeof bytes !== 'number') {
-         return '';
-     }
-
-     if (bytes >= 1000000000) {
-         return (bytes / 1000000000).toFixed(2) + ' GB';
-     }
-
-     if (bytes >= 1000000) {
-         return (bytes / 1000000).toFixed(2) + ' MB';
-     }
-
-     return (bytes / 1000).toFixed(2) + ' KB';
- }
+ 
  
  
  function changeEtablissement(id){
 	document.location.href='change_etablissement_controller.php?etablissement='+id;
 		 
+ }
+ 
+ function deleteAvatar(){
+	 $("#userfileId").val("delete");
+	 $("#avatar_image").attr("src","/html/images/icon_user.png");
+ }
+ 
+ function deleteImagePrincipale(){
+	 $("#etablissementImagePrincipaleId").val("delete");
+	 $("#etablissement_image_principale").attr("src","/html/images/defaut_image_etablissement.jpeg");
+ }
+ 
+ function deleteImageFond(){
+	 $("#etablissementImageFondId").val("delete");
+	 $("#etablissement_image_fond").attr("src","/html/images/defaut_image_etablissement.jpeg");
  }
  
  
