@@ -51,50 +51,29 @@ if (isset($_POST['submit'])){
 		if($error==false){
 			if(updateEtablissement($etablissement)){
 				$succes = "Vos informations ont été mises à jour";
-				//upload fichier
-				if ($_FILES['imagePrincipale']['error']) {
-					switch ($_FILES['imagePrincipale']['error']){
-						case 1: // UPLOAD_ERR_INI_SIZE
-							$error_image = "Le fichier dépasse la limite autorisée par le serveur !";
-							break;
-						case 2: // UPLOAD_ERR_FORM_SIZE
-							$error_image =  "Le fichier dépasse la limite autorisée dans le formulaire HTML !";
-							break;
-						case 3: // UPLOAD_ERR_PARTIAL
-							$error_image =  "L'envoi du fichier a été interrompu pendant le transfert !";
-							break;
-					}
-				}
-				else {
-					if ((isset($_FILES['imagePrincipale']['tmp_name'])&&($_FILES['imagePrincipale']['error'] == UPLOAD_ERR_OK))) {
+				if(isset($_POST['etablissementImagePrincipale']) && StringUtils::isNotEmpty($_POST['etablissementImagePrincipale'])){
+					if($_POST['etablissementImagePrincipale'] == "delete"){
+						FileUtils::deleteEtablissementImagePrincipale($etablissement);
+						$etablissement->imagePrincipale = null;
+					}else{
 						$path = FileUtils::createEtablissementDir($etablissement->idEtablissement);
-						move_uploaded_file($_FILES['imagePrincipale']['tmp_name'], $path."/".$_FILES['imagePrincipale']['name']);
-						setImagePrincipaleToEtablissement($etablissement, $_FILES['imagePrincipale']['name']);
-						$etablissement->imagePrincipale = $_FILES['imagePrincipale']['name'];
+						$fileName = substr($_POST['etablissementImagePrincipale'], strlen(Constants::PATH_TMP));
+						rename(Constants::PATH_DATA.$_POST['etablissementImagePrincipale'], $path."/".$fileName);
+						setImagePrincipaleToEtablissement($etablissement, $fileName);
+						$etablissement->imagePrincipale = $fileName;
 					}
 				}
 				
-				
-				//upload fichier
-				if ($_FILES['imageFond']['error']) {
-					switch ($_FILES['imageFond']['error']){
-						case 1: // UPLOAD_ERR_INI_SIZE
-							$error_image = "Le fichier dépasse la limite autorisée par le serveur !";
-							break;
-						case 2: // UPLOAD_ERR_FORM_SIZE
-							$error_image =  "Le fichier dépasse la limite autorisée dans le formulaire HTML !";
-							break;
-						case 3: // UPLOAD_ERR_PARTIAL
-							$error_image =  "L'envoi du fichier a été interrompu pendant le transfert !";
-							break;
-					}
-				}
-				else {
-					if ((isset($_FILES['imageFond']['tmp_name'])&&($_FILES['imageFond']['error'] == UPLOAD_ERR_OK))) {
+				if(isset($_POST['etablissementImageFond']) && StringUtils::isNotEmpty($_POST['etablissementImageFond'])){
+					if($_POST['etablissementImageFond'] == "delete"){
+						FileUtils::deleteEtablissementImageFond($etablissement);
+						$etablissement->imageFond = null;
+					}else{
 						$path = FileUtils::createEtablissementDir($etablissement->idEtablissement);
-						move_uploaded_file($_FILES['imageFond']['tmp_name'], $path."/".$_FILES['imageFond']['name']);
-						setImageFondToEtablissement($etablissement, $_FILES['imageFond']['name']);
-						$etablissement->imageFond = $_FILES['imageFond']['name'];
+						$fileName = substr($_POST['etablissementImageFond'], strlen(Constants::PATH_TMP));
+						rename(Constants::PATH_DATA.$_POST['etablissementImageFond'], $path."/".$fileName);
+						setImageFondToEtablissement($etablissement, $fileName);
+						$etablissement->imageFond = $fileName;
 					}
 				}
 				

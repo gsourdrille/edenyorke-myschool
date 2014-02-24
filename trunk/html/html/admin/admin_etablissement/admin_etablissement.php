@@ -61,29 +61,35 @@
 			
 			<div id="admin_image" style="display: block">
 				<?php if ($etablissement->imagePrincipale!=null){?>
-					<img src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImagePrincipale($etablissement);?>&x=100&y=100&f=0" width="100px" height="100px">
+					<img id="etablissement_image_principale" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImagePrincipale($etablissement);?>&x=100&y=100&f=0" width="100px" height="100px">
 				<?php }else{?>
 					<img src="/html/images/defaut_image_etablissement.jpeg" width="100px" height="100px">
 				<?php }?>
 					<input type="button" value="Changer" onclick="showUploadImagePrincipaleButton()">
+					<input type="button" value="Supprimer" onclick="deleteImagePrincipale()">
 			</div>
+			<input id="etablissementImagePrincipaleId" type="hidden" name="etablissementImagePrincipale" />
 			<div id="upload_image" style="display: none">
 				<label for="imagePrincipale">Image de l'établissement : </label>
-				<input name="imagePrincipale" type="file" />
+				<input type="file" name="imagePrincipale" id="etablissement_principale_upload" />
 				<input type="button" value="Annuler" onclick="hideUploadImagePrincipaleButton()">
 			</div>
+			
+			
 			<div id="admin_image_fond" style="display: block">
 				<?php if ($etablissement->imageFond!=null){?>
-					<img src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImageFond($etablissement);?>&x=200&y=200&f=0" width="100px">
+					<img id="etablissement_image_fond" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImageFond($etablissement);?>&x=200&y=200&f=0" width="100px">
 					 
 				<?php }else{?>
 					<img src="/html/images/defaut_image_etablissement.jpeg" width="100px" height="100px">
 				<?php }?>
 					<input type="button" value="Changer" onclick="showUploadImageFondButton()">
+					<input type="button" value="Supprimer" onclick="deleteImageFond()">
 			</div>
+			<input id="etablissementImageFondId" type="hidden" name="etablissementImageFond" />
 			<div id="upload_image_fond" style="display: none">
 				<label for="imageFond">Image de fond de l'établissement : </label>
-				<input name="imageFond" type="file" />
+				<input type="file" name="imageFond" id="etablissement_fond_upload" />
 				<input type="button" value="Annuler" onclick="hideUploadImageFondButton()">
 			</div>
 			<div id="button_submit_infos">
