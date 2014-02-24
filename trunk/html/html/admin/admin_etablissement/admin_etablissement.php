@@ -72,7 +72,7 @@
 			<div id="upload_image" style="display: none">
 				<label for="imagePrincipale">Image de l'établissement : </label>
 				<input type="file" name="imagePrincipale" id="etablissement_principale_upload" />
-				<input type="button" value="Annuler" onclick="hideUploadImagePrincipaleButton()">
+				<input type="button" value="Annuler" onclick="hideUploadButton()">
 			</div>
 			
 			

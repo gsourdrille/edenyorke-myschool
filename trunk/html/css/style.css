@@ -129,7 +129,7 @@ select{
 #post_conteneur{
 	width: 982px;
 	margin:30px 200px;
-	height: 1000px;
+	min-height: 1000px;
 	background-color: #F6FEEE;
 	border-radius: 6px;
 	box-shadow: 0 0 15px #000000;
