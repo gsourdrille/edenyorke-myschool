@@ -48,7 +48,8 @@ $(document).ready(function() {
     });
 	
 	 $('#avatar_upload').uploadify({
-	        'swf'      : '/html/js/uploadify/uploadify.swf',
+	        'buttonImage' : '/html/images/upload_button.png',
+		 	'swf'      : '/html/js/uploadify/uploadify.swf',
 	        'uploader' : '/core/controller/upload_controller.php',
 	    	'onUploadSuccess' : function(file, data, response) {
 	    		$url="/core/controller/thumb_controller.php?src="+data+"&x=100&y=100&f=0";
@@ -61,6 +62,7 @@ $(document).ready(function() {
 	    });
 	 
 	 $('#etablissement_principale_upload').uploadify({
+		 	'buttonImage' : '/html/images/upload_button.png',
 	        'swf'      : '/html/js/uploadify/uploadify.swf',
 	        'uploader' : '/core/controller/upload_controller.php',
 	    	'onUploadSuccess' : function(file, data, response) {
@@ -73,6 +75,7 @@ $(document).ready(function() {
 	    });
 	 
 	 $('#etablissement_fond_upload').uploadify({
+		 	'buttonImage' : '/html/images/upload_button.png',
 	        'swf'      : '/html/js/uploadify/uploadify.swf',
 	        'uploader' : '/core/controller/upload_controller.php',
 	    	'onUploadSuccess' : function(file, data, response) {
