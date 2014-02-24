@@ -5,12 +5,14 @@
 <LINK rel="stylesheet" type="text/css" href="/html/css/style.css">
 <LINK rel="stylesheet" type="text/css" href="/html/css/jquery.multiselect.css">
 <LINK rel="stylesheet" type="text/css" href="/html/css/jquery-ui.css">
+<LINK rel="stylesheet" type="text/css" href="/html/css/uploadify.css">
  <script type="text/javascript" src="/html/js/jquery.js"></script>
  <script type="text/javascript" src="/html/js/jquery-ui.min.js"></script> 
  <script type="text/javascript" src="/html/js/liveschool.js"></script>   
   <script type="text/javascript" src="/html/js/tinymce/tinymce.min.js"></script> 
   <script type="text/javascript" src="/html/js/jquery.multiselect.js"></script> 
   <script type="text/javascript" src="/html/js/galleria/galleria-1.3.5.min.js"></script>
+   <script type="text/javascript" src="/html/js/uploadify/jquery.uploadify.min.js"></script> 
 <title>LiveSchool</title>
 </head>
 <body>

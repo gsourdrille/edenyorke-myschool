@@ -51,6 +51,8 @@ $(document).ready(function() {
 	        'buttonImage' : '/html/images/upload_button.png',
 		 	'swf'      : '/html/js/uploadify/uploadify.swf',
 	        'uploader' : '/core/controller/upload_controller.php',
+	        'formData' : { 'type' : 'image' },
+	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
 	    		$url="/core/controller/thumb_controller.php?src="+data+"&x=100&y=100&f=0";
 	    		$("#avatar_image").attr("src",$url);
@@ -65,6 +67,8 @@ $(document).ready(function() {
 		 	'buttonImage' : '/html/images/upload_button.png',
 	        'swf'      : '/html/js/uploadify/uploadify.swf',
 	        'uploader' : '/core/controller/upload_controller.php',
+	        'formData' : { 'type' : 'image' },
+	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
 	    		$url="/core/controller/thumb_controller.php?src="+data+"&x=100&y=100&f=0";
 	    		$("#etablissement_image_principale").attr("src",$url);
@@ -78,6 +82,8 @@ $(document).ready(function() {
 		 	'buttonImage' : '/html/images/upload_button.png',
 	        'swf'      : '/html/js/uploadify/uploadify.swf',
 	        'uploader' : '/core/controller/upload_controller.php',
+	        'formData' : { 'type' : 'image' },
+	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
 	    		$url="/core/controller/thumb_controller.php?src="+data+"&x=100&y=100&f=0";
 	    		$("#etablissement_image_fond").attr("src",$url);
@@ -231,7 +237,7 @@ function deleteCommentaire(idCommentaire,idDiv){
  
  function openNewPost(){
 	 $("#link_new_post").hide();
-     $("#zone_new_post").show();
+     $("#zone_new_post").fadeIn(1000);
      $("#selectRight").multiselect({
   	   selectedText: "# of # selected",
   	   minWidth:"154px",
@@ -249,7 +255,7 @@ function deleteCommentaire(idCommentaire,idDiv){
  
  function closeNewPost(){
 	 $("#link_new_post").show();
-     $("#zone_new_post").hide();
+     $("#zone_new_post").fadeOut(500);
  }
  function showAssoPost(){
 	 $("#step2").show();

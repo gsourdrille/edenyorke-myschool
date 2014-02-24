@@ -69,7 +69,7 @@
 			<div id="upload_image" style="display: none">
 				<label for="userfile">Photo de profil : </label>
 				<input type="file" name="userUploadfile" id="avatar_upload" />
-				<input type="button" value="Annuler" onclick="hideUploadImagePrincipaleButton()">
+				<input type="button" value="Annuler" onclick="hideUploadButton()">
 			</div>
 			
 			<?php if(isset($error_image)){?>
