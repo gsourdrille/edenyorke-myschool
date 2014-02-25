@@ -48,9 +48,9 @@
 		</div>
 			
 		<div id="postAddPj">
-			<label for="addfile">Ajouter un fichier : </label>
-			<input name="postfile[]" type="file" />
-			<button id="add_more">+</button>
+			<label for="uploadInput">Ajouter un fichier : </label>
+			<input id="upload_file" name="uploadInput" type="file" />
+			<div id="postFileId"></div>
 		</div>
 	</div>
 </form>
