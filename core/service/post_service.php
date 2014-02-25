@@ -127,7 +127,7 @@ function updateListePieceJointe($idPost,$listePieceJointeToDelete){
 	$pieceJointeDao = new PieceJointeDao();
 	foreach ($listePieceJointeToDelete as $pjId){
 		//suppression physique
-		$pj = $pieceJointeDao ->findPieceJointe($pjId);
+		$pj = $pieceJointeDao ->findPieceJointe($pjId,$idPost);
 		FileUtils::deletePostFile($idPost, $pj->path);
 		//suppression en base
 		$pieceJointeDao->deletePieceJointe($pjId);
@@ -204,4 +204,9 @@ function envoiMailNotification($post, $utilisateur){
 	
 	envoiMailNotificationPost($post, $utilisateur, $listeUtilisateurs);
 	
+}
+
+function getPj($idPj, $idPost){
+	$pjDao = new PieceJointeDao();
+	return $pjDao->findPieceJointe($idPj, $idPost);
 }
