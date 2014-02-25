@@ -93,6 +93,18 @@ $(document).ready(function() {
 	    	}
 	    });
 	    
+	 
+	 $('#upload_file').uploadify({
+		 	'buttonImage' : '/html/images/upload_button.png',
+	        'swf'      : '/html/js/uploadify/uploadify.swf',
+	        'uploader' : '/core/controller/upload_controller.php',
+	        'formData' : { 'type' : 'file' },
+	        'fileSizeLimit' : '6MB',
+	    	'onUploadSuccess' : function(file, data, response) {
+	    		$("#postFileId").append("<input type=\"hidden\" name=\"postFile[]\" value=\""+data+"\" />");
+	    	}
+	    });
+	    
 	
 	tinyMCE.init({  
         mode : "exact",  
