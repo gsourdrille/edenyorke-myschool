@@ -64,10 +64,10 @@ class PieceJointeDao {
 		return $listePiecesJointes;
 	}
 	
-	public function findPieceJointe($idPj){
+	public function findPieceJointe($idPj,$idPost){
 		$baseDao = new BaseDao();
 		$baseDao->connect();
-		$requete = "SELECT * FROM PIECE_JOINTE WHERE ID_PJ='$idPj'";
+		$requete = "SELECT * FROM PIECE_JOINTE WHERE ID_PJ='$idPj' AND ID_POST='$idPost'";
 		$resulat = $baseDao->sendRequest($requete);
 		$row = mysqli_fetch_assoc($resulat);
 		$pj = $this->buildPieceJointe($row);
