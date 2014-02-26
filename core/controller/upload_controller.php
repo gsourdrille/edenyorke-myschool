@@ -4,14 +4,12 @@ Uploadify
 Copyright (c) 2012 Reactive Apps, Ronnie Garcia
 Released under the MIT License <http://www.opensource.org/licenses/mit-license.php> 
 */
-include_once($_SERVER['DOCUMENT_ROOT']."/core/constant/constants.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/include.php");
 // Define a destination
 $targetFolder = Constants::PATH_TMP; // Relative to the root
 
-
 if (!empty($_FILES)) {
 	$response['error'] = false;
-	
 	$tempFile = $_FILES['Filedata']['tmp_name'];
 	$targetPath = Constants::PATH_DATA . $targetFolder;
 	$targetFile = rtrim($targetPath,'/') . '/' . $_FILES['Filedata']['name'];
@@ -37,6 +35,12 @@ if (!empty($_FILES)) {
 			$response['type'] = 'fichier';
 		}
 		$response['path'] = $tmpFile;
+		$response['name'] = $_FILES['Filedata']['name'];
+		
+		//generation d'un identifiant unique
+		$id = EncryptUtils::generateId();
+		$response['id'] = $id;
+		
 	}
 	
 	echo json_encode($response);

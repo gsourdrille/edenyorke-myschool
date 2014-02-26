@@ -48,6 +48,7 @@
 		</div>
 			
 		<div id="postAddPj">
+			<div id="listeFilePreview"></div>
 			<label for="uploadInput">Ajouter un fichier : </label>
 			<input id="upload_file" name="uploadInput" type="file" />
 			<div id="postFileId"></div>

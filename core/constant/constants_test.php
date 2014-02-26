@@ -30,6 +30,8 @@
  	
  	const FILE_NAME_LENGTH = 12;
  	
+ 	const ID_LENGTH = 15;
+ 	
  	const MAIL_REPLY_TO="donotreply@liveschool.fr";
  	const MAIL_FROM="liveschool@liveschool.fr";
  	const MAIL_FROM_NAME="liveschool";
