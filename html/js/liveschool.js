@@ -54,11 +54,12 @@ $(document).ready(function() {
 	        'formData' : { 'type' : 'image' },
 	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
-	    		$url="/core/controller/thumb_controller.php?src="+data+"&x=100&y=100&f=0";
+	    		var myFile = jQuery.parseJSON(data);
+	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&x=100&y=100&f=0";
 	    		$("#avatar_image").attr("src",$url);
 	    		$("#admin_image").show();
 	    	    $("#upload_image").hide();
-	    	    $("#userfileId").val(data);
+	    	    $("#userfileId").val(myFile.path);
 	    	
 	    	}
 	    });
@@ -70,11 +71,12 @@ $(document).ready(function() {
 	        'formData' : { 'type' : 'image' },
 	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
-	    		$url="/core/controller/thumb_controller.php?src="+data+"&x=100&y=100&f=0";
+	    		var myFile = jQuery.parseJSON(data);
+	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&x=100&y=100&f=0";
 	    		$("#etablissement_image_principale").attr("src",$url);
 	    		$("#admin_image").show();
 	    	    $("#upload_image").hide();
-	    	    $("#etablissementImagePrincipaleId").val(data);
+	    	    $("#etablissementImagePrincipaleId").val(myFile.path);
 	    	}
 	    });
 	 
@@ -85,11 +87,12 @@ $(document).ready(function() {
 	        'formData' : { 'type' : 'image' },
 	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
-	    		$url="/core/controller/thumb_controller.php?src="+data+"&x=100&y=100&f=0";
+	    		var myFile = jQuery.parseJSON(data);
+	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&x=100&y=100&f=0";
 	    		$("#etablissement_image_fond").attr("src",$url);
 	    		$("#admin_image_fond").show();
 	    	    $("#upload_image_fond").hide();
-	    	    $("#etablissementImageFondId").val(data);
+	    	    $("#etablissementImageFondId").val(myFile.path);
 	    	}
 	    });
 	    
@@ -101,7 +104,13 @@ $(document).ready(function() {
 	        'formData' : { 'type' : 'file' },
 	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
-	    		$("#postFileId").append("<input type=\"hidden\" name=\"postFile[]\" value=\""+data+"\" />");
+	    		var myFile = jQuery.parseJSON(data);
+	    		$("#postFileId").append("<input type=\"hidden\" name=\"postFile[]\" value=\""+myFile.path+"\" />");
+	    		if(myFile.type == "image"){
+	    			
+	    		}else{
+	    			
+	    		}
 	    	}
 	    });
 	    
