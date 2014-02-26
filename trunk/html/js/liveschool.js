@@ -105,13 +105,18 @@ $(document).ready(function() {
 	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
 	    		var myFile = jQuery.parseJSON(data);
-	    		$("#postFileId").append("<input type=\"hidden\" name=\"postFile[]\" value=\""+myFile.path+"\" />");
+	    		$("#postFileId").append("<input id=\"FILE_"+myFile.id+"\" type=\"hidden\" name=\"postFile[]\" value=\""+myFile.path+"\" />");
+	    		var filePreview;
 	    		if(myFile.type == "image"){
-	    			
+	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0 \"></a>";
 	    		}else{
-	    			
+	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"><img class=\"postPjThumbnails\" src=/html/images/icone-document.jpg title=\""+myFile.name+"\"></a>";
 	    		}
-	    	}
+	    		$("#listeFilePreview").append(filePreview);
+	    	},
+	    	'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+	            alert('The file ' + file.name + ' could not be uploaded: ' + errorString);
+	        }
 	    });
 	    
 	
@@ -132,6 +137,14 @@ $(document).ready(function() {
     
 	
 });
+
+
+function deleteFile(id){
+	var prev = "#PREV_"+id;
+	var file = "#FILE_"+id;
+	$(file).remove();
+	$(prev).remove();
+}
 
 
 function sendComment(idForm,idDiv){
