@@ -42,6 +42,7 @@ $(document).ready(function() {
                 	closeNewPost();
                 	$('#zonePosts').html("");
                 	$('#zonePosts').load("/html/html/main/zone_posts.php");
+                	
                 }            
            });
            return false;  
@@ -105,7 +106,7 @@ $(document).ready(function() {
 	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
 	    		var myFile = jQuery.parseJSON(data);
-	    		$("#postFileId").append("<input id=\"FILE_"+myFile.id+"\" type=\"hidden\" name=\"postFile[]\" value=\""+myFile.path+"\" />");
+	    		$("#postFileId").append("<input id=\"FILE_"+myFile.id+"\" type=\"hidden\" name=\"postFile[]\" value=\""+myFile.name+"\" />");
 	    		var filePreview;
 	    		if(myFile.type == "image"){
 	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0 \"></a>";
@@ -119,6 +120,28 @@ $(document).ready(function() {
 	        }
 	    });
 	    
+	 
+	 $('#upload_file_edit').uploadify({
+		 	'buttonImage' : '/html/images/upload_button.png',
+	        'swf'      : '/html/js/uploadify/uploadify.swf',
+	        'uploader' : '/core/controller/upload_controller.php',
+	        'formData' : { 'type' : 'file' },
+	        'fileSizeLimit' : '6MB',
+	    	'onUploadSuccess' : function(file, data, response) {
+	    		var myFile = jQuery.parseJSON(data);
+	    		$("#postFileAddId").append("<input id=\"FILE_"+myFile.id+"\" type=\"hidden\" name=\"postFile[]\" value=\""+myFile.name+"\" />");
+	    		var filePreview;
+	    		if(myFile.type == "image"){
+	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0 \"></a>";
+	    		}else{
+	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"><img class=\"postPjThumbnails\" src=/html/images/icone-document.jpg title=\""+myFile.name+"\"></a>";
+	    		}
+	    		$("#listeFileEditPreview").append(filePreview);
+	    	},
+	    	'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+	            alert('The file ' + file.name + ' could not be uploaded: ' + errorString);
+	        }
+	    });
 	
 	tinyMCE.init({  
         mode : "exact",  
@@ -143,6 +166,12 @@ function deleteFile(id){
 	var prev = "#PREV_"+id;
 	var file = "#FILE_"+id;
 	$(file).remove();
+	$(prev).remove();
+}
+
+function deletePj(idPj){
+	$("#postFileDeleteId").append("<input type=\"hidden\" name=\"postDeleteFile[]\" value=\""+idPj+"\" />");
+	var prev = "#PREV_"+idPj;
 	$(prev).remove();
 }
 
@@ -270,22 +299,28 @@ function deleteCommentaire(idCommentaire,idDiv){
  
  
  function openNewPost(){
-	 $("#link_new_post").hide();
-     $("#zone_new_post").fadeIn(1000);
-     $("#selectRight").multiselect({
-  	   selectedText: "# of # selected",
-  	   minWidth:"154px",
-  	   autoOpen:true,
-  	   header: false,
-  	   selectedList: 4,
-  	   height:"135px",
-  	   noneSelectedText: 'Pour qui ?',
-  	   position: {
-  		      my: 'left top',
-  		      at: 'left bottom'
-  	   }
-  	});
- }
+	$("#link_new_post").hide();
+    $("#zone_new_post").fadeIn(1000);
+    tinyMCE.get("newPostArea").setContent('');
+ 	$("#postFileId").html('');
+ 	$("#listeFilePreview").html('');
+ 	$("#selectRight").multiselect({
+   	   selectedText: "# of # selected",
+   	   minWidth:"154px",
+   	   autoOpen:true,
+   	   header: false,
+   	   selectedList: 4,
+   	   height:"135px",
+   	   noneSelectedText: 'Pour qui ?',
+   	   position: {
+   		      my: 'left top',
+   		      at: 'left bottom'
+   	   }
+   	});
+ 	$("#selectRight").multiselect("uncheckAll");
+ 	$("#allowCommentNew").prop('checked',true);
+ 	$("#onlyEnseignantNew").prop('checked',false);
+ 	}
  
  function closeNewPost(){
 	 $("#link_new_post").show();
@@ -342,15 +377,7 @@ function deleteCommentaire(idCommentaire,idDiv){
 	 $("#edit_post_"+idPost).hide();
  }
  
- function deletePj(idPj, idPost){
-	 $("#pj_"+idPj).remove();
-	 var currentval = $("#pjToDelete_"+idPost).val();
-	 if(currentval==""){
-		 $("#pjToDelete_"+idPost).val(idPj);
-	 }else{
-		 $("#pjToDelete_"+idPost).val(currentval + "," + idPj);
-	 }
- }
+
  
  function editPost(idPost){
 	 	tinyMCE.triggerSave();

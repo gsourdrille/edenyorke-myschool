@@ -42,9 +42,9 @@
 		</div>
 		<div id="enableComment">
 			<label for="allowComment">Ouvert aux commentaires : </label>
-			<input name="allowComment" type="checkbox" checked />
+			<input id="allowCommentNew" name="allowComment" type="checkbox" checked />
 			<label for="onlyEnseignant">Seulement aux enseignants : </label>
-			<input name="onlyEnseignant" type="checkbox"  />
+			<input id="onlyEnseignantNew" name="onlyEnseignant" type="checkbox"  />
 		</div>
 			
 		<div id="postAddPj">

@@ -163,12 +163,12 @@ function getImagesFromPost($idPost){
 	return $listeImages;
 }
 
-function processPieceJointe($postfile,$file,$post,$name){
+function processPieceJointe($post,$name){
 	$path = FileUtils::createPostDir($post->idPost);
-	move_uploaded_file($postfile['tmp_name'][$file], $path."/".$name);
+	rename(Constants::PATH_DATA.Constants::PATH_TMP.$name, $path."/".$name);
 	$pieceJointe = new PieceJointe();
 	$pieceJointe->idPost = $post->idPost;
-	$pieceJointe->contentType = $postfile['type'][$file];
+	$pieceJointe->contentType = FileUtils::getContentType($name);
 	$pieceJointe->path = $name;
 	return $pieceJointe;
 }
