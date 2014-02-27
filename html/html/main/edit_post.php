@@ -48,11 +48,16 @@
 				<input type="button" onClick="editPost(<?php echo $post->idPost;?>)" value="Envoyer">
 			</div>
 		</div>
-		<div id="postListPj">
-			<input id="pjToDelete_<?php echo $post->idPost;?>" type="hidden" name="pjToDelete"/>
+		<div id="listeFileEditPreview">
 			<?php foreach ($post->piecesJointes as $pj){
 				?>
-			<a id="pj_<?php echo $pj->idPj;?>" href="#null" onclick="deletePj(<?php echo $pj->idPj;?>,<?php echo $post->idPost;?>)" title="Supprimer"><?php echo $pj->path." x"?></a>
+				<div class="zone_pj">
+					<?php if($pj->isImage){?>
+						<a  id="PREV_<?php echo $pj->idPj;?>" href="#dev" onClick="deletePj(<?php echo $pj->idPj;?>)"><img class="postPjThumbnails" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>&x=30&y=30&f=0 " ></a>
+					<?php }else{?>
+						<a id="PREV_<?php echo $pj->idPj;?>" href="#dev" onClick="deletePj(<?php echo $pj->idPj;?>)"><img class="postPjThumbnails" src="/html/images/icone-document.jpg" title="<?php echo $pj->path?>"></a>
+					<?php }?>
+				</div>
 				<?php 	
 			}
 			?>
@@ -63,10 +68,12 @@
 			<label for="onlyEnseignant">Seulement aux enseignants : </label>
 			<input name="onlyEnseignant" type="checkbox"  <?php echo $post->seulementEnseignant?  'checked' : ''?>/>
 		</div>
+			
 		<div id="postEditPj">
-			<label for="addfile">Ajouter un fichier : </label>
-			<input name="postfile[]" type="file" />
-			<button id="add_more<?php echo $post->idPost;?>">+</button>
+			<label for="uploadInput">Ajouter un fichier : </label>
+			<input id="upload_file_edit<?php echo $post->idPost;?>" name="uploadInput" type="file" />
+			<div id="postFileAddId<?php echo $post->idPost;?>"></div>
+			<div id="postFileDeleteId<?php echo $post->idPost;?>"></div>
 		</div>
 	</div>
 </form>
