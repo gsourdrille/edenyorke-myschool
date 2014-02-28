@@ -162,6 +162,8 @@ $(document).ready(function() {
 });
 
 
+
+
 function deleteFile(id){
 	var prev = "#PREV_"+id;
 	var file = "#FILE_"+id;
@@ -169,8 +171,8 @@ function deleteFile(id){
 	$(prev).remove();
 }
 
-function deletePj(idPj){
-	$("#postFileDeleteId").append("<input type=\"hidden\" name=\"postDeleteFile[]\" value=\""+idPj+"\" />");
+function deletePj(idPj,idPost){
+	$("#postFileDeleteId"+idPost).append("<input type=\"hidden\" name=\"postDeleteFile[]\" value=\""+idPj+"\" />");
 	var prev = "#PREV_"+idPj;
 	$(prev).remove();
 }
@@ -368,6 +370,28 @@ function deleteCommentaire(idCommentaire,idDiv){
 	    $("#add_more"+idPost).click(function(e){
 	        e.preventDefault();
 	        $(this).before("<input name='postfile[]' type='file'/>");
+	    });
+	    
+	    $('#upload_file_edit'+idPost).uploadify({
+		 	'buttonImage' : '/html/images/upload_button.png',
+	        'swf'      : '/html/js/uploadify/uploadify.swf',
+	        'uploader' : '/core/controller/upload_controller.php',
+	        'formData' : { 'type' : 'file' },
+	        'fileSizeLimit' : '6MB',
+	    	'onUploadSuccess' : function(file, data, response) {
+	    		var myFile = jQuery.parseJSON(data);
+	    		$("#postFileAddId"+idPost).append("<input id=\"FILE_"+myFile.id+"\" type=\"hidden\" name=\"postFile[]\" value=\""+myFile.name+"\" />");
+	    		var filePreview;
+	    		if(myFile.type == "image"){
+	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0 \"></a>";
+	    		}else{
+	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"><img class=\"postPjThumbnails\" src=/html/images/icone-document.jpg title=\""+myFile.name+"\"></a>";
+	    		}
+	    		$("#listeFileEditPreview"+idPost).append(filePreview);
+	    	},
+	    	'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+	            alert('The file ' + file.name + ' could not be uploaded: ' + errorString);
+	        }
 	    });
 	 
  }
