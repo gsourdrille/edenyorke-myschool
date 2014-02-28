@@ -48,17 +48,13 @@
 				<input type="button" onClick="editPost(<?php echo $post->idPost;?>)" value="Envoyer">
 			</div>
 		</div>
-		<div id="listeFileEditPreview">
+		<div id="listeFileEditPreview<?php echo $post->idPost;?>">
 			<?php foreach ($post->piecesJointes as $pj){
-				?>
-				<div class="zone_pj">
-					<?php if($pj->isImage){?>
-						<a  id="PREV_<?php echo $pj->idPj;?>" href="#dev" onClick="deletePj(<?php echo $pj->idPj;?>)"><img class="postPjThumbnails" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>&x=30&y=30&f=0 " ></a>
+					 if($pj->isImage){?>
+						<a  id="PREV_<?php echo $pj->idPj;?>" href="#dev" onClick="deletePj(<?php echo $pj->idPj;?>,<?php echo $post->idPost;?>)"><img class="postPjThumbnails" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>&x=30&y=30&f=0 " ></a>
 					<?php }else{?>
-						<a id="PREV_<?php echo $pj->idPj;?>" href="#dev" onClick="deletePj(<?php echo $pj->idPj;?>)"><img class="postPjThumbnails" src="/html/images/icone-document.jpg" title="<?php echo $pj->path?>"></a>
-					<?php }?>
-				</div>
-				<?php 	
+						<a id="PREV_<?php echo $pj->idPj;?>" href="#dev" onClick="deletePj(<?php echo $pj->idPj;?>,<?php echo $post->idPost;?>)"><img class="postPjThumbnails" src="/html/images/icone-document.jpg" title="<?php echo $pj->path?>"></a>
+					<?php }
 			}
 			?>
 		</div>
