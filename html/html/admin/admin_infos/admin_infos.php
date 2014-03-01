@@ -59,7 +59,7 @@
 				<?php if ($utilisateur->avatar!=null){?>
 					<img id="avatar_image" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>&x=100&y=100&f=0 " width="100px" height="100px">
 				<?php }else{?>
-					<img src="/html/images/icon_user.png" width="100px" height="100px">
+					<img id="avatar_image" src="/html/images/icon_user.png" width="100px" height="100px">
 				<?php }?>
 					<input type="button" value="Changer" onclick="showUploadImagePrincipaleButton()">
 					<input type="button" value="Supprimer" onclick="deleteAvatar()">

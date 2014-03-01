@@ -63,7 +63,7 @@
 				<?php if ($etablissement->imagePrincipale!=null){?>
 					<img id="etablissement_image_principale" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImagePrincipale($etablissement);?>&x=100&y=100&f=0" width="100px" height="100px">
 				<?php }else{?>
-					<img src="/html/images/defaut_image_etablissement.jpeg" width="100px" height="100px">
+					<img id="etablissement_image_principale" src="/html/images/defaut_image_etablissement.jpeg" width="100px" height="100px">
 				<?php }?>
 					<input type="button" value="Changer" onclick="showUploadImagePrincipaleButton()">
 					<input type="button" value="Supprimer" onclick="deleteImagePrincipale()">
@@ -81,7 +81,7 @@
 					<img id="etablissement_image_fond" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImageFond($etablissement);?>&x=200&y=200&f=0" width="100px">
 					 
 				<?php }else{?>
-					<img src="/html/images/defaut_image_etablissement.jpeg" width="100px" height="100px">
+					<img id="etablissement_image_fond" src="/html/images/defaut_image_etablissement.jpeg" width="100px" height="100px">
 				<?php }?>
 					<input type="button" value="Changer" onclick="showUploadImageFondButton()">
 					<input type="button" value="Supprimer" onclick="deleteImageFond()">
