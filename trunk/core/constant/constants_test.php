@@ -1,6 +1,8 @@
 <?php
 
- class Constants{
+include_once ("abstract_constants.php");
+
+ class Constants extends AbstractConstants{
 
  	
  	const HOTE = 'db516119988.db.1and1.com';
@@ -12,25 +14,6 @@
  	const LOGGER_LOCATION  ="/homepages/11/d516114061/htdocs/test.liveschool/liveschool/logs/";
  	
  	const PATH_DATA = '/homepages/11/d516114061/htdocs/test.liveschool';
- 	
- 	const PATH_IMAGE_ETABLISSEMENT ='/data/etablissements/';
- 	
- 	const PATH_IMAGE_UTILISATEUR='/data/utilisateurs/';
- 	
- 	const PATH_POST_FILE='/data/posts/';
- 	
- 	const DEFAUT_OFFSET = 0;
- 	const DEFAUT_MAX_RESULT = 3;
- 	
- 	const FORMAT_DATE = "d/m/Y";
- 	
- 	const PASS_CHARS_LENGTH = 8 ;
- 	
- 	const TOKEN_LENGTH = 32 ;
- 	
- 	const FILE_NAME_LENGTH = 12;
- 	
- 	const ID_LENGTH = 15;
  	
  	const MAIL_REPLY_TO="donotreply@liveschool.fr";
  	const MAIL_FROM="liveschool@liveschool.fr";
