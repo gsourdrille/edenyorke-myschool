@@ -20,8 +20,8 @@
 <?php include($_SERVER['DOCUMENT_ROOT']."/html/html/commun/header.php"); ?>
 </div>
 <?php include("body.php"); ?>
-<div id="footer">
-			<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/commun/footer.php"); ?>
-		</div>
+<!-- <div id="footer"> -->
+		<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/commun/footer.php"); ?>
+<!-- 		</div> -->
 </body>
 </html>
