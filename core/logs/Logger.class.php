@@ -48,7 +48,9 @@ class Logger {
 	 * @return string Chemin vers le fichier de log
     **/
     public function path($type, $name, $granularity = self::GRAN_YEAR){
-		# On vérifie que le logger est prêt (et donc que le dossier de dépôt existe
+		date_default_timezone_set('Europe/Paris');
+    	
+    	# On vérifie que le logger est prêt (et donc que le dossier de dépôt existe
         if( !$this->ready ){
             trigger_error("Logger is not ready", E_USER_WARNING);
             return false;
