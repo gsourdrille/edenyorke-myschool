@@ -71,6 +71,7 @@
 			<div id="postFileAddId<?php echo $post->idPost;?>"></div>
 			<div id="postFileDeleteId<?php echo $post->idPost;?>"></div>
 		</div>
+		<div id="post_error<?php echo $post->idPost;?>" class="error_general"></div>
 	</div>
 </form>
 

@@ -38,11 +38,16 @@ $(document).ready(function() {
                 cache: false,
                 contentType: false,
                 processData: false,
+                dataType: 'json',
                 success: function(json) {
+                	if(json['error']){
+                		$('#post_error').html("");
+                		$('#post_error').append(json["error_message"]);
+                	}else{
                 	closeNewPost();
-                	$('#zonePosts').html("");
-                	$('#zonePosts').load("/html/html/main/zone_posts.php");
-                	
+	                	$('#zonePosts').html("");
+	                	$('#zonePosts').load("/html/html/main/zone_posts.php");
+                	}
                 }            
            });
            return false;  
@@ -389,9 +394,7 @@ function deleteCommentaire(idCommentaire,idDiv){
 	    		}
 	    		$("#listeFileEditPreview"+idPost).append(filePreview);
 	    	},
-	    	'onUploadError' : function(file, errorCode, errorMsg, errorString) {
-	            alert('The file ' + file.name + ' could not be uploaded: ' + errorString);
-	        }
+	    	
 	    });
 	 
  }
@@ -415,10 +418,16 @@ function deleteCommentaire(idCommentaire,idDiv){
 	                cache: false,
 	                contentType: false,
 	                processData: false,
+	                dataType: 'json',
 	                success: function(json) {
-	                	closeNewPost();
-	                	$('#zonePosts').html("");
-	                	$('#zonePosts').load("/html/html/main/zone_posts.php");
+	                	if(json['error']){
+	                		$('#post_error'+idPost).html("");
+	                		$('#post_error'+idPost).append(json["error_message"]);
+	                	}else{
+		                	closeNewPost();
+		                	$('#zonePosts').html("");
+		                	$('#zonePosts').load("/html/html/main/zone_posts.php");
+	                	}
 	                }             
 	       });
 		   return false;  

@@ -53,6 +53,7 @@
 			<input id="upload_file" name="uploadInput" type="file" />
 			<div id="postFileId"></div>
 		</div>
+		<div id="post_error" class="error_general"></div>
 	</div>
 </form>
 
