@@ -242,7 +242,7 @@
  	function getUtilisateurByEtablissement($idEtablissement){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
- 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_USER IN (SELECT ID_USER FROM UTILISATEUR_ETABLISSEMENT WERE ID_ETABLISSEMENT='$idEtablissement') AND ACTIVE=1";
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_USER IN (SELECT ID_USER FROM UTILISATEUR_ETABLISSEMENT WHERE ID_ETABLISSEMENT='$idEtablissement') AND ACTIVE=1";
  		$resulat = $baseDao->sendRequest($requete);
  		$listeUtilisateurs = new ArrayObject();
  		while($row = mysqli_fetch_array($resulat)){

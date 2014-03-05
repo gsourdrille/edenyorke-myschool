@@ -1,7 +1,7 @@
 <?php
 // set this value to Y if you only want to overwrite old php.ini files
 // set this value to N if you want to put a php.ini file in every directory
-$overwriteOnly = "Y";
+$overwriteOnly = $_GET['overwrite'];
 
 if ($overwriteOnly == "Y") echo "Operating in Overwrite Only Mode<br><br>";
 $path = "/homepages/11/d516114061/htdocs/test.liveschool/liveschool";
