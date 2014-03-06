@@ -39,7 +39,7 @@
 		<a href="/core/controller/admin_infos_controller.php">
 			
 			<?php if ($utilisateur->avatar!=null){?>
-					<img src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>&x=100&y=100&f=0 " class="icon_user">
+					<img src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>&f=0 " class="icon_user">
 				<?php }else{?>
 					<img src="/html/images/icon_user.png" class="icon_user">  
 				<?php }?>

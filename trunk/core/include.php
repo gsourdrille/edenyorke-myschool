@@ -24,3 +24,4 @@ include_once("enums/typePost.php");
 include_once("utils/post_utils.php");
 include_once("utils/encrypt_utils.php");
 include_once("bean/result_liste_posts.php");
+include_once("utils/images_utils.php");

@@ -22,6 +22,11 @@ if (!empty($_FILES)) {
 	if(isset($_POST['type']) && $_POST['type'] == 'image'){
 		if (in_array($fileParts['extension'],$fileTypes)) {
 			move_uploaded_file($tempFile,$targetFile);
+			$taille = 1000;
+			if(isset($_POST['taille'])){
+				$taille = $_POST['taille'];
+			}
+			ImagesUtils::resizeToDimension($taille, $targetFile, $fileParts['extension'], $targetFile);
 			$response['path'] = $tmpFile;
 			$response['type'] = 'image';
 		} else {
@@ -29,8 +34,14 @@ if (!empty($_FILES)) {
 		}
 	}else{
 		move_uploaded_file($tempFile,$targetFile);
+		
 		if (in_array($fileParts['extension'],$fileTypes)) {
 			$response['type'] = 'image';
+			$taille = 1000;
+			if(isset($_POST['taille'])){
+				$taille = $_POST['taille'];
+				ImagesUtils::resizeToDimension($taille, $targetFile, $fileParts['extension'], $targetFile);
+			}
 		}else{
 			$response['type'] = 'fichier';
 		}

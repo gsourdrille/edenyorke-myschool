@@ -57,11 +57,11 @@ $(document).ready(function() {
 	        'buttonImage' : '/html/images/upload_button.png',
 		 	'swf'      : '/html/js/uploadify/uploadify.swf',
 	        'uploader' : '/core/controller/upload_controller.php',
-	        'formData' : { 'type' : 'image' },
+	        'formData' : { 'type' : 'image', 'taille' : '200' },
 	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
 	    		var myFile = jQuery.parseJSON(data);
-	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&x=100&y=100&f=0";
+	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
 	    		$("#avatar_image").attr("src",$url);
 	    		$("#admin_image").show();
 	    	    $("#upload_image").hide();
@@ -74,11 +74,11 @@ $(document).ready(function() {
 		 	'buttonImage' : '/html/images/upload_button.png',
 	        'swf'      : '/html/js/uploadify/uploadify.swf',
 	        'uploader' : '/core/controller/upload_controller.php',
-	        'formData' : { 'type' : 'image' },
+	        'formData' : { 'type' : 'image' , 'taille' : '200' },
 	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
 	    		var myFile = jQuery.parseJSON(data);
-	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&x=100&y=100&f=0";
+	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
 	    		$("#etablissement_image_principale").attr("src",$url);
 	    		$("#admin_image").show();
 	    	    $("#upload_image").hide();
@@ -90,11 +90,11 @@ $(document).ready(function() {
 		 	'buttonImage' : '/html/images/upload_button.png',
 	        'swf'      : '/html/js/uploadify/uploadify.swf',
 	        'uploader' : '/core/controller/upload_controller.php',
-	        'formData' : { 'type' : 'image' },
+	        'formData' : { 'type' : 'image' , 'taille' : '1000' },
 	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
 	    		var myFile = jQuery.parseJSON(data);
-	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&x=100&y=100&f=0";
+	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
 	    		$("#etablissement_image_fond").attr("src",$url);
 	    		$("#admin_image_fond").show();
 	    	    $("#upload_image_fond").hide();
@@ -107,7 +107,7 @@ $(document).ready(function() {
 		 	'buttonImage' : '/html/images/upload_button.png',
 	        'swf'      : '/html/js/uploadify/uploadify.swf',
 	        'uploader' : '/core/controller/upload_controller.php',
-	        'formData' : { 'type' : 'file' },
+	        'formData' : { 'type' : 'file' , 'taille' : '1000' },
 	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
 	    		var myFile = jQuery.parseJSON(data);
@@ -130,7 +130,7 @@ $(document).ready(function() {
 		 	'buttonImage' : '/html/images/upload_button.png',
 	        'swf'      : '/html/js/uploadify/uploadify.swf',
 	        'uploader' : '/core/controller/upload_controller.php',
-	        'formData' : { 'type' : 'file' },
+	        'formData' : { 'type' : 'file', 'taille' : '1000'  },
 	        'fileSizeLimit' : '6MB',
 	    	'onUploadSuccess' : function(file, data, response) {
 	    		var myFile = jQuery.parseJSON(data);

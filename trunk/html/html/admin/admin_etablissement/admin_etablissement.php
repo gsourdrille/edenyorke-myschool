@@ -61,7 +61,7 @@
 			
 			<div id="admin_image" style="display: block">
 				<?php if ($etablissement->imagePrincipale!=null){?>
-					<img id="etablissement_image_principale" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImagePrincipale($etablissement);?>&x=100&y=100&f=0" width="100px" height="100px">
+					<img id="etablissement_image_principale" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImagePrincipale($etablissement);?>&f=0" width="100px" height="100px">
 				<?php }else{?>
 					<img id="etablissement_image_principale" src="/html/images/defaut_image_etablissement.jpeg" width="100px" height="100px">
 				<?php }?>
@@ -78,7 +78,7 @@
 			
 			<div id="admin_image_fond" style="display: block">
 				<?php if ($etablissement->imageFond!=null){?>
-					<img id="etablissement_image_fond" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImageFond($etablissement);?>&x=200&y=200&f=0" width="100px">
+					<img id="etablissement_image_fond" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImageFond($etablissement);?>&f=0" width="100px">
 					 
 				<?php }else{?>
 					<img id="etablissement_image_fond" src="/html/images/defaut_image_etablissement.jpeg" width="100px" height="100px">

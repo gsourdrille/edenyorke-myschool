@@ -57,7 +57,7 @@
 			
 			<div id="admin_image" style="display: block">
 				<?php if ($utilisateur->avatar!=null){?>
-					<img id="avatar_image" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>&x=100&y=100&f=0 " width="100px" height="100px">
+					<img id="avatar_image" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>&f=0 " width="100px" height="100px">
 				<?php }else{?>
 					<img id="avatar_image" src="/html/images/icon_user.png" width="100px" height="100px">
 				<?php }?>
