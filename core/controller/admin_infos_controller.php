@@ -57,15 +57,15 @@ if (isset($_POST['submit'])){
 					$_SESSION['USER'] = serialize($utilisateur);
 					$succes = "Vos informations ont été mises à jour";
 					if(isset($_POST['userfile']) && StringUtils::isNotEmpty($_POST['userfile'])){
-						if($_POST['etablissementImageFond'] == "delete"){
+						if(isset($_POST['userfileId']) && $_POST['userfileId'] == "delete"){
 							FileUtils::deleteUtilisateurFile($utilisateur);
 							$utilisateur->avatar = null;
 							$_SESSION['USER'] = serialize($utilisateur);
 						}else{
 							$path = FileUtils::createUtilisateurDir($utilisateur->idUser);
 							$fileName = substr($_POST['userfile'], strlen(Constants::PATH_TMP)); 
-							rename(Constants::PATH_DATA.$_POST['userfile'], $path."/".$fileName);
 							setImageToUtilisateur($utilisateur, $fileName);
+							rename(Constants::PATH_DATA.$_POST['userfile'], $path."/".$fileName);
 							$utilisateur->avatar = $fileName;
 							$_SESSION['USER'] = serialize($utilisateur);
 						}

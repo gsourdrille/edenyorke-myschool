@@ -123,20 +123,7 @@ class Zubrag_image {
     // check for allowed image types
     if ($orig_img_type < 1 or $orig_img_type > 3) die("Image type not supported");
  
-    if ($orig_x > $this->max_x or $orig_y > $this->max_y) {
- 
-      // resize
-      $per_x = $orig_x / $this->max_x;
-      $per_y = $orig_y / $this->max_y;
-      if ($per_y > $per_x) {
-        $this->max_x = $orig_x / $per_y;
-      }
-      else {
-        $this->max_y = $orig_y / $per_x;
-      }
- 
-    }
-    else {
+    
       // keep original sizes, i.e. just copy
       if ($this->save_to_file) {
         @copy($from_name, $to_name);
@@ -156,7 +143,7 @@ class Zubrag_image {
               readfile($from_name);
             break;
         }
-      }
+      
       return;
     }
  
