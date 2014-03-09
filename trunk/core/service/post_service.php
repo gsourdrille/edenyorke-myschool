@@ -165,7 +165,7 @@ function getImagesFromPost($idPost){
 
 function processPieceJointe($post,$name){
 	$path = FileUtils::createPostDir($post->idPost);
-	rename(Constants::PATH_DATA.Constants::PATH_TMP.$name, $path."/".$name);
+	rename(Config::getProperties(Key::PATH_DATA).Constants::PATH_TMP.$name, $path."/".$name);
 	$pieceJointe = new PieceJointe();
 	$pieceJointe->idPost = $post->idPost;
 	$pieceJointe->contentType = FileUtils::getContentType($name);

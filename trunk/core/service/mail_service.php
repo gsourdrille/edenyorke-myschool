@@ -2,15 +2,15 @@
 
 function envoiMailInscription($utilisateur,$token){
 	
-	 $headers ='From: "'.Constants::MAIL_FROM_NAME.'"<'.Constants::MAIL_FROM.'>'."\n"; 
-     $headers .='Reply-To: '.Constants::MAIL_REPLY_TO.''."\n"; 
+	 $headers ='From: "'.Config::getProperties(Key::MAIL_FROM_NAME).'"<'.Config::getProperties(Key::MAIL_FROM).'>'."\n"; 
+     $headers .='Reply-To: '.Config::getProperties(Key::MAIL_REPLY_TO).''."\n"; 
      $headers .='Content-Type: text/html; charset=utf-8"'."\n"; 
      $headers .='Content-Transfer-Encoding: 8bit';
 
      $template=  file_get_contents($_SERVER['DOCUMENT_ROOT']."/html/mail/template_inscription.html");
      $parametre = array();
      $parametre['USER_FULLNAME']= $utilisateur->fullname();
-     $parametre['VALIDATION_LINK']=Constants::MAIL_VALID_URL_REPONSE.$token;
+     $parametre['VALIDATION_LINK']=Config::getProperties(Key::MAIL_VALID_URL_REPONSE).$token;
      
      foreach ($parametre as $key=> $value){
      	$template = str_replace('{{ '.$key.' }}', $value, $template);
@@ -22,8 +22,8 @@ function envoiMailInscription($utilisateur,$token){
 
 function envoiMailConfirmationEnvoiPassword($utilisateur,$motdepasse){
 	
-	$headers ='From: "'.Constants::MAIL_FROM_NAME.'"<'.Constants::MAIL_FROM.'>'."\n";
-	$headers .='Reply-To: '.Constants::MAIL_REPLY_TO.''."\n";
+	$headers ='From: "'.Config::getProperties(Key::MAIL_FROM_NAME).'"<'.Config::getProperties(Key::MAIL_FROM).'>'."\n";
+	$headers .='Reply-To: '.Config::getProperties(Key::MAIL_REPLY_TO).''."\n";
 	$headers .='Content-Type: text/html; charset=utf-8"'."\n";
 	$headers .='Content-Transfer-Encoding: 8bit';
 	
@@ -40,8 +40,8 @@ function envoiMailConfirmationEnvoiPassword($utilisateur,$motdepasse){
 }
 
 function envoiMailDemandeInscription($etablissement, $utilisateur){
-	$headers ='From: "'.Constants::MAIL_FROM_NAME.'"<'.Constants::MAIL_FROM.'>'."\n";
-	$headers .='Reply-To: '.Constants::MAIL_REPLY_TO.''."\n";
+	$headers ='From: "'.Config::getProperties(Key::MAIL_FROM_NAME).'"<'.Config::getProperties(Key::MAIL_FROM).'>'."\n";
+	$headers .='Reply-To: '.Config::getProperties(Key::MAIL_REPLY_TO).''."\n";
 	$headers .='Content-Type: text/html; charset=utf-8"'."\n";
 	$headers .='Content-Transfer-Encoding: 8bit';
 	
@@ -58,14 +58,14 @@ function envoiMailDemandeInscription($etablissement, $utilisateur){
 		$template = str_replace('{{ '.$key.' }}', $value, $template);
 	}
 	
-	mail(Constants::MAIL_DEMANDE_INCRIPTION, 'Nouvelle inscription !', utf8_decode($template), $headers);
+	mail(Config::getProperties(Key::MAIL_DEMANDE_INCRIPTION), 'Nouvelle inscription !', utf8_decode($template), $headers);
 	return true;
 }
 
 function envoiMailNotificationPost($post, $utilisateur, $listeUtilisateurs){
 	foreach ($listeUtilisateurs as $user){
-		$headers ='From: "'.Constants::MAIL_FROM_NAME.'"<'.Constants::MAIL_FROM.'>'."\n";
-		$headers .='Reply-To: '.Constants::MAIL_REPLY_TO.''."\n";
+		$headers ='From: "'.Config::getProperties(Key::MAIL_FROM_NAME).'"<'.Config::getProperties(Key::MAIL_FROM).'>'."\n";
+		$headers .='Reply-To: '.Config::getProperties(Key::MAIL_REPLY_TO).''."\n";
 		$headers .='Content-Type: text/html; charset=utf-8"'."\n";
 		$headers .='Content-Transfer-Encoding: 8bit';
 		

@@ -59,7 +59,7 @@ if (isset($_POST['submit'])){
 						$path = FileUtils::createEtablissementDir($etablissement->idEtablissement);
 						$fileName = substr($_POST['etablissementImagePrincipale'], strlen(Constants::PATH_TMP));
 						setImagePrincipaleToEtablissement($etablissement, $fileName);
-						rename(Constants::PATH_DATA.$_POST['etablissementImagePrincipale'], $path."/".$fileName);
+						rename(Config::getProperties(Key::PATH_DATA).$_POST['etablissementImagePrincipale'], $path."/".$fileName);
 						$etablissement->imagePrincipale = $fileName;
 					}
 				}
@@ -72,7 +72,7 @@ if (isset($_POST['submit'])){
 						$path = FileUtils::createEtablissementDir($etablissement->idEtablissement);
 						$fileName = substr($_POST['etablissementImageFond'], strlen(Constants::PATH_TMP));
 						setImageFondToEtablissement($etablissement, $fileName);
-						rename(Constants::PATH_DATA.$_POST['etablissementImageFond'], $path."/".$fileName);
+						rename(Config::getProperties(Key::PATH_DATA).$_POST['etablissementImageFond'], $path."/".$fileName);
 						$etablissement->imageFond = $fileName;
 					}
 				}

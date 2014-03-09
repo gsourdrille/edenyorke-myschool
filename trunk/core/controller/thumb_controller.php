@@ -2,7 +2,8 @@
 
 // include image processing code
 include($_SERVER['DOCUMENT_ROOT']."/core/utils/thumbnail/image.class.php");
-include($_SERVER['DOCUMENT_ROOT']."/core/constant/constants.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/config/config.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/constant/key.php");
 ###############################################################
 # Thumbnail Image Generator 1.3
 ###############################################################
@@ -55,7 +56,7 @@ $cut_y = 0;
 
 // Folder where source images are stored (thumbnails will be generated from these images).
 // MUST end with slash.
-$images_folder = Constants::PATH_DATA;
+$images_folder = Config::getProperties(Key::PATH_DATA);
 
 // Folder to save thumbnails, full path from the root folder, MUST end with slash.
 // Only needed if you save generated thumbnails on the server.

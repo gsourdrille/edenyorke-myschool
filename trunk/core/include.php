@@ -25,3 +25,5 @@ include_once("utils/post_utils.php");
 include_once("utils/encrypt_utils.php");
 include_once("bean/result_liste_posts.php");
 include_once("utils/images_utils.php");
+include_once("config/config.php");
+include_once("constant/key.php");
