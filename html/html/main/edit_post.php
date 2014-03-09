@@ -51,7 +51,7 @@
 		<div id="listeFileEditPreview<?php echo $post->idPost;?>">
 			<?php foreach ($post->piecesJointes as $pj){
 					 if($pj->isImage){?>
-						<a  id="PREV_<?php echo $pj->idPj;?>" href="#dev" onClick="deletePj(<?php echo $pj->idPj;?>,<?php echo $post->idPost;?>)"><img class="postPjThumbnails" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>&x=30&y=30&f=0 " ></a>
+						<a  id="PREV_<?php echo $pj->idPj;?>" href="#dev" onClick="deletePj(<?php echo $pj->idPj;?>,<?php echo $post->idPost;?>)"><img class="postPjThumbnails" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>&x=30&y=30&f=0&resize=true " ></a>
 					<?php }else{?>
 						<a id="PREV_<?php echo $pj->idPj;?>" href="#dev" onClick="deletePj(<?php echo $pj->idPj;?>,<?php echo $post->idPost;?>)"><img class="postPjThumbnails" src="/html/images/icone-document.jpg" title="<?php echo $pj->path?>"></a>
 					<?php }

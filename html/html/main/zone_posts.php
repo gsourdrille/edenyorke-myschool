@@ -42,7 +42,7 @@ include($_SERVER['DOCUMENT_ROOT']."/core/controller/zone_posts_controller.php")?
 					<?php foreach ($post->piecesJointes as $pj){?>
 						<div class="zone_pj">
 							<?php if($pj->isImage){?>
-								<a href="#dev" onClick="showGaleria(<?php echo $post->idPost;?>)"><img class="postPjThumbnails" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>&x=30&y=30&f=0 " ></a>
+								<a href="#dev" onClick="showGaleria(<?php echo $post->idPost;?>)"><img class="postPjThumbnails" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>&x=30&y=30&f=0&resize=true  " ></a>
 							<?php }else{?>
 								<a href="/core/controller/file_controller.php?post=<?php echo $post->idPost?>&pj=<?php echo $pj->idPj?>"><img class="postPjThumbnails" src="/html/images/icone-document.jpg" title="<?php echo $pj->path?>"></a>
 							<?php }?>
