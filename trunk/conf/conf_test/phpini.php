@@ -30,15 +30,7 @@ closedir($dh);
 }
 search($path);
 
-echo "<br>copy constant file.<br>";
-$constantFile = "/homepages/11/d516114061/htdocs/test.liveschool/liveschool/core/constant/constants.php";
-$constantGoalFile = "/homepages/11/d516114061/htdocs/test.liveschool/liveschool/core/constant/constants_test.php";
-if (!file_exists($constantFile)) die('Error - no source constants.php file');
-echo "<br>delete : ".$constantFile;
-unlink($constantFile);
-if (!file_exists($constantGoalFile)) die('Error - no source constants_php.php file');
-echo "<br>rename : ".$constantGoalFile." to : ".$constantFile;
-rename($constantGoalFile, $constantFile);
+
 echo "<br>Done.";
 }else{
 	echo "Pass KO";
