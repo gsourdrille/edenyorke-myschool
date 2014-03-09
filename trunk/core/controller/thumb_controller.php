@@ -105,6 +105,12 @@ if (isset($_REQUEST['y'])) {
   $max_y = intval($_REQUEST['y']);
 }
 
+if(isset($_REQUEST['resize'])){
+	$resize = true;
+}else{
+	$resize = false;
+}
+
 // if (!file_exists($images_folder)) die('Images folder does not exist (update $images_folder in the script)');
 // if ($save_to_file && !file_exists($thumbs_folder)) die('Thumbnails folder does not exist (update $thumbs_folder in the script)');
 
@@ -122,6 +128,7 @@ $img->cut_y        = $cut_y;
 $img->quality      = $image_quality;
 $img->save_to_file = $save_to_file;
 $img->image_type   = $image_type;
+$img->resize       = $resize;
 
 // generate thumbnail
 $img->GenerateThumbFile($images_folder . $from_name, $thumbs_folder . $to_name);

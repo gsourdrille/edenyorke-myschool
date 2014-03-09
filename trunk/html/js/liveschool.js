@@ -114,7 +114,7 @@ $(document).ready(function() {
 	    		$("#postFileId").append("<input id=\"FILE_"+myFile.id+"\" type=\"hidden\" name=\"postFile[]\" value=\""+myFile.name+"\" />");
 	    		var filePreview;
 	    		if(myFile.type == "image"){
-	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0 \"></a>";
+	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0&resize=true  \"></a>";
 	    		}else{
 	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"><img class=\"postPjThumbnails\" src=/html/images/icone-document.jpg title=\""+myFile.name+"\"></a>";
 	    		}
@@ -137,7 +137,7 @@ $(document).ready(function() {
 	    		$("#postFileAddId").append("<input id=\"FILE_"+myFile.id+"\" type=\"hidden\" name=\"postFile[]\" value=\""+myFile.name+"\" />");
 	    		var filePreview;
 	    		if(myFile.type == "image"){
-	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0 \"></a>";
+	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0&resize=true  \"></a>";
 	    		}else{
 	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"><img class=\"postPjThumbnails\" src=/html/images/icone-document.jpg title=\""+myFile.name+"\"></a>";
 	    		}
@@ -388,7 +388,7 @@ function deleteCommentaire(idCommentaire,idDiv){
 	    		$("#postFileAddId"+idPost).append("<input id=\"FILE_"+myFile.id+"\" type=\"hidden\" name=\"postFile[]\" value=\""+myFile.name+"\" />");
 	    		var filePreview;
 	    		if(myFile.type == "image"){
-	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0 \"></a>";
+	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0&resize=true  \"></a>";
 	    		}else{
 	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"><img class=\"postPjThumbnails\" src=/html/images/icone-document.jpg title=\""+myFile.name+"\"></a>";
 	    		}

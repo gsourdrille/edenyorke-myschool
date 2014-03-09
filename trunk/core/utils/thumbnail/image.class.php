@@ -15,6 +15,7 @@ class Zubrag_image {
   var $max_y = 100;
   var $cut_x = 0;
   var $cut_y = 0;
+  var $resize = false;
  
   function SaveImage($im, $filename) {
  
@@ -122,29 +123,39 @@ class Zubrag_image {
  
     // check for allowed image types
     if ($orig_img_type < 1 or $orig_img_type > 3) die("Image type not supported");
- 
-    
-      // keep original sizes, i.e. just copy
-      if ($this->save_to_file) {
-        @copy($from_name, $to_name);
-      }
-      else {
-        switch ($this->image_type) {
-          case 1:
-              header("Content-type: image/gif");
-              readfile($from_name);
-            break;
-          case 2:
-              header("Content-type: image/jpeg");
-              readfile($from_name);
-            break;
-          case 3:
-              header("Content-type: image/png");
-              readfile($from_name);
-            break;
-        }
-      
-      return;
+    if ($this->resize && ($orig_x > $this->max_x or $orig_y > $this->max_y)) {
+    	// resize
+    	$per_x = $orig_x / $this->max_x;
+    	$per_y = $orig_y / $this->max_y;
+    	if ($per_y > $per_x) {
+    		$this->max_x = $orig_x / $per_y;
+    	}
+    	else {
+    		$this->max_y = $orig_y / $per_x;
+    	}
+    }
+    else {
+    	// keep original sizes, i.e. just copy
+    	if ($this->save_to_file) {
+    		@copy($from_name, $to_name);
+    	}
+    	else {
+    		switch ($this->image_type) {
+    			case 1:
+    				header("Content-type: image/gif");
+    				readfile($from_name);
+    				break;
+    			case 2:
+    				header("Content-type: image/jpeg");
+    				readfile($from_name);
+    				break;
+    			case 3:
+    				header("Content-type: image/png");
+    				readfile($from_name);
+    				break;
+    		}
+    	}
+    	return;
     }
  
     if ($this->image_type == 1) {
