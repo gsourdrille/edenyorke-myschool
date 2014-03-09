@@ -65,7 +65,7 @@ if (isset($_POST['submit'])){
 							$path = FileUtils::createUtilisateurDir($utilisateur->idUser);
 							$fileName = substr($_POST['userfile'], strlen(Constants::PATH_TMP)); 
 							setImageToUtilisateur($utilisateur, $fileName);
-							rename(Constants::PATH_DATA.$_POST['userfile'], $path."/".$fileName);
+							rename(Config::getProperties(Key::PATH_DATA).$_POST['userfile'], $path."/".$fileName);
 							$utilisateur->avatar = $fileName;
 							$_SESSION['USER'] = serialize($utilisateur);
 						}

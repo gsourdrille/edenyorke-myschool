@@ -11,7 +11,7 @@ $targetFolder = Constants::PATH_TMP; // Relative to the root
 if (!empty($_FILES)) {
 	$response['error'] = false;
 	$tempFile = $_FILES['Filedata']['tmp_name'];
-	$targetPath = Constants::PATH_DATA . $targetFolder;
+	$targetPath = Config::getProperties(Key::PATH_DATA) . $targetFolder;
 	$targetFile = rtrim($targetPath,'/') . '/' . $_FILES['Filedata']['name'];
 	$tmpFile = rtrim($targetFolder,'/') . '/' . $_FILES['Filedata']['name'];
 	

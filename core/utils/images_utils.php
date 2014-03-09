@@ -58,9 +58,6 @@ public static function resizeToDimension($dimension, $source, $extension, $desti
 			//get the orientation
 			$ort = $exif['Orientation'];
 			
-			$logger = new Logger(Constants::LOGGER_LOCATION);
-			$logger->log('succes', 'succes', "ORT : ".$ort , Logger::GRAN_VOID);
-	
 			//determine what oreientation the image was taken at
 			switch($ort)
 			{
