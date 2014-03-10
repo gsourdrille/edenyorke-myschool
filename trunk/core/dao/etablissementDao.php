@@ -47,11 +47,16 @@ class EtablissementDao{
 	}
 	
 	public function setImagePrincipaleToEtablissement($idEtablissement, $imageName){
-		if($idEtablissement != null && $imageName != null){
+		if($idEtablissement != null){
 			$baseDao = new BaseDao();
 			$baseDao->connect();
-			$requete = "UPDATE ETABLISSEMENT SET IMAGE_PRINCIPALE='$imageName'
-			WHERE ID_ETABLISSEMENT=$idEtablissement";
+			if(StringUtils::isEmpty($imageName)){
+				$requete = "UPDATE ETABLISSEMENT SET IMAGE_PRINCIPALE=null
+				WHERE ID_ETABLISSEMENT=$idEtablissement";
+			}else{
+				$requete = "UPDATE ETABLISSEMENT SET IMAGE_PRINCIPALE='$imageName'
+				WHERE ID_ETABLISSEMENT=$idEtablissement";
+			}
 			$result = $baseDao->sendRequest($requete);
 			$baseDao->close();
 			if(!$result){
@@ -64,11 +69,16 @@ class EtablissementDao{
 	}
 	
 	public function setImageFondToEtablissement($idEtablissement, $imageName){
-		if($idEtablissement != null && $imageName != null){
+		if($idEtablissement != null){
 			$baseDao = new BaseDao();
 			$baseDao->connect();
-			$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND='$imageName'
+			if(StringUtils::isEmpty($imageName)){
+			$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND=null 
 			WHERE ID_ETABLISSEMENT=$idEtablissement";
+			}else{
+				$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND='$imageName'
+				WHERE ID_ETABLISSEMENT=$idEtablissement";
+			}
 			$result = $baseDao->sendRequest($requete);
 			$baseDao->close();
 			if(!$result){

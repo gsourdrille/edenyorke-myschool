@@ -152,11 +152,15 @@
  	}
  	
  	public function setImageToUtilisateur($iduser, $imageName){
- 		if($iduser != null && $imageName != null){
+ 		if($iduser != null){
  			$baseDao = new BaseDao();
  			$baseDao->connect();
- 			$requete = "UPDATE UTILISATEUR SET AVATAR='$imageName'
- 			WHERE ID_USER=$iduser";
+ 			if(StringUtils::isEmpty($imageName)){
+ 				$requete = "UPDATE UTILISATEUR SET AVATAR=null WHERE ID_USER=$iduser";
+ 			}else{
+ 				$requete = "UPDATE UTILISATEUR SET AVATAR=$imageName WHERE ID_USER=$iduser";
+ 			}	
+ 			$logger->log('succes', 'liveschool', "requete : ".$requete , Logger::GRAN_VOID);
  			$result = $baseDao->sendRequest($requete);
  			$baseDao->close();
  			if(!$result){

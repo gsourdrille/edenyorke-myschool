@@ -53,7 +53,7 @@ if (isset($_POST['submit'])){
 				$succes = "Vos informations ont été mises à jour";
 				if(isset($_POST['etablissementImagePrincipale']) && StringUtils::isNotEmpty($_POST['etablissementImagePrincipale'])){
 					if($_POST['etablissementImagePrincipale'] == "delete"){
-						FileUtils::deleteEtablissementImagePrincipale($etablissement);
+						setImagePrincipaleToEtablissement($etablissement, null);
 						$etablissement->imagePrincipale = null;
 					}else{
 						$path = FileUtils::createEtablissementDir($etablissement->idEtablissement);
@@ -66,7 +66,7 @@ if (isset($_POST['submit'])){
 				
 				if(isset($_POST['etablissementImageFond']) && StringUtils::isNotEmpty($_POST['etablissementImageFond'])){
 					if($_POST['etablissementImageFond'] == "delete"){
-						FileUtils::deleteEtablissementImageFond($etablissement);
+						setImageFondToEtablissement($etablissement, null);
 						$etablissement->imageFond = null;
 					}else{
 						$path = FileUtils::createEtablissementDir($etablissement->idEtablissement);

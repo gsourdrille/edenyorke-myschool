@@ -21,6 +21,7 @@ class BaseDao {
 	public function sendRequest($request){
 		// Creation d'un objet Logger
 		$logger = new Logger(Config::getProperties(Key::LOGGER_LOCATION));
+		$logger->log('access', 'bdd_acces', $request , Logger::GRAN_VOID);
 		$charset = mysqli_query($this->connection,"SET NAMES UTF8");
 		$ressource = mysqli_query($this->connection,$request) ;
 		if(!$ressource){
