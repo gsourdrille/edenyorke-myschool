@@ -23,7 +23,7 @@ if(isset($_GET['action'])){
  	$_SESSION['ENSEIGNANT_SELECTED'] = null;
  }else if(isset($_POST['deleteEnseignant'])){
 	$idEnseignant = $_SESSION['ENSEIGNANT_SELECTED'];
-	deleteUser($idEnseignant);
+	deleteEtablissementToUtilisateur($_SESSION['ETABLISSEMENT_ID'],$idEnseignant); 
 	$showEnseignant = false;
 	$listeEnseignants = getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
 	$_SESSION['ENSEIGNANT_SELECTED'] = null;

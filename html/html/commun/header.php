@@ -25,8 +25,8 @@
 			}?>
 			</select>
 			<?php 
-		}else{?>
-	
+		}else if ($etablissement != null) {?>
+		
 		<a href="/core/controller/tableau_controller.php">
 			<?php echo $etablissement->fullName();?>
 		</a>

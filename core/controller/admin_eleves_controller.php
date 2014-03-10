@@ -23,7 +23,7 @@ if(isset($_GET['action'])){
  	$_SESSION['ELEVE_SELECTED'] = null;
  }else if(isset($_POST['deleteEleve'])){
 	$idEleve = $_SESSION['ELEVE_SELECTED'];
-	deleteUser($idEleve);  
+	deleteEtablissementToUtilisateur($_SESSION['ETABLISSEMENT_ID'],$idEleve);  
 	$showEleve = false;
 	$listeEleves = getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ELEVE);
 	$_SESSION['ELEVE_SELECTED'] = null;

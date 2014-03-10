@@ -122,6 +122,21 @@
  		}
  	}
  	
+ 	public function getPostFromUtilisateur($idUser){
+ 		if($idPost != null){
+ 			$baseDao = new BaseDao();
+ 			$baseDao->connect();
+ 			$requete = "SELECT * FROM POST WHERE ID_USER=$idUser";
+ 			$resulat = $baseDao->sendRequest($requete);
+ 			$listePosts = new ArrayObject();
+ 			while($row = mysqli_fetch_assoc($resulat)){
+ 				$listePosts->append($this->buildPost($row));
+ 			}
+ 			$baseDao->close();
+ 			return $listePosts;
+ 		}
+ 	}
+ 	
  	public function findPost($idPost){
  			$baseDao = new BaseDao();
  			$baseDao->connect();

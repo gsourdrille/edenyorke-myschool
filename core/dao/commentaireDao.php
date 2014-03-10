@@ -43,6 +43,16 @@ class CommentaireDao {
 		}
 	}
 	
+	public function deleteCommentaireToUtilisateur($idUser){
+		if($idCommentaire != null){
+			$baseDao = new BaseDao();
+			$baseDao->connect();
+			$requete = "DELETE FROM COMMENTAIRE WHERE ID_USER=$idUser";
+			$baseDao->sendRequest($requete);
+			$baseDao->close();
+		}
+	}
+	
 	public function findCommentairesFromPost($idPost, $offset, $nbResultat){
 			$baseDao = new BaseDao();
 			$baseDao->connect();

@@ -139,7 +139,13 @@
  		$baseDao->close();
  	}
 
- 	
+ 	public function deleteClasseToUtilisateurAndEtablissement($idEtablissement, $idUser){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "DELETE FROM UTILISATEUR_CLASSE WHERE ID_USER = $idUser AND ID_CLASSE IN (SELECT ID_CLASSE FROM CLASSE WHERE ID_NIVEAU IN (SELECT ID_NIVEAU FROM NIVEAU WHERE ID_ETABLISSEMENT = $idEtablissement))";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$baseDao->close();
+ 	}
  	public function isUniqueClasseCode($code){
  		$baseDao = new BaseDao();
  		$baseDao->connect();
@@ -193,6 +199,8 @@
  		$classe->codeEnseignant = $row["CODE_ENSEIGNANT"];
  		return $classe;
  	}
+ 	
+ 	
  	
  	
  }
