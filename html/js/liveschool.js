@@ -67,6 +67,9 @@ $(document).ready(function() {
 	    	    $("#upload_image").hide();
 	    	    $("#userfileId").val(myFile.path);
 	    	
+	    	},
+	    	'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+	            alert('The file ' + file.name + ' could not be uploaded: ' + errorString);
 	    	}
 	    });
 	 

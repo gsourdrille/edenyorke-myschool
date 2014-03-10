@@ -57,8 +57,8 @@ if (isset($_POST['submit'])){
 					$_SESSION['USER'] = serialize($utilisateur);
 					$succes = "Vos informations ont été mises à jour";
 					if(isset($_POST['userfile']) && StringUtils::isNotEmpty($_POST['userfile'])){
-						if(isset($_POST['userfileId']) && $_POST['userfileId'] == "delete"){
-							FileUtils::deleteUtilisateurFile($utilisateur);
+						if($_POST['userfile'] == "delete"){
+							setImageToUtilisateur($utilisateur, null);
 							$utilisateur->avatar = null;
 							$_SESSION['USER'] = serialize($utilisateur);
 						}else{
