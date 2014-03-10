@@ -1,4 +1,5 @@
 <div id="left_conteneur">
+	<?php if($etablissement != null){?>
 	<div class="left_post">
 		<div id="logo_ecole">
 			<?php if ($etablissement->imagePrincipale!=null){?>
@@ -28,4 +29,5 @@
 			</ul>
 		</div>
 	</div>
+	<?php }?>
 </div>

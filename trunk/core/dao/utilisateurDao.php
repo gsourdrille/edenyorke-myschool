@@ -290,6 +290,14 @@
  		$baseDao->close();
  	}
  	
+ 	public function deleteEtablissementToUtilisateur($etablissementId, $userId){
+ 		$baseDao = new BaseDao();
+ 		$baseDao->connect();
+ 		$requete = "DELETE FROM UTILISATEUR_ETABLISSEMENT WHERE ID_USER=$userId AND ID_ETABLISSEMENT=$etablissementId";
+ 		$resulat = $baseDao->sendRequest($requete);
+ 		$baseDao->close();
+ 	}
+ 	
  	
  	public function buildUtilisateur($row){
   		$utilisateur = new Utilisateur();

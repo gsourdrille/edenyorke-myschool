@@ -146,6 +146,28 @@ function deleteUser($idUser){
 	return $userDao->deleteUtilisateur($idUser);
 }
 
+function deleteEtablissementToUtilisateur($idEtablissement,$idUser){
+	$userDao = new UtilisateurDao();
+	$userDao->deleteEtablissementToUtilisateur($idEtablissement,$idUser);
+	$classeDao = new ClasseDao();
+	$classeDao->deleteClasseToUtilisateurAndEtablissement($idEtablissement,$idUser);
+	/*
+	//Supression des posts associés à l'utilisateur
+	$postDao = new PostDao();
+	$listePost =  $postDao->getPostFromUtilisateur($idUser);
+	if($listePost != null && $listePost->count()>0){
+		foreach ($listePost as $post){
+			$postDao->deletePost($post->idPost);
+			FileUtils::deletePostDir($idPost);
+		}
+	}
+	
+	//Suppression des commentaires
+	$commentaireDao = new CommentaireDao();
+	$commentaireDao->deleteCommentaireToUtilisateur($idUser);
+	*/
+} 
+
 function getAllClassesForEtablissement($idEtablissement){
 	$listeClassesAndNiveaux = null;
 	
