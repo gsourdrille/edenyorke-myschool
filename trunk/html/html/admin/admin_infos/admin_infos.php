@@ -68,7 +68,7 @@
 			<input id="userfileId" type="hidden" name="userfile" />
 			<div id="upload_image" style="display: none">
 				<label for="userfile">Photo de profil : </label>
-				<input type="file" name="userUploadfile" id="avatar_upload" />
+				<div id="avatar_upload" >Charger l'image</div>
 				<input type="button" value="Annuler" onclick="hideUploadButton()">
 			</div>
 			
