@@ -50,7 +50,7 @@
 		<div id="postAddPj">
 			<div id="listeFilePreview"></div>
 			<label for="uploadInput">Ajouter un fichier : </label>
-			<input id="upload_file" name="uploadInput" type="file" />
+			<div id="upload_file" >Charger</div>
 			<div id="postFileId"></div>
 		</div>
 		<div id="post_error" class="error_general"></div>

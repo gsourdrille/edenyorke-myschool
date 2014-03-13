@@ -71,7 +71,7 @@
 			<input id="etablissementImagePrincipaleId" type="hidden" name="etablissementImagePrincipale" />
 			<div id="upload_image" style="display: none">
 				<label for="imagePrincipale">Image de l'établissement : </label>
-				<input type="file" name="imagePrincipale" id="etablissement_principale_upload" />
+				<div id="etablissement_principale_upload" >Charger l'image</div>
 				<input type="button" value="Annuler" onclick="hideUploadButton()">
 			</div>
 			
@@ -89,7 +89,7 @@
 			<input id="etablissementImageFondId" type="hidden" name="etablissementImageFond" />
 			<div id="upload_image_fond" style="display: none">
 				<label for="imageFond">Image de fond de l'établissement : </label>
-				<input type="file" name="imageFond" id="etablissement_fond_upload" />
+				<div id="etablissement_fond_upload" >Charger l'image</div>
 				<input type="button" value="Annuler" onclick="hideUploadImageFondButton()">
 			</div>
 			<div id="button_submit_infos">

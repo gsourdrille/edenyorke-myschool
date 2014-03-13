@@ -67,7 +67,7 @@
 			
 		<div id="postEditPj">
 			<label for="uploadInput">Ajouter un fichier : </label>
-			<input id="upload_file_edit<?php echo $post->idPost;?>" name="uploadInput" type="file" />
+			<div id="upload_file_edit<?php echo $post->idPost;?>">Charger</div>
 			<div id="postFileAddId<?php echo $post->idPost;?>"></div>
 			<div id="postFileDeleteId<?php echo $post->idPost;?>"></div>
 		</div>

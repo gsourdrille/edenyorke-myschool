@@ -53,104 +53,105 @@ $(document).ready(function() {
            return false;  
     });
 	
-	 $('#avatar_upload').uploadify({
-	        'buttonImage' : '/html/images/upload_button.png',
-		 	'swf'      : '/html/js/uploadify/uploadify.swf',
-	        'uploader' : '/core/controller/upload_controller.php',
-	        'formData' : { 'type' : 'image', 'taille' : '200' },
-	        'fileSizeLimit' : '6MB',
-	    	'onUploadSuccess' : function(file, data, response) {
-	    		var myFile = jQuery.parseJSON(data);
-	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
-	    		$("#avatar_image").attr("src",$url);
-	    		$("#admin_image").show();
-	    	    $("#upload_image").hide();
-	    	    $("#userfileId").val(myFile.path);
-	    	
-	    	},
-	    	'onUploadError' : function(file, errorCode, errorMsg, errorString) {
-	            alert('The file ' + file.name + ' could not be uploaded: ' + errorString);
-	    	}
-	    });
-	 
-	 $('#etablissement_principale_upload').uploadify({
-		 	'buttonImage' : '/html/images/upload_button.png',
-	        'swf'      : '/html/js/uploadify/uploadify.swf',
-	        'uploader' : '/core/controller/upload_controller.php',
-	        'formData' : { 'type' : 'image' , 'taille' : '200' },
-	        'fileSizeLimit' : '6MB',
-	    	'onUploadSuccess' : function(file, data, response) {
-	    		var myFile = jQuery.parseJSON(data);
-	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
-	    		$("#etablissement_image_principale").attr("src",$url);
-	    		$("#admin_image").show();
-	    	    $("#upload_image").hide();
-	    	    $("#etablissementImagePrincipaleId").val(myFile.path);
-	    	}
-	    });
-	 
-	 $('#etablissement_fond_upload').uploadify({
-		 	'buttonImage' : '/html/images/upload_button.png',
-	        'swf'      : '/html/js/uploadify/uploadify.swf',
-	        'uploader' : '/core/controller/upload_controller.php',
-	        'formData' : { 'type' : 'image' , 'taille' : '1000' },
-	        'fileSizeLimit' : '6MB',
-	    	'onUploadSuccess' : function(file, data, response) {
-	    		var myFile = jQuery.parseJSON(data);
-	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
-	    		$("#etablissement_image_fond").attr("src",$url);
-	    		$("#admin_image_fond").show();
-	    	    $("#upload_image_fond").hide();
-	    	    $("#etablissementImageFondId").val(myFile.path);
-	    	}
-	    });
-	    
-	 
-	 $('#upload_file').uploadify({
-		 	'buttonImage' : '/html/images/upload_button.png',
-	        'swf'      : '/html/js/uploadify/uploadify.swf',
-	        'uploader' : '/core/controller/upload_controller.php',
-	        'formData' : { 'type' : 'file' , 'taille' : '1000' },
-	        'fileSizeLimit' : '6MB',
-	    	'onUploadSuccess' : function(file, data, response) {
-	    		var myFile = jQuery.parseJSON(data);
-	    		$("#postFileId").append("<input id=\"FILE_"+myFile.id+"\" type=\"hidden\" name=\"postFile[]\" value=\""+myFile.name+"\" />");
-	    		var filePreview;
-	    		if(myFile.type == "image"){
-	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0&resize=true  \"></a>";
-	    		}else{
-	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"><img class=\"postPjThumbnails\" src=/html/images/icone-document.jpg title=\""+myFile.name+"\"></a>";
-	    		}
-	    		$("#listeFilePreview").append(filePreview);
-	    	},
-	    	'onUploadError' : function(file, errorCode, errorMsg, errorString) {
-	            alert('The file ' + file.name + ' could not be uploaded: ' + errorString);
-	        }
-	    });
-	    
-	 
-	 $('#upload_file_edit').uploadify({
-		 	'buttonImage' : '/html/images/upload_button.png',
-	        'swf'      : '/html/js/uploadify/uploadify.swf',
-	        'uploader' : '/core/controller/upload_controller.php',
-	        'formData' : { 'type' : 'file', 'taille' : '1000'  },
-	        'fileSizeLimit' : '6MB',
-	    	'onUploadSuccess' : function(file, data, response) {
-	    		var myFile = jQuery.parseJSON(data);
-	    		$("#postFileAddId").append("<input id=\"FILE_"+myFile.id+"\" type=\"hidden\" name=\"postFile[]\" value=\""+myFile.name+"\" />");
-	    		var filePreview;
-	    		if(myFile.type == "image"){
-	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0&resize=true  \"></a>";
-	    		}else{
-	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"><img class=\"postPjThumbnails\" src=/html/images/icone-document.jpg title=\""+myFile.name+"\"></a>";
-	    		}
-	    		$("#listeFileEditPreview").append(filePreview);
-	    	},
-	    	'onUploadError' : function(file, errorCode, errorMsg, errorString) {
-	            alert('The file ' + file.name + ' could not be uploaded: ' + errorString);
-	        }
-	    });
 	
+	
+	$('#avatar_upload').uploadFile({
+		url:'/core/controller/upload_controller.php',
+		fileName:"Filedata",
+		formData : { 'type' : 'image', 'taille' : '200' },
+		showStatusAfterSuccess:false,
+		autoSubmit:true,
+		multiple:false,
+		maxFileSize:1024*5000,
+		dragDropStr: "<span><b>Faites glisser et déposez l'image</b></span>",
+		abortStr:"abandonner",
+		extErrorStr:"n'est pas autorisé. Extensions autorisées:",
+		sizeErrorStr:"n'est pas autorisé. Admis taille max:",
+		multiDragErrorStr: "Plusieurs Drag & Drop de fichiers ne sont pas autorisés.",
+		onSuccess:function(files,data,xhr){
+			var myFile = jQuery.parseJSON(data);
+    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
+    		$("#avatar_image").attr("src",$url);
+    		$("#admin_image").show();
+    	    $("#upload_image").hide();
+    	    $("#userfileId").val(myFile.path);
+		}
+	});
+	
+	$('#etablissement_principale_upload').uploadFile({
+		url:'/core/controller/upload_controller.php',
+		fileName:"Filedata",
+		formData : { 'type' : 'image', 'taille' : '200' },
+		showStatusAfterSuccess:false,
+		autoSubmit:true,
+		multiple:false,
+		maxFileSize:1024*5000,
+		dragDropStr: "<span><b>Faites glisser et déposez l'image</b></span>",
+		abortStr:"abandonner",
+		extErrorStr:"n'est pas autorisé. Extensions autorisées:",
+		sizeErrorStr:"n'est pas autorisé. Admis taille max:",
+		multiDragErrorStr: "Plusieurs Drag & Drop de fichiers ne sont pas autorisés.",
+		onSuccess:function(files,data,xhr){
+			var myFile = jQuery.parseJSON(data);
+    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
+    		$("#etablissement_image_principale").attr("src",$url);
+    		$("#admin_image").show();
+    	    $("#upload_image").hide();
+    	    $("#etablissementImagePrincipaleId").val(myFile.path);
+		}
+	});
+	
+	$('#etablissement_fond_upload').uploadFile({
+		url:'/core/controller/upload_controller.php',
+		fileName:"Filedata",
+		formData : { 'type' : 'image', 'taille' : '1000' },
+		showStatusAfterSuccess:false,
+		autoSubmit:true,
+		multiple:false,
+		maxFileSize:1024*5000,
+		dragDropStr: "<span><b>Faites glisser et déposez l'image</b></span>",
+		abortStr:"abandonner",
+		extErrorStr:"n'est pas autorisé. Extensions autorisées:",
+		sizeErrorStr:"n'est pas autorisé. Admis taille max:",
+		multiDragErrorStr: "Plusieurs Drag & Drop de fichiers ne sont pas autorisés.",
+		onSuccess:function(files,data,xhr){
+			var myFile = jQuery.parseJSON(data);
+    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
+    		$("#etablissement_image_fond").attr("src",$url);
+    		$("#admin_image_fond").show();
+    	    $("#upload_image_fond").hide();
+    	    $("#etablissementImageFondId").val(myFile.path);
+		}
+	});
+	
+	$('#upload_file').uploadFile({
+		url:'/core/controller/upload_controller.php',
+		fileName:"Filedata",
+		formData : { 'type' : 'file', 'taille' : '1000' },
+		showStatusAfterSuccess:false,
+		autoSubmit:true,
+		multiple:true,
+		maxFileSize:1024*5000,
+		dragDropStr: "<span><b>Faites glisser et déposez les fichiers</b></span>",
+		abortStr:"abandonner",
+		extErrorStr:"n'est pas autorisé. Extensions autorisées:",
+		sizeErrorStr:"n'est pas autorisé. Admis taille max:",
+		onSuccess:function(files,data,xhr){
+			var myFile = jQuery.parseJSON(data);
+    		$("#postFileId").append("<input id=\"FILE_"+myFile.id+"\" type=\"hidden\" name=\"postFile[]\" value=\""+myFile.name+"\" />");
+    		var filePreview;
+    		if(myFile.type == "image"){
+    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"> <img class=\"postPjThumbnails\" src=\"/core/controller/thumb_controller.php?src="+myFile.path+"&x=30&y=30&f=0&resize=true  \"></a>";
+    		}else{
+    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"><img class=\"postPjThumbnails\" src=/html/images/icone-document.jpg title=\""+myFile.name+"\"></a>";
+    		}
+    		$("#listeFilePreview").append(filePreview);
+		}
+	});
+	
+
+	 
+	 
 	tinyMCE.init({  
         mode : "exact",  
         theme : "modern", 
@@ -380,14 +381,22 @@ function deleteCommentaire(idCommentaire,idDiv){
 	        $(this).before("<input name='postfile[]' type='file'/>");
 	    });
 	    
-	    $('#upload_file_edit'+idPost).uploadify({
-		 	'buttonImage' : '/html/images/upload_button.png',
-	        'swf'      : '/html/js/uploadify/uploadify.swf',
-	        'uploader' : '/core/controller/upload_controller.php',
-	        'formData' : { 'type' : 'file' },
-	        'fileSizeLimit' : '6MB',
-	    	'onUploadSuccess' : function(file, data, response) {
-	    		var myFile = jQuery.parseJSON(data);
+	    
+	    
+	    $('#upload_file_edit'+idPost).uploadFile({
+			url:'/core/controller/upload_controller.php',
+			fileName:"Filedata",
+			formData : { 'type' : 'file', 'taille' : '1000' },
+			showStatusAfterSuccess:false,
+			autoSubmit:true,
+			multiple:true,
+			maxFileSize:1024*5000,
+			dragDropStr: "<span><b>Faites glisser et déposez les fichiers</b></span>",
+			abortStr:"abandonner",
+			extErrorStr:"n'est pas autorisé. Extensions autorisées:",
+			sizeErrorStr:"n'est pas autorisé. Admis taille max:",
+			onSuccess:function(files,data,xhr){
+				var myFile = jQuery.parseJSON(data);
 	    		$("#postFileAddId"+idPost).append("<input id=\"FILE_"+myFile.id+"\" type=\"hidden\" name=\"postFile[]\" value=\""+myFile.name+"\" />");
 	    		var filePreview;
 	    		if(myFile.type == "image"){
@@ -396,9 +405,8 @@ function deleteCommentaire(idCommentaire,idDiv){
 	    			filePreview = "<a id=\"PREV_"+myFile.id+"\" href=\"#dev\" onclick=\"deleteFile("+myFile.id+")\"><img class=\"postPjThumbnails\" src=/html/images/icone-document.jpg title=\""+myFile.name+"\"></a>";
 	    		}
 	    		$("#listeFileEditPreview"+idPost).append(filePreview);
-	    	},
-	    	
-	    });
+			}
+		});
 	 
  }
  

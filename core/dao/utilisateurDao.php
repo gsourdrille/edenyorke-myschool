@@ -158,9 +158,8 @@
  			if(StringUtils::isEmpty($imageName)){
  				$requete = "UPDATE UTILISATEUR SET AVATAR=null WHERE ID_USER=$iduser";
  			}else{
- 				$requete = "UPDATE UTILISATEUR SET AVATAR=$imageName WHERE ID_USER=$iduser";
+ 				$requete = "UPDATE UTILISATEUR SET AVATAR='$imageName' WHERE ID_USER=$iduser";
  			}	
- 			$logger->log('succes', 'liveschool', "requete : ".$requete , Logger::GRAN_VOID);
  			$result = $baseDao->sendRequest($requete);
  			$baseDao->close();
  			if(!$result){
