@@ -1,12 +1,13 @@
 <?php
-require_once ($_SERVER['DOCUMENT_ROOT']."/core/service/post_service.php");
-require_once ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
+include_once ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/PostServiceImpl.php");
+include_once ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
+include_once ($_SERVER['DOCUMENT_ROOT']."/core/bean/TypeUtilisateur.php");
 //Recuperation de l'utilisateur
 include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 
 
 
-if($_SESSION['TYPE_UTILISATEUR']==Type_Utilisateur::DIRECTION){
+if($_SESSION['TYPE_UTILISATEUR']==TypeUtilisateur::DIRECTION){
 	//Recuperation de toutes les classes
 	$listeClasse = getClassesByEtablissement($_SESSION['ETABLISSEMENT_ID']);
 	//Recuperation de tous les niveaux

@@ -116,6 +116,7 @@ public static function resizeToDimension($dimension, $source, $extension, $desti
 	
 		}
 		
+	
 		//determine what the file extension of the source
 		//image is
 		switch($extension)
@@ -124,18 +125,20 @@ public static function resizeToDimension($dimension, $source, $extension, $desti
 			//its a gif
 			case 'gif': case 'GIF':
 				//create a gif from the source
-				return imagegif($destinationImage, $destination);
+				imagegif($destinationImage, $destination);
 				break;
-			case 'jpg': case 'JPG': case 'jpeg':
+			case 'jpg': case 'JPG': case 'jpeg':  case 'JPEG':
 				//create a jpg from the source
-				return imagejpeg($destinationImage, $destination, 100);
+				imagejpeg($destinationImage, $destination, 100);
 				break;
 			case 'png': case 'PNG':
 				//create a png from the source
-				return imagepng($destinationImage, $destination, 100);
+				imagepng($destinationImage, $destination, 100);
 				break;
 		
 		}
+		imagedestroy($sourceImage);
+		imagedestroy($destinationImage);
 	
 	}
 	

@@ -1,4 +1,5 @@
 <?php
+@include_once ($_SERVER['DOCUMENT_ROOT']."/core/utils/FileUtils.php");
 ?>
 <div id="header_content">
 	<div id="liveschool">
