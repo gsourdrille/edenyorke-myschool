@@ -1,7 +1,7 @@
 <?php 
 
 
-class Type_Utilisateur{
+class TypeUtilisateur{
 	const DIRECTION = '1';
 	const ENSEIGNANT = '2';
 	const ELEVE = '3';

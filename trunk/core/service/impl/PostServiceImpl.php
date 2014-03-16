@@ -1,23 +1,43 @@
 <?php
-require_once  ($_SERVER['DOCUMENT_ROOT']."/core/service/commun_service.php");
-require_once  ($_SERVER['DOCUMENT_ROOT']."/core/service/mail_service.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/service/impl/CommunServiceImpl.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/service/mail_service.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/FileUtils.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/service/PostService.php");
+
+class PostServiceImpl implements PostService {
+	
+	var $classeDao;
+	var $niveauDao;
+	var $utilisateurDao;
+	var $postDao;
+	var $commentaireDao;
+	var $pieceJointeDao;
+	
+	var $communService;
+	
+	function __construct() {
+		$this->classeDao = new ClasseDaoImpl();
+		$this->niveauDao = new NiveauDaoImpl();
+		$this->utilisateurDao = new UtilisateurDaoImpl();
+		$this->commentaireDao = new CommentaireDaoImpl();
+		$this->pieceJointeDao = new PieceJointeDaoImpl();
+		
+		$this->communService = new CommunServiceImpl();
+	}
 
 function getClassesIdByUser($idUser){
-	$classeDao = new ClasseDao();
-	$listeClasses =  $classeDao ->getClassesByUtlisateur($idUser);
+	$listeClasses =  $this->classeDao->getClassesByUtlisateur($idUser);
 	return $listeClasses;
 }
 
 
 function getNiveauxIdByClasses($listeClasses){
-	$classeDao = new ClasseDao();
-	$niveauDao = new NiveauDao();
 	$listeNiveauxId = new ArrayObject();
 	$listeNiveaux = new ArrayObject();
 	foreach ($listeClasses as $classe){
 		if(!in_array($classe->idNiveau, (array)$listeNiveauxId)){
 			$listeNiveauxId->append($classe->idNiveau);
-			$listeNiveaux->append($niveauDao->findNiveau($classe->idNiveau));
+			$listeNiveaux->append($this->niveauDao->findNiveau($classe->idNiveau));
 		}
 	}
 	
@@ -30,11 +50,6 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 	$utilisateur = unserialize($_SESSION['USER']);
 	$typeUtilisateur = $_SESSION['TYPE_UTILISATEUR'];
 	
-	$postDao = new PostDao();
-	$utilisateurDao = new UtilisateurDao();
-	$commentaireDao = new CommentaireDao();
-	$pieceJointeDao = new PieceJointeDao();
-	
 	$listeClassesId = new ArrayObject();
 	foreach($listeClasses as $classe){
 		$listeClassesId->append($classe->idClasse);
@@ -44,20 +59,20 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 		$listeNiveauxId->append($niveaux->idNiveau);
 	}
 	
-	$listePosts = $postDao->getAllPosts($etablissementId, $listeClassesId, $listeNiveauxId, $nbResultat, $offset,$typeUtilisateur);
+	$listePosts = $this->postDao->getAllPosts($etablissementId, $listeClassesId, $listeNiveauxId, $nbResultat, $offset,$typeUtilisateur);
 	//Pour chaque post
 	foreach ($listePosts as $post){
 		//Enrichissement du createur
-		$createurPost = $utilisateurDao->findUtilisateurById($post->createur);
-		$typeUtilisateur = getTypeUtilisateur($createurPost);
-		$createurPost->type = getTypeUtilisateurLibelle($typeUtilisateur);
+		$createurPost = $this->utilisateurDao->findUtilisateurById($post->createur);
+		$typeUtilisateur = $this->communService->getTypeUtilisateur($createurPost);
+		$createurPost->type = $this->communService->getTypeUtilisateurLibelle($typeUtilisateur);
 		$post->fullCreateur = $createurPost;
 		if($post->createur == $utilisateur->idUser){
 			$post->isCreateur = true;
 		}
 		//Enrichissement des commentaires
 		if($post->commentairesActives){
-			$listCommentaires = $commentaireDao->findCommentairesFromPost($post->idPost, 0, 5);
+			$listCommentaires = $this->commentaireDao->findCommentairesFromPost($post->idPost, 0, 5);
 			foreach ($listCommentaires as $commentaire){
 				$commentaire->fullCreateur = $utilisateurDao->findUtilisateurById($commentaire->idUser);
 				if($commentaire->idUser == $utilisateur->idUser){
@@ -67,13 +82,13 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 			$post->commentaires =$listCommentaires;
 		}
 		//Enrichissement des pieces jointes
-		$post->piecesJointes = $pieceJointeDao ->findPiecesJointesFromPost($post->idPost);
+		$post->piecesJointes = $this->pieceJointeDao->findPiecesJointesFromPost($post->idPost);
 		
 		//Enrichissement des associations
-		$post->associations = $postDao->getAssociations($post->idPost);
+		$post->associations = $this->postDao->getAssociations($post->idPost);
 	}
 	
-	$nbTotalPosts = $postDao->countAllPosts($etablissementId, $listeClassesId, $listeNiveauxId, $typeUtilisateur);
+	$nbTotalPosts = $this->postDao->countAllPosts($etablissementId, $listeClassesId, $listeNiveauxId, $typeUtilisateur);
 	
 	$resultListePoste = new ResultListePosts();
 	$resultListePoste->listePost = $listePosts;
@@ -89,33 +104,28 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 }
 
 function savePost($post){
-	$postDao = new PostDao();
-	$postDao->savePost($post);	
+	$this->postDao->savePost($post);	
 	if($post->associations != null && $post->associations->count()>0){
-		$postDao->saveAssociations($post);
+		$this->postDao->saveAssociations($post);
 	}
 	return $post;
 }
 
 function setListePieceJointeToPost($idPost, $listePieceJointe){
-	$pieceJointeDao = new PieceJointeDao();
-	$pieceJointeDao->savePieceJointe($idPost, $listePieceJointe);
+	$this->pieceJointeDao->savePieceJointe($idPost, $listePieceJointe);
 }
 
 function addCommentaireToPost($commentaire){
-	$commentaireDao = new CommentaireDao();
-	$commentaireDao->saveCommentaire($commentaire);
+	$this->commentaireDao->saveCommentaire($commentaire);
 }
 
 function getPost($idPost){
-	$postDao = new PostDao();
-	$post = $postDao->findPost($idPost);
+	$this->post = $postDao->findPost($idPost);
 	return $post;
 }
 
 function editPost($post){
-	$postDao = new PostDao();
-	$postDao->updatePost($post);
+	$this->post->updatePost($post);
 	if($post->associations != null && $post->associations->count()>0){
 		$postDao->deleteAssociations($post->idPost);
 		$postDao->saveAssociations($post);
@@ -124,49 +134,42 @@ function editPost($post){
 }
 
 function updateListePieceJointe($idPost,$listePieceJointeToDelete){
-	$pieceJointeDao = new PieceJointeDao();
 	foreach ($listePieceJointeToDelete as $pjId){
 		//suppression physique
-		$pj = $pieceJointeDao ->findPieceJointe($pjId,$idPost);
+		$pj = $this->pieceJointeDao->findPieceJointe($pjId,$idPost);
 		FileUtils::deletePostFile($idPost, $pj->path);
 		//suppression en base
-		$pieceJointeDao->deletePieceJointe($pjId);
+		$this->pieceJointeDao->deletePieceJointe($pjId);
 	}
 }
 
 function getCommentaire($idCommentaire){
-	$commentaireDao = new CommentaireDao();
-	$commentaire = $commentaireDao->findCommentaire($idCommentaire);
+	$commentaire = $this->commentaireDao->findCommentaire($idCommentaire);
 	return $commentaire;
 }
 
 function saveCommentaire($commentaire){
-	$commentaireDao = new CommentaireDao();
-	$commentaire = $commentaireDao->updateCommentaire($commentaire);
+	$commentaire = $this->commentaireDao->updateCommentaire($commentaire);
 }
 
 function deleteCommentaire($idCommentaire){
-	$commentaireDao = new CommentaireDao();
-	$commentaire = $commentaireDao->deleteCommentaire($idCommentaire);
+	$commentaire = $this->commentaireDao->deleteCommentaire($idCommentaire);
 }
 
 
 function deletePost($idPost){
-	$postDao = new PostDao();
-	$postDao->deletePost($idPost);
+	$this->postDao->deletePost($idPost);
 	FileUtils::deletePostDir($idPost);
 }
 
 function getImagesFromPost($idPost){
-	$pieceJointeDao = new PieceJointeDao();
-	$listeImages = $pieceJointeDao->findImagesFromPost($idPost);
+	$listeImages = $this->pieceJointeDao->findImagesFromPost($idPost);
 	return $listeImages;
 }
 
 function processPieceJointe($post,$name){
 	$path = FileUtils::createPostDir($post->idPost);
 	rename(Config::getProperties(Key::PATH_DATA).Constants::PATH_TMP.$name, $path."/".$name);
-	$pieceJointe = new PieceJointe();
 	$pieceJointe->idPost = $post->idPost;
 	$pieceJointe->contentType = FileUtils::getContentType($name);
 	$pieceJointe->path = $name;
@@ -174,22 +177,20 @@ function processPieceJointe($post,$name){
 }
 
 function envoiMailNotification($post, $utilisateur){
-	$postDao = new PostDao();
-	$utilisateurDao = new UtilisateurDao();
-	$listeAssociations = $postDao->getAssociations($post->idPost);
+	$listeAssociations = $this->postDao->getAssociations($post->idPost);
 	$listeUtilisateurs = Array();
 	foreach($listeAssociations as $association){
 		switch ($association->typePost){
 			case TypePost::ETABLISSEMENT:
-				$listeUtilisateursEtablissement = $utilisateurDao->getUtilisateurByEtablissement($association->id);
+				$listeUtilisateursEtablissement = $this->utilisateurDao->getUtilisateurByEtablissement($association->id);
 				$listeUtilisateurs = array_merge($listeUtilisateurs,$listeUtilisateursEtablissement->getArrayCopy());
 			break;
 			case TypePost::NIVEAU:
-				$listeUtilisateursNiveau = $utilisateurDao->getUtilisateurByNiveaux($association->id);
+				$listeUtilisateursNiveau = $this->utilisateurDao->getUtilisateurByNiveaux($association->id);
 				$listeUtilisateurs = array_merge($listeUtilisateurs,$listeUtilisateursNiveau->getArrayCopy());
 			break;
 			case TypePost::CLASSE:
-				$listeUtilisateursClasse = $utilisateurDao->getUtilisateurByClasses($association->id);
+				$listeUtilisateursClasse = $this->utilisateurDao->getUtilisateurByClasses($association->id);
 				$listeUtilisateurs = array_merge($listeUtilisateurs,$listeUtilisateursClasse->getArrayCopy());
 			break;
 		}
@@ -207,6 +208,7 @@ function envoiMailNotification($post, $utilisateur){
 }
 
 function getPj($idPj, $idPost){
-	$pjDao = new PieceJointeDao();
-	return $pjDao->findPieceJointe($idPj, $idPost);
+	return $this->pieceJointeDao->findPieceJointe($idPj, $idPost);
+}
+
 }

@@ -1,5 +1,9 @@
 <?php
 
+include_once($_SERVER['DOCUMENT_ROOT']."/core/config/Config.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/constant/Key.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/constant/Constants.php");
+
  class FileUtils {
 	
 	
