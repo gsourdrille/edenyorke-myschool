@@ -1,0 +1,841 @@
+@CHARSET "UTF-8";
+
+body {
+    color: #666565;
+    font: 14px/18px Arial,Helvetica,sans-serif;
+    min-width: 1200px;
+    position: relative;
+}
+
+a {
+    color: inherit;
+    outline: medium none;
+    text-decoration: none;
+    transition: all 0.5s ease 0s;
+}
+
+
+select{
+ background: transparent;
+ width: 154px;
+ line-height: 1;
+ border: 1;
+}
+#header {
+  background: url("../images/header_bg.png") repeat-x scroll 0 0 #89AB0C;
+  border-bottom: 1px solid #7D9E0C;
+  position: relative;
+  min-height:40px;
+}
+
+#header_content{
+	
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	width: 1200px;
+	min-height:40px;
+}
+
+#footer {
+  background: url("../images/header_bg.png") repeat-x scroll 0 0 #89AB0C;
+  border-bottom: 1px solid #7D9E0C;
+  position: relative;
+  min-height:80px;
+}
+
+#footer_content{
+	
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	width: 1200px;
+	min-height:80px;
+}
+
+#user {
+  color: #FFFFFF;
+  font-size: 14px;
+  margin: 5px 0 0 10px;
+  width:200px;
+  float:left;
+}
+
+#disconnect {
+  color: #FFFFFF;
+  font-size: 12px;
+  margin: 10px 0 0 10px;
+  width:100px;
+  float:left;
+}
+
+.icon_user{
+	width:30px;
+	height:30px;
+	vertical-align: middle;
+}
+
+.icon_school{
+	width:100px;
+	height:100px;
+	vertical-align: middle;
+}
+
+#school_name{
+	color: #FFFFFF;
+	font-size: 20px;
+	margin: 10px 0 0 100px;
+	width: 400px;
+	float:left;
+}
+
+
+
+#school_name select{
+	color: #FFFFFF;
+	font-size: 20px;
+	width: 400px;
+	float:left;
+}
+
+#mail{
+	margin: 5px 0 0 50px;
+	float:left;
+}
+
+.icon_mail{
+	width:30px;
+	height:30px;
+	vertical-align: middle;
+
+}
+
+#liveschool{
+	color: #FFFFFF;
+	font-size: 20px;
+	margin: 10px 0 0 150px;
+	width: 100px;
+	float:left;
+}
+
+#liveschool_login{
+	color: #FFFFFF;
+	font-size: 20px;
+	margin: 10px 0 0 550px;
+	width: 100px;
+	float:left;
+}
+
+#post_conteneur{
+	width: 982px;
+	margin:30px 200px;
+	min-height: 1000px;
+	background-color: #F6FEEE;
+	border-radius: 6px;
+	box-shadow: 0 0 15px #000000;
+	position: absolute;
+	
+}
+
+#login_conteneur{
+	width: 400px;
+	margin:100px 500px;
+	height: 250px;
+	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius:6px;
+	position: absolute;
+	box-shadow:0 0 15px #000000;
+	
+}
+
+#main_conteneur{
+	width: 1400px;
+	margin:0 auto;
+	min-height: 700px;
+	background-repeat:no-repeat;
+	background-size : cover;
+	
+}
+
+.with_bg{
+	background-image: url("../images/photo_saint_martin.jpg");
+}
+
+.no_bg{
+	#background-image: url("../images/back-to-school.jpg");
+}
+
+.post {
+  background-color: #FFFFFF;
+  border-color: #D8D8D8;
+  border-image: none;
+  border-left: 1px solid #D8D8D8;
+  border-radius: 6px;
+  border-right: 1px solid #D8D8D8;
+  border-style: solid;
+  border-width: 0 1px 2px;
+  box-shadow: 0 0 15px #FFFFFF;
+  margin: 20px 0px; 
+  width: 500px;
+  height: auto;
+  float : left;
+}
+
+#nom_createur{
+	margin:5px 5px;
+	float: left;
+}
+
+#createur{
+	border-bottom: 1px solid;
+	height: 60px;
+}
+
+#poste{
+	margin-top:10px;
+	margin-right:30px;
+	float: right;
+}
+
+
+#infos_post{
+	width: 100%;
+}
+
+#edit_post_link{
+	float:left;
+	margin-left: 40px;
+	font-size: 12px;
+}
+
+#delete_post_link{
+	float:left;
+	margin-left: 40px;
+	font-size: 12px;
+}
+#post_date{
+	float:right;
+	margin-right:30px;
+	font-style: italic;
+	font-size: 12px;
+}
+
+#entete_createur{
+	float:left;
+	width:100%;
+}
+
+.post_content{
+	height: auto;
+	min-height: 110px;
+	border-bottom: 1px solid;
+}
+
+.edit_post{
+	height: auto;
+	min-height: 110px;
+	border-bottom: 1px solid;
+	display:none;
+}
+
+.post_content_image{
+	width : 150px;
+	height : 200px;
+	float: left;
+	margin-top : 5px;
+	margin-left : 5px;
+	}
+	
+.post_content_texte{
+	margin-top : 5px;
+	margin-left : 5px;
+	float: left;
+	width : 490px;
+	min-height :60px
+
+	}
+	
+.zone_pj{
+	margin:5px;
+	float:left;
+}
+
+.post_content_pj{
+	width:490px;
+	float:left;
+}
+
+#valid
+{
+	position:absolute;
+	margin-top:-10px;
+	margin-left : 485px;
+
+}
+
+#post_comment{
+	min-height: 30px;
+}
+
+#post_comment_nb{
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+#post_comment_write_tools{
+	float: left;
+	margin-top: 5px;
+	margin-left: 350px;
+}
+
+.post_comment_write_icon{
+	width: 30px;
+	height: 30px;
+}
+
+.post_comment_content{
+border-top: 1px solid;
+    height: auto;
+    min-height: 40px;
+    display: none;
+}
+
+.post_comment_write_comment{
+border-top: 1px solid;
+    height: auto;
+    min-height: 40px;
+    display: none;
+}
+
+#post_comment_entete{
+	min-height:40px;
+}
+.image_valid{
+		width: 25px;
+	height: 25px;
+}
+
+#left_conteneur{
+	float: left;
+	width: 350px;
+}
+
+#center_conteneur{
+	float: left;
+	width: 550px;
+	margin-left:40px;
+}
+
+
+.left_post {
+  background-color: #FFFFFF;
+  border-color: #D8D8D8;
+  border-image: none;
+  border-left: 1px solid #D8D8D8;
+  border-radius: 3px 3px 3px 3px;
+  border-right: 1px solid #D8D8D8;
+  border-style: solid;
+  border-width: 0 1px 2px;
+  margin: 20px 40px; 
+  width: 300px;
+  min-height: 100px;
+  float : left;
+}
+
+#logo_ecole{
+	float:left;
+
+}
+
+#infos_ecole{
+	float:left;
+	font-size: 12px;
+	margin-left:5px;
+}
+
+.icon_calendar{
+	width:30px;
+	height:30px;
+	vertical-align: middle;
+	float:left;
+		margin-top : 5px;
+	margin-left : 5px;
+}
+
+#agenda_title{
+	border-bottom: 1px solid;
+	height: 40px;
+	width:300px;
+}
+
+#agenda_title_text{
+	margin:10px 10px;
+	float: left;
+}
+
+#agenda_content{
+	margin-top : 10px;
+	position: relative;
+}
+
+.toolbox {
+  background-color: #FFFFFF;
+  border-color: #D8D8D8;
+  border-image: none;
+  border-left: 1px solid #D8D8D8;
+  border-radius: 3px 3px 3px 3px;
+  border-right: 1px solid #D8D8D8;
+  border-style: solid;
+  border-width: 0 1px 2px;
+  margin: 20px 0px; 
+  width: 500px;
+  height: 40px;
+  float : left;
+}
+
+#mask{
+	font-size: 12px;
+	float: left;
+	margin-top:10px;
+	margin-left:10px;
+}
+
+#filter{
+	font-size: 12px;
+	float: left;
+	margin-top:10px;
+	margin-left:40px;
+}
+
+.formulaireInput{
+	float: left;
+	margin-top:20px;
+	margin-left:30px;
+	width: 350px;
+	
+}
+
+#button_login{
+	font-size: 20px;
+	float: left;
+	margin-left:60px;
+	width: 140px;
+	
+}
+
+#remember_me{
+	font-size: 12px;
+	float: left;
+	margin-left:10px;
+	width: 150px;
+	color:white;
+	margin-top: 5px;
+	
+}
+
+.error_formulaire{
+	font-size: 13px;
+	color:red;
+	float: left;
+	margin-left: 60px;
+}
+
+.error_general{
+	font-size: 13px;
+	color:red;
+	float: left;
+	margin-left: 60px;
+}
+
+#tools_login{
+	float: left;
+	width: 400px;
+}
+
+#current_admin_page{
+  background-color: #FFFFFF;
+  border-color: #D8D8D8;
+  border-image: none;
+  border-left: 1px solid #D8D8D8;
+  border-radius: 3px 3px 3px 3px;
+  border-right: 1px solid #D8D8D8;
+  border-style: solid;
+  border-width: 0 1px 2px;
+  margin: 20px 0px; 
+  width: 700px;
+  height: 800px;
+  float : left;
+
+}
+
+#left_admin{
+  background-color: #FFFFFF;
+  border-color: #D8D8D8;
+  border-image: none;
+  border-left: 1px solid #D8D8D8;
+  border-radius: 3px 3px 3px 3px;
+  border-right: 1px solid #D8D8D8;
+  border-style: solid;
+  border-width: 0 1px 2px;
+  margin: 20px 40px; 
+  width: 200px;
+  height: 800px;
+  float : left;
+}
+
+#left_admin_conteneur{
+	float: left;
+	width: 210px;
+}
+
+.floatleft{
+	float: left;
+}
+.floatright{
+	float: right;
+}
+
+#button_submit_infos{
+	float:left;
+}
+
+#div_classe{
+	margin-top:200px;
+}
+
+#center_admin_conteneur{
+	width : 700px;
+}
+
+#comment_createur{
+	margin:5px;
+	float: left;
+}
+
+#comment_date{
+	margin:10px;
+	float: right;
+	font-style: italic;
+	font-size: 12px;
+}
+
+.comment_content{
+	margin : 10px;
+}
+
+.edit_commentaire{
+	display:none;
+}
+
+#entete_comment{
+	width: 100%;
+	float: left;
+}
+
+#zone_new_post{
+	background-color: #FFFFFF;
+  border-color: #D8D8D8;
+  border-image: none;
+  border-left: 1px solid #D8D8D8;
+  border-radius: 3px 3px 3px 3px;
+  border-right: 1px solid #D8D8D8;
+  border-style: solid;
+  border-width: 0 1px 2px;
+  margin: 20px 0px; 
+  width: 500px;
+  min-height: 280px;
+  float : left;
+     display: none;
+	}
+	
+#zone_edit_post{
+	background-color: #FFFFFF;
+  border-color: #D8D8D8;
+  border-image: none;
+  border-left: 1px solid #D8D8D8;
+  border-radius: 3px 3px 3px 3px;
+  border-right: 1px solid #D8D8D8;
+  border-style: solid;
+  border-width: 0 1px 2px;
+  width: 500px;
+  min-height: 250px;
+  float : left;
+	}
+	
+	
+#step1{
+	position:relative;
+}
+	
+#postAddPj {
+	 margin-top:10px;
+	 margin-left:10px;
+}
+
+#enableComment {
+	 margin-top:210px;
+	 margin-left:10px;
+}
+
+#postListPj {
+	 margin-top:210px;
+	 margin-left:10px;
+}
+
+#postEditPj {
+	 margin-top:10px;
+	 margin-left:10px;
+}
+
+.writeCommentArea{
+	width: 500px;
+	height: 50px;
+}
+
+#dialog-confirm-delete-post{
+	display:none;
+}
+
+.buttonForm {
+	width: 270px;
+	height: 30px;
+	font-size:14.4px;
+	border-radius:2px;
+	box-shadow:none;
+	margin-left:30px;
+}
+
+.loginButton{
+  background-color: #ABCE2F;
+  background-image: linear-gradient(to bottom, #ABCE2F, #99BC1D);
+  background-repeat: repeat-x;
+  border: 1px solid #99BC1D;
+  color: #2E2E2E;
+  width: 140px;
+  height: 30px;
+  font-size : 14.4px;
+  cursor: pointer; 
+  text-align: center;
+}
+
+.loginButton:hover {color: white;}
+
+.connexion_text{
+	font-size : 24px;
+	color: white;
+	margin-top: 20px;
+	margin-left: 140px;
+}
+
+
+.forgot_text{
+	font-size : 24px;
+	color: white;
+	margin-top: 20px;
+	margin-left: 80px;
+}
+
+.succes_text{
+	font-size : 16px;
+	color: white;
+	margin-top: 40px;
+	margin-left: 40px;
+}
+
+.loginText{
+	font-size : 16px;
+	color: white;
+	margin-top: 40px;
+	margin-left: 40px;
+}
+
+.login_footer{
+	float: left;
+	margin-top:20px;
+	width: 100%;
+}
+
+.login_tools{
+	float: left;
+	width: 150px;
+}
+
+.inscription_link{
+	font-size: 12px;
+	float: left;
+	margin-left:80px;
+	width: 50px;
+	margin-top: 30px;
+	color:white;
+	
+	
+}
+
+.forgot_link{
+	font-size: 12px;
+	float: left;
+	margin-top: 20px;
+	color:white;
+	
+	
+}
+
+.inscription_link A:link {text-decoration: none}
+.inscription_link A:visited {text-decoration: none}
+.inscription_link A:active {text-decoration: none}
+.inscription_link A:hover {text-decoration: underline}
+
+.forgot_link A:link {text-decoration: none}
+.forgot_link A:visited {text-decoration: none}
+.forgot_link A:active {text-decoration: none}
+.forgot_link A:hover {text-decoration: underline}
+
+
+#register_conteneur{
+	width: 400px;
+	margin:100px 500px;
+	min-height: 450px;
+	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius:6px;
+	position: absolute;
+	box-shadow:0 0 15px #000000;
+	display:none;
+}
+
+
+
+
+#error_demande_inscription{
+	display:none;
+	font-size: 13px;
+	color:red;
+	width: 200px;
+}
+
+#inscription_succes{
+	display: none;
+	width: 400px;
+	margin:100px 500px;
+	min-height: 200px;
+	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius:6px;
+	position: absolute;
+	box-shadow:0 0 15px #000000;
+}
+
+#demande_inscription_succes{
+	display: none;
+	width: 400px;
+	margin:100px 500px;
+	min-height: 200px;
+	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius:6px;
+	position: absolute;
+	box-shadow:0 0 15px #000000;
+}
+
+#listeClasseUser{
+	float:left;
+}
+#ajoutClasseZone{
+	float:left;
+}
+
+#ajoutClasseUser{
+	float:left;
+	margin-top : 20px;
+}
+#succes_valid_message{
+	color:green;
+}
+
+#error_valid_message{
+	color:red;
+}
+
+.valid_message{
+	margin-left: 600px;
+}
+
+#demande_inscription{
+	margin-left:240px;
+	margin-top:220px;
+	color:black;
+	font-size: 12px;
+	
+}
+
+.demande_inscription_link A:link {text-decoration: none}
+.demande_inscription_link A:visited {text-decoration: none}
+.demande_inscription_link A:active {text-decoration: none}
+.demande_inscription_link A:hover {text-decoration: underline}
+
+#register_etablissement_conteneur{
+	width: 400px;
+	margin:100px 500px;
+	min-height: 500px;
+	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius:6px;
+	position: absolute;
+	box-shadow:0 0 15px #000000;
+	display:none;
+}
+
+#forgot_conteneur{
+	width: 400px;
+	margin:100px 500px;
+	min-height: 170px;
+	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius:6px;
+	position: absolute;
+	box-shadow:0 0 15px #000000;
+	display:none;
+}
+
+#forgot_conteneur_succes{
+	width: 400px;
+	margin:100px 500px;
+	height: 170px;
+	background:linear-gradient(to bottom, #424242 0px, #393939 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border-radius:6px;
+	position: absolute;
+	box-shadow:0 0 15px #000000;
+	display:none;
+}
+
+#galleria{height:467px}
+
+#dialog-galeria{
+	height: 470px;
+	width: 710px;
+	display: none;
+}
+
+.postPjThumbnails{
+	height: 30px;
+	width: 30px;
+	margin:2px;
+}
+
+#no_etablissement_container{
+	float: left;
+    margin-left: 240px;
+    width: 550px;
+}
+
+.no_etablissement_box{
+  background-color: #FFFFFF;
+  border-color: #D8D8D8;
+  border-image: none;
+  border-left: 1px solid #D8D8D8;
+  border-radius: 6px;
+  border-right: 1px solid #D8D8D8;
+  border-style: solid;
+  border-width: 0 1px 2px;
+  box-shadow: 0 0 15px #FFFFFF;
+  margin: 20px 0px; 
+  width: 500px;
+  height: 200px;
+  float : left;
+}
