@@ -3,7 +3,9 @@
 
 include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/BaseDaoImpl.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/bean/Post.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/bean/AssociationDTO.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/PostDao.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/enums/TypePost.php");
 
  class PostDaoImpl extends BaseDaoImpl implements PostDao{
  	

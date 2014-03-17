@@ -9,6 +9,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/ClasseDaoImpl.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/CommentaireDaoImpl.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/PostDaoImpl.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/PieceJointeDaoImpl.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/bean/ResultListePosts.php");
 
 
 class PostServiceImpl implements PostService {
@@ -84,7 +85,7 @@ function getAllPost($etablissementId, $listeClasses, $listeNiveaux, $nbResultat,
 		if($post->commentairesActives){
 			$listCommentaires = $this->commentaireDao->findCommentairesFromPost($post->idPost, 0, 5);
 			foreach ($listCommentaires as $commentaire){
-				$commentaire->fullCreateur = $utilisateurDao->findUtilisateurById($commentaire->idUser);
+				$commentaire->fullCreateur = $this->utilisateurDao->findUtilisateurById($commentaire->idUser);
 				if($commentaire->idUser == $utilisateur->idUser){
 					$commentaire->isCreateur = true;
 				}
@@ -130,15 +131,15 @@ function addCommentaireToPost($commentaire){
 }
 
 function getPost($idPost){
-	$this->post = $postDao->findPost($idPost);
+	$post = $this->postDao->findPost($idPost);
 	return $post;
 }
 
 function editPost($post){
-	$this->post->updatePost($post);
+	$this->postDao->updatePost($post);
 	if($post->associations != null && $post->associations->count()>0){
-		$postDao->deleteAssociations($post->idPost);
-		$postDao->saveAssociations($post);
+		$this->postDao->deleteAssociations($post->idPost);
+		$this->postDao->saveAssociations($post);
 	}
 	return $post;
 }
@@ -180,6 +181,7 @@ function getImagesFromPost($idPost){
 function processPieceJointe($post,$name){
 	$path = FileUtils::createPostDir($post->idPost);
 	rename(Config::getProperties(Key::PATH_DATA).Constants::PATH_TMP.$name, $path."/".$name);
+	$pieceJointe = new PieceJointe();
 	$pieceJointe->idPost = $post->idPost;
 	$pieceJointe->contentType = FileUtils::getContentType($name);
 	$pieceJointe->path = $name;

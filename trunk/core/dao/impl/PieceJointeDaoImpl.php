@@ -2,6 +2,7 @@
 include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/BaseDaoImpl.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/bean/PieceJointe.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/PieceJointeDao.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/StringUtils.php");
 
 class PieceJointeDaoImpl extends  BaseDaoImpl implements PieceJointeDao {
 	

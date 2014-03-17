@@ -1,5 +1,5 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/AdminServiceImpl.php");
+include_once ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/AdminServiceImpl.php");
 
 $adminService = new AdminServiceImpl();
 

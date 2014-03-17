@@ -171,7 +171,7 @@ class AdminServiceImpl implements AdminService{
 		if($listeNiveaux->count() > 0){
 			foreach ($listeNiveaux as $niveau){
 				$listeClasse = new ArrayObject();
-				$listeClasse = getClassesByNiveau($niveau->idNiveau);
+				$listeClasse = $this->getClassesByNiveau($niveau->idNiveau);
 				if($listeClasse->count() > 0){
 					$listeClassesAndNiveaux[$niveau->nom] = $listeClasse;
 				}

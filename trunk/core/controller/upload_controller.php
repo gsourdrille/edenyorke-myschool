@@ -2,6 +2,8 @@
 include($_SERVER['DOCUMENT_ROOT']."/core/Config/Config.php");
 include($_SERVER['DOCUMENT_ROOT']."/core/Constant/Key.php");
 include($_SERVER['DOCUMENT_ROOT']."/core/Constant/Constants.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/utils/ImagesUtils.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/utils/EncryptUtils.php");
 // Define a destination
 $targetFolder = Constants::PATH_TMP; // Relative to the root
 

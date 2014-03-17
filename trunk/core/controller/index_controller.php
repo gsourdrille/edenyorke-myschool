@@ -2,6 +2,7 @@
 session_start();
 
 require ($_SERVER['DOCUMENT_ROOT'].'/core/service/impl/LoginServiceImpl.php');
+include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/StringUtils.php");
 
 $loginService = new LoginServiceImpl();
 
