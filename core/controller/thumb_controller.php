@@ -2,8 +2,8 @@
 
 // include image processing code
 include($_SERVER['DOCUMENT_ROOT']."/core/utils/thumbnail/image.class.php");
-include($_SERVER['DOCUMENT_ROOT']."/core/config/config.php");
-include($_SERVER['DOCUMENT_ROOT']."/core/constant/key.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/Config/Config.php");
+include($_SERVER['DOCUMENT_ROOT']."/core/Constant/Key.php");
 ###############################################################
 # Thumbnail Image Generator 1.3
 ###############################################################

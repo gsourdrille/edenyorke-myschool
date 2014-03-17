@@ -1,7 +1,8 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT']."/core/service/post_service.php");
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/PostServiceImpl.php");
+$postService = new PostServiceImpl();
 $idPost = $_GET['idPost'];
-$listeImages = getImagesFromPost($idPost);
+$listeImages = $postService->getImagesFromPost($idPost);
 		
 
 

@@ -1,22 +1,23 @@
 <?php
 include_once ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/PostServiceImpl.php");
-include_once ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
+include_once ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/AdminServiceImpl.php");
 include_once ($_SERVER['DOCUMENT_ROOT']."/core/bean/TypeUtilisateur.php");
 //Recuperation de l'utilisateur
 include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 
-
+$adminService = new AdminServiceImpl();
+$postService = new PostServiceImpl();
 
 if($_SESSION['TYPE_UTILISATEUR']==TypeUtilisateur::DIRECTION){
 	//Recuperation de toutes les classes
-	$listeClasse = getClassesByEtablissement($_SESSION['ETABLISSEMENT_ID']);
+	$listeClasse = $adminService->getClassesByEtablissement($_SESSION['ETABLISSEMENT_ID']);
 	//Recuperation de tous les niveaux
-	$listeNiveaux = getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
+	$listeNiveaux = $adminService->getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
 }else{ 
 	//Recuperation des classes lies a l'utlisateur
-	$listeClasse = getClassesIdByUser($utilisateur->idUser);
+	$listeClasse = $postService->getClassesIdByUser($utilisateur->idUser);
 	//Recuperation des niveaux lies aux classes
-	$listeNiveaux = getNiveauxIdByClasses($listeClasse);
+	$listeNiveaux = $postService->getNiveauxIdByClasses($listeClasse);
 }
 
 

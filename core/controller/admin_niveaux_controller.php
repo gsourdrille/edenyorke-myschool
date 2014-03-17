@@ -1,23 +1,25 @@
 <?php
 session_start();
-require ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/AdminServiceImpl.php");
 include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
+
+$adminService = new AdminServiceImpl();
 
 
 //Recuperation des niveaux lies a l'etablissement
-$listeNiveaux = getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
+$listeNiveaux = $adminService->getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
 if(isset($_GET['action'])){
 	$action = $_GET['action'];
 	if($action == 'showNiveau'){
-		$niveau = getNiveauById($_GET['idNiveau']);
-		$listeClasses = getClassesByNiveau($_GET['idNiveau']);
+		$niveau = $adminService->getNiveauById($_GET['idNiveau']);
+		$listeClasses = $adminService->getClassesByNiveau($_GET['idNiveau']);
 		$_SESSION['NIVEAU_SELECTED'] = $niveau->idNiveau;
 		$showNiveau = true;
 		$showListeClasses = true;
 	}else if($action == 'showClasse'){
-		$classe = getCLasseById($_GET['idClasse']);
-		$niveau = getNiveauById($_SESSION['NIVEAU_SELECTED']);
-		$listeClasses = getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
+		$classe = $adminService->getCLasseById($_GET['idClasse']);
+		$niveau = $adminService->getNiveauById($_SESSION['NIVEAU_SELECTED']);
+		$listeClasses = $adminService->getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
 		$_SESSION['CLASSE_SELECTED'] = $classe->idClasse;
 		$showNiveau = true;
 		$showListeClasses = true;
@@ -33,7 +35,7 @@ if(isset($_POST['saveNiveau'])){
 		$niveau->idEtablissement = $_SESSION['ETABLISSEMENT_ID'];
 		$isnew = true;
 	}else{
-		$niveau = getNiveauById($idNiveau);
+		$niveau = $adminService->getNiveauById($idNiveau);
 		$isnew = false;
 	}
 	
@@ -43,7 +45,7 @@ if(isset($_POST['saveNiveau'])){
 		$error = true;
 	}else{
 		//Verification que le nomn n'existe pas deja
-		if(validateNiveau($nomNiveau, $niveau->idNiveau, $_SESSION['ETABLISSEMENT_ID'])){
+		if($adminService->validateNiveau($nomNiveau, $niveau->idNiveau, $_SESSION['ETABLISSEMENT_ID'])){
 			$niveau->nom = $nomNiveau;
 		}else{
 			$error_nom_niveau="Ce nom de niveau est déjà utilisé, veuillez en choisir un autre";
@@ -53,9 +55,9 @@ if(isset($_POST['saveNiveau'])){
 	$showNiveau = true;
 	$showListeClasses = true;
 	if($error==false){
-		if(saveOrUpdateNiveau($niveau)){
+		if($adminService->saveOrUpdateNiveau($niveau)){
 			$succesNiveau = "Vos informations ont été mises à jour";
-			$listeNiveaux = getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
+			$listeNiveaux = $adminService->getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
 			$_SESSION['NIVEAU_SELECTED'] = $niveau->idNiveau;
 		}else{
 			$succesNiveau = "Une erreur est survnue lors de la mise à jour";
@@ -64,23 +66,23 @@ if(isset($_POST['saveNiveau'])){
 	}
 }else if(isset($_POST['deleteNiveau'])){
 	$idNiveau = $_POST['idNiveau']; 
-	deleteNiveau($idNiveau);
+	$adminService->deleteNiveau($idNiveau);
 	$showNiveau = false;
 	$showListeClasses = false;
-	$listeNiveaux = getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
+	$listeNiveaux = $adminService->getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
 }else if(isset($_POST['showAddNiveau'])){
 	$showNiveau = true;
 	$showListeClasses = false;
 	$nomNiveau="";
 }else if(isset($_POST['showAddClasse'])){
-	$niveau = getNiveauById($_SESSION['NIVEAU_SELECTED']);
-	$listeClasses = getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
+	$niveau = $adminService->getNiveauById($_SESSION['NIVEAU_SELECTED']);
+	$listeClasses = $adminService->getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
 	$showClasse = true;
 	$showNiveau = true;
 	$showListeClasses = true;
 	$nomClasse="";
 }else if(isset($_POST['saveClasse'])){
-	$niveau = getNiveauById($_SESSION['NIVEAU_SELECTED']);
+	$niveau = $adminService->getNiveauById($_SESSION['NIVEAU_SELECTED']);
 	$idClasse = $_POST['idClasse'];
 	$nomClasse = $_POST['nomClasse'];
 	if($idClasse == null || trim($idClasse) == false){
@@ -89,7 +91,7 @@ if(isset($_POST['saveNiveau'])){
 		$classe->idNiveau = $_SESSION['NIVEAU_SELECTED'];
 		$isnew = true;
 	}else{
-		$classe = getClasseById($idClasse);
+		$classe = $adminService->getClasseById($idClasse);
 		$isnew = false;
 	}
 	
@@ -99,7 +101,7 @@ if(isset($_POST['saveNiveau'])){
 		$error = true;
 	}else{
 		//Verification que le nomn n'existe pas deja
-		if(validateClasse($nomClasse, $classe->idClasse, $_SESSION['NIVEAU_SELECTED'])){
+		if($adminService->validateClasse($nomClasse, $classe->idClasse, $_SESSION['NIVEAU_SELECTED'])){
 			$classe->nom = $nomClasse;
 		}else{
 			$error_nom_classe="Ce nom de classe est déjà utilisée, veuillez en choisir un autre";
@@ -108,7 +110,7 @@ if(isset($_POST['saveNiveau'])){
 	}
 	$showClasse = true;
 	if($error==false){
-		if(saveOrUpdateClasse($classe)){
+		if($adminService->saveOrUpdateClasse($classe)){
 			$succesClasse = "Vos informations ont été mises à jour";
 			$_SESSION['CLASSE_SELECTED'] = $classe->idClasse;
 		}else{
@@ -116,19 +118,19 @@ if(isset($_POST['saveNiveau'])){
 		}
 			
 	}
-	$listeClasses = getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
+	$listeClasses = $adminService->getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
 	$showClasse = true;
 	$showNiveau = true;
 	$showListeClasses = true;
 
 }else if(isset($_POST['deleteClasse'])){
 	$idClasse = $_POST['idClasse'];
-	$niveau = getNiveauById($_SESSION['NIVEAU_SELECTED']);
-	$listeNiveaux = getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
-	deleteClasse($idClasse);
+	$niveau = $adminService->getNiveauById($_SESSION['NIVEAU_SELECTED']);
+	$listeNiveaux = $adminService->getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
+	$adminService->deleteClasse($idClasse);
 	$showNiveau = true;
 	$showListeClasses = true;
 	$showClasse = false;
-	$listeClasses = getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
+	$listeClasses = $adminService->getClassesByNiveau($_SESSION['NIVEAU_SELECTED']);
 }
 require ($_SERVER['DOCUMENT_ROOT']."/html/html/admin/admin_niveaux/index.php");

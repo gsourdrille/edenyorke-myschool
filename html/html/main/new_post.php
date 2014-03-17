@@ -1,6 +1,6 @@
 
 <?php include($_SERVER['DOCUMENT_ROOT']."/core/controller/new_posts_controller.php")?>
-<?php if($_SESSION['TYPE_UTILISATEUR']== Type_Utilisateur::DIRECTION || $_SESSION['TYPE_UTILISATEUR']== Type_Utilisateur::ENSEIGNANT){?>
+<?php if($_SESSION['TYPE_UTILISATEUR']== TypeUtilisateur::DIRECTION || $_SESSION['TYPE_UTILISATEUR']== TypeUtilisateur::ENSEIGNANT){?>
 	<div id="link_new_post">
 		<a href="#dev" onClick="openNewPost()">Nouveau post</a>
 	</div>

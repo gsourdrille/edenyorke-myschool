@@ -1,9 +1,11 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/AdminServiceImpl.php");
+
+$adminService = new AdminServiceImpl();
 
 if(isset($_GET['token'])){
 	$token = $_GET['token'];
-	if(validToken($token)){
+	if($adminService->validToken($token)){
 		$validInscription = true;
 	}else{
 		$validInscription = false;

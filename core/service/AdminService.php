@@ -49,8 +49,6 @@ interface AdminService {
 	
 	function getAllClassesForEtablissement($idEtablissement);
 	
-	function getAllNiveauxForEtablissement($idEtablissement);
-	
 	function getClassesByUser($idUser);
 	
 	function addClassesToUser($idUser, $listeIdClasses);

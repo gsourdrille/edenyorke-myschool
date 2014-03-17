@@ -1,7 +1,10 @@
 <?php
 session_start();
-require ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/AdminServiceImpl.php");
 include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
+
+$adminService = new AdminServiceImpl();
+
 
 if (isset($_POST['submit'])){
 			$error = false;
@@ -24,7 +27,7 @@ if (isset($_POST['submit'])){
 				$error_login="Le login ne peut être vide";
 				$error = true;
 			}else{
-				if(validateLogin($login, $utilisateur->idUser)){
+				if($adminService->validateLogin($login, $utilisateur->idUser)){
 					$utilisateur->login = $login;
 				}else{
 					$error_login="Ce login est déjà utilisé, veuillez en choisir un autre";
@@ -53,18 +56,18 @@ if (isset($_POST['submit'])){
 				}
 			}
 			if($error==false){
-				if(updateUtilisateur($utilisateur)){
+				if($adminService->updateUtilisateur($utilisateur)){
 					$_SESSION['USER'] = serialize($utilisateur);
 					$succes = "Vos informations ont été mises à jour";
 					if(isset($_POST['userfile']) && StringUtils::isNotEmpty($_POST['userfile'])){
 						if($_POST['userfile'] == "delete"){
-							setImageToUtilisateur($utilisateur, null);
+							$adminService->setImageToUtilisateur($utilisateur, null);
 							$utilisateur->avatar = null;
 							$_SESSION['USER'] = serialize($utilisateur);
 						}else{
 							$path = FileUtils::createUtilisateurDir($utilisateur->idUser);
 							$fileName = substr($_POST['userfile'], strlen(Constants::PATH_TMP)); 
-							setImageToUtilisateur($utilisateur, $fileName);
+							$adminService->setImageToUtilisateur($utilisateur, $fileName);
 							rename(Config::getProperties(Key::PATH_DATA).$_POST['userfile'], $path."/".$fileName);
 							$utilisateur->avatar = $fileName;
 							$_SESSION['USER'] = serialize($utilisateur);
@@ -84,20 +87,20 @@ if (isset($_POST['submit'])){
 					if(StringUtils::isEmpty($codeClasse)){
 						$error = "Le code classe est vide";
 					}else{
-						$classe = getClasseFromCode($codeClasse);
+						$classe = $adminService->getClasseFromCode($codeClasse);
 						if($classe == null){
 							$error = "Le code classe n'existe pas";
 						}else{
 							$niveau = getNiveauById($classe->idNiveau);
-							addClasseToUser($utilisateur->idUser, $classe->idClasse);
-							addEtablissementToUser($utilisateur->idUser, $niveau->idEtablissement);
+							$adminService->addClasseToUser($utilisateur->idUser, $classe->idClasse);
+							$adminService->addEtablissementToUser($utilisateur->idUser, $niveau->idEtablissement);
 						}
 					}
 					break;
 					case 'DELETE':
 						if(isset($_POST['selectClasse'])){
 							$listIdClasse = $_POST['selectClasse'];
-							deleteClassesToUser($utilisateur->idUser, $listIdClasse);
+							$adminService->deleteClassesToUser($utilisateur->idUser, $listIdClasse);
 						}else{
 							$error = "Veuillez selectionner une ou plusieurs classes";
 						}

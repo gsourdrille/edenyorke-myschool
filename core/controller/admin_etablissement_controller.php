@@ -1,8 +1,9 @@
 <?php
 session_start();
-require ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
-
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/AdminServiceImpl.php");
 include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
+
+$adminService = new AdminServiceImpl();
 
 if (isset($_POST['submit'])){
 	
@@ -49,16 +50,16 @@ if (isset($_POST['submit'])){
 		$etablissement->fax = $fax;
 		
 		if($error==false){
-			if(updateEtablissement($etablissement)){
+			if($adminService->updateEtablissement($etablissement)){
 				$succes = "Vos informations ont été mises à jour";
 				if(isset($_POST['etablissementImagePrincipale']) && StringUtils::isNotEmpty($_POST['etablissementImagePrincipale'])){
 					if($_POST['etablissementImagePrincipale'] == "delete"){
-						setImagePrincipaleToEtablissement($etablissement, null);
+						$adminService->setImagePrincipaleToEtablissement($etablissement, null);
 						$etablissement->imagePrincipale = null;
 					}else{
 						$path = FileUtils::createEtablissementDir($etablissement->idEtablissement);
 						$fileName = substr($_POST['etablissementImagePrincipale'], strlen(Constants::PATH_TMP));
-						setImagePrincipaleToEtablissement($etablissement, $fileName);
+						$adminService->setImagePrincipaleToEtablissement($etablissement, $fileName);
 						rename(Config::getProperties(Key::PATH_DATA).$_POST['etablissementImagePrincipale'], $path."/".$fileName);
 						$etablissement->imagePrincipale = $fileName;
 					}
@@ -66,12 +67,12 @@ if (isset($_POST['submit'])){
 				
 				if(isset($_POST['etablissementImageFond']) && StringUtils::isNotEmpty($_POST['etablissementImageFond'])){
 					if($_POST['etablissementImageFond'] == "delete"){
-						setImageFondToEtablissement($etablissement, null);
+						$adminService->setImageFondToEtablissement($etablissement, null);
 						$etablissement->imageFond = null;
 					}else{
 						$path = FileUtils::createEtablissementDir($etablissement->idEtablissement);
 						$fileName = substr($_POST['etablissementImageFond'], strlen(Constants::PATH_TMP));
-						setImageFondToEtablissement($etablissement, $fileName);
+						$adminService->setImageFondToEtablissement($etablissement, $fileName);
 						rename(Config::getProperties(Key::PATH_DATA).$_POST['etablissementImageFond'], $path."/".$fileName);
 						$etablissement->imageFond = $fileName;
 					}

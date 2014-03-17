@@ -1,8 +1,10 @@
 <?php
 session_start();
-require_once($_SERVER['DOCUMENT_ROOT']."/core/service/post_service.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/core/service/impl/PostServiceImpl.php");
 //Recuperation de l'utilisateur
 include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
+
+$postService = new PostServiceImpl();
 
 $response['error'] = false;
 if(isset($_POST)) {
@@ -53,7 +55,7 @@ if(isset($_POST)) {
 							}
 						}
 						$post->associations = $listeAssociationDTO;
-						$post= savePost($post);
+						$post= $postService->savePost($post);
 							
 						if($post->idPost != null){
 							//Creation des pieces jointes
@@ -61,16 +63,16 @@ if(isset($_POST)) {
 							
 							if(isset($_POST['postFile'])){
 								foreach ($_POST['postFile'] as $file){
-									$pieceJointe = processPieceJointe($post, $file);
+									$pieceJointe = $postService->processPieceJointe($post, $file);
 									$listePiecesJointes->append($pieceJointe);
 								}
 							}
 							if($listePiecesJointes->count()>0){
-								setListePieceJointeToPost($post->idPost,$listePiecesJointes);
+								$postService->setListePieceJointeToPost($post->idPost,$listePiecesJointes);
 							}
 							
 							//envoi de la notification par email
-							envoiMailNotification($post, $utilisateur);
+							$postService->envoiMailNotification($post, $utilisateur);
 						}
 					}else{
 						$response['error'] = true;
@@ -81,7 +83,7 @@ if(isset($_POST)) {
 			case 'EDIT':
 				//Edition du post
 				$idPost = $_POST['idPost'];
-				$post = getPost($idPost);
+				$post = $postService->getPost($idPost);
 				$post->contenu = $_POST['editPostArea'];
 				if(StringUtils::isEmpty($post->contenu)){
 					$response['error'] = true;
@@ -122,7 +124,7 @@ if(isset($_POST)) {
 							}
 						}
 						$post->associations = $listeAssociationDTO;
-						$post= editPost($post);
+						$post= $postService->editPost($post);
 							
 						if($post->idPost != null){
 							
@@ -131,18 +133,18 @@ if(isset($_POST)) {
 							
 							if(isset($_POST['postFile'])){
 								foreach ($_POST['postFile'] as $file){
-									$pieceJointe = processPieceJointe($post, $file);
+									$pieceJointe = $postService->processPieceJointe($post, $file);
 									$listePiecesJointes->append($pieceJointe);
 								}
 							}
 							if($listePiecesJointes->count()>0){
-								setListePieceJointeToPost($post->idPost,$listePiecesJointes);
+								$postService->setListePieceJointeToPost($post->idPost,$listePiecesJointes);
 							}
 							
 							//suppression des pieces jointes supprimees manuellement
 							if(isset($_POST['postDeleteFile'])){
 								$listePiecesJointeToDelete = $_POST['postDeleteFile'];
-								updateListePieceJointe($post->idPost,$listePiecesJointeToDelete);
+								$postService->updateListePieceJointe($post->idPost,$listePiecesJointeToDelete);
 							}
 						}
 					}else{
@@ -153,7 +155,7 @@ if(isset($_POST)) {
 			break;
 			case 'DELETE':
 				$idPost = $_POST['idPost'];
-				deletePost($idPost);
+				$postService->deletePost($idPost);
 			break;
 		}
 		
