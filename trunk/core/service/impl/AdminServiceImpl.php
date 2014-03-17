@@ -230,9 +230,9 @@ class AdminServiceImpl implements AdminService{
 		//Gestion du type
 		$typeUtilisateur = null;
 		if($code == $classe->codeEleve){
-			$typeUtilisateur = Type_Utilisateur::ELEVE;
+			$typeUtilisateur = TypeUtilisateur::ELEVE;
 		}else if($code == $classe->codeEnseignant){
-			$typeUtilisateur = Type_Utilisateur::ENSEIGNANT;
+			$typeUtilisateur = TypeUtilisateur::ENSEIGNANT;
 		}else{
 			return null;
 		}

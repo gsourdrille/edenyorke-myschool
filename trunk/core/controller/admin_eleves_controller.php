@@ -6,7 +6,7 @@ include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 $adminService = new AdminServiceImpl();
 
 //Recuperation des enseignants lies a l'etablissement
-$listeEleves = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ELEVE);
+$listeEleves = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],TypeUtilisateur::ELEVE);
 $listeClasseAndNiveau = $adminService->getAllClassesForEtablissement($_SESSION['ETABLISSEMENT_ID']);
 if(isset($_GET['action'])){
 	$action = $_GET['action'];
@@ -26,7 +26,7 @@ if(isset($_GET['action'])){
 	$idEleve = $_SESSION['ELEVE_SELECTED'];
 	$adminService->deleteEtablissementToUtilisateur($_SESSION['ETABLISSEMENT_ID'],$idEleve);  
 	$showEleve = false;
-	$listeEleves = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ELEVE);
+	$listeEleves = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],TypeUtilisateur::ELEVE);
 	$_SESSION['ELEVE_SELECTED'] = null;
 }else if(isset($_POST['saveEleve'])){
 	$idEleve = $_POST['idEleve'];
@@ -87,7 +87,7 @@ if(isset($_GET['action'])){
 	$showEleve = true;
 	if($error==false){
 		$eleve->active = 1;
-		if($adminService->saveOrUpdateUtilisateur($eleve,Type_Utilisateur::ELEVE, $_SESSION['ETABLISSEMENT_ID'])){
+		if($adminService->saveOrUpdateUtilisateur($eleve,TypeUtilisateur::ELEVE, $_SESSION['ETABLISSEMENT_ID'])){
 			if(isset($_POST['selectClasseto'])){
 				$listeClasse = $_POST['selectClasseto'];
 			}else{
@@ -99,7 +99,7 @@ if(isset($_GET['action'])){
 		}else{
 			$succes = "Une erreur est survenue lors de la mise à jour";
 		}
-		$listeEleves = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ELEVE);
+		$listeEleves = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],TypeUtilisateur::ELEVE);
 		$listeClasseSelected = $adminService->getClassesByUser($_SESSION['ELEVE_SELECTED']);
 	}
 	

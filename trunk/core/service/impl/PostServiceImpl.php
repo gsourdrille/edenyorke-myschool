@@ -29,6 +29,7 @@ class PostServiceImpl implements PostService {
 		$this->utilisateurDao = new UtilisateurDaoImpl();
 		$this->commentaireDao = new CommentaireDaoImpl();
 		$this->pieceJointeDao = new PieceJointeDaoImpl();
+		$this->postDao =  new PostDaoImpl();
 		
 		$this->communService = new CommunServiceImpl();
 		$this->mailService = new MailServiceImpl();

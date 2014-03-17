@@ -5,7 +5,7 @@ include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 
 $adminService = new AdminServiceImpl();
 //Recuperation des enseignants lies a l'etablissement
-$listeEnseignants = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
+$listeEnseignants = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],TypeUtilisateur::ENSEIGNANT);
 $listeClasseAndNiveau = $adminService->getAllClassesForEtablissement($_SESSION['ETABLISSEMENT_ID']);
 if(isset($_GET['action'])){
 	$action = $_GET['action'];
@@ -25,7 +25,7 @@ if(isset($_GET['action'])){
 	$idEnseignant = $_SESSION['ENSEIGNANT_SELECTED'];
 	$adminService->deleteEtablissementToUtilisateur($_SESSION['ETABLISSEMENT_ID'],$idEnseignant); 
 	$showEnseignant = false;
-	$listeEnseignants = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
+	$listeEnseignants = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],TypeUtilisateur::ENSEIGNANT);
 	$_SESSION['ENSEIGNANT_SELECTED'] = null;
 }else if(isset($_POST['saveEnseignant'])){
 	$idEnseignant = $_POST['idEnseignant'];
@@ -86,7 +86,7 @@ if(isset($_GET['action'])){
 	$showEnseignant = true;
 	if($error==false){
 		$enseignant->active = 1;
-		if($adminService->saveOrUpdateUtilisateur($enseignant,Type_Utilisateur::ENSEIGNANT, $_SESSION['ETABLISSEMENT_ID'])){
+		if($adminService->saveOrUpdateUtilisateur($enseignant,TypeUtilisateur::ENSEIGNANT, $_SESSION['ETABLISSEMENT_ID'])){
 			if(isset($_POST['selectClasseto'])){
 				$listeClasse = $_POST['selectClasseto'];
 			}else{
@@ -98,7 +98,7 @@ if(isset($_GET['action'])){
 		}else{
 			$succes = "Une erreur est survenue lors de la mise à jour";
 		}
-		$listeEnseignants = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
+		$listeEnseignants = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],TypeUtilisateur::ENSEIGNANT);
 		$listeClasseSelected = $adminService->getClassesByUser($_SESSION['ENSEIGNANT_SELECTED']);
 	}
 	
