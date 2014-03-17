@@ -1,5 +1,8 @@
 <?php
-require ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/AdminServiceImpl.php");
+
+$adminService = new AdminServiceImpl();
+
 if(isset($_POST)){
 	$utilisateur = new Utilisateur();
 	$etablissement = new Etablissement();
@@ -40,7 +43,7 @@ if(isset($_POST)){
 		$response['error_login'] ="Le login ne peut être vide";
 	}else{
 		if(filter_var($login, FILTER_VALIDATE_EMAIL)){
-			if(validateLogin($login, null)){
+			if($adminService->validateLogin($login, null)){
 				$utilisateur->login = $login;
 			}else{
 				$response['error'] = true;
@@ -66,7 +69,7 @@ if(isset($_POST)){
 	}
 	
 	if(!$response['error']){
-		if(envoiMailDemandeInscription($etablissement, $utilisateur)){
+		if($adminService->envoiMailDemandeInscription($etablissement, $utilisateur)){
 			$response['error'] = false;
 		}else{
 			$response['error'] = true;

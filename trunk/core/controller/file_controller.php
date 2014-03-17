@@ -1,10 +1,13 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT']."/core/config/config.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/core/constant/key.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/file_utils.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/core/service/post_service.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/Config/Config.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/Constant/Key.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/FileUtils.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/service/impl/PostServiceImpl.php");
+
+$postService = new PostServiceImpl();
+
 if(isset($_GET['pj']) && isset($_GET['post'])){
-	$pj = getPj($_GET['pj'], $_GET['post']);
+	$pj = $postService->getPj($_GET['pj'], $_GET['post']);
 	if($pj != null){
 		$filename = Config::getProperties(Key::PATH_DATA).FileUtils::getPostFile($pj->idPost,$pj->path);
 		header('Pragma: public');

@@ -1,8 +1,15 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT']."/core/service/impl/CommunServiceImpl.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/core/service/mail_service.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/service/impl/MailServiceImpl.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/FileUtils.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/service/PostService.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/UtilisateurDaoImpl.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/NiveauDaoImpl.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/ClasseDaoImpl.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/CommentaireDaoImpl.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/PostDaoImpl.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/PieceJointeDaoImpl.php");
+
 
 class PostServiceImpl implements PostService {
 	
@@ -14,6 +21,7 @@ class PostServiceImpl implements PostService {
 	var $pieceJointeDao;
 	
 	var $communService;
+	var $mailService;
 	
 	function __construct() {
 		$this->classeDao = new ClasseDaoImpl();
@@ -23,6 +31,7 @@ class PostServiceImpl implements PostService {
 		$this->pieceJointeDao = new PieceJointeDaoImpl();
 		
 		$this->communService = new CommunServiceImpl();
+		$this->mailService = new MailServiceImpl();
 	}
 
 function getClassesIdByUser($idUser){
@@ -203,7 +212,7 @@ function envoiMailNotification($post, $utilisateur){
 	}
 	
 	
-	envoiMailNotificationPost($post, $utilisateur, $listeUtilisateurs);
+	$this->mailService->envoiMailNotificationPost($post, $utilisateur, $listeUtilisateurs);
 	
 }
 

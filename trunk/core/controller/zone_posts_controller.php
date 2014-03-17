@@ -1,8 +1,11 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/core/service/post_service.php");
-require_once ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/core/service/impl/PostServiceImpl.php");
+require_once ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/AdminServiceImpl.php");
 //Recuperation de l'utilisateur
 include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
+
+$adminService = new AdminServiceImpl();
+$postService = new PostServiceImpl();
 
 //Recuperation de l'etablissement
 $etablissementId = $_SESSION['ETABLISSEMENT_ID'];
@@ -10,14 +13,14 @@ $etablissementId = $_SESSION['ETABLISSEMENT_ID'];
 
 if($_SESSION['TYPE_UTILISATEUR']==Type_Utilisateur::DIRECTION){
 	//Recuperation de toutes les classes
-	$listeClasse = getClassesByEtablissement($_SESSION['ETABLISSEMENT_ID']);
+	$listeClasse = $adminService->getClassesByEtablissement($_SESSION['ETABLISSEMENT_ID']);
 	//Recuperation de tous les niveaux
-	$listeNiveaux = getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
+	$listeNiveaux = $adminService->getNiveauxByEtablissement($_SESSION['ETABLISSEMENT_ID']);
 }else{ 
 	//Recuperation des classes lies a l'utlisateur
-	$listeClasse = getClassesIdByUser($utilisateur->idUser);
+	$listeClasse = $postService->getClassesIdByUser($utilisateur->idUser);
 	//Recuperation des niveaux lies aux classes
-	$listeNiveaux = getNiveauxIdByClasses($listeClasse);
+	$listeNiveaux = $postService->getNiveauxIdByClasses($listeClasse);
 }
 
 
@@ -41,7 +44,7 @@ if(isset($_GET['offset'])){
 }
 
 //Recuperation des uniques posts de l'etablissement/niveaux/classes max 15 debut 0 order by date
-$resultListePosts = getAllPost($etablissementId, $listeClasse, $listeNiveaux, Constants::DEFAUT_MAX_RESULT, $offset);
+$resultListePosts = $postService->getAllPost($etablissementId, $listeClasse, $listeNiveaux, Constants::DEFAUT_MAX_RESULT, $offset);
 if($resultListePosts->hasMorePosts){
 	$offset = $offset + Constants::DEFAUT_MAX_RESULT;
 }

@@ -1,18 +1,18 @@
 <?php
 session_start();
-require ($_SERVER['DOCUMENT_ROOT']."/core/service/admin_service.php");
+require ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/AdminServiceImpl.php");
 include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 
-
+$adminService = new AdminServiceImpl();
 //Recuperation des enseignants lies a l'etablissement
-$listeEnseignants = getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
-$listeClasseAndNiveau = getAllClassesForEtablissement($_SESSION['ETABLISSEMENT_ID']);
+$listeEnseignants = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
+$listeClasseAndNiveau = $adminService->getAllClassesForEtablissement($_SESSION['ETABLISSEMENT_ID']);
 if(isset($_GET['action'])){
 	$action = $_GET['action'];
 	if($action == 'showEnseignant'){
-		$enseignant = getUserById($_GET['idUser']);
+		$enseignant = $adminService->getUserById($_GET['idUser']);
 		$_SESSION['ENSEIGNANT_SELECTED'] = $enseignant->idUser;
-		$listeClasseSelected = getClassesByUser($enseignant->idUser);
+		$listeClasseSelected = $adminService->getClassesByUser($enseignant->idUser);
 		$showEnseignant = true;
 	}
 }
@@ -23,9 +23,9 @@ if(isset($_GET['action'])){
  	$_SESSION['ENSEIGNANT_SELECTED'] = null;
  }else if(isset($_POST['deleteEnseignant'])){
 	$idEnseignant = $_SESSION['ENSEIGNANT_SELECTED'];
-	deleteEtablissementToUtilisateur($_SESSION['ETABLISSEMENT_ID'],$idEnseignant); 
+	$adminService->deleteEtablissementToUtilisateur($_SESSION['ETABLISSEMENT_ID'],$idEnseignant); 
 	$showEnseignant = false;
-	$listeEnseignants = getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
+	$listeEnseignants = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
 	$_SESSION['ENSEIGNANT_SELECTED'] = null;
 }else if(isset($_POST['saveEnseignant'])){
 	$idEnseignant = $_POST['idEnseignant'];
@@ -34,7 +34,7 @@ if(isset($_GET['action'])){
 		$enseignant = new Utilisateur();
 		$isnew = true;
 	}else{
-		$enseignant = getUserById($idEnseignant);
+		$enseignant = $adminService->getUserById($idEnseignant);
 		$isnew = false;
 	}
 	
@@ -58,7 +58,7 @@ if(isset($_GET['action'])){
 		$error_login="Le login ne peut être vide";
 		$error = true;
 	}else{
-		if(validateLogin($login, $enseignant->idUser)){
+		if($adminService->validateLogin($login, $enseignant->idUser)){
 			$enseignant->login = $login;
 		}else{
 			$error_login="Ce login est déjà utilisé, veuillez en choisir un autre";
@@ -86,20 +86,20 @@ if(isset($_GET['action'])){
 	$showEnseignant = true;
 	if($error==false){
 		$enseignant->active = 1;
-		if(saveOrUpdateUtilisateur($enseignant,Type_Utilisateur::ENSEIGNANT, $_SESSION['ETABLISSEMENT_ID'])){
+		if($adminService->saveOrUpdateUtilisateur($enseignant,Type_Utilisateur::ENSEIGNANT, $_SESSION['ETABLISSEMENT_ID'])){
 			if(isset($_POST['selectClasseto'])){
 				$listeClasse = $_POST['selectClasseto'];
 			}else{
 				$listeClasse = null;
 			}
-			addClassesToUser($enseignant->idUser, $listeClasse);
+			$adminService->addClassesToUser($enseignant->idUser, $listeClasse);
 			$succes = "Vos informations ont été mises à jour";
 			$_SESSION['ENSEIGNANT_SELECTED'] = $enseignant->idUser;
 		}else{
 			$succes = "Une erreur est survenue lors de la mise à jour";
 		}
-		$listeEnseignants = getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
-		$listeClasseSelected = getClassesByUser($_SESSION['ENSEIGNANT_SELECTED']);
+		$listeEnseignants = $adminService->getUserByEtablissementAndType($_SESSION['ETABLISSEMENT_ID'],Type_Utilisateur::ENSEIGNANT);
+		$listeClasseSelected = $adminService->getClassesByUser($_SESSION['ENSEIGNANT_SELECTED']);
 	}
 	
 }
