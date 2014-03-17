@@ -54,7 +54,6 @@ class CommentaireDaoImpl extends BaseDaoImpl implements CommentaireDao{
 	}
 	
 	public function findCommentairesFromPost($idPost, $offset, $nbResultat){
-			$baseDao = new BaseDao();
 			$requete = "SELECT * FROM COMMENTAIRE WHERE ID_POST='$idPost' ORDER BY DATE_CREATION DESC LIMIT $nbResultat OFFSET $offset";
 			$resulat = $this->sendRequest($requete);
 			$listeCommentaires = new ArrayObject();

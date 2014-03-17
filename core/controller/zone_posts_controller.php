@@ -11,7 +11,7 @@ $postService = new PostServiceImpl();
 $etablissementId = $_SESSION['ETABLISSEMENT_ID'];
 
 
-if($_SESSION['TYPE_UTILISATEUR']==Type_Utilisateur::DIRECTION){
+if($_SESSION['TYPE_UTILISATEUR']==TypeUtilisateur::DIRECTION){
 	//Recuperation de toutes les classes
 	$listeClasse = $adminService->getClassesByEtablissement($_SESSION['ETABLISSEMENT_ID']);
 	//Recuperation de tous les niveaux

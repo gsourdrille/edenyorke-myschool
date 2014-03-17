@@ -159,7 +159,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/PostDao.php");
  			$requeteNiveau  = "UNION SELECT ID_POST FROM POST_NIVEAU WHERE ID_NIVEAU IN ($idNiveauxSQL)";
  		}
  		$requeteDroitPost = "";
- 		if($typeUtilisateur == Type_Utilisateur::ELEVE){
+ 		if($typeUtilisateur == TypeUtilisateur::ELEVE){
  			$requeteDroitPost = "POUR_ENSEIGNANT=0 AND";
  		}
  		$requete = "SELECT * FROM POST WHERE ".$requeteDroitPost." ID_POST IN (SELECT ID_POST FROM POST_ETABLISSEMENT WHERE ID_ETABLISSEMENT = '$idEtablissement' 
@@ -187,7 +187,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/PostDao.php");
  			$requeteNiveau  = "UNION SELECT ID_POST FROM POST_NIVEAU WHERE ID_NIVEAU IN ($idNiveauxSQL)";
  		}
  		$requeteDroitPost = "";
- 		if($typeUtilisateur == Type_Utilisateur::ELEVE){
+ 		if($typeUtilisateur == TypeUtilisateur::ELEVE){
  			$requeteDroitPost = "POUR_ENSEIGNANT=0 AND";
  		}
  		$requete = "SELECT count(*) FROM POST WHERE ".$requeteDroitPost." ID_POST IN (SELECT ID_POST FROM POST_ETABLISSEMENT WHERE ID_ETABLISSEMENT = '$idEtablissement'

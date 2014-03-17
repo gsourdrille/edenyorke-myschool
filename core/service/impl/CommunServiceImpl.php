@@ -38,13 +38,13 @@ class CommunServiceImpl implements CommunService {
 	function getTypeUtilisateurLibelle($typeUtilisateur){
 		$libelle = "";
 		switch ($typeUtilisateur){
-			case Type_Utilisateur::DIRECTION:
+			case TypeUtilisateur::DIRECTION:
 				$libelle="Direction";
 				break;
-			case Type_Utilisateur::ENSEIGNANT:
+			case TypeUtilisateur::ENSEIGNANT:
 				$libelle="Enseignant";
 				break;
-			case Type_Utilisateur::ELEVE:
+			case TypeUtilisateur::ELEVE:
 				$libelle="Elève";
 				break;
 		}
