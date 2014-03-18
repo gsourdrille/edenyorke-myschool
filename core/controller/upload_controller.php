@@ -4,6 +4,8 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/constant/Key.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/constant/Constants.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/ImagesUtils.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/EncryptUtils.php");
+
+include_once($_SERVER['DOCUMENT_ROOT']."/core/logs/Logger.php");
 // Define a destination
 $targetFolder = Constants::PATH_TMP; // Relative to the root
 
@@ -20,14 +22,20 @@ if (!empty($_FILES)) {
 	
 	if(isset($_POST['type']) && $_POST['type'] == 'image'){
 		if (in_array($fileParts['extension'],$fileTypes)) {
-			move_uploaded_file($tempFile,$targetFile);
-			$taille = 1000;
-			if(isset($_POST['taille'])){
-				$taille = $_POST['taille'];
+			$size = getimagesize($tempFile);
+			if($size[0] > 3500 || $size[1] > 3500){
+				$response['error'] = true;
+				$response['error_message'] = "L'image ".$_FILES['Filedata']['name']." est trop grande";
+			}else{
+				move_uploaded_file($tempFile,$targetFile);
+				$taille = 1000;
+				if(isset($_POST['taille'])){
+					$taille = $_POST['taille'];
+				}
+				ImagesUtils::resizeToDimension($taille, $targetFile, $fileParts['extension'], $targetFile);
+				$response['path'] = $tmpFile;
+				$response['type'] = 'image';
 			}
-			ImagesUtils::resizeToDimension($taille, $targetFile, $fileParts['extension'], $targetFile);
-			$response['path'] = $tmpFile;
-			$response['type'] = 'image';
 		} else {
 			$response['error'] = true;
 		}
@@ -35,11 +43,17 @@ if (!empty($_FILES)) {
 		move_uploaded_file($tempFile,$targetFile);
 		
 		if (in_array($fileParts['extension'],$fileTypes)) {
-			$response['type'] = 'image';
-			$taille = 1000;
-			if(isset($_POST['taille'])){
-				$taille = $_POST['taille'];
-				ImagesUtils::resizeToDimension($taille, $targetFile, $fileParts['extension'], $targetFile);
+			$size = getimagesize($tempFile);
+			if($size[0] > 3500 || $size[1] > 3500){
+				$response['error'] = true;
+				$response['error_message'] = "L'image ".$_FILES['Filedata']['name']." est trop grande";
+			}else{
+				$response['type'] = 'image';
+				$taille = 1000;
+				if(isset($_POST['taille'])){
+					$taille = $_POST['taille'];
+					ImagesUtils::resizeToDimension($taille, $targetFile, $fileParts['extension'], $targetFile);
+				}
 			}
 		}else{
 			$response['type'] = 'fichier';

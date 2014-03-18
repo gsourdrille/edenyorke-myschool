@@ -67,6 +67,7 @@
 				<?php }?>
 					<input type="button" value="Changer" onclick="showUploadImagePrincipaleButton()">
 					<input type="button" value="Supprimer" onclick="deleteImagePrincipale()">
+					<div id="error_upload_principale" class="error_general"></div>
 			</div>
 			<input id="etablissementImagePrincipaleId" type="hidden" name="etablissementImagePrincipale" />
 			<div id="upload_image" style="display: none">
@@ -85,6 +86,7 @@
 				<?php }?>
 					<input type="button" value="Changer" onclick="showUploadImageFondButton()">
 					<input type="button" value="Supprimer" onclick="deleteImageFond()">
+					<div id="error_upload_fond" class="error_general"></div>
 			</div>
 			<input id="etablissementImageFondId" type="hidden" name="etablissementImageFond" />
 			<div id="upload_image_fond" style="display: none">

@@ -70,11 +70,20 @@ $(document).ready(function() {
 		multiDragErrorStr: "Plusieurs Drag & Drop de fichiers ne sont pas autorisés.",
 		onSuccess:function(files,data,xhr){
 			var myFile = jQuery.parseJSON(data);
-    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
-    		$("#avatar_image").attr("src",$url);
-    		$("#admin_image").show();
-    	    $("#upload_image").hide();
-    	    $("#userfileId").val(myFile.path);
+			if(myFile.error){
+				$("#error_upload_avatar").show();
+				$("#error_upload_avatar").append(myFile.error_message);
+				$("#admin_image").show();
+	    	    $("#upload_image").hide();
+			}else{
+				$("#error_upload_avatar").hide();
+				$("#error_upload_avatar").html("");
+	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
+	    		$("#avatar_image").attr("src",$url);
+	    		$("#admin_image").show();
+	    	    $("#upload_image").hide();
+	    	    $("#userfileId").val(myFile.path);
+			}
 		}
 	});
 	
@@ -93,11 +102,20 @@ $(document).ready(function() {
 		multiDragErrorStr: "Plusieurs Drag & Drop de fichiers ne sont pas autorisés.",
 		onSuccess:function(files,data,xhr){
 			var myFile = jQuery.parseJSON(data);
-    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
-    		$("#etablissement_image_principale").attr("src",$url);
-    		$("#admin_image").show();
-    	    $("#upload_image").hide();
-    	    $("#etablissementImagePrincipaleId").val(myFile.path);
+			if(myFile.error){
+				$("#error_upload_principale").show();
+				$("#error_upload_principale").append(myFile.error_message);
+				$("#admin_image").show();
+	    	    $("#upload_image").hide();
+			}else{
+				$("#error_upload_principale").hide();
+				$("#error_upload_principale").html("");
+	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
+	    		$("#etablissement_image_principale").attr("src",$url);
+	    		$("#admin_image").show();
+	    	    $("#upload_image").hide();
+	    	    $("#etablissementImagePrincipaleId").val(myFile.path);
+			}
 		}
 	});
 	
@@ -116,11 +134,20 @@ $(document).ready(function() {
 		multiDragErrorStr: "Plusieurs Drag & Drop de fichiers ne sont pas autorisés.",
 		onSuccess:function(files,data,xhr){
 			var myFile = jQuery.parseJSON(data);
-    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
-    		$("#etablissement_image_fond").attr("src",$url);
-    		$("#admin_image_fond").show();
-    	    $("#upload_image_fond").hide();
-    	    $("#etablissementImageFondId").val(myFile.path);
+			if(myFile.error){
+				$("#error_upload_fond").show();
+				$("#error_upload_fond").append(myFile.error_message);
+				$("#admin_image_fond").show();
+	    	    $("#upload_image_fond").hide();
+			}else{
+				$("#error_upload_fond").hide();
+				$("#error_upload_fond").html("");
+	    		$url="/core/controller/thumb_controller.php?src="+myFile.path+"&f=0";
+	    		$("#etablissement_image_fond").attr("src",$url);
+	    		$("#admin_image_fond").show();
+	    	    $("#upload_image_fond").hide();
+	    	    $("#etablissementImageFondId").val(myFile.path);
+			}
 		}
 	});
 	

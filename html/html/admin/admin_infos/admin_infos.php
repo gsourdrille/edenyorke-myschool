@@ -63,6 +63,7 @@
 				<?php }?>
 					<input type="button" value="Changer" onclick="showUploadImagePrincipaleButton()">
 					<input type="button" value="Supprimer" onclick="deleteAvatar()">
+					<div id="error_upload_avatar" class="error_general"></div>
 			</div>
 			
 			<input id="userfileId" type="hidden" name="userfile" />
