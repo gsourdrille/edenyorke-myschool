@@ -15,11 +15,17 @@ class AdminServiceImpl implements AdminService{
 	var $niveauDao;
 	var $classeDao;
 	
+	var $encryptService;
+	var $mailService;
+	
 	function __construct() {
 		$this->utilisateurDao = new UtilisateurDaoImpl();
 		$this->etablissementDao = new EtablissementDaoImpl();
 		$this->niveauDao = new NiveauDaoImpl();
 		$this->classeDao = new ClasseDaoImpl();
+		
+		$this->encryptService = new EncryptServiceImpl();
+		$this->mailService = new MailServiceImpl();
 	}
 
 	function validateLogin($username, $userId){
@@ -116,8 +122,8 @@ class AdminServiceImpl implements AdminService{
 	
 	function saveOrUpdateClasse($classe){
 		if($classe->idClasse == null){
-			$classe->codeEleve = generateUniqueCode();
-			$classe->codeEnseignant = generateUniqueCode();
+			$classe->codeEleve = $this->encryptService->generateUniqueCode();
+			$classe->codeEnseignant = $this->encryptService->generateUniqueCode();
 			return $this->classeDao->saveClasse($classe);
 		}else{
 			return $this->classeDao->updateClasse($classe);
@@ -245,7 +251,7 @@ class AdminServiceImpl implements AdminService{
 		$this->classeDao-> addClasseToUser($user->idUser, $classe->idClasse);
 		
 		
-		envoiMailConfirmationInscription($user);
+		$this->envoiMailConfirmationInscription($user);
 		
 		return $user;
 		
@@ -261,7 +267,7 @@ class AdminServiceImpl implements AdminService{
 		$token = generateToken();
 		$this->utilisateurDao->ajouterToken($user->idUser, $token) ;
 		//envoi du mail
-		envoiMailInscription($user,$token);
+		$this->mailService->envoiMailInscription($user,$token);
 	}
 	
 	function sendNewPassword($login){
@@ -271,7 +277,7 @@ class AdminServiceImpl implements AdminService{
 			$utilisateur->mdp =sha1($newPassowrd);
 			$utilisateurDao->updateUtilisateur($utilisateur);
 			//envoi du mail
-			envoiMailConfirmationEnvoiPassword($utilisateur,$newPassowrd);
+			$this->mailServiceenvoiMailConfirmationEnvoiPassword($utilisateur,$newPassowrd);
 			return true;
 		}
 		return false;

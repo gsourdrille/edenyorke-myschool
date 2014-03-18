@@ -1,6 +1,6 @@
 <?php 
 @session_start();
-include($_SERVER['DOCUMENT_ROOT']."/core/controller/zone_posts_controller.php")?>
+include_once($_SERVER['DOCUMENT_ROOT']."/core/controller/zone_posts_controller.php")?>
 <?php foreach ($resultListePosts->listePost as $post){?>
 	<div class="post">
 		<div id="createur">

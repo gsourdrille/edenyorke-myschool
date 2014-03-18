@@ -1,6 +1,6 @@
 <?php 
 @session_start();
-include($_SERVER['DOCUMENT_ROOT']."/core/controller/visionneuse_controller.php")?>
+include_once($_SERVER['DOCUMENT_ROOT']."/core/controller/visionneuse_controller.php")?>
 
 <div class="galleria">
 <?php foreach ($listeImages as $image){?>

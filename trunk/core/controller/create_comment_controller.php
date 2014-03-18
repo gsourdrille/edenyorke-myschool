@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once($_SERVER['DOCUMENT_ROOT']."/core/service/impl/PostServiceImpl.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/service/impl/PostServiceImpl.php");
 //Recuperation de l'utilisateur
-include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 
 $postService = new PostServiceImpl();
 
