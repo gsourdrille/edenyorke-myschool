@@ -276,11 +276,15 @@ class AdminServiceImpl implements AdminService{
 		if($utilisateur != null){
 			$newPassowrd = EncryptUtils::generatePassword();
 			$utilisateur->mdp =sha1($newPassowrd);
-			$utilisateurDao->updateUtilisateur($utilisateur);
+			$this->utilisateurDao->updateUtilisateur($utilisateur);
 			//envoi du mail
-			$this->mailServiceenvoiMailConfirmationEnvoiPassword($utilisateur,$newPassowrd);
+			$this->mailService->envoiMailConfirmationEnvoiPassword($utilisateur,$newPassowrd);
 			return true;
 		}
 		return false;
+	}
+	
+	function inscriptionEtablissement($etablissement, $utilisateur){
+		return $this->mailService->envoiMailDemandeInscription($etablissement, $utilisateur);
 	}
 }

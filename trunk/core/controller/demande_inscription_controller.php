@@ -70,7 +70,7 @@ if(isset($_POST)){
 	}
 	
 	if(!$response['error']){
-		if($adminService->envoiMailDemandeInscription($etablissement, $utilisateur)){
+		if($adminService->inscriptionEtablissement($etablissement, $utilisateur)){
 			$response['error'] = false;
 		}else{
 			$response['error'] = true;
