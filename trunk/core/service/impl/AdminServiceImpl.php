@@ -7,6 +7,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/EtablissementDaoImpl.php"
 include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/NiveauDaoImpl.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/impl/ClasseDaoImpl.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/service/AdminService.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/bean/TypeUtilisateur.php");
 
 class AdminServiceImpl implements AdminService{
 	
@@ -264,7 +265,7 @@ class AdminServiceImpl implements AdminService{
 	
 	function envoiMailConfirmationInscription($user){
 		//Ajout d'un jeton pour la validation de l'inscription
-		$token = generateToken();
+		$token = $this->encryptService->generateToken();
 		$this->utilisateurDao->ajouterToken($user->idUser, $token) ;
 		//envoi du mail
 		$this->mailService->envoiMailInscription($user,$token);
