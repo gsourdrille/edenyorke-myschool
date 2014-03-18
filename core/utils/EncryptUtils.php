@@ -1,6 +1,6 @@
 <?php
 
-
+include_once($_SERVER['DOCUMENT_ROOT']."/core/constant/Constants.php");
 class EncryptUtils {
 	
 	const PASS_CHARS = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNOPQRSTUVWXYZ23456789';

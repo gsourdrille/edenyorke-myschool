@@ -3,7 +3,7 @@ include_once ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/PostServiceImpl.php"
 include_once ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/AdminServiceImpl.php");
 include_once ($_SERVER['DOCUMENT_ROOT']."/core/bean/TypeUtilisateur.php");
 //Recuperation de l'utilisateur
-include($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 
 $adminService = new AdminServiceImpl();
 $postService = new PostServiceImpl();
