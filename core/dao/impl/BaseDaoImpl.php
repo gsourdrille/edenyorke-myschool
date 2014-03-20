@@ -11,7 +11,7 @@ class BaseDaoImpl implements BaseDao{
 	var $logger;
 	
 	function __construct() {
-		$logger = new Logger(Config::getProperties(Key::LOGGER_LOCATION));
+		$this->logger = new Logger(Config::getProperties(Key::LOGGER_LOCATION));
 	}
 	
 	public function connect(){
@@ -30,8 +30,8 @@ class BaseDaoImpl implements BaseDao{
 		$charset = mysqli_query($this->connection,"SET NAMES UTF8");
 		$ressource = mysqli_query($this->connection,$request) ;
 		if(!$ressource){
-			$logger->log('access', 'bdd_error', $request , Logger::GRAN_VOID);
-			$logger->log('access', 'bdd_error', mysqli_error($this->connection) , Logger::GRAN_VOID);
+			$this->logger->log('access', 'bdd_error', $request , Logger::GRAN_VOID);
+			$this->logger->log('access', 'bdd_error', mysqli_error($this->connection) , Logger::GRAN_VOID);
 		}
 		return $ressource;
 	}
