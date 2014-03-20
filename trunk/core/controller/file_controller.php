@@ -1,6 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT']."/core/Config/Config.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/core/Constant/Key.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/config/Config.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/constant/Key.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/FileUtils.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/service/impl/PostServiceImpl.php");
 
