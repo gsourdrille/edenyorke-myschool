@@ -76,8 +76,8 @@ class EtablissementDaoImpl extends BaseDaoImpl implements EtablissementDao{
 			$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND=null 
 			WHERE ID_ETABLISSEMENT=$idEtablissement";
 			}else{
-				$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND='$imageName'
-				WHERE ID_ETABLISSEMENT=$idEtablissement";
+				$nomImage = $this->escapeString($imageName);
+				$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND='$nomImage' WHERE ID_ETABLISSEMENT=$idEtablissement";
 			}
 			$result = $this->sendRequest($requete);
 			$this->close();
