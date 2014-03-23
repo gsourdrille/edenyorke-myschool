@@ -150,7 +150,8 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/UtilisateurDao.php");
  			if(StringUtils::isEmpty($imageName)){
  				$requete = "UPDATE UTILISATEUR SET AVATAR=null WHERE ID_USER=$iduser";
  			}else{
- 				$requete = "UPDATE UTILISATEUR SET AVATAR='$imageName' WHERE ID_USER=$iduser";
+ 				$nomImage = $this->escapeString($imageName);
+ 				$requete = "UPDATE UTILISATEUR SET AVATAR='$nomImage' WHERE ID_USER=$iduser";
  			}	
  			$result = $this->sendRequest($requete);
  			$this->close();

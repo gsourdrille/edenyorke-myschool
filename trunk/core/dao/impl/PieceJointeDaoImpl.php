@@ -11,7 +11,8 @@ class PieceJointeDaoImpl extends  BaseDaoImpl implements PieceJointeDao {
 		if($idPost != null && $piecesJointes != null && count($piecesJointes) > 0){
 			$this->connect();
 			foreach ($piecesJointes as $pj){
-				$requete = "INSERT INTO PIECE_JOINTE (ID_POST,CONTENT_TYPE,PATH) VALUES ('$pj->idPost', '$pj->contentType', '$pj->path' ) ";
+				$path = $this->escapeString($pj->path);
+				$requete = "INSERT INTO PIECE_JOINTE (ID_POST,CONTENT_TYPE,PATH) VALUES ('$pj->idPost', '$pj->contentType', '$path' ) ";
 				$result = $this->sendRequest($requete);
 			}
 			$this->close();
