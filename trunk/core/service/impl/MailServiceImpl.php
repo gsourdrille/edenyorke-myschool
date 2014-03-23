@@ -3,6 +3,7 @@
 include_once($_SERVER['DOCUMENT_ROOT']."/core/service/MailService.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/config/Config.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/constant/Key.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/exception/MailException.php");
 
 class MailServiceImpl implements MailService {
 
@@ -22,7 +23,10 @@ class MailServiceImpl implements MailService {
 	     	$template = str_replace('{{ '.$key.' }}', $value, $template);
 	     }
 	     
-	     mail($utilisateur->login, 'Validation inscription LiveSchool', utf8_decode($template), $headers);
+	     $succes = mail($utilisateur->login, 'Validation inscription LiveSchool', utf8_decode($template), $headers);
+	     if(!succes){
+	     	throw new MailException("Erreur lors de l'envoi du mail");
+	     }
 		
 	}
 	
@@ -42,7 +46,10 @@ class MailServiceImpl implements MailService {
 			$template = str_replace('{{ '.$key.' }}', $value, $template);
 		}
 		
-		mail($utilisateur->login, 'Votre nouveau mot de passe LiveSchool', utf8_decode($template), $headers);
+		$succes = mail($utilisateur->login, 'Votre nouveau mot de passe LiveSchool', utf8_decode($template), $headers);
+		if(!succes){
+			throw new MailException("Erreur lors de l'envoi du mail");
+		}
 	}
 	
 	function envoiMailDemandeInscription($etablissement, $utilisateur){
@@ -64,8 +71,11 @@ class MailServiceImpl implements MailService {
 			$template = str_replace('{{ '.$key.' }}', $value, $template);
 		}
 		
-		mail(Config::getProperties(Key::MAIL_DEMANDE_INCRIPTION), 'Nouvelle inscription !', utf8_decode($template), $headers);
-		return true;
+		$succes =  mail(Config::getProperties(Key::MAIL_DEMANDE_INCRIPTION), 'Nouvelle inscription !', utf8_decode($template), $headers);
+		if(!succes){
+			throw new MailException("Erreur lors de l'envoi du mail");
+		}
+		return $succes;
 	}
 	
 	function envoiMailNotificationPost($post, $utilisateur, $listeUtilisateurs){
@@ -84,7 +94,10 @@ class MailServiceImpl implements MailService {
 			foreach ($parametre as $key=> $value){
 				$template = str_replace('{{ '.$key.' }}', $value, $template);
 			}
-			mail($user->login, 'Nouveau message !', utf8_decode($template), $headers);
+			$succes =  mail($user->login, 'Nouveau message !', utf8_decode($template), $headers);
+			if(!succes){
+				throw new MailException("Erreur lors de l'envoi du mail");
+			}
 		}
 	}
 }

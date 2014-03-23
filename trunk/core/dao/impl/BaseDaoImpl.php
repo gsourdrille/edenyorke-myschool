@@ -4,6 +4,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/logs/Logger.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/BaseDao.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/config/Config.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/constant/Key.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/exception/DaoException.php");
 
 class BaseDaoImpl implements BaseDao{
 	
@@ -30,8 +31,9 @@ class BaseDaoImpl implements BaseDao{
 		$charset = mysqli_query($this->connection,"SET NAMES UTF8");
 		$ressource = mysqli_query($this->connection,$request) ;
 		if(!$ressource){
-			$this->logger->log('access', 'bdd_error', $request , Logger::GRAN_VOID);
-			$this->logger->log('access', 'bdd_error', mysqli_error($this->connection) , Logger::GRAN_VOID);
+			$this->logger->log('erreur', 'liveschool_error', $request , Logger::GRAN_MONTH);
+			$this->logger->log('erreur', 'liveschool_error', mysqli_error($this->connection) , Logger::GRAN_MONTH);
+			throw new DaoException("Erreur lors l'acces à la base de données");
 		}
 		return $ressource;
 	}
