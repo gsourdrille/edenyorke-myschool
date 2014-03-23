@@ -55,6 +55,7 @@ class EtablissementDaoImpl extends BaseDaoImpl implements EtablissementDao{
 				$requete = "UPDATE ETABLISSEMENT SET IMAGE_PRINCIPALE=null
 				WHERE ID_ETABLISSEMENT=$idEtablissement";
 			}else{
+				$nomImage = $this->escapeString($imageName);
 				$requete = "UPDATE ETABLISSEMENT SET IMAGE_PRINCIPALE='$imageName'
 				WHERE ID_ETABLISSEMENT=$idEtablissement";
 			}
@@ -73,8 +74,7 @@ class EtablissementDaoImpl extends BaseDaoImpl implements EtablissementDao{
 		if($idEtablissement != null){
 			$this->connect();
 			if(StringUtils::isEmpty($imageName)){
-			$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND=null 
-			WHERE ID_ETABLISSEMENT=$idEtablissement";
+				$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND=null  WHERE ID_ETABLISSEMENT=$idEtablissement";
 			}else{
 				$nomImage = $this->escapeString($imageName);
 				$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND='$nomImage' WHERE ID_ETABLISSEMENT=$idEtablissement";
