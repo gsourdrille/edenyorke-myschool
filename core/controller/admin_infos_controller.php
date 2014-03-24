@@ -125,4 +125,5 @@ try{
 	}	
 }catch (Exception $e){
 	$logger->log('erreur', 'liveschool_error', $e->getTraceAsString() , Logger::GRAN_MONTH);
+	header("location:/core/controller/erreur_controller.php");
 }		
