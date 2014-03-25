@@ -275,25 +275,25 @@ function deleteCommentaire(idCommentaire,idDiv){
  function loadNiveaux() {
     var selectBox = document.getElementById("liste_niveaux");
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    document.location.href='admin_niveaux_controller.php?action=showNiveau&idNiveau='+selectedValue;
+    document.location.href='/classes/niveaux/'+selectedValue;
 }
  
  function loadClasses() {
 	    var selectBox = document.getElementById("liste_classes");
 	    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-	    document.location.href='admin_niveaux_controller.php?action=showClasse&idClasse='+selectedValue;
+	    document.location.href='/classes/classes/'+selectedValue;
 	}
  
  function loadEnseignants() {
 	    var selectBox = document.getElementById("liste_enseignants");
 	    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-	    document.location.href='admin_enseignants_controller.php?action=showEnseignant&idUser='+selectedValue;
+	    document.location.href='/enseignants/'+selectedValue;
 	}
  
  function loadEleves() {
 	    var selectBox = document.getElementById("liste_eleves");
 	    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-	    document.location.href='admin_eleves_controller.php?action=showEleve&idUser='+selectedValue;
+	    document.location.href='/eleves/'+selectedValue;
 	}
  
  function selectAllClasses(){
@@ -579,7 +579,7 @@ function deleteCommentaire(idCommentaire,idDiv){
  
  
  function changeEtablissement(id){
-	document.location.href='change_etablissement_controller.php?etablissement='+id;
+	document.location.href='/etablissement/'+id;
 		 
  }
  

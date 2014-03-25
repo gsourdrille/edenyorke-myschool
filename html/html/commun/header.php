@@ -3,7 +3,7 @@
 ?>
 <div id="header_content">
 	<div id="liveschool">
-		<a href="/core/controller/tableau_controller.php">
+		<a href="/tableau">
 		LiveSchool
 		</a>
 	</div>
@@ -28,7 +28,7 @@
 			<?php 
 		}else if ($etablissement != null) {?>
 		
-		<a href="/core/controller/tableau_controller.php">
+		<a href="/tableau">
 			<?php echo $etablissement->fullName();?>
 		</a>
 		<?php }?>
@@ -37,7 +37,7 @@
 		<img alt="" src="/html/images/icon_mail.png"  class="icon_mail"/>
 	</div>
 	<div id="user">
-		<a href="/core/controller/admin_infos_controller.php">
+		<a href="/moncompte">
 			
 			<?php if ($utilisateur->avatar!=null){?>
 					<img src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getUtilisateurAvatar($utilisateur);?>&f=0 " class="icon_user">
@@ -48,6 +48,6 @@
 		</a>
 	</div>
 	<div id="disconnect">
-		<a href="/html/html/login/index.php">deconnection</a>
+		<a href="/login">deconnection</a>
 	</div>
 </div>

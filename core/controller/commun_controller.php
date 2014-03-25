@@ -5,7 +5,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/logs/Logger.php");
 $logger = new Logger(Config::getProperties(Key::LOGGER_LOCATION));
 
 if(!isset($_SESSION['USER'])){
-	header("location:/html/html/login/index.php");
+	header("location:/login");
 }else{
 	try{
 		$communService = new CommunServiceImpl();
@@ -18,6 +18,6 @@ if(!isset($_SESSION['USER'])){
 		$listeEtablissement = $communService->getEtablissementFromUser($utilisateur->idUser);
 	}catch (Exception $e){
 		$logger->log('erreur', 'liveschool_error', $e->getTraceAsString() , Logger::GRAN_MONTH);
-		header("location:/core/controller/erreur_controller.php");
+		header("location:/erreur/erreur500");
 	}
 } 

@@ -1,6 +1,6 @@
 <div id="current_admin_page">
 	<div id="center_conteneur">
-		<form action="/core/controller/admin_etablissement_controller.php" method="post" enctype="multipart/form-data">
+		<form action="/etablissement" method="post" enctype="multipart/form-data">
 			
 			<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
 			
