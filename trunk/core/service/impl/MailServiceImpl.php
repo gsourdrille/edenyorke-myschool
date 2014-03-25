@@ -24,7 +24,7 @@ class MailServiceImpl implements MailService {
 	     }
 	     
 	     $succes = mail($utilisateur->login, 'Validation inscription LiveSchool', utf8_decode($template), $headers);
-	     if(!succes){
+	     if(!$succes){
 	     	throw new MailException("Erreur lors de l'envoi du mail");
 	     }
 		
@@ -47,7 +47,7 @@ class MailServiceImpl implements MailService {
 		}
 		
 		$succes = mail($utilisateur->login, 'Votre nouveau mot de passe LiveSchool', utf8_decode($template), $headers);
-		if(!succes){
+		if(!$succes){
 			throw new MailException("Erreur lors de l'envoi du mail");
 		}
 	}
@@ -72,7 +72,7 @@ class MailServiceImpl implements MailService {
 		}
 		
 		$succes =  mail(Config::getProperties(Key::MAIL_DEMANDE_INCRIPTION), 'Nouvelle inscription !', utf8_decode($template), $headers);
-		if(!succes){
+		if(!$succes){
 			throw new MailException("Erreur lors de l'envoi du mail");
 		}
 		return $succes;
@@ -95,7 +95,7 @@ class MailServiceImpl implements MailService {
 				$template = str_replace('{{ '.$key.' }}', $value, $template);
 			}
 			$succes =  mail($user->login, 'Nouveau message !', utf8_decode($template), $headers);
-			if(!succes){
+			if(!$succes){
 				throw new MailException("Erreur lors de l'envoi du mail");
 			}
 		}
