@@ -21,4 +21,4 @@ try{
 }catch (Exception $e){
 	$logger->log('erreur', 'liveschool_error', $e->getTraceAsString() , Logger::GRAN_MONTH);
 }
-require ($_SERVER['DOCUMENT_ROOT']."/login");
+require ($_SERVER['DOCUMENT_ROOT']."/html/html/login/index.php");

@@ -19,7 +19,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/logs/Logger.php");
 			$_SESSION['USER'] = serialize($utilisateur);
 			$_SESSION['ETABLISSEMENT_ID'] = $communService->getFirstEtablissement($utilisateur);
 			if(isset($_POST['autologin']) && $_POST['autologin']){
-				saveAutologin($utilisateur);
+				$loginService->saveAutologin($utilisateur);
 			}
 		}else{
 			$response['error'] = true;

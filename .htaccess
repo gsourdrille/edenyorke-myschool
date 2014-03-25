@@ -16,4 +16,7 @@
 	RewriteRule ^etablissement/([^/]+)$ ./core/controller/change_etablissement_controller.php?etablissement=$1 [QSA,L] 
 	RewriteRule ^erreur/erreur500/?$ ./core/controller/erreur_controller.php?erreur=500 [QSA,L] 
 	RewriteRule ^erreur/erreur404/?$ ./core/controller/erreur_controller.php?erreur=404 [QSA,L] 
+	
+	RewriteRule ^validation/([^/]+)$ /core/controller/valid_controller.php?token=$1 [QSA,L]  
+	
 </IfModule>
