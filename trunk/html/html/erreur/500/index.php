@@ -13,7 +13,7 @@
 </div>
 	<div id="main_conteneur" style="background-image: url('/core/controller/thumb_controller.php?src=<?php echo FileUtils::getEtablissementImageFond($etablissement);?>&f=0&q=100')">
 	<div id="post_conteneur">
-		<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/erreur/erreur.php"); ?>
+		<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/erreur/500/erreur.php"); ?>
 	
 	</div>
 </div> 

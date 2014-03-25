@@ -15,7 +15,7 @@
 					echo ">$selectEleve->nom $selectEleve->prenom</option>";
 					}?>
 			</select>
-			<form action="/core/controller/admin_eleves_controller.php" method="post">
+			<form action="/eleves" method="post">
 				<div id="button_submit_infos">
 					<input type="submit" name="showAddEleve" value="Ajouter">
 				</div>
@@ -23,7 +23,7 @@
 			</div>
 		<div class="floatleft">
 			<?php  if(isset($showEleve) && $showEleve){?>
-			<form action="/core/controller/admin_eleves_controller.php" method="post">
+			<form action="/eleves" method="post">
 				<input type="hidden" name="idEleve"  value="<?php if(isset($_SESSION['ELEVE_SELECTED'])){echo $_SESSION['ELEVE_SELECTED'];}?>"/>
 				<div id="nom_info">
 					<label for="name">Nom : </label>

@@ -1,0 +1,19 @@
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
+	RewriteRule ^login/?$ ./html/html/login/ [QSA,L]
+	RewriteRule ^tableau/?$ ./core/controller/tableau_controller.php [QSA,L]
+	RewriteRule ^moncompte/?$ ./core/controller/admin_infos_controller.php [QSA,L]
+	RewriteRule ^etablissement/?$ ./core/controller/admin_etablissement_controller.php [QSA,L] 
+	RewriteRule ^classes/?$ ./core/controller/admin_niveaux_controller.php [QSA,L]
+	RewriteRule ^classes/niveaux/([^/]+)$ /core/controller/admin_niveaux_controller.php?action=showNiveau&idNiveau=$1 [QSA,L]
+	RewriteRule ^classes/classes/([^/]+)$ /core/controller/admin_niveaux_controller.php?action=showClasse&idClasse=$1 [QSA,L]
+	RewriteRule ^eleves/?$ ./core/controller/admin_eleves_controller.php [QSA,L]
+	RewriteRule ^eleves/([^/]+)$ ./core/controller/admin_eleves_controller.php?action=showEleve&idUser=$1 [QSA,L]
+	RewriteRule ^enseignants/([^/]+)$ ./core/controller/admin_enseignants_controller.php?action=showEnseignant&idUser=$1 [QSA,L]
+	RewriteRule ^enseignants/?$ ./core/controller/admin_enseignants_controller.php [QSA,L]
+	RewriteRule ^etablissement/([^/]+)$ ./core/controller/change_etablissement_controller.php?etablissement=$1 [QSA,L] 
+	RewriteRule ^erreur/erreur500/?$ ./core/controller/erreur_controller.php?erreur=500 [QSA,L] 
+	RewriteRule ^erreur/erreur404/?$ ./core/controller/erreur_controller.php?erreur=404 [QSA,L] 
+</IfModule>

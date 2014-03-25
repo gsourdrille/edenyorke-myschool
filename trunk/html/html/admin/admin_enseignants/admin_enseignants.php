@@ -15,7 +15,7 @@
 					echo ">$selectEnseignant->nom $selectEnseignant->prenom</option>";
 					}?>
 			</select>
-			<form action="/core/controller/admin_enseignants_controller.php" method="post">
+			<form action="/enseignants" method="post">
 				<div id="button_submit_infos">
 					<input type="submit" name="showAddEnseignant" value="Ajouter">
 				</div>
@@ -23,7 +23,7 @@
 			</div>
 		<div class="floatleft">
 			<?php  if(isset($showEnseignant) && $showEnseignant){?>
-			<form action="/core/controller/admin_enseignants_controller.php" method="post">
+			<form action="/enseignants" method="post">
 				<input type="hidden" name="idEnseignant"  value="<?php if(isset($_SESSION['ENSEIGNANT_SELECTED'])){echo $_SESSION['ENSEIGNANT_SELECTED'];}?>"/>
 				<div id="nom_info">
 					<label for="name">Nom : </label>

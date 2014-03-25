@@ -45,6 +45,6 @@ try{
 	echo json_encode($array);
 }catch (Exception $e){
 	$logger->log('erreur', 'liveschool_error', $e->getTraceAsString() , Logger::GRAN_MONTH);
-	header("location:/core/controller/erreur_controller.php");
+	header("location:/erreur/erreur500");
 }
 ?>

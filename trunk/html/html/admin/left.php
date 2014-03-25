@@ -4,12 +4,12 @@
 	
 	
 		<ul>
-			<li><a href="/core/controller/admin_infos_controller.php"> Infos personnelles</a></li>
+			<li><a href="/moncompte"> Infos personnelles</a></li>
 			<?php if($_SESSION['TYPE_UTILISATEUR'] == TypeUtilisateur::DIRECTION){?>
-				<li><a href="/core/controller/admin_etablissement_controller.php">Etablissement</a></li>
-				<li><a href="/core/controller/admin_niveaux_controller.php">Niveaux & Classes</a></li>
-				<li><a href="/core/controller/admin_enseignants_controller.php">Enseignants</a></li>
-				<li><a href="/core/controller/admin_eleves_controller.php">Elèves</a></li>
+				<li><a href="/etablissement">Etablissement</a></li>
+				<li><a href="/classes">Niveaux & Classes</a></li>
+				<li><a href="/enseignants">Enseignants</a></li>
+				<li><a href="/eleves">Elèves</a></li>
 			<?php }?>
 		</ul>
 	</div>

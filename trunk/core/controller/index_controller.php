@@ -16,16 +16,16 @@ $loginService = new LoginServiceImpl();
 			$utilisateur = $loginService->getUtilisateurByLoginToken($key);
 			if($utilisateur != null){
 				$_SESSION['USER'] = serialize($utilisateur);
-				header("location:/core/controller/tableau_controller.php");
+				header("location:/tableau");
 			}else{
-				header("location:/html/html/login/index.php");
+				header("location:/login");
 			}
 		}
 		}else {
-			header("location:/html/html/login/index.php");
+			header("location:/login");
 		}
 	}catch (Exception $e){
 		$logger->log('erreur', 'liveschool_error', $e->getTraceAsString() , Logger::GRAN_MONTH);
-		header("location:/core/controller/erreur_controller.php");
+		header("location:/erreur/erreur500");
 	}
 

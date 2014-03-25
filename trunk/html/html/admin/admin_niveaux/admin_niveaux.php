@@ -16,7 +16,7 @@
 				echo ">$selectNiveau->nom</option>";
 				}?>
 		</select>
-		<form action="/core/controller/admin_niveaux_controller.php" method="post">
+		<form action="/classes" method="post">
 			<div id="button_submit_infos">
 				<input type="submit" name="showAddNiveau" value="Ajouter">
 			</div>
@@ -24,7 +24,7 @@
 		</div>
 		<div class="floatright">
 		<?php  if(isset($showNiveau) && $showNiveau){?>
-			<form action="/core/controller/admin_niveaux_controller.php" method="post">
+			<form action="/classes" method="post">
 				<input type="hidden" name="idNiveau"  value="<?php if(isset($niveau->idNiveau)){echo $niveau->idNiveau;}?>"/>
 				<div id="nom_niveau">
 					<label for="name">Nom : </label>
@@ -73,7 +73,7 @@
 								}
 							}?>
 					</select>
-					<form action="/core/controller/admin_niveaux_controller.php" method="post">
+					<form action="/classes" method="post">
 						<div id="button_submit_infos">
 							<input type="submit" name="showAddClasse" value="Ajouter">
 						</div>
@@ -81,7 +81,7 @@
 				</div>
 			<div class="floatright">
 			<?php  if(isset($showClasse) && $showClasse){?>
-				<form action="/core/controller/admin_niveaux_controller.php" method="post">
+				<form action="/classes" method="post">
 					<input type="hidden" name="idClasse"  value="<?php if(isset($classe->idClasse)){echo $classe->idClasse;}?>"/>
 					<div id="nom_classe">
 						<label for="name">Nom : </label>

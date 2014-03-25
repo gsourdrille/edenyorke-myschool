@@ -1,7 +1,7 @@
 <?php 
 @session_start();
 include_once($_SERVER['DOCUMENT_ROOT']."/core/controller/admin_liste_classe_controller.php")?>
-<form id="ajoutClasseUserForm" action="/core/controller/admin_infos_controller.php" method="POST">
+<form id="ajoutClasseUserForm" action="/moncompte" method="POST">
 	<fieldset>
 		<legend>Classes Associées</legend>
 		<div id="listeClasseUser">
