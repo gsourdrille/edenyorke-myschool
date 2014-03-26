@@ -9,6 +9,11 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/logs/Logger.php");
 $logger = new Logger(Config::getProperties(Key::LOGGER_LOCATION));
 
 try{
+	
+	$utilsateur2 = new Utilisateur();
+	$utilsateur2 = null;
+	$utilsateur2->userId;
+	
 	$adminService = new AdminServiceImpl();
 	if (isset($_POST['submit'])){
 				$error = false;
