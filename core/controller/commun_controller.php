@@ -1,5 +1,6 @@
 <?php
 include_once  ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/CommunServiceImpl.php");
+include_once  ($_SERVER['DOCUMENT_ROOT']."/core/controller/exception_controller.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/logs/Logger.php");
 
 $logger = new Logger(Config::getProperties(Key::LOGGER_LOCATION));
@@ -21,3 +22,4 @@ if(!isset($_SESSION['USER'])){
 		header("location:/erreur/erreur500");
 	}
 } 
+

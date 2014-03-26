@@ -1,7 +1,6 @@
 <?php
-session_start();
 include_once ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/AdminServiceImpl.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/controller/admin_controller.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/StringUtils.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/FileUtils.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/logs/Logger.php");
