@@ -3,7 +3,8 @@ include_once  ($_SERVER['DOCUMENT_ROOT']."/core/service/impl/CommunServiceImpl.p
 include_once  ($_SERVER['DOCUMENT_ROOT']."/core/controller/exception_controller.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/logs/Logger.php");
 
-$logger = new Logger(Config::getProperties(Key::LOGGER_LOCATION));
+Logger::configure($_SERVER['DOCUMENT_ROOT']."/conf/log4php.xml");
+$logger = Logger::getLogger("LiveSchool");
 
 if(!isset($_SESSION['USER'])){
 	header("location:/login");
@@ -18,7 +19,7 @@ if(!isset($_SESSION['USER'])){
 		$etablissement = $communService->getEtablissement($_SESSION['ETABLISSEMENT_ID']);
 		$listeEtablissement = $communService->getEtablissementFromUser($utilisateur->idUser);
 	}catch (Exception $e){
-		$logger->log('erreur', 'liveschool_error', $e->getTraceAsString() , Logger::GRAN_MONTH);
+		$logger->error($e->getTraceAsString(), $e);
 		header("location:/erreur/erreur500");
 	}
 } 

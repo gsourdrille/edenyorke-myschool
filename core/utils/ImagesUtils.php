@@ -92,7 +92,6 @@ public static function resizeToDimension($dimension, $source, $extension, $desti
 					try {
 						$destinationImage = imagerotate($destinationImage, -90, 0);
 					} catch (Exception $e) {
-						$logger->log('succes', 'succes', "ERROR : ".$e , Logger::GRAN_VOID);
 					}
 					
 	

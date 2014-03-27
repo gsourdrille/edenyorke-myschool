@@ -12,7 +12,9 @@ class BaseDaoImpl implements BaseDao{
 	var $logger;
 	
 	function __construct() {
-		$this->logger = new Logger(Config::getProperties(Key::LOGGER_LOCATION));
+		Logger::configure($_SERVER['DOCUMENT_ROOT']."/conf/log4php.xml");
+		$this->logger = Logger::getLogger(__CLASS__);
+		
 	}
 	
 	public function connect(){
@@ -31,8 +33,8 @@ class BaseDaoImpl implements BaseDao{
 		$charset = mysqli_query($this->connection,"SET NAMES UTF8");
 		$ressource = mysqli_query($this->connection,$request) ;
 		if(!$ressource){
-			$this->logger->log('erreur', 'liveschool_error', $request , Logger::GRAN_MONTH);
-			$this->logger->log('erreur', 'liveschool_error', mysqli_error($this->connection) , Logger::GRAN_MONTH);
+			$this->logger->error($request);
+			$this->logger->error(mysqli_error($this->connection));
 			throw new DaoException("Erreur lors l'acces à la base de données");
 		}
 		return $ressource;

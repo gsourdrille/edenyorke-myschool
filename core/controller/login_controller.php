@@ -5,8 +5,9 @@ include_once ($_SERVER['DOCUMENT_ROOT'].'/core/service/impl/LoginServiceImpl.php
 include_once ($_SERVER['DOCUMENT_ROOT'].'/core/service/impl/CommunServiceImpl.php');
 include_once($_SERVER['DOCUMENT_ROOT']."/core/logs/Logger.php");
 	
-	$logger = new Logger(Config::getProperties(Key::LOGGER_LOCATION));
-	$response['error'] = false;
+Logger::configure($_SERVER['DOCUMENT_ROOT']."/conf/log4php.xml");
+$logger = Logger::getLogger("LiveSchool");
+$response['error'] = false;
 	try{
 		$username=trim($_POST['username']);
 		$password=trim($_POST['password']);
@@ -29,7 +30,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/logs/Logger.php");
 	}catch (Exception $e){
 		$response['error'] = true;
 		$response['error_login'] = "Une erreur est survenue lors de l'authentification";
-		$logger->log('erreur', 'liveschool_error', $e->getTraceAsString() , Logger::GRAN_MONTH);
+		$logger->error( $e->getTraceAsString() ,$e);
 	}
 	
 	echo json_encode($response);

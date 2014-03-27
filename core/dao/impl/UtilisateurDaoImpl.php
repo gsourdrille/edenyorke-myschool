@@ -83,7 +83,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/UtilisateurDao.php");
  	
  	public function findUtilisateur($login,$password){
  			$this->connect();
- 			$requete = "SELECT * FROM UTILISATEUR WHERE LOGIN='$login' AND MOT_DE_PASSE='$password' AND ACTIVE=1";
+ 			$requete = "SELECT * FR UTILISATEUR WHERE LOGIN='$login' AND MOT_DE_PASSE='$password' AND ACTIVE=1";
  			$resulat = $this->sendRequest($requete);
  			$row = mysqli_fetch_array($resulat);
  			if($row["ID_USER"] == null){
