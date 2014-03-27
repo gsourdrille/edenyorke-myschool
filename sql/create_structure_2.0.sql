@@ -1,0 +1,398 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.6
+-- http://www.phpmyadmin.net
+--
+-- Client: localhost
+-- Généré le: Jeu 27 Mars 2014 à 23:30
+-- Version du serveur: 5.5.33
+-- Version de PHP: 5.5.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de données: `liveschool_test`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ACTIVATION`
+--
+
+CREATE TABLE `ACTIVATION` (
+  `ID_USER` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `TOKEN` text CHARACTER SET utf8 NOT NULL,
+  UNIQUE KEY `ID_USER` (`ID_USER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `CLASSE`
+--
+
+CREATE TABLE `CLASSE` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_CLASSE` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_NIVEAU` varchar(14) CHARACTER SET utf8 DEFAULT NULL,
+  `NOM` text CHARACTER SET utf8,
+  `CODE_ELEVE` varchar(8) CHARACTER SET utf8 NOT NULL,
+  `CODE_ENSEIGNANT` varchar(8) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_CLASSE` (`ID_CLASSE`),
+  KEY `FK_RELATION_2` (`ID_NIVEAU`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `COMMENTAIRE`
+--
+
+CREATE TABLE `COMMENTAIRE` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_COMMENTAIRE` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_POST` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_USER` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `CONTENU` text CHARACTER SET utf8 NOT NULL,
+  `DATE_CREATION` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_COMMENTAIRE` (`ID_COMMENTAIRE`),
+  KEY `INDEX_COMMENTAIRE_POST` (`ID_POST`),
+  KEY `INDEX_COMMENTAIRE_USER` (`ID_USER`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=73 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ETABLISSEMENT`
+--
+
+CREATE TABLE `ETABLISSEMENT` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_ETABLISSEMENT` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `NOM` text CHARACTER SET utf8 NOT NULL,
+  `ADRESSE` text CHARACTER SET utf8 NOT NULL,
+  `CODE_POSTAL` text CHARACTER SET utf8 NOT NULL,
+  `VILLE` text CHARACTER SET utf8 NOT NULL,
+  `TELEPHONE_1` text CHARACTER SET utf8,
+  `TELEPHONE_2` text CHARACTER SET utf8,
+  `FAX` text CHARACTER SET utf8,
+  `IMAGE_PRINCIPALE` text CHARACTER SET utf8,
+  `IMAGE_FOND` text CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_ETABLISSEMENT_2` (`ID_ETABLISSEMENT`),
+  KEY `ID_ETABLISSEMENT` (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
+
+--
+-- Contenu de la table `ETABLISSEMENT`
+--
+
+INSERT INTO `ETABLISSEMENT` (`ID`, `ID_ETABLISSEMENT`, `NOM`, `ADRESSE`, `CODE_POSTAL`, `VILLE`, `TELEPHONE_1`, `TELEPHONE_2`, `FAX`, `IMAGE_PRINCIPALE`, `IMAGE_FOND`) VALUES
+(4, 'E5334a58995f59', 'Lycée Saint Martin', '2 rue d''antrain', '35000', 'Rennes', '0299001245', '0266986589', '0212457898', NULL, '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `NIVEAU`
+--
+
+CREATE TABLE `NIVEAU` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_NIVEAU` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_ETABLISSEMENT` varchar(14) CHARACTER SET utf8 DEFAULT NULL,
+  `NOM` text CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_NIVEAU` (`ID_NIVEAU`),
+  KEY `ID_ETABLISSEMENT` (`ID_ETABLISSEMENT`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `PIECE_JOINTE`
+--
+
+CREATE TABLE `PIECE_JOINTE` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_PJ` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_POST` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `CONTENT_TYPE` varchar(52) CHARACTER SET utf8 NOT NULL,
+  `PATH` text CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_PJ` (`ID_PJ`),
+  KEY `ID_POST` (`ID_POST`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=88 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `POST`
+--
+
+CREATE TABLE `POST` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_POST` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_USER` varchar(14) CHARACTER SET utf8 DEFAULT NULL,
+  `DATE_CREATION` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `DATE_DERNIERE_MODIFICATION` timestamp NULL DEFAULT NULL,
+  `CONTENU` text CHARACTER SET utf8 NOT NULL,
+  `COMMENTAIRES_ACTIVES` tinyint(1) NOT NULL DEFAULT '1',
+  `POUR_ENSEIGNANT` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_POST` (`ID_POST`),
+  KEY `FK_CREATEUR` (`ID_USER`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=99 ;
+
+--
+-- Déclencheurs `POST`
+--
+DROP TRIGGER IF EXISTS `UPDATE_POST_TIMESTAMP`;
+DELIMITER //
+CREATE TRIGGER `UPDATE_POST_TIMESTAMP` BEFORE UPDATE ON `POST`
+ FOR EACH ROW SET NEW.DATE_DERNIERE_MODIFICATION = NOW()
+//
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `POST_CLASSE`
+--
+
+CREATE TABLE `POST_CLASSE` (
+  `ID_POST` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_CLASSE` varchar(14) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID_POST`,`ID_CLASSE`),
+  KEY `FK_POST_CLASSE2` (`ID_CLASSE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `POST_ETABLISSEMENT`
+--
+
+CREATE TABLE `POST_ETABLISSEMENT` (
+  `ID_POST` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_ETABLISSEMENT` varchar(14) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID_POST`,`ID_ETABLISSEMENT`),
+  KEY `FK_POST_ETABLISSEMENT2` (`ID_ETABLISSEMENT`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `POST_NIVEAU`
+--
+
+CREATE TABLE `POST_NIVEAU` (
+  `ID_POST` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_NIVEAU` varchar(14) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID_POST`,`ID_NIVEAU`),
+  KEY `FK_POST_NIVEAU2` (`ID_NIVEAU`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `TYPE_UTILISATEUR`
+--
+
+CREATE TABLE `TYPE_UTILISATEUR` (
+  `ID_TYPE_UTILISATEUR` int(11) NOT NULL,
+  `VALEUR` text CHARACTER SET utf8 NOT NULL,
+  `LIBELLE` text CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID_TYPE_UTILISATEUR`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `TYPE_UTILISATEUR`
+--
+
+INSERT INTO `TYPE_UTILISATEUR` (`ID_TYPE_UTILISATEUR`, `VALEUR`, `LIBELLE`) VALUES
+(1, 'DIRECTION', 'Direction'),
+(2, 'ENSEIGNANT', 'Enseignant'),
+(3, 'ELEVE', 'Elève'),
+(4, 'PARENT_ELEVE', 'Parent');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `UTILISATEUR`
+--
+
+CREATE TABLE `UTILISATEUR` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_USER` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `NOM` text CHARACTER SET utf8 NOT NULL,
+  `PRENOM` text CHARACTER SET utf8 NOT NULL,
+  `LOGIN` text CHARACTER SET utf8 NOT NULL,
+  `MOT_DE_PASSE` text CHARACTER SET utf8,
+  `AVATAR` text CHARACTER SET utf8,
+  `ACTIVE` tinyint(1) NOT NULL DEFAULT '0',
+  `LOGIN_TOKEN` text CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_USER` (`ID_USER`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=34 ;
+
+--
+-- Contenu de la table `UTILISATEUR`
+--
+
+INSERT INTO `UTILISATEUR` (`ID`, `ID_USER`, `NOM`, `PRENOM`, `LOGIN`, `MOT_DE_PASSE`, `AVATAR`, `ACTIVE`, `LOGIN_TOKEN`) VALUES
+(33, 'U5334a4dd3577f', 'SOURDRILLE', 'Guillaume', 'gsourdrille@gmail.com', 'fc2789a2f2f3303f7322efa51bb5882fe034a321', NULL, 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `UTILISATEUR_CLASSE`
+--
+
+CREATE TABLE `UTILISATEUR_CLASSE` (
+  `ID_CLASSE` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_USER` varchar(14) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID_CLASSE`,`ID_USER`),
+  KEY `FK_UTILISATEUR_CLASSE2` (`ID_USER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `UTILISATEUR_ETABLISSEMENT`
+--
+
+CREATE TABLE `UTILISATEUR_ETABLISSEMENT` (
+  `ID_USER` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_ETABLISSEMENT` varchar(14) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID_USER`,`ID_ETABLISSEMENT`),
+  KEY `ID_USER` (`ID_USER`),
+  KEY `ID_ETABLISSEMENT` (`ID_ETABLISSEMENT`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `UTILISATEUR_ETABLISSEMENT`
+--
+
+INSERT INTO `UTILISATEUR_ETABLISSEMENT` (`ID_USER`, `ID_ETABLISSEMENT`) VALUES
+('U5334a4dd3577f', 'E5334a58995f59');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `UTILISATEUR_NIVEAU`
+--
+
+CREATE TABLE `UTILISATEUR_NIVEAU` (
+  `ID_NIVEAU` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_USER` varchar(14) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`ID_NIVEAU`,`ID_USER`),
+  KEY `FK_UTILISATEUR_NIVEAU2` (`ID_USER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `UTILISATEUR_TYPE_UTILISATEUR`
+--
+
+CREATE TABLE `UTILISATEUR_TYPE_UTILISATEUR` (
+  `ID_USER` varchar(14) CHARACTER SET utf8 NOT NULL,
+  `ID_TYPE_UTILISATEUR` int(11) NOT NULL,
+  PRIMARY KEY (`ID_USER`,`ID_TYPE_UTILISATEUR`),
+  KEY `FK_UTILISATEUR_TYPE_UTILISATE2` (`ID_TYPE_UTILISATEUR`),
+  KEY `ID_USER` (`ID_USER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `UTILISATEUR_TYPE_UTILISATEUR`
+--
+
+INSERT INTO `UTILISATEUR_TYPE_UTILISATEUR` (`ID_USER`, `ID_TYPE_UTILISATEUR`) VALUES
+('U5334a4dd3577f', 1);
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `ACTIVATION`
+--
+ALTER TABLE `ACTIVATION`
+  ADD CONSTRAINT `activation_ibfk_1` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `CLASSE`
+--
+ALTER TABLE `CLASSE`
+  ADD CONSTRAINT `classe_ibfk_1` FOREIGN KEY (`ID_NIVEAU`) REFERENCES `NIVEAU` (`ID_NIVEAU`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `COMMENTAIRE`
+--
+ALTER TABLE `COMMENTAIRE`
+  ADD CONSTRAINT `commentaire_ibfk_2` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`) ON DELETE CASCADE,
+  ADD CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `NIVEAU`
+--
+ALTER TABLE `NIVEAU`
+  ADD CONSTRAINT `niveau_ibfk_1` FOREIGN KEY (`ID_ETABLISSEMENT`) REFERENCES `ETABLISSEMENT` (`ID_ETABLISSEMENT`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `PIECE_JOINTE`
+--
+ALTER TABLE `PIECE_JOINTE`
+  ADD CONSTRAINT `piece_jointe_ibfk_1` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `POST_CLASSE`
+--
+ALTER TABLE `POST_CLASSE`
+  ADD CONSTRAINT `post_classe_ibfk_2` FOREIGN KEY (`ID_CLASSE`) REFERENCES `CLASSE` (`ID_CLASSE`) ON DELETE CASCADE,
+  ADD CONSTRAINT `post_classe_ibfk_1` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `POST_ETABLISSEMENT`
+--
+ALTER TABLE `POST_ETABLISSEMENT`
+  ADD CONSTRAINT `post_etablissement_ibfk_2` FOREIGN KEY (`ID_ETABLISSEMENT`) REFERENCES `ETABLISSEMENT` (`ID_ETABLISSEMENT`) ON DELETE CASCADE,
+  ADD CONSTRAINT `post_etablissement_ibfk_1` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `POST_NIVEAU`
+--
+ALTER TABLE `POST_NIVEAU`
+  ADD CONSTRAINT `post_niveau_ibfk_2` FOREIGN KEY (`ID_NIVEAU`) REFERENCES `NIVEAU` (`ID_NIVEAU`) ON DELETE CASCADE,
+  ADD CONSTRAINT `post_niveau_ibfk_1` FOREIGN KEY (`ID_POST`) REFERENCES `POST` (`ID_POST`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `UTILISATEUR_CLASSE`
+--
+ALTER TABLE `UTILISATEUR_CLASSE`
+  ADD CONSTRAINT `utilisateur_classe_ibfk_2` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`) ON DELETE CASCADE,
+  ADD CONSTRAINT `utilisateur_classe_ibfk_1` FOREIGN KEY (`ID_CLASSE`) REFERENCES `CLASSE` (`ID_CLASSE`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `UTILISATEUR_ETABLISSEMENT`
+--
+ALTER TABLE `UTILISATEUR_ETABLISSEMENT`
+  ADD CONSTRAINT `utilisateur_etablissement_ibfk_2` FOREIGN KEY (`ID_ETABLISSEMENT`) REFERENCES `ETABLISSEMENT` (`ID_ETABLISSEMENT`) ON DELETE CASCADE,
+  ADD CONSTRAINT `utilisateur_etablissement_ibfk_1` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `UTILISATEUR_NIVEAU`
+--
+ALTER TABLE `UTILISATEUR_NIVEAU`
+  ADD CONSTRAINT `utilisateur_niveau_ibfk_2` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`) ON DELETE CASCADE,
+  ADD CONSTRAINT `utilisateur_niveau_ibfk_1` FOREIGN KEY (`ID_NIVEAU`) REFERENCES `NIVEAU` (`ID_NIVEAU`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `UTILISATEUR_TYPE_UTILISATEUR`
+--
+ALTER TABLE `UTILISATEUR_TYPE_UTILISATEUR`
+  ADD CONSTRAINT `utilisateur_type_utilisateur_ibfk_2` FOREIGN KEY (`ID_TYPE_UTILISATEUR`) REFERENCES `TYPE_UTILISATEUR` (`ID_TYPE_UTILISATEUR`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `utilisateur_type_utilisateur_ibfk_1` FOREIGN KEY (`ID_USER`) REFERENCES `UTILISATEUR` (`ID_USER`) ON DELETE CASCADE;
