@@ -6,7 +6,8 @@ include_once ($_SERVER['DOCUMENT_ROOT']."/core/bean/TypeUtilisateur.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/controller/commun_controller.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/logs/Logger.php");
 
-$logger = new Logger(Config::getProperties(Key::LOGGER_LOCATION));
+Logger::configure($_SERVER['DOCUMENT_ROOT']."/conf/log4php.xml");
+$logger = Logger::getLogger("LiveSchool");
 
 try{
 	$adminService = new AdminServiceImpl();
@@ -54,7 +55,7 @@ try{
 		$offset = $offset + Constants::DEFAUT_MAX_RESULT;
 	}
 }catch (Exception $e){
-	$logger->log('erreur', 'liveschool_error', $e->getTraceAsString() , Logger::GRAN_MONTH);
+	$logger->error($e->getTraceAsString() , $e);
 	header("location:/erreur/erreur500");
 }
 	

@@ -8,7 +8,6 @@ class Key {
 	const MDP = 'mdp';
 	const BASE = 'base';
 	
-	const LOGGER_LOCATION  ="logger";
 	const PATH_DATA = 'data';
 	
 	const MAIL_REPLY_TO="reply_to";
