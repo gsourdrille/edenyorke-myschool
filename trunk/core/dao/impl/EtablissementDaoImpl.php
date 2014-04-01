@@ -14,11 +14,10 @@ class EtablissementDaoImpl extends BaseDaoImpl implements EtablissementDao{
 			$nom = $this->escapeString($etablissement->nom);
 			$adresse = $this->escapeString($etablissement->adresse);
 			$ville = $this->escapeString($etablissement->ville);
-			
-			$requete = "INSERT INTO ETABLISSEMENT (NOM,ADRESSE,CODE_POSTAL,VILLE,TELEPHONE_1,TELEPHONE_2,FAX)
-			VALUES ('$nom', '$etablissement->adresse', '$adresse', '$etablissement->ville', '$ville', '$etablissement->telephone2','$etablissement->fax') ";
+			$idEtablissement = uniqid('e');
+			$requete = "INSERT INTO ETABLISSEMENT (ID_ETABLISSEMENT,NOM,ADRESSE,CODE_POSTAL,VILLE,TELEPHONE_1,TELEPHONE_2,FAX)
+			VALUES ('$idEtablissement','$nom', '$etablissement->adresse', '$adresse', '$etablissement->ville', '$ville', '$etablissement->telephone2','$etablissement->fax') ";
 			$result = $this->sendRequest($requete);
-			$idEtablissement= $this->lastInsertId();
 			$etablissement->idEtablissement = $idEtablissement;
 			$this->close();
 			return $etablissement;
@@ -35,7 +34,7 @@ class EtablissementDaoImpl extends BaseDaoImpl implements EtablissementDao{
 			
 			$requete = "UPDATE ETABLISSEMENT SET NOM='$nom', ADRESSE='$adresse', CODE_POSTAL='$etablissement->codePostal',
 			VILLE='$ville',TELEPHONE_1='$etablissement->telephone1', TELEPHONE_2='$etablissement->telephone2',FAX='$etablissement->fax' 
-			WHERE ID_ETABLISSEMENT=$etablissement->idEtablissement";
+			WHERE ID_ETABLISSEMENT='$etablissement->idEtablissement'";
 			
 			$result = $this->sendRequest($requete);
 			$this->close();
@@ -53,11 +52,11 @@ class EtablissementDaoImpl extends BaseDaoImpl implements EtablissementDao{
 			$this->connect();
 			if(StringUtils::isEmpty($imageName)){
 				$requete = "UPDATE ETABLISSEMENT SET IMAGE_PRINCIPALE=null
-				WHERE ID_ETABLISSEMENT=$idEtablissement";
+				WHERE ID_ETABLISSEMENT='$idEtablissement'";
 			}else{
 				$nomImage = $this->escapeString($imageName);
 				$requete = "UPDATE ETABLISSEMENT SET IMAGE_PRINCIPALE='$imageName'
-				WHERE ID_ETABLISSEMENT=$idEtablissement";
+				WHERE ID_ETABLISSEMENT='$idEtablissement'";
 			}
 			$result = $this->sendRequest($requete);
 			$this->close();
@@ -74,10 +73,10 @@ class EtablissementDaoImpl extends BaseDaoImpl implements EtablissementDao{
 		if($idEtablissement != null){
 			$this->connect();
 			if(StringUtils::isEmpty($imageName)){
-				$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND=null  WHERE ID_ETABLISSEMENT=$idEtablissement";
+				$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND=null  WHERE ID_ETABLISSEMENT='$idEtablissement'";
 			}else{
 				$nomImage = $this->escapeString($imageName);
-				$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND='$nomImage' WHERE ID_ETABLISSEMENT=$idEtablissement";
+				$requete = "UPDATE ETABLISSEMENT SET IMAGE_FOND='$nomImage' WHERE ID_ETABLISSEMENT='$idEtablissement'";
 			}
 			$result = $this->sendRequest($requete);
 			$this->close();
@@ -93,7 +92,7 @@ class EtablissementDaoImpl extends BaseDaoImpl implements EtablissementDao{
 	public function deleteEtablissemenr($etablissement){
 		if($etablissement != null){
 			$this->connect();
-			$requete = "DELETE FROM ETABLISSEMENT WHERE ID_ETABLISSEMENT=$etablissement->idEtablissement";
+			$requete = "DELETE FROM ETABLISSEMENT WHERE ID_ETABLISSEMENT='$etablissement->idEtablissement'";
 			$this->sendRequest($requete);
 			$this->close();
 		}

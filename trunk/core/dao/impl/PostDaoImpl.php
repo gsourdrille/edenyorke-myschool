@@ -13,9 +13,9 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/enums/TypePost.php");
  		if($post != null){
  			$this->connect();
  			$contenu = $this->escapeString($post->contenu);
- 			$requete = "INSERT INTO POST (ID_USER,CONTENU,COMMENTAIRES_ACTIVES, POUR_ENSEIGNANT) VALUES ('$post->createur', '$contenu', '$post->commentairesActives', '$post->seulementEnseignant') ";
+ 			$idPost = uniqid('p');
+ 			$requete = "INSERT INTO POST (ID_POST,ID_USER,CONTENU,COMMENTAIRES_ACTIVES, POUR_ENSEIGNANT) VALUES ('$idPost', '$post->createur', '$contenu', '$post->commentairesActives', '$post->seulementEnseignant') ";
  			$result = $this->sendRequest($requete);
- 			$idPost = $this->lastInsertId();
  			$post->idPost = $idPost;
  			$this->close();
  			return $post;
@@ -51,7 +51,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/enums/TypePost.php");
  		if($idPost != null){
  			$this->connect();
  			//Recuperation des association etablissement
- 			$requete = "SELECT * FROM POST_ETABLISSEMENT WHERE ID_POST=$idPost";
+ 			$requete = "SELECT * FROM POST_ETABLISSEMENT WHERE ID_POST='$idPost'";
  			$result = $this->sendRequest($requete);
  			while($row = mysqli_fetch_assoc($result)){
  				$association =  new AssociationDTO();
@@ -60,7 +60,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/enums/TypePost.php");
  				$listeAssociations->append($association);
  			}
  			//Recuperation des associations Niveaux
- 			$requete = "SELECT * FROM POST_NIVEAU WHERE ID_POST=$idPost";
+ 			$requete = "SELECT * FROM POST_NIVEAU WHERE ID_POST='$idPost'";
  			$result = $this->sendRequest($requete);
  			while($row = mysqli_fetch_assoc($result)){
  				$association =  new AssociationDTO();
@@ -69,7 +69,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/enums/TypePost.php");
  				$listeAssociations->append($association);
  			}
  			//Recuperation des associations Classes
- 			$requete = "SELECT * FROM POST_CLASSE WHERE ID_POST=$idPost";
+ 			$requete = "SELECT * FROM POST_CLASSE WHERE ID_POST='$idPost'";
  			$result = $this->sendRequest($requete);
  			while($row = mysqli_fetch_assoc($result)){
  				$association =  new AssociationDTO();
@@ -86,11 +86,11 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/enums/TypePost.php");
  	public function deleteAssociations($idPost){
  		if($idPost != null){
  			$this->connect();
- 			$requete = "DELETE FROM POST_ETABLISSEMENT WHERE ID_POST = $idPost ";
+ 			$requete = "DELETE FROM POST_ETABLISSEMENT WHERE ID_POST = '$idPost' ";
  			$result = $this->sendRequest($requete);
- 			$requete = "DELETE FROM POST_NIVEAU WHERE ID_POST = $idPost ";
+ 			$requete = "DELETE FROM POST_NIVEAU WHERE ID_POST = '$idPost' ";
  			$result = $this->sendRequest($requete);
- 			$requete = "DELETE FROM POST_CLASSE WHERE ID_POST = $idPost ";
+ 			$requete = "DELETE FROM POST_CLASSE WHERE ID_POST = '$idPost' ";
  			$result = $this->sendRequest($requete);
  			$this->close();
  		}
@@ -100,7 +100,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/enums/TypePost.php");
  		if($post != null){
  			$this->connect();
  			$contenu = $this->escapeString($post->contenu);
- 			$requete = "UPDATE POST SET CONTENU='$contenu', COMMENTAIRES_ACTIVES='$post->commentairesActives', POUR_ENSEIGNANT='$post->seulementEnseignant' WHERE ID_POST=$post->idPost";
+ 			$requete = "UPDATE POST SET CONTENU='$contenu', COMMENTAIRES_ACTIVES='$post->commentairesActives', POUR_ENSEIGNANT='$post->seulementEnseignant' WHERE ID_POST='$post->idPost'";
  			$result  = $this->sendRequest($requete);
  			$this->close();
  			if(!$result){
@@ -115,7 +115,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/enums/TypePost.php");
  	public function deletePost($idPost){
  		if($idPost != null){
  			$this->connect();
- 			$requete = "DELETE FROM POST WHERE ID_POST=$idPost";
+ 			$requete = "DELETE FROM POST WHERE ID_POST='$idPost'";
  			$this->sendRequest($requete);
  			$this->close();
  		}
@@ -124,7 +124,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/enums/TypePost.php");
  	public function getPostFromUtilisateur($idUser){
  		if($idPost != null){
  			$this->connect();
- 			$requete = "SELECT * FROM POST WHERE ID_USER=$idUser";
+ 			$requete = "SELECT * FROM POST WHERE ID_USER='$idUser'";
  			$resulat = $this->sendRequest($requete);
  			$listePosts = new ArrayObject();
  			while($row = mysqli_fetch_assoc($resulat)){
@@ -152,12 +152,14 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/enums/TypePost.php");
  		$this->connect();
  		$requeteClasse = "";
  		if(count($idClasses)>0){
- 			$idClassesSQL = join(',',(array)$idClasses);
+ 			$idClassesSQL = implode('", "',(array)$idClasses);
+ 			$idClassesSQL = "'.$idClassesSQL.'";
  			$requeteClasse = "UNION SELECT ID_POST FROM POST_CLASSE WHERE ID_CLASSE IN ($idClassesSQL)";
  		}
  		$requeteNiveau = "";
  		if(count($idsNiveaux)){
- 			$idNiveauxSQL = join(',',(array)$idsNiveaux);
+ 			$idNiveauxSQL = implode('", "',(array)$idsNiveaux);
+ 			$idNiveauxSQL = "'.$idNiveauxSQL.'";
  			$requeteNiveau  = "UNION SELECT ID_POST FROM POST_NIVEAU WHERE ID_NIVEAU IN ($idNiveauxSQL)";
  		}
  		$requeteDroitPost = "";
@@ -180,12 +182,14 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/enums/TypePost.php");
  		$this->connect();
  		$requeteClasse = "";
  		if(count($idClasses)>0){
- 			$idClassesSQL = join(',',(array)$idClasses);
+ 			$idClassesSQL = implode('", "',(array)$idClasses);
+ 			$idClassesSQL = "'.$idClassesSQL.'";
  			$requeteClasse = "UNION SELECT ID_POST FROM POST_CLASSE WHERE ID_CLASSE IN ($idClassesSQL)";
  		}
  		$requeteNiveau = "";
  		if(count($idsNiveaux)){
- 			$idNiveauxSQL = join(',',(array)$idsNiveaux);
+ 			$idNiveauxSQL = implode('", "',(array)$idsNiveaux);
+ 			$idNiveauxSQL = "'.$idNiveauxSQL.'";
  			$requeteNiveau  = "UNION SELECT ID_POST FROM POST_NIVEAU WHERE ID_NIVEAU IN ($idNiveauxSQL)";
  		}
  		$requeteDroitPost = "";

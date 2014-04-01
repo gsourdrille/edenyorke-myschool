@@ -5,7 +5,7 @@
 <LINK rel="stylesheet" type="text/css" href="/html/css/style.css">
 <LINK rel="stylesheet" type="text/css" href="/html/css/uploadfile.css">
  <script type="text/javascript" src="/html/js/jquery.js"></script>
- <script type="text/javascript" src="/html/js/liveschool.js"></script> 
+ <script type="text/javascript" src="/html/js/liveschool_admin.js"></script> 
  <script type="text/javascript" src="/html/js/jquery.uploadfile.js"></script> 
   <script type="text/javascript" src="/html/js/jquery.form.js"></script> 
 

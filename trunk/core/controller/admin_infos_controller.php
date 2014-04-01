@@ -11,10 +11,7 @@ $logger = Logger::getLogger("LiveSchool");
 
 try{
 	
-	$utilsateur2 = new Utilisateur();
-	$utilsateur2 = null;
-	$utilsateur2->userId;
-	
+
 	$adminService = new AdminServiceImpl();
 	if (isset($_POST['submit'])){
 				$error = false;
