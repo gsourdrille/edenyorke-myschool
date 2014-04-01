@@ -11,9 +11,9 @@ class CommentaireDaoImpl extends BaseDaoImpl implements CommentaireDao{
 		if($commentaire != null){
 			$this->connect();
 			$contenu = $this->escapeString($commentaire->contenu);
-			$requete = "INSERT INTO COMMENTAIRE (ID_POST,ID_USER,CONTENU) VALUES ('$commentaire->idPost', '$commentaire->idUser', '$contenu' ) ";
+			$idCommentaire = uniqid('o');
+			$requete = "INSERT INTO COMMENTAIRE (ID_COMMENTAIRE,ID_POST,ID_USER,CONTENU) VALUES ('$idCommentaire','$commentaire->idPost', '$commentaire->idUser', '$contenu' ) ";
 			$result = $this->sendRequest($requete);
-			$idCommentaire = $this->lastInsertId();
 			$commentaire->idCommentaire = $idCommentaire;
 			$this->close();
 			return $commentaire;
@@ -24,7 +24,7 @@ class CommentaireDaoImpl extends BaseDaoImpl implements CommentaireDao{
 		if($commentaire != null){
 			$this->connect();
 			$contenu = $this->escapeString($commentaire->contenu);
-			$requete = "UPDATE COMMENTAIRE SET CONTENU='$contenu' WHERE ID_COMMENTAIRE=$commentaire->idCommentaire";
+			$requete = "UPDATE COMMENTAIRE SET CONTENU='$contenu' WHERE ID_COMMENTAIRE='$commentaire->idCommentaire'";
 			$result  = $this->sendRequest($requete);
 			$this->close();
 			if(!$result){
@@ -38,7 +38,7 @@ class CommentaireDaoImpl extends BaseDaoImpl implements CommentaireDao{
 	public function deleteCommentaire($idCommentaire){
 		if($idCommentaire != null){
 			$this->connect();
-			$requete = "DELETE FROM COMMENTAIRE WHERE ID_COMMENTAIRE=$idCommentaire";
+			$requete = "DELETE FROM COMMENTAIRE WHERE ID_COMMENTAIRE='$idCommentaire'";
 			$this->sendRequest($requete);
 			$this->close();
 		}
@@ -47,7 +47,7 @@ class CommentaireDaoImpl extends BaseDaoImpl implements CommentaireDao{
 	public function deleteCommentaireToUtilisateur($idUser){
 		if($idCommentaire != null){
 			$this->connect();
-			$requete = "DELETE FROM COMMENTAIRE WHERE ID_USER=$idUser";
+			$requete = "DELETE FROM COMMENTAIRE WHERE ID_USER='$idUser'";
 			$this->sendRequest($requete);
 			$this->close();
 		}

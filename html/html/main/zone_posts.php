@@ -20,12 +20,12 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/controller/zone_posts_controller.p
 			<div id="infos_post">
 				<div id="edit_post_link">
 					<?php if($post->isCreateur){?>
-						<a href="#dev" onclick="showEditPost(<?php echo $post->idPost;?>)">modifier</a>
+						<a href="#dev" onclick="showEditPost('<?php echo $post->idPost?>')">modifier</a>
 					<?php }?>
 				</div>
 				<div id="delete_post_link">
 					<?php if($post->isCreateur){?>
-						<a href="#dev" onclick="deletePost(<?php echo $post->idPost;?>)">supprimer</a>
+						<a href="#dev" onclick="deletePost('<?php echo $post->idPost?>')">supprimer</a>
 					<?php }?>
 				</div>
 				<div id="post_date">
@@ -42,7 +42,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/controller/zone_posts_controller.p
 					<?php foreach ($post->piecesJointes as $pj){?>
 						<div class="zone_pj">
 							<?php if($pj->isImage){?>
-								<a href="#dev" onClick="showGaleria(<?php echo $post->idPost;?>)"><img class="postPjThumbnails" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>&x=30&y=30&f=0&resize=true  " ></a>
+								<a href="#dev" onClick="showGaleria('<?php echo $post->idPost;?>')"><img class="postPjThumbnails" src="/core/controller/thumb_controller.php?src=<?php echo FileUtils::getPostFile($post->idPost,$pj->path)?>&x=30&y=30&f=0&resize=true  " ></a>
 							<?php }else{?>
 								<a href="/core/controller/file_controller.php?post=<?php echo $post->idPost?>&pj=<?php echo $pj->idPj?>"><img class="postPjThumbnails" src="/html/images/icone-document.jpg" title="<?php echo $pj->path?>"></a>
 							<?php }?>

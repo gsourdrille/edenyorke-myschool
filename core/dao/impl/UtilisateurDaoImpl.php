@@ -14,13 +14,13 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/UtilisateurDao.php");
  			$nom = $this->escapeString($utilisateur->nom);
  			$prenom = $this->escapeString($utilisateur->prenom);
  			$login = $this->escapeString($utilisateur->login);
+ 			$idUser = uniqid('u');
  			
- 			$requete = "INSERT INTO UTILISATEUR (NOM,PRENOM,LOGIN,MOT_DE_PASSE,ACTIVE) 
- 						VALUES ('$nom', '$prenom', '$login', '$utilisateur->mdp',$utilisateur->active) ";
+ 			$requete = "INSERT INTO UTILISATEUR (ID_USER, NOM,PRENOM,LOGIN,MOT_DE_PASSE,ACTIVE) 
+ 						VALUES ('$idUser' ,'$nom', '$prenom', '$login', '$utilisateur->mdp',$utilisateur->active) ";
  			$result = $this->sendRequest($requete);
  			$requete = "SELECT LAST_INSERT_ID() FROM UTILISATEUR";
- 			$result = $this->lastInsertId();
- 			$utilisateur->idUser = $result;
+ 			$utilisateur->idUser = $idUser;
  			$requete = "INSERT INTO UTILISATEUR_TYPE_UTILISATEUR (ID_USER, ID_TYPE_UTILISATEUR) VALUES ('$utilisateur->idUser',$type)";
  			$result = $this->sendRequest($requete);
  			$this->close();
@@ -33,7 +33,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/UtilisateurDao.php");
   		if($utilisateur != null && $typesUtlisateurs != null){
  			$this->connect();
  			//Supression des anciennes relations
- 			$requete = "DELETE FROM UTILISATEUR_TYPE_UTILISATEUR WHERE ID_USER=$utilisateur->idUser";
+ 			$requete = "DELETE FROM UTILISATEUR_TYPE_UTILISATEUR WHERE ID_USER='$utilisateur->idUser'";
  			$result = $this->sendRequest($requete);
  			foreach ($typesUtlisateurs as $typeUtilisateur) {
  				$requete = "INSERT INTO UTILISATEUR_TYPE_UTILISATEUR (ID_USER,ID_TYPE_UTILISATEUR)
@@ -52,7 +52,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/UtilisateurDao.php");
  			$login = $this->escapeString($utilisateur->login);
  			
  			$requete = "UPDATE UTILISATEUR SET NOM='$nom', PRENOM='$prenom', LOGIN='$login',MOT_DE_PASSE='$utilisateur->mdp'
- 						WHERE ID_USER=$utilisateur->idUser";
+ 						WHERE ID_USER='$utilisateur->idUser'";
  			$result  = $this->sendRequest($requete);
  			$this->close();
  			if(!$result){
@@ -66,7 +66,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/UtilisateurDao.php");
  	public function deleteTypeUtilisateur($utilisateur, $typeUtilisateur){
  		if($utilisateur != null){
  			$this->connect();
-	 		$requete = "DELETE FROM UTILISATEUR_TYPE_UTILISATEUR WHERE ID_USER = $utilisateur->idUser AND ID_TYPE_UTILISATEUR = $typeUtilisateur";
+	 		$requete = "DELETE FROM UTILISATEUR_TYPE_UTILISATEUR WHERE ID_USER = '$utilisateur->idUser' AND ID_TYPE_UTILISATEUR = $typeUtilisateur";
 	 		$result = $this->sendRequest($requete);
 	 		$this->close();
  		}
@@ -75,7 +75,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/UtilisateurDao.php");
  	public function deleteUtilisateur($idUser){
  		if($idUser != null){
  			$this->connect();
- 			$requete = "DELETE FROM UTILISATEUR WHERE ID_USER=$idUser";
+ 			$requete = "DELETE FROM UTILISATEUR WHERE ID_USER='$idUser'";
  			$this->sendRequest($requete);
  			$this->close();
  		}
@@ -148,10 +148,10 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/UtilisateurDao.php");
  		if($iduser != null){
  			$this->connect();
  			if(StringUtils::isEmpty($imageName)){
- 				$requete = "UPDATE UTILISATEUR SET AVATAR=null WHERE ID_USER=$iduser";
+ 				$requete = "UPDATE UTILISATEUR SET AVATAR=null WHERE ID_USER='$iduser'";
  			}else{
  				$nomImage = $this->escapeString($imageName);
- 				$requete = "UPDATE UTILISATEUR SET AVATAR='$nomImage' WHERE ID_USER=$iduser";
+ 				$requete = "UPDATE UTILISATEUR SET AVATAR='$nomImage' WHERE ID_USER='$iduser'";
  			}	
  			$result = $this->sendRequest($requete);
  			$this->close();
@@ -167,7 +167,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/UtilisateurDao.php");
  	
  	public function ajouterToken($idUser, $token){
  		$this->connect();
- 		$requete = "INSERT INTO ACTIVATION (ID_USER,TOKEN) VALUE ($idUser, '$token' )";
+ 		$requete = "INSERT INTO ACTIVATION (ID_USER,TOKEN) VALUE ('$idUser', '$token' )";
  		$resulat = $this->sendRequest($requete);
  		$this->close();
  	}
@@ -244,7 +244,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/UtilisateurDao.php");
  	
  	function getUtilisateurByNiveaux($idNiveau){
  		$this->connect();
- 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_USER IN (SELECT ID_USER FROM UTILISATEUR_CLASSE WHERE ID_CLASSE IN (SELECT ID_CLASSE FROM CLASSE WHERE ID_NIVEAU = $idNiveau))  AND ACTIVE=1";
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_USER IN (SELECT ID_USER FROM UTILISATEUR_CLASSE WHERE ID_CLASSE IN (SELECT ID_CLASSE FROM CLASSE WHERE ID_NIVEAU = '$idNiveau'))  AND ACTIVE=1";
  		$resulat = $this->sendRequest($requete);
  		$listeUtilisateurs = new ArrayObject();
  		while($row = mysqli_fetch_array($resulat)){
@@ -256,7 +256,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/UtilisateurDao.php");
  	
  	function getUtilisateurByClasses($idClasse){
  		$this->connect();
- 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_USER IN (SELECT ID_USER FROM UTILISATEUR_CLASSE WHERE ID_CLASSE = $idClasse)  AND ACTIVE=1";
+ 		$requete = "SELECT * FROM UTILISATEUR WHERE ID_USER IN (SELECT ID_USER FROM UTILISATEUR_CLASSE WHERE ID_CLASSE = '$idClasse')  AND ACTIVE=1";
  		$resulat = $this->sendRequest($requete);
  		$listeUtilisateurs = new ArrayObject();
  		while($row = mysqli_fetch_array($resulat)){
@@ -268,14 +268,14 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/UtilisateurDao.php");
  	
  	public function addEtablissementToUtilisateur($etablissementId, $userId){
  		$this->connect();
- 		$requete = "INSERT INTO UTILISATEUR_ETABLISSEMENT (ID_USER, ID_ETABLISSEMENT) VALUES ($userId, $etablissementId)";
+ 		$requete = "INSERT INTO UTILISATEUR_ETABLISSEMENT (ID_USER, ID_ETABLISSEMENT) VALUES ('$userId', '$etablissementId')";
  		$resulat = $this->sendRequest($requete);
  		$this->close();
  	}
  	
  	public function deleteEtablissementToUtilisateur($etablissementId, $userId){
  		$this->connect();
- 		$requete = "DELETE FROM UTILISATEUR_ETABLISSEMENT WHERE ID_USER=$userId AND ID_ETABLISSEMENT=$etablissementId";
+ 		$requete = "DELETE FROM UTILISATEUR_ETABLISSEMENT WHERE ID_USER='$userId' AND ID_ETABLISSEMENT='$etablissementId'";
  		$resulat = $this->sendRequest($requete);
  		$this->close();
  	}

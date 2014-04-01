@@ -10,9 +10,9 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/ClasseDao.php");
  		if($classe != null){
  			$this->connect();
  			$nom = $this->escapeString($classe->nom);
- 			$requete = "INSERT INTO CLASSE (NOM,ID_NIVEAU,CODE_ELEVE,CODE_ENSEIGNANT) VALUES ('$nom', '$classe->idNiveau', '$classe->codeEleve', '$classe->codeEnseignant') ";
+ 			$idClasse = uniqid('c');
+ 			$requete = "INSERT INTO CLASSE (ID_CLASSE,NOM,ID_NIVEAU,CODE_ELEVE,CODE_ENSEIGNANT) VALUES ('$idClasse', '$nom', '$classe->idNiveau', '$classe->codeEleve', '$classe->codeEnseignant') ";
  			$result = $this->sendRequest($requete);
- 			$idClasse = $this->lastInsertId();
  			$classe->idClasse = $idClasse;
  			$this->close();
  			return $classe;
@@ -25,7 +25,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/ClasseDao.php");
  		if($classe != null){
  			$this->connect();
  			$nom = $this->escapeString($classe->nom);
- 			$requete = "UPDATE CLASSE SET NOM='$nom' WHERE ID_CLASSE=$classe->idClasse";
+ 			$requete = "UPDATE CLASSE SET NOM='$nom' WHERE ID_CLASSE='$classe->idClasse'";
  			$result  = $this->sendRequest($requete);
  			$this->close();
  			if(!$result){
@@ -40,7 +40,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/ClasseDao.php");
  	public function deleteClasse($idClasse){
  		if($idClasse != null){
  			$this->connect();
- 			$requete = "DELETE FROM CLASSE WHERE ID_CLASSE=$idClasse";
+ 			$requete = "DELETE FROM CLASSE WHERE ID_CLASSE='$idClasse'";
  			$this->sendRequest($requete);
  			$this->close();
  		}
@@ -91,7 +91,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/ClasseDao.php");
  		$listeClassesByUtilisateur = new ArrayObject();
  		while($row = mysqli_fetch_assoc($resulat)){
  			$idClasse = $row['ID_CLASSE'];
- 			$requete = "SELECT * FROM CLASSE WHERE ID_CLASSE =$idClasse";
+ 			$requete = "SELECT * FROM CLASSE WHERE ID_CLASSE ='$idClasse'";
  			$resulatClasse = $this->sendRequest($requete);
  			$rowClasse = mysqli_fetch_assoc($resulatClasse);
  			$listeClassesByUtilisateur->append($this->buildClasse($rowClasse));
@@ -135,7 +135,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/ClasseDao.php");
 
  	public function deleteClasseToUtilisateurAndEtablissement($idEtablissement, $idUser){
  		$this->connect();
- 		$requete = "DELETE FROM UTILISATEUR_CLASSE WHERE ID_USER = $idUser AND ID_CLASSE IN (SELECT ID_CLASSE FROM CLASSE WHERE ID_NIVEAU IN (SELECT ID_NIVEAU FROM NIVEAU WHERE ID_ETABLISSEMENT = $idEtablissement))";
+ 		$requete = "DELETE FROM UTILISATEUR_CLASSE WHERE ID_USER = $idUser AND ID_CLASSE IN (SELECT ID_CLASSE FROM CLASSE WHERE ID_NIVEAU IN (SELECT ID_NIVEAU FROM NIVEAU WHERE ID_ETABLISSEMENT = '$idEtablissement'))";
  		$resulat = $this->sendRequest($requete);
  		$this->close();
  	}

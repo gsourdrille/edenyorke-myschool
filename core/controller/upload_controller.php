@@ -4,6 +4,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/constant/Key.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/constant/Constants.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/ImagesUtils.php");
 include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/EncryptUtils.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/core/utils/StringUtils.php");
 
 include_once($_SERVER['DOCUMENT_ROOT']."/core/logs/Logger.php");
 
@@ -18,8 +19,9 @@ try{
 		$response['error'] = false;
 		$tempFile = $_FILES['Filedata']['tmp_name'];
 		$targetPath = Config::getProperties(Key::PATH_DATA) . $targetFolder;
-		$targetFile = rtrim($targetPath,'/') . '/' . $_FILES['Filedata']['name'];
-		$tmpFile = rtrim($targetFolder,'/') . '/' . $_FILES['Filedata']['name'];
+		$filename = StringUtils::cleanCaracteresSpeciaux($_FILES['Filedata']['name']);
+		$targetFile = rtrim($targetPath,'/') . '/' . $filename;
+		$tmpFile = rtrim($targetFolder,'/') . '/' . $filename;
 		
 		// Validate the file type
 		$fileTypes = array('jpg','jpeg','gif','png','JPG','JPEG','GIF','PNG'); // File extensions
@@ -45,14 +47,13 @@ try{
 				$response['error'] = true;
 			}
 		}else{
-			move_uploaded_file($tempFile,$targetFile);
-			
 			if (in_array($fileParts['extension'],$fileTypes)) {
 				$size = getimagesize($tempFile);
 				if($size[0] > 3500 || $size[1] > 3500){
 					$response['error'] = true;
 					$response['error_message'] = "L'image ".$_FILES['Filedata']['name']." est trop grande";
 				}else{
+					move_uploaded_file($tempFile,$targetFile);
 					$response['type'] = 'image';
 					$taille = 1000;
 					if(isset($_POST['taille'])){
@@ -61,10 +62,11 @@ try{
 					}
 				}
 			}else{
+				move_uploaded_file($tempFile,$targetFile);
 				$response['type'] = 'fichier';
 			}
 			$response['path'] = $tmpFile;
-			$response['name'] = $_FILES['Filedata']['name'];
+			$response['name'] = $filename;
 			
 			//generation d'un identifiant unique
 			$id = EncryptUtils::generateId();

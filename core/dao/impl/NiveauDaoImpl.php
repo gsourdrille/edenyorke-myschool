@@ -10,9 +10,9 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/NiveauDao.php");
  		if($niveau != null){
  			$this->connect();
  			$nom = $this->escapeString($niveau->nom);
- 			$requete = "INSERT INTO NIVEAU (NOM,ID_ETABLISSEMENT) VALUES ('$nom', '$niveau->idEtablissement') ";
+ 			$idNiveau = uniqid('n');
+ 			$requete = "INSERT INTO NIVEAU (ID_NIVEAU,NOM,ID_ETABLISSEMENT) VALUES ('$idNiveau', '$nom', '$niveau->idEtablissement') ";
  			$result = $this->sendRequest($requete);
- 			$idNiveau = $this->lastInsertId();
  			$niveau->idNiveau = $idNiveau;
  			$this->close();
  			return $niveau;
@@ -25,7 +25,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/NiveauDao.php");
  		if($niveau != null){
  			$this->connect();
  			$nom = $this->escapeString($niveau->nom);
- 			$requete = "UPDATE NIVEAU SET NOM='$nom' WHERE ID_NIVEAU=$niveau->idNiveau";
+ 			$requete = "UPDATE NIVEAU SET NOM='$nom' WHERE ID_NIVEAU='$niveau->idNiveau'";
  			$result  = $this->sendRequest($requete);
  			$this->close();
  			if(!$result){
@@ -40,7 +40,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/core/dao/NiveauDao.php");
  	public function deleteNiveau($idNiveau){
  		if($idNiveau != null){
  			$this->connect();
- 			$requete = "DELETE FROM NIVEAU WHERE ID_NIVEAU=$idNiveau";
+ 			$requete = "DELETE FROM NIVEAU WHERE ID_NIVEAU='$idNiveau'";
  			$this->sendRequest($requete);
  			$this->close();
  		}

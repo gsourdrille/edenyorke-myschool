@@ -38,10 +38,10 @@
 							<?php echo $commentaire->fullCreateur->fullName();?>
 							<?php if($commentaire->isCreateur){?>
 								<div id="edit_commentaire_link">
-									<a href="#dev" onclick="showEditCommentaire(<?php echo $commentaire->idCommentaire;?>)">modifier</a>
+									<a href="#dev" onclick="showEditCommentaire('<?php echo $commentaire->idCommentaire;?>')">modifier</a>
 								</div>
 								<div id="delete_commentaire_link">
-									<a href="#dev" onclick="deleteCommentaire(<?php echo $commentaire->idCommentaire;?>,<?php echo $idPostComment;?>)">supprimer</a>
+									<a href="#dev" onclick="deleteCommentaire('<?php echo $commentaire->idCommentaire;?>',<?php echo $idPostComment;?>)">supprimer</a>
 								</div>
 							<?php }?>
 						</div>
