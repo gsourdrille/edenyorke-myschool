@@ -1,25 +1,27 @@
-<?session_start();
-session_destroy();
-$_SESSION = array();?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<LINK rel="stylesheet" type="text/css" href="/html/css/style.css">
-		 <script type="text/javascript" src="/html/js/jquery.js"></script>
-		 <script type="text/javascript" src="/html/js/jquery-ui.min.js"></script> 
-		 <script type="text/javascript" src="/html/js/liveschool_login.js"></script> 
-	
-	 
-		<title>LiveSchool</title>
-	</head>
+<?php
+  session_start();
+  session_destroy();
+  $_SESSION = array(); ?>
+<!DOCTYPE html>
+<!--[if lte IE 7]> <html class="ie7 ie" lang="fr"> <![endif]-->
+<!--[if IE 8]> <html class="ie8 ie" lang="fr"> <![endif]-->
+<!--[if IE 9]> <html class="ie9 ie" lang="fr"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="fr"> <!--<![endif]-->
+  <head>
+    <?php include("structure/head.php"); ?>
+  </head>
 	<body>
-		<div id="header">
-			<?php include("header.php"); ?>
-		</div>
-			<?php include("body.php"); ?>
-		<div id="footer">
-			<?php include($_SERVER['DOCUMENT_ROOT']."/html/html/commun/footer.php"); ?>
-		</div>
-	</body>
+    <!--h1 class="logo">
+      <span>
+        <img src="/html/images/logo-liveschool.svg" alt="LiveSchool" />
+      </span>
+    </h1-->
+    
+    <?php include("body.php"); ?>
+
+    <?php 
+    // FICHIERS JAVASCRIPT
+    include("structure/js-bottom.php"); ?>    
+	
+  </body>
 </html>

@@ -1,32 +1,39 @@
 
-	<div id="main_conteneur">
+	<div id="main" class="access">
 		<?php if (isset($validInscription)){
 			if ($validInscription){?>
 				<div id="succes_valid_message" class="valid_message" >Inscription validée</div>
 			<?php }else{?>
 				<div id="error_valid_message" class="valid_message" >Inscription non valide</div>
 		<?php }
-			}?>	
-		<div id="login_conteneur">
-			<?php include("login.php"); ?>
+			}?>
+    
+		<div id="area-login" class="form-wrapper">
+			<?php include("form-login.php"); ?>
 		</div>
-		<div id="forgot_conteneur">
-			<?php include("forgot_password.php"); ?>
+    
+    <div id="area-forgot" class="form-wrapper">
+			<?php include("form-forgotpassword.php"); ?>
 		</div>
-		<div id="forgot_conteneur_succes">
-				<?php include("forgot_password_succes.php"); ?>
+    
+    <div id="area-forgotsuccess" class="form-wrapper">
+				<?php include("success-forgotpassword.php"); ?>
 		</div>
-		<div id="register_conteneur">
-			<?php include("inscription.php"); ?>
+    
+    <div id="area-register" class="form-wrapper">
+			<?php include("form-inscription.php"); ?>
 		</div>
-		<div id="inscription_succes">
-			<?php include("inscription_succes.php");?>
+    
+    <div id="area-registersuccess" class="form-wrapper">
+			<?php include("success-inscription.php");?>
 		</div>
-		<div id="register_etablissement_conteneur">
-			<?php include("demande_inscription.php");?>
+  
+    <div id="area-registerschool" class="form-wrapper">
+			<?php include("form-inscriptionecole.php");?>
 		</div>
-		<div id="demande_inscription_succes">
-			<?php include("demande_inscription_succes.php")?>
+    
+    <div id="area-registerschoolsuccess" class="form-wrapper">
+			<?php include("success-inscriptionecole.php")?>
 		</div>
 	</div> 
 
