@@ -11,13 +11,13 @@ function demandeInscription(){
             dataType: 'json',
             success: function(json) {
             	if(json['error']){
-            		$("#error_demande_generale").hide();
-            		$("#error_demande_login").hide();
-            		$("#error_demande_mdp").hide();
-            		$("#error_demande_nom").hide();
-        			$("#error_demande_prenom").hide();
-            		$("#error_demande_tel").hide();
-            		$("#error_demande_nom_etablissement").hide();
+                $("#error_demande_generale").hide();
+                $("#error_demande_login").hide();
+                $("#error_demande_mdp").hide();
+                $("#error_demande_nom").hide();
+                $("#error_demande_prenom").hide();
+                $("#error_demande_tel").hide();
+                $("#error_demande_nom_etablissement").hide();
             		
             		if(json['error_login']){
             			$("#error_demande_login").show();
@@ -55,8 +55,8 @@ function demandeInscription(){
         			$("#error_demande_prenom").hide();
             		$("#error_demande_tel").hide();
             		$("#error_demande_nom_etablissement").hide();
-            		$("#demande_inscription_succes").show();
-            		$("#register_etablissement_conteneur").hide();
+            		$("#area-registerschoolsuccess").show();
+            		$("#area-registerschool").hide();
             	}
             }  
        });
@@ -79,8 +79,8 @@ function demandeNouveauMotDePasse(){
             			$("#error_forgot_general").html(json['error_login']);
             		}
             	}else{
-            		$("#forgot_conteneur_succes").show();
-            		$("#forgot_conteneur").hide();
+            		$("#area-forgot_succes").show();
+            		$("#area-forgot").hide();
             	}
             }  
        });
@@ -158,8 +158,8 @@ function inscription(){
             		$("#error_inscription_nom").hide();
         			$("#error_inscription_prenom").hide();
             		$("#error_inscription_code").hide();
-            		$("#inscription_succes").show();
-            		$("#register_conteneur").hide();
+            		$("#area-registersuccess").show();
+            		$("#area-register").hide();
             	}
             }  
        });
@@ -169,47 +169,47 @@ function inscription(){
 
  
  function showInscriptionBox(){
-	 $("#login_conteneur").hide();
-	 $("#register_conteneur").show();
+	 $("#area-login").hide();
+	 $("#area-register").show();
  }
  
  function hideInscriptionBox(){
-	 $("#login_conteneur").show();
-	 $("#register_conteneur").hide();
+	 $("#area-login").show();
+	 $("#area-register").hide();
  }
  
  
  function hideInscriptionSuccesBox(){
-	 $("#login_conteneur").show();
-	 $("#inscription_succes").hide();
+	 $("#area-login").show();
+	 $("#area-registersuccess").hide();
  }
  
  function showDemandeInscriptionBox(){
-	 $("#login_conteneur").hide();
-	 $("#register_etablissement_conteneur").show();
+	 $("#area-login").hide();
+	 $("#area-registerschool").show();
  }
  
  function hideDemandeInscriptionBox(){
-	 $("#login_conteneur").show();
-	 $("#register_etablissement_conteneur").hide();
+	 $("#area-login").show();
+	 $("#area-registerschool").hide();
  }
  
  
  function hideDemandeSuccesBox(){
-	 $("#login_conteneur").show();
-	 $("#demande_inscription_succes").hide();
+	 $("#area-login").show();
+	 $("#area-registerschoolsuccess").hide();
  }
  function showForgotBox(){
-	 $("#login_conteneur").hide();
-	 $("#forgot_conteneur").show();
+	 $("#area-login").hide();
+	 $("#area-forgot").show();
  }
  
  function hideForgotBox(){
-	 $("#login_conteneur").show();
-	 $("#forgot_conteneur").hide();
+	 $("#area-login").show();
+	 $("#area-forgot").hide();
  }
  
  function hideForgotSuccesBox(){
-	 $("#login_conteneur").show();
-	 $("#forgot_conteneur_succes").hide();
+	 $("#area-login").show();
+	 $("#area-forgot_succes").hide();
  }
